@@ -1,1 +1,37 @@
-<template></template>
+<template>
+    <div class="grid-item item1">
+        <input
+            type="button"
+            label="Load"
+            value="Load"
+            onclick={handleLoadBtnClick}
+        />
+    </div>
+    <div class="grid-item item2">
+        <input
+            type="button"
+            label="Save"
+            value="Save"
+            onclick={handleSaveBtnClick}
+        />
+    </div>
+    <div class="grid-item item3">
+        <input
+            type="button"
+            label="Clear"
+            value="Clear"
+            onclick={handleClearBtnClick}
+        />
+    </div>
+    <div class="grid-item item4">
+        <input type="button" label="label" value="value" onclick={handleCick} />
+    </div>
+    <template for:each={entryPairs} for:item="pair">
+        <div key={pair.id}>
+            <span>start</span>
+            <span>{pair.start}</span>
+            <span>end</span>
+            <span>{pair.end}</span>
+        </div>
+    </template>
+</template>
