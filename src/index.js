@@ -1,6 +1,6 @@
 import { createElement } from 'lwc';
-import MyApp from 'my/app';
+import TimeTracking from 'app/timeTracking';
 
-const app = createElement('my-app', { is: MyApp });
+const timetracking = createElement('app-timeTracking', { is: TimeTracking });
 // eslint-disable-next-line @lwc/lwc/no-document-query
-document.querySelector('#main').appendChild(app);
+document.querySelector('#main').appendChild(timetracking);
