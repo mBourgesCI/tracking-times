@@ -4,8 +4,10 @@ import { Storage } from 'data/localStorage';
 export default class TimeTracking extends LightningElement {
     timestamps = [];
     @track entryPairs = [];
+    @track state = {};
 
     connectedCallback() {
+        this.state.data = [];
         this.loadData();
     }
 
@@ -86,4 +88,6 @@ export default class TimeTracking extends LightningElement {
 
         this.timestamps[timestampindex].timeStamp = newValue;
     }
+
+    addTimeStamp() {}
 }
