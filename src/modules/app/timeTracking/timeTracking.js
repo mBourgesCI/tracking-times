@@ -111,6 +111,10 @@ export default class TimeTracking extends LightningElement {
                 entries[entries.length - 1].end = timeStamp;
             } else {
                 // add new item with timestamp as start
+                this.state.entries.push({
+                    id: this.state.entries.length,
+                    start: timeStamp
+                });
             }
         }
     }
