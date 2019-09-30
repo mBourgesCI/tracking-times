@@ -43,5 +43,14 @@
             <span>{pair.end}</span>
         </div>
     </template>
-    <div class="entries"></div>
+    <div class="entries">
+        <template for:each={state.entries} for:item="entry">
+            <div key={entry.id}>
+                <div class="entry">start</div>
+                <div class="entry">{entry.id}</div>
+                <div class="entry">end</div>
+                <div class="entry">{entry.id}</div>
+            </div>
+        </template>
+    </div>
 </template>

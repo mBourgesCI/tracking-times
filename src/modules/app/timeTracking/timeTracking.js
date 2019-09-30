@@ -41,6 +41,8 @@ export default class TimeTracking extends LightningElement {
 
         this.timestamps.push(obj);
         this.refreshTimePairList();
+
+        this.state.entries.push({ id: this.state.entries.length });
     }
 
     handleLoadBtnClick() {
