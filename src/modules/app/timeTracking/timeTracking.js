@@ -1,89 +1,91 @@
+/* eslint-disable no-unused-vars */
 import { LightningElement, track } from 'lwc';
-import { Storage } from 'data/localStorage';
+import { save, load, clear } from 'data/localStorage';
 
 export default class TimeTracking extends LightningElement {
-    timestamps = [];
-    @track entryPairs = [];
+    @track state = {};
 
     connectedCallback() {
+        this.state.entries = [];
         this.loadData();
     }
 
-    refreshTimePairList() {
-        this.entryPairs = [];
-        for (let index = 0; index < this.timestamps.length; index++) {
-            const element = this.timestamps[index];
-            if (index % 2 === 0) {
-                let newEntry = {
-                    id: this.entryPairs.length,
-                    start: element.timeStamp
-                };
-                this.entryPairs.push(newEntry);
-            }
-            if (index % 2 === 1) {
-                let entry = this.entryPairs[this.entryPairs.length - 1];
-                entry.end = element.timeStamp;
-            }
-        }
+    handleClickAdd() {
+        this.addTimeStamp();
     }
 
-    handleCick() {
-        let timeStamp = new Date();
-        let id = this.timestamps === null ? 0 : this.timestamps.length;
-
-        var obj = {
-            timeStamp: timeStamp.getTime(),
-            id: id
-        };
-
-        this.timestamps.push(obj);
-        this.refreshTimePairList();
-    }
-
-    handleLoadBtnClick() {
-        this.loadData();
-    }
-
-    handleSaveBtnClick() {
+    handleClickSave() {
         this.saveData();
     }
 
-    handleClearBtnClick() {
+    handleClickLoad() {
+        this.loadData();
+    }
+
+    handleClickClear() {
         this.clearData();
-        this.refreshTimePairList();
     }
 
     clearData() {
-        var storage = new Storage();
-
-        this.timestamps = [];
-        storage.clear();
+        this.state.entries = [];
+        clear();
     }
 
     saveData() {
-        var storage = new Storage();
-        storage.save(this.timestamps);
+        let entries = this.state.entries;
+        save(entries);
     }
 
     loadData() {
-        var storage = new Storage();
-        this.timestamps = storage.load();
-        if (this.timestamps === null) {
-            this.timestamps = [];
+        let loaded = load();
+        if (loaded === undefined || loaded === null) {
+            this.state.entries = [];
+        } else {
+            this.state.entries = loaded;
         }
-        this.refreshTimePairList();
     }
 
-    handleChangeTimestamp(event) {
-        var identifier, newValue;
+    addTimeStamp() {
+        var entries;
 
-        identifier = event.detail.identifier;
-        newValue = event.detail.newValue;
+        let timeStamp = this.createTimeStamp();
 
-        let keys = identifier.split('-');
+        entries = this.state.entries;
 
-        let timestampindex = keys[0] * 2 + (keys[1] === 'start' ? 0 : 1);
+        if (this.isEmpty()) {
+            // add new item with timestamp as start
+            this.state.entries.push({
+                id: this.state.entries.length,
+                start: timeStamp
+            });
+        } else {
+            if (entries[entries.length - 1].end === undefined) {
+                // set timestamp as end time
+                entries[entries.length - 1].end = timeStamp;
+            } else {
+                // add new item with timestamp as start
+                this.state.entries.push({
+                    id: this.state.entries.length,
+                    start: timeStamp
+                });
+            }
+        }
+    }
 
-        this.timestamps[timestampindex].timeStamp = newValue;
+    createTimeStamp() {
+        var result, timestamp;
+        timestamp = new Date();
+        result = {};
+
+        result.value = timestamp.getTime();
+        result.string = timestamp;
+        return result;
+    }
+
+    isEmpty() {
+        if (this.state.entries === undefined) return true;
+        if (this.state.entries === null) return true;
+        if (this.state.entries.length === 0) return true;
+        return false;
     }
 }
