@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { LightningElement, track } from 'lwc';
-import { Storage } from 'data/localStorage';
+import { save, load, clear } from 'data/localStorage';
 
 export default class TimeTracking extends LightningElement {
     timestamps = [];
@@ -57,20 +57,16 @@ export default class TimeTracking extends LightningElement {
     }
 
     clearData() {
-        var storage = new Storage();
-
         this.timestamps = [];
-        storage.clear();
+        clear();
     }
 
     saveData() {
-        var storage = new Storage();
-        storage.save(this.timestamps);
+        save(this.timestamps);
     }
 
     loadData() {
-        var storage = new Storage();
-        this.timestamps = storage.load();
+        this.timestamps = load();
         if (this.timestamps === null) {
             this.timestamps = [];
         }
