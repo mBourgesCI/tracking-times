@@ -30,7 +30,12 @@
                 <div class="container-time">
                     <span class="output">{entry.start.string.time}</span>
                     <span class="input">
-                        <input type="time" value={entry.start.string.time} />
+                        <input
+                            data-entry={entry.id}
+                            type="time"
+                            value={entry.start.string.time}
+                            onchange={handleChangeStarttime}
+                        />
                     </span>
                 </div>
                 <template if:true={entry.end}>
@@ -38,7 +43,12 @@
                     <div class="container-time">
                         <span class="output">{entry.end.string.time}</span>
                         <span class="input">
-                            <input type="time" value={entry.end.string.time} />
+                            <input
+                                data-entry={entry.id}
+                                type="time"
+                                value={entry.end.string.time}
+                                onchange={handleChangeEndtime}
+                            />
                         </span>
                     </div>
                 </template>
