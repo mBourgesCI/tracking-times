@@ -27,10 +27,10 @@
         <template for:each={state.entries} for:item="entry">
             <div class="entry" key={entry.id}>
                 <div>start</div>
-                <div>{entry.start.string}</div>
+                <div>{entry.start.string.time}</div>
                 <template if:true={entry.end}>
                     <div>end</div>
-                    <div>{entry.end.string}</div>
+                    <div>{entry.end.string.time}</div>
                 </template>
             </div>
         </template>
