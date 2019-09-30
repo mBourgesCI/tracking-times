@@ -99,16 +99,13 @@ export default class TimeTracking extends LightningElement {
 
         entries = this.getEntries();
 
-        let newPairId = entries === null ? 0 : entries.length;
-
-        this.state.entries.push({
-            id: this.state.entries.length,
-            start: timeStamp,
-            end: timeStamp
-        });
-
         if (entries.length === 0) {
+            this.state.entries.push({
+                id: this.state.entries.length,
+                start: timeStamp
+            });
             // add new item with timestamp as start
+            let newPairId = entries === null ? 0 : entries.length;
         } else {
             if (entries[entries.length - 1].end !== undefined) {
                 // set timestamp as end time

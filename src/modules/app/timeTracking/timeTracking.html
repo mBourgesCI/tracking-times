@@ -48,8 +48,10 @@
             <div class="entry" key={entry.id}>
                 <div>start</div>
                 <div>{entry.start}</div>
-                <div>end</div>
-                <div>{entry.end}</div>
+                <template if:true={entry.end}>
+                    <div>end</div>
+                    <div>{entry.end}</div>
+                </template>
             </div>
         </template>
     </div>

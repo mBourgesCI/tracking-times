@@ -42,18 +42,12 @@ describe('test core logic', () => {
             ).toBeTruthy();
             expect(
                 entryContainers_ToCheck.childNodes[0].childNodes.length
-            ).toBe(4);
+            ).toBe(2);
             expect(
                 entryContainers_ToCheck.childNodes[0].childNodes[0].textContent
             ).toBe('start');
             expect(
                 entryContainers_ToCheck.childNodes[0].childNodes[1].textContent
-            ).toBeTruthy();
-            expect(
-                entryContainers_ToCheck.childNodes[0].childNodes[2].textContent
-            ).toBe('end');
-            expect(
-                entryContainers_ToCheck.childNodes[0].childNodes[3].textContent
             ).toBeTruthy();
         });
     });
