@@ -1,3 +1,19 @@
 .button {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+div.container-time > .input {
+    display: none;
+}
+
+div.container-time > .output {
+    display: block;
+}
+
+div.container-time:hover > .input {
+    display: block;
+}
+
+div.container-time:hover > .output {
+    display: none;
+}
