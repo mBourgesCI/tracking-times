@@ -19,7 +19,9 @@ describe('test core logic', () => {
         );
         expect(entryListContainer).toBeTruthy();
     });
+});
 
+describe('test creation of new entries', () => {
     test('test adding first timestamp', () => {
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
