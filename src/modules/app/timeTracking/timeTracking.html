@@ -1,6 +1,7 @@
 <template>
     <div class="grid-item item1">
         <input
+            class="button button-lead"
             type="button"
             label="Load"
             value="Load"
@@ -9,6 +10,7 @@
     </div>
     <div class="grid-item item2">
         <input
+            class="button button-save"
             type="button"
             label="Save"
             value="Save"
@@ -17,6 +19,7 @@
     </div>
     <div class="grid-item item3">
         <input
+            class="button button-clear"
             type="button"
             label="Clear"
             value="Clear"
@@ -24,7 +27,13 @@
         />
     </div>
     <div class="grid-item item4">
-        <input type="button" label="label" value="value" onclick={handleCick} />
+        <input
+            class="button button-add"
+            type="button"
+            label="label"
+            value="value"
+            onclick={handleCick}
+        />
     </div>
     <template for:each={entryPairs} for:item="pair">
         <div key={pair.id}>
