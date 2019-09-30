@@ -1,54 +1,28 @@
 <template>
-    <div class="grid-item item1">
-        <input
-            class="button button-lead"
-            type="button"
-            label="Load"
-            value="Load"
-            onclick={handleLoadBtnClick}
-        />
-    </div>
-    <div class="grid-item item2">
-        <input
-            class="button button-save"
-            type="button"
-            label="Save"
-            value="Save"
-            onclick={handleSaveBtnClick}
-        />
-    </div>
-    <div class="grid-item item3">
-        <input
-            class="button button-clear"
-            type="button"
-            label="Clear"
-            value="Clear"
-            onclick={handleClearBtnClick}
-        />
-    </div>
-    <div class="grid-item item4">
-        <input
-            class="button button-add"
-            type="button"
-            label="label"
-            value="value"
-            onclick={handleCick}
-        />
-    </div>
+    <input
+        type="button"
+        class="button button-save"
+        onclick={handleClickSave}
+        value="Save"
+    />
+    <input
+        type="button"
+        class="button button-load"
+        onclick={handleClickLoad}
+        value="Load"
+    />
+    <input
+        type="button"
+        class="button button-clear"
+        onclick={handleClickClear}
+        value="Clear"
+    />
     <input
         type="button"
         class="button button-add"
         onclick={handleClickAdd}
         value="Add"
     />
-    <template for:each={entryPairs} for:item="pair">
-        <div key={pair.id}>
-            <span>start</span>
-            <span>{pair.start}</span>
-            <span>end</span>
-            <span>{pair.end}</span>
-        </div>
-    </template>
     <div class="entries">
         <template for:each={state.entries} for:item="entry">
             <div class="entry" key={entry.id}>

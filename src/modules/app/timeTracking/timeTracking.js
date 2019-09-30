@@ -3,8 +3,6 @@ import { LightningElement, track } from 'lwc';
 import { save, load, clear } from 'data/localStorage';
 
 export default class TimeTracking extends LightningElement {
-    timestamps = [];
-    @track entryPairs = [];
     @track state = {};
 
     connectedCallback() {
@@ -12,84 +10,39 @@ export default class TimeTracking extends LightningElement {
         this.loadData();
     }
 
-    refreshTimePairList() {
-        this.entryPairs = [];
-        for (let index = 0; index < this.timestamps.length; index++) {
-            const element = this.timestamps[index];
-            if (index % 2 === 0) {
-                let newEntry = {
-                    id: this.entryPairs.length,
-                    start: element.timeStamp
-                };
-                this.entryPairs.push(newEntry);
-            }
-            if (index % 2 === 1) {
-                let entry = this.entryPairs[this.entryPairs.length - 1];
-                entry.end = element.timeStamp;
-            }
-        }
-    }
-
-    handleCick() {
-        let timeStamp = new Date();
-        let id = this.timestamps === null ? 0 : this.timestamps.length;
-
-        var obj = {
-            timeStamp: timeStamp.getTime(),
-            id: id
-        };
-
-        this.timestamps.push(obj);
-        this.refreshTimePairList();
-
-        this.handleClickAdd();
-    }
-
     handleClickAdd() {
         this.addTimeStamp();
     }
 
-    handleLoadBtnClick() {
-        this.loadData();
-    }
-
-    handleSaveBtnClick() {
+    handleClickSave() {
         this.saveData();
     }
 
-    handleClearBtnClick() {
+    handleClickLoad() {
+        this.loadData();
+    }
+
+    handleClickClear() {
         this.clearData();
-        this.refreshTimePairList();
     }
 
     clearData() {
-        this.timestamps = [];
+        this.state.entries = [];
         clear();
     }
 
     saveData() {
-        save(this.timestamps);
+        let entries = this.state.entries;
+        save(entries);
     }
 
     loadData() {
-        this.timestamps = load();
-        if (this.timestamps === null) {
-            this.timestamps = [];
+        let loaded = load();
+        if (loaded === undefined || loaded === null) {
+            this.state.entries = [];
+        } else {
+            this.state.entries = loaded;
         }
-        this.refreshTimePairList();
-    }
-
-    handleChangeTimestamp(event) {
-        var identifier, newValue;
-
-        identifier = event.detail.identifier;
-        newValue = event.detail.newValue;
-
-        let keys = identifier.split('-');
-
-        let timestampindex = keys[0] * 2 + (keys[1] === 'start' ? 0 : 1);
-
-        this.timestamps[timestampindex].timeStamp = newValue;
     }
 
     addTimeStamp() {
@@ -97,9 +50,9 @@ export default class TimeTracking extends LightningElement {
 
         let timeStamp = this.createTimeStamp();
 
-        entries = this.getEntries();
+        entries = this.state.entries;
 
-        if (entries.length === 0) {
+        if (this.isEmpty()) {
             // add new item with timestamp as start
             this.state.entries.push({
                 id: this.state.entries.length,
@@ -124,12 +77,15 @@ export default class TimeTracking extends LightningElement {
         timestamp = new Date();
         result = {};
 
-        result.value = timestamp;
-        result.string = timestamp.getTime();
+        result.value = timestamp.getTime();
+        result.string = timestamp;
         return result;
     }
 
-    getEntries() {
-        return this.state.entries;
+    isEmpty() {
+        if (this.state.entries === undefined) return true;
+        if (this.state.entries === null) return true;
+        if (this.state.entries.length === 0) return true;
+        return false;
     }
 }
