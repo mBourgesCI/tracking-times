@@ -1,4 +1,6 @@
-class Storage {
+import { LightningElement } from 'lwc';
+
+export default class Storage extends LightningElement {
     save(obj) {
         localStorage.setItem('storage', JSON.stringify(obj));
     }
@@ -11,5 +13,3 @@ class Storage {
         localStorage.removeItem('storage');
     }
 }
-
-export { Storage };

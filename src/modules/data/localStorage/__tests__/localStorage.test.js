@@ -1,9 +1,9 @@
-import { Storage } from 'data/localStorage';
+import { createElement } from 'lwc';
+import Storage from 'data/localStorage';
 
 describe('interact-with-local-storage', () => {
     it('check saveing data', () => {
-        // eslint-disable-next-line no-unused-vars
-        const element = new Storage();
+        const element = createElement('data-localStorage', { is: Storage });
         expect(element).toBeDefined();
     });
 });
