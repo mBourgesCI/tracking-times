@@ -26,9 +26,42 @@ export default class TimeTracking extends LightningElement {
         this.clearData();
     }
 
-    handleChangeEndtime(event) {}
+    handleChangeEndtime(event) {
+        var param = {};
 
-    handleChangeStarttime(event) {}
+        param.entry = event.target.getAttribute('data-entry');
+        param.input = 'end';
+        param.value = event.target.value;
+
+        this.changeTime(param);
+    }
+
+    handleChangeStarttime(event) {
+        var param = {};
+
+        param.entry = event.target.getAttribute('data-entry');
+        param.input = 'start';
+        param.value = event.target.value;
+
+        this.changeTime(param);
+    }
+
+    changeTime(param) {
+        var index, entry;
+
+        index = parseInt(param.entry, 10);
+
+        if (param.input === 'end') {
+            entry = this.state.entries[index].end;
+        }
+        if (param.input === 'start') {
+            entry = this.state.entries[index].start;
+        }
+
+        if (entry !== undefined) {
+            entry.string.time = param.value;
+        }
+    }
 
     clearData() {
         this.state.entries = [];
