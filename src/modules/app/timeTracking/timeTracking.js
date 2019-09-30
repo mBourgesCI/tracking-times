@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { LightningElement, track } from 'lwc';
 import { Storage } from 'data/localStorage';
 
@@ -7,7 +8,7 @@ export default class TimeTracking extends LightningElement {
     @track state = {};
 
     connectedCallback() {
-        this.state.data = [];
+        this.state.entries = [];
         this.loadData();
     }
 
@@ -89,5 +90,31 @@ export default class TimeTracking extends LightningElement {
         this.timestamps[timestampindex].timeStamp = newValue;
     }
 
-    addTimeStamp() {}
+    addTimeStamp() {
+        var entries;
+
+        let timeStamp = this.createTimeStamp();
+
+        entries = this.getEntries();
+
+        let newPairId = entries === null ? 0 : entries.length;
+
+        if (entries.length === 0) {
+            // add new item with timestamp as start
+        } else {
+            if (entries[entries.length - 1].end !== undefined) {
+                // set timestamp as end time
+            } else {
+                // add new item with timestamp as start
+            }
+        }
+    }
+
+    createTimeStamp() {
+        return new Date();
+    }
+
+    getEntries() {
+        return this.state.entries;
+    }
 }
