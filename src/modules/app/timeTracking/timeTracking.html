@@ -46,10 +46,10 @@
     <div class="entries">
         <template for:each={state.entries} for:item="entry">
             <div class="entry" key={entry.id}>
-                <div>start</div>
-                <div>{entry.id}</div>
-                <div>end</div>
-                <div>{entry.id}</div>
+                <div>{entry.id}-start</div>
+                <div>{entry.start}</div>
+                <div>{entry.id}-end</div>
+                <div>{entry.end}</div>
             </div>
         </template>
     </div>

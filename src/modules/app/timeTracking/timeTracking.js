@@ -42,7 +42,11 @@ export default class TimeTracking extends LightningElement {
         this.timestamps.push(obj);
         this.refreshTimePairList();
 
-        this.state.entries.push({ id: this.state.entries.length });
+        this.handleClickAdd();
+    }
+
+    handleClickAdd() {
+        this.addTimeStamp();
     }
 
     handleLoadBtnClick() {
@@ -96,6 +100,12 @@ export default class TimeTracking extends LightningElement {
         entries = this.getEntries();
 
         let newPairId = entries === null ? 0 : entries.length;
+
+        this.state.entries.push({
+            id: this.state.entries.length,
+            start: timeStamp,
+            end: timeStamp
+        });
 
         if (entries.length === 0) {
             // add new item with timestamp as start
