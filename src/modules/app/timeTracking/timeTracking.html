@@ -45,11 +45,11 @@
     </template>
     <div class="entries">
         <template for:each={state.entries} for:item="entry">
-            <div key={entry.id}>
-                <div class="entry">start</div>
-                <div class="entry">{entry.id}</div>
-                <div class="entry">end</div>
-                <div class="entry">{entry.id}</div>
+            <div class="entry" key={entry.id}>
+                <div>start</div>
+                <div>{entry.id}</div>
+                <div>end</div>
+                <div>{entry.id}</div>
             </div>
         </template>
     </div>

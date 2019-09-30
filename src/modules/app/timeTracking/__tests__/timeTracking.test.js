@@ -29,13 +29,32 @@ describe('test core logic', () => {
 
         const addButton = element.shadowRoot.querySelector('.button-add');
         expect(addButton).toBeTruthy();
-        addButton.click();
+        addButton.dispatchEvent(new CustomEvent('click', {}));
 
         return Promise.resolve().then(() => {
             const entryContainers_ToCheck = element.shadowRoot.querySelector(
-                'div.entry'
+                '.entries'
             );
             expect(entryContainers_ToCheck).toBeTruthy();
+            expect(entryContainers_ToCheck.childNodes.length).toBe(1);
+            expect(
+                entryContainers_ToCheck.childNodes[0].childNodes
+            ).toBeTruthy();
+            expect(
+                entryContainers_ToCheck.childNodes[0].childNodes.length
+            ).toBe(4);
+            expect(
+                entryContainers_ToCheck.childNodes[0].childNodes[0].textContent
+            ).toBe('start');
+            expect(
+                entryContainers_ToCheck.childNodes[0].childNodes[1].textContent
+            ).toBeTruthy();
+            expect(
+                entryContainers_ToCheck.childNodes[0].childNodes[2].textContent
+            ).toBe('end');
+            expect(
+                entryContainers_ToCheck.childNodes[0].childNodes[3].textContent
+            ).toBeTruthy();
         });
     });
 });
