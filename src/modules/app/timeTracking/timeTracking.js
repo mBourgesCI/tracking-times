@@ -120,7 +120,13 @@ export default class TimeTracking extends LightningElement {
     }
 
     createTimeStamp() {
-        return new Date();
+        var result, timestamp;
+        timestamp = new Date();
+        result = {};
+
+        result.value = timestamp;
+        result.string = timestamp.getTime();
+        return result;
     }
 
     getEntries() {
