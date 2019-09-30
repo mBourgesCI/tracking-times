@@ -62,7 +62,7 @@ describe('test core logic', () => {
         const entryContainers = element.shadowRoot.querySelector('div.entry');
         expect(entryContainers).toBeFalsy();
 
-        const addButton = element.shadowRoot.querySelector('div.button-add');
+        const addButton = element.shadowRoot.querySelector('.button-add');
         expect(addButton).toBeTruthy();
         addButton.addEventListener('click', handler);
         addButton.dispatchEvent(new CustomEvent('click', {}));
@@ -107,7 +107,7 @@ describe('test core logic', () => {
         const entryContainers = element.shadowRoot.querySelector('div.entry');
         expect(entryContainers).toBeFalsy();
 
-        const addButton = element.shadowRoot.querySelector('div.button-add');
+        const addButton = element.shadowRoot.querySelector('.button-add');
         expect(addButton).toBeTruthy();
         addButton.addEventListener('click', handler);
         addButton.dispatchEvent(new CustomEvent('click', {}));

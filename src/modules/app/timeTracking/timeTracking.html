@@ -35,7 +35,12 @@
             onclick={handleCick}
         />
     </div>
-    <div class="button button-add" onclick={handleClickAdd}>Add</div>
+    <input
+        type="button"
+        class="button button-add"
+        onclick={handleClickAdd}
+        value="Add"
+    />
     <template for:each={entryPairs} for:item="pair">
         <div key={pair.id}>
             <span>start</span>
