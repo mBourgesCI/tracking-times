@@ -2,18 +2,18 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-div.container-time > .input {
-    display: none;
-}
-
-div.container-time > .output {
+div.hoverinput > span.output {
     display: block;
 }
 
-div.container-time:hover > .input {
-    display: block;
+div.hoverinput > span.input {
+    display: none;
 }
 
-div.container-time:hover > .output {
+div.hoverinput:hover > span.output {
     display: none;
+}
+
+div.hoverinput:hover > span.input {
+    display: block;
 }
