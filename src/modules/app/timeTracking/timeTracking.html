@@ -1,38 +1,96 @@
 <template>
-    <input
-        type="button"
-        class="button button-save"
-        onclick={handleClickSave}
-        value="Save"
-    />
-    <input
-        type="button"
-        class="button button-load"
-        onclick={handleClickLoad}
-        value="Load"
-    />
-    <input
-        type="button"
-        class="button button-clear"
-        onclick={handleClickClear}
-        value="Clear"
-    />
-    <input
-        type="button"
-        class="button button-add"
-        onclick={handleClickAdd}
-        value="Add"
-    />
+    <div class="button-bar">
+        <div>
+            <input
+                type="button"
+                class="button button-save"
+                onclick={handleClickSave}
+                value="Save"
+            />
+        </div>
+        <div>
+            <input
+                type="button"
+                class="button button-load"
+                onclick={handleClickLoad}
+                value="Load"
+            />
+        </div>
+        <div>
+            <input
+                type="button"
+                class="button button-clear"
+                onclick={handleClickClear}
+                value="Clear"
+            />
+        </div>
+        <div>
+            <input
+                type="button"
+                class="button button-add"
+                onclick={handleClickAdd}
+                value="Add"
+            />
+        </div>
+    </div>
     <div class="entries">
         <template for:each={state.entries} for:item="entry">
-            <div class="entry" key={entry.id}>
-                <div>start</div>
-                <div>{entry.start.string.time}</div>
-                <template if:true={entry.end}>
-                    <div>end</div>
-                    <div>{entry.end.string.time}</div>
-                </template>
+            <div
+                key={entry.id}
+                class="container-start container-date hoverinput"
+            >
+                <span class="output">{entry.start.string.date}</span>
+                <span class="input"
+                    ><input
+                        data-entry={entry.id}
+                        type="date"
+                        value={entry.start.string.date}
+                        onchange={handleChangeStartDate}
+                /></span>
             </div>
+            <div
+                key={entry.id}
+                class="container-start container-time hoverinput"
+            >
+                <span class="output">{entry.start.string.time}</span>
+                <span class="input">
+                    <input
+                        data-entry={entry.id}
+                        type="time"
+                        value={entry.start.string.time}
+                        onchange={handleChangeStarttime}
+                    />
+                </span>
+            </div>
+            <template if:true={entry.end}>
+                <div
+                    key={entry.id}
+                    class="container-end container-date hoverinput"
+                >
+                    <span class="output">{entry.end.string.date}</span>
+                    <span class="input"
+                        ><input
+                            data-entry={entry.id}
+                            type="date"
+                            value={entry.end.string.date}
+                            onchange={handleChangeEndDate}
+                    /></span>
+                </div>
+                <div
+                    key={entry.id}
+                    class="container-end container-time hoverinput"
+                >
+                    <span class="output">{entry.end.string.time}</span>
+                    <span class="input">
+                        <input
+                            data-entry={entry.id}
+                            type="time"
+                            value={entry.end.string.time}
+                            onchange={handleChangeEndtime}
+                        />
+                    </span>
+                </div>
+            </template>
         </template>
     </div>
 </template>

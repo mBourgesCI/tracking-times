@@ -22,6 +22,13 @@ describe('test core logic', () => {
 });
 
 describe('test creation of new entries', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
     test('test adding first timestamp', () => {
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);

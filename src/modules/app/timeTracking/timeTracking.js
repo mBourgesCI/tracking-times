@@ -26,6 +26,72 @@ export default class TimeTracking extends LightningElement {
         this.clearData();
     }
 
+    handleChangeEndtime(event) {
+        var param = {};
+
+        param.entry = event.target.getAttribute('data-entry');
+        param.input = 'end';
+        param.type = 'time';
+        param.value = event.target.value;
+
+        this.changeTime(param);
+    }
+
+    handleChangeStarttime(event) {
+        var param = {};
+
+        param.entry = event.target.getAttribute('data-entry');
+        param.input = 'start';
+        param.type = 'time';
+        param.value = event.target.value;
+
+        this.changeTime(param);
+    }
+
+    handleChangeStartDate(event) {
+        var param = {};
+
+        param.entry = event.target.getAttribute('data-entry');
+        param.input = 'start';
+        param.type = 'date';
+        param.value = event.target.value;
+
+        this.changeTime(param);
+    }
+
+    handleChangeEndDate(event) {
+        var param = {};
+
+        param.entry = event.target.getAttribute('data-entry');
+        param.input = 'end';
+        param.type = 'date';
+        param.value = event.target.value;
+
+        this.changeTime(param);
+    }
+
+    changeTime(param) {
+        var index, entry;
+
+        index = parseInt(param.entry, 10);
+
+        if (param.input === 'end') {
+            entry = this.state.entries[index].end;
+        }
+        if (param.input === 'start') {
+            entry = this.state.entries[index].start;
+        }
+
+        if (entry !== undefined) {
+            if (param.type === 'time') {
+                entry.string.time = param.value;
+            }
+            if (param.type === 'date') {
+                entry.string.date = param.value;
+            }
+        }
+    }
+
     clearData() {
         this.state.entries = [];
         clear();
@@ -79,7 +145,7 @@ export default class TimeTracking extends LightningElement {
 
         result.value = timestamp.getTime();
         result.string = {};
-        result.string.date = timestamp.toLocaleDateString();
+        result.string.date = timestamp.toISOString().split('T')[0];
         result.string.time = timestamp.toLocaleTimeString();
         return result;
     }
