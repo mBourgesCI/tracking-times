@@ -31,6 +31,7 @@ export default class TimeTracking extends LightningElement {
 
         param.entry = event.target.getAttribute('data-entry');
         param.input = 'end';
+        param.type = 'time';
         param.value = event.target.value;
 
         this.changeTime(param);
@@ -41,6 +42,29 @@ export default class TimeTracking extends LightningElement {
 
         param.entry = event.target.getAttribute('data-entry');
         param.input = 'start';
+        param.type = 'time';
+        param.value = event.target.value;
+
+        this.changeTime(param);
+    }
+
+    handleChangeStartDate(event) {
+        var param = {};
+
+        param.entry = event.target.getAttribute('data-entry');
+        param.input = 'start';
+        param.type = 'date';
+        param.value = event.target.value;
+
+        this.changeTime(param);
+    }
+
+    handleChangeEndDate(event) {
+        var param = {};
+
+        param.entry = event.target.getAttribute('data-entry');
+        param.input = 'end';
+        param.type = 'date';
         param.value = event.target.value;
 
         this.changeTime(param);
@@ -59,7 +83,12 @@ export default class TimeTracking extends LightningElement {
         }
 
         if (entry !== undefined) {
-            entry.string.time = param.value;
+            if (param.type === 'time') {
+                entry.string.time = param.value;
+            }
+            if (param.type === 'date') {
+                entry.string.date = param.value;
+            }
         }
     }
 
