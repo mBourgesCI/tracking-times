@@ -1,5 +1,5 @@
 <template>
-    <div class="buttons grid-columns-4">
+    <div class="button-bar">
         <div>
             <input
                 type="button"
@@ -33,9 +33,12 @@
             />
         </div>
     </div>
-    <div class="entries grid-columns-4">
+    <div class="entries">
         <template for:each={state.entries} for:item="entry">
-            <div key={entry.id} class="container-date hoverinput">
+            <div
+                key={entry.id}
+                class="container-start container-date hoverinput"
+            >
                 <span class="output">{entry.start.string.date}</span>
                 <span class="input"
                     ><input
@@ -45,7 +48,10 @@
                         onchange={handleChangeStartDate}
                 /></span>
             </div>
-            <div key={entry.id} class="container-time hoverinput">
+            <div
+                key={entry.id}
+                class="container-start container-time hoverinput"
+            >
                 <span class="output">{entry.start.string.time}</span>
                 <span class="input">
                     <input
@@ -57,7 +63,10 @@
                 </span>
             </div>
             <template if:true={entry.end}>
-                <div key={entry.id} class="container-date hoverinput">
+                <div
+                    key={entry.id}
+                    class="container-end container-date hoverinput"
+                >
                     <span class="output">{entry.end.string.date}</span>
                     <span class="input"
                         ><input
@@ -67,7 +76,10 @@
                             onchange={handleChangeEndDate}
                     /></span>
                 </div>
-                <div key={entry.id} class="container-time hoverinput">
+                <div
+                    key={entry.id}
+                    class="container-end container-time hoverinput"
+                >
                     <span class="output">{entry.end.string.time}</span>
                     <span class="input">
                         <input
