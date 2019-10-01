@@ -25,34 +25,50 @@
     />
     <div class="entries">
         <template for:each={state.entries} for:item="entry">
-            <div class="entry" key={entry.id}>
-                <div>start</div>
-                <div class="container-time">
-                    <span class="output">{entry.start.string.time}</span>
+            <div key={entry.id} class="container-date">
+                <span class="output">{entry.start.string.date}</span>
+                <span class="input"
+                    ><input
+                        data-entry={entry.id}
+                        type="date"
+                        value={entry.start.string.date}
+                        onchange={handleChangeStartDate}
+                /></span>
+            </div>
+            <div key={entry.id} class="container-time">
+                <span class="output">{entry.start.string.time}</span>
+                <span class="input">
+                    <input
+                        data-entry={entry.id}
+                        type="time"
+                        value={entry.start.string.time}
+                        onchange={handleChangeStarttime}
+                    />
+                </span>
+            </div>
+            <template if:true={entry.end}>
+                <div key={entry.id} class="container-date">
+                    <span class="output">{entry.end.string.date}</span>
+                    <span class="input"
+                        ><input
+                            data-entry={entry.id}
+                            type="date"
+                            value={entry.end.string.date}
+                            onchange={handleChangeEndDate}
+                    /></span>
+                </div>
+                <div key={entry.id} class="container-time">
+                    <span class="output">{entry.end.string.time}</span>
                     <span class="input">
                         <input
                             data-entry={entry.id}
                             type="time"
-                            value={entry.start.string.time}
-                            onchange={handleChangeStarttime}
+                            value={entry.end.string.time}
+                            onchange={handleChangeEndtime}
                         />
                     </span>
                 </div>
-                <template if:true={entry.end}>
-                    <div>end</div>
-                    <div class="container-time">
-                        <span class="output">{entry.end.string.time}</span>
-                        <span class="input">
-                            <input
-                                data-entry={entry.id}
-                                type="time"
-                                value={entry.end.string.time}
-                                onchange={handleChangeEndtime}
-                            />
-                        </span>
-                    </div>
-                </template>
-            </div>
+            </template>
         </template>
     </div>
 </template>
