@@ -116,7 +116,7 @@ export default class TimeTracking extends LightningElement {
 
         result.value = timestamp.getTime();
         result.string = {};
-        result.string.date = timestamp.toLocaleDateString();
+        result.string.date = timestamp.toISOString().split('T')[0];
         result.string.time = timestamp.toLocaleTimeString();
         return result;
     }
