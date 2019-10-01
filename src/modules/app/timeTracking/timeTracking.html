@@ -1,29 +1,39 @@
 <template>
-    <input
-        type="button"
-        class="button button-save"
-        onclick={handleClickSave}
-        value="Save"
-    />
-    <input
-        type="button"
-        class="button button-load"
-        onclick={handleClickLoad}
-        value="Load"
-    />
-    <input
-        type="button"
-        class="button button-clear"
-        onclick={handleClickClear}
-        value="Clear"
-    />
-    <input
-        type="button"
-        class="button button-add"
-        onclick={handleClickAdd}
-        value="Add"
-    />
-    <div class="entries">
+    <div class="buttons grid-columns-4">
+        <div>
+            <input
+                type="button"
+                class="button button-save"
+                onclick={handleClickSave}
+                value="Save"
+            />
+        </div>
+        <div>
+            <input
+                type="button"
+                class="button button-load"
+                onclick={handleClickLoad}
+                value="Load"
+            />
+        </div>
+        <div>
+            <input
+                type="button"
+                class="button button-clear"
+                onclick={handleClickClear}
+                value="Clear"
+            />
+        </div>
+        <div>
+            <input
+                type="button"
+                class="button button-add"
+                onclick={handleClickAdd}
+                value="Add"
+            />
+        </div>
+    </div>
+    <div class="entries grid-columns-4">
         <template for:each={state.entries} for:item="entry">
             <div key={entry.id} class="container-date hoverinput">
                 <span class="output">{entry.start.string.date}</span>
