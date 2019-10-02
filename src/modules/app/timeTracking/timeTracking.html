@@ -58,6 +58,7 @@
                         <input
                             data-entry={entry.id}
                             type="time"
+                            step="900"
                             value={entry.start.string.time}
                             onchange={handleChangeStarttime}
                         />
@@ -86,12 +87,18 @@
                             <input
                                 data-entry={entry.id}
                                 type="time"
+                                step="900"
                                 value={entry.end.string.time}
                                 onchange={handleChangeEndtime}
                             />
                         </span>
                     </div>
                 </template>
+                <div>
+                    <template if:true={entry.diff}>
+                        <div>{entry.diff}</div>
+                    </template>
+                </div>
             </div>
         </template>
     </div>

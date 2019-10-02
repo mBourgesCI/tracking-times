@@ -8,10 +8,12 @@ export default class TimeTracking extends LightningElement {
     connectedCallback() {
         this.state.entries = [];
         this.loadData();
+        this.calculateDiffs();
     }
 
     handleClickAdd() {
         this.addTimeStamp();
+        this.calculateDiffs();
     }
 
     handleClickSave() {
@@ -29,7 +31,7 @@ export default class TimeTracking extends LightningElement {
     handleChangeEndtime(event) {
         var param = {};
 
-        param.entry = event.target.getAttribute('data-entry');
+        param.entryIndex = event.target.getAttribute('data-entry');
         param.input = 'end';
         param.type = 'time';
         param.value = event.target.value;
@@ -40,7 +42,7 @@ export default class TimeTracking extends LightningElement {
     handleChangeStarttime(event) {
         var param = {};
 
-        param.entry = event.target.getAttribute('data-entry');
+        param.entryIndex = event.target.getAttribute('data-entry');
         param.input = 'start';
         param.type = 'time';
         param.value = event.target.value;
@@ -51,7 +53,7 @@ export default class TimeTracking extends LightningElement {
     handleChangeStartDate(event) {
         var param = {};
 
-        param.entry = event.target.getAttribute('data-entry');
+        param.entryIndex = event.target.getAttribute('data-entry');
         param.input = 'start';
         param.type = 'date';
         param.value = event.target.value;
@@ -62,7 +64,7 @@ export default class TimeTracking extends LightningElement {
     handleChangeEndDate(event) {
         var param = {};
 
-        param.entry = event.target.getAttribute('data-entry');
+        param.entryIndex = event.target.getAttribute('data-entry');
         param.input = 'end';
         param.type = 'date';
         param.value = event.target.value;
@@ -71,25 +73,28 @@ export default class TimeTracking extends LightningElement {
     }
 
     changeTime(param) {
-        var index, entry;
+        var index, entry, timestamp;
 
-        index = parseInt(param.entry, 10);
+        index = parseInt(param.entryIndex, 10);
+        entry = timestamp = this.state.entries[index];
 
         if (param.input === 'end') {
-            entry = this.state.entries[index].end;
+            timestamp = entry.end;
         }
         if (param.input === 'start') {
-            entry = this.state.entries[index].start;
+            timestamp = entry.start;
         }
 
-        if (entry !== undefined) {
+        if (timestamp !== undefined) {
             if (param.type === 'time') {
-                entry.string.time = param.value;
+                timestamp.string.time = param.value;
             }
             if (param.type === 'date') {
-                entry.string.date = param.value;
+                timestamp.string.date = param.value;
             }
         }
+
+        this.calculateDiffForEntry(entry);
     }
 
     clearData() {
@@ -122,7 +127,8 @@ export default class TimeTracking extends LightningElement {
             // add new item with timestamp as start
             this.state.entries.push({
                 id: this.state.entries.length,
-                start: timeStamp
+                start: timeStamp,
+                diff: null
             });
         } else {
             if (entries[entries.length - 1].end === undefined) {
@@ -132,9 +138,34 @@ export default class TimeTracking extends LightningElement {
                 // add new item with timestamp as start
                 this.state.entries.push({
                     id: this.state.entries.length,
-                    start: timeStamp
+                    start: timeStamp,
+                    diff: null
                 });
             }
+        }
+    }
+
+    calculateDiffs() {
+        this.state.entries.forEach(entry => {
+            this.calculateDiffForEntry(entry);
+        });
+    }
+
+    calculateDiffForEntry(entry) {
+        var start, startStr, end, endStr;
+
+        if (
+            entry !== undefined &&
+            entry.start !== undefined &&
+            entry.end !== undefined
+        ) {
+            startStr = entry.start.string.date + 'T' + entry.start.string.time;
+            endStr = entry.end.string.date + 'T' + entry.end.string.time;
+
+            start = new Date(startStr);
+            end = new Date(endStr);
+
+            entry.diff = (end - start) / (60 * 60 * 1000);
         }
     }
 
@@ -146,7 +177,7 @@ export default class TimeTracking extends LightningElement {
         result.value = timestamp.getTime();
         result.string = {};
         result.string.date = timestamp.toISOString().split('T')[0];
-        result.string.time = timestamp.toLocaleTimeString();
+        result.string.time = timestamp.toLocaleTimeString().substr(0, 5);
         return result;
     }
 
