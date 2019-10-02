@@ -19,7 +19,7 @@ div.button-bar {
 div.entry {
     padding: 3px;
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 20% 20% 20% 20% 20%;
 }
 
 div.hoverinput {
