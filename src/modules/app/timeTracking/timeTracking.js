@@ -122,7 +122,8 @@ export default class TimeTracking extends LightningElement {
             // add new item with timestamp as start
             this.state.entries.push({
                 id: this.state.entries.length,
-                start: timeStamp
+                start: timeStamp,
+                diff: null
             });
         } else {
             if (entries[entries.length - 1].end === undefined) {
@@ -132,10 +133,20 @@ export default class TimeTracking extends LightningElement {
                 // add new item with timestamp as start
                 this.state.entries.push({
                     id: this.state.entries.length,
-                    start: timeStamp
+                    start: timeStamp,
+                    diff: null
                 });
             }
         }
+    }
+
+    calculateDiffs(){
+        this.state.entries.forEach(entry => {
+            if(entry.start && entry.end) {
+                let diff = entry.end.value - entry.start.value;
+                entry.diff = diff;
+            }
+        });
     }
 
     createTimeStamp() {
