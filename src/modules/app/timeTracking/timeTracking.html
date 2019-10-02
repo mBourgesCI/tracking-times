@@ -35,62 +35,64 @@
     </div>
     <div class="entries">
         <template for:each={state.entries} for:item="entry">
-            <div
-                key={entry.id}
-                class="container-start container-date hoverinput"
-            >
-                <span class="output">{entry.start.string.date}</span>
-                <span class="input"
-                    ><input
-                        data-entry={entry.id}
-                        type="date"
-                        value={entry.start.string.date}
-                        onchange={handleChangeStartDate}
-                /></span>
-            </div>
-            <div
-                key={entry.id}
-                class="container-start container-time hoverinput"
-            >
-                <span class="output">{entry.start.string.time}</span>
-                <span class="input">
-                    <input
-                        data-entry={entry.id}
-                        type="time"
-                        value={entry.start.string.time}
-                        onchange={handleChangeStarttime}
-                    />
-                </span>
-            </div>
-            <template if:true={entry.end}>
+            <div key={entry.id} class="entry">
                 <div
                     key={entry.id}
-                    class="container-end container-date hoverinput"
+                    class="container-start container-date hoverinput"
                 >
-                    <span class="output">{entry.end.string.date}</span>
+                    <span class="output">{entry.start.string.date}</span>
                     <span class="input"
                         ><input
                             data-entry={entry.id}
                             type="date"
-                            value={entry.end.string.date}
-                            onchange={handleChangeEndDate}
+                            value={entry.start.string.date}
+                            onchange={handleChangeStartDate}
                     /></span>
                 </div>
                 <div
                     key={entry.id}
-                    class="container-end container-time hoverinput"
+                    class="container-start container-time hoverinput"
                 >
-                    <span class="output">{entry.end.string.time}</span>
+                    <span class="output">{entry.start.string.time}</span>
                     <span class="input">
                         <input
                             data-entry={entry.id}
                             type="time"
-                            value={entry.end.string.time}
-                            onchange={handleChangeEndtime}
+                            value={entry.start.string.time}
+                            onchange={handleChangeStarttime}
                         />
                     </span>
                 </div>
-            </template>
+                <template if:true={entry.end}>
+                    <div
+                        key={entry.id}
+                        class="container-end container-date hoverinput"
+                    >
+                        <span class="output">{entry.end.string.date}</span>
+                        <span class="input"
+                            ><input
+                                data-entry={entry.id}
+                                type="date"
+                                value={entry.end.string.date}
+                                onchange={handleChangeEndDate}
+                        /></span>
+                    </div>
+                    <div
+                        key={entry.id}
+                        class="container-end container-time hoverinput"
+                    >
+                        <span class="output">{entry.end.string.time}</span>
+                        <span class="input">
+                            <input
+                                data-entry={entry.id}
+                                type="time"
+                                value={entry.end.string.time}
+                                onchange={handleChangeEndtime}
+                            />
+                        </span>
+                    </div>
+                </template>
+            </div>
         </template>
     </div>
 </template>

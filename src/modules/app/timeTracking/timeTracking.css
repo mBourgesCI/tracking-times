@@ -1,4 +1,4 @@
-.button {
+body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -7,7 +7,8 @@ div.button-bar {
     grid-template-columns: 25% 25% 25% 25%;
     margin-bottom: 15px;
 }
-div.entries {
+div.entry {
+    padding: 3px;
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
 }
@@ -34,7 +35,7 @@ div.hoverinput:hover > span.input {
 }
 
 @media (max-width: 490px) {
-    div.entries {
+    div.entry {
         grid-template-columns: 50% 50%;
     }
     div.button-bar {
@@ -42,7 +43,7 @@ div.hoverinput:hover > span.input {
     }
 }
 @media (max-width: 260px) {
-    div.entries {
+    div.entry {
         grid-template-columns: 100%;
     }
     div.button-bar {
