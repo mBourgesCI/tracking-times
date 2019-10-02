@@ -149,6 +149,20 @@ export default class TimeTracking extends LightningElement {
         });
     }
 
+    calculateDiffForEntry(entry) {
+        var start, startStr, end, endStr;
+        
+        if(entry !== undefined) {
+            startStr = entry.start.string.date + 'T' + entry.start.string.time;
+            endStr = entry.end.string.date + 'T' + entry.end.string.time;
+
+            start = new Date(startStr);
+            end = new Date(endStr);
+
+            entry.diff = end-start;
+        }
+    }
+
     createTimeStamp() {
         var result, timestamp;
         timestamp = new Date();
@@ -157,7 +171,7 @@ export default class TimeTracking extends LightningElement {
         result.value = timestamp.getTime();
         result.string = {};
         result.string.date = timestamp.toISOString().split('T')[0];
-        result.string.time = timestamp.toLocaleTimeString();
+        result.string.time = timestamp.toLocaleTimeString().substr(0,5);
         return result;
     }
 
