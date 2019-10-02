@@ -8,10 +8,12 @@ export default class TimeTracking extends LightningElement {
     connectedCallback() {
         this.state.entries = [];
         this.loadData();
+        this.calculateDiffs();
     }
 
     handleClickAdd() {
         this.addTimeStamp();
+        this.calculateDiffs();
     }
 
     handleClickSave() {
@@ -71,25 +73,28 @@ export default class TimeTracking extends LightningElement {
     }
 
     changeTime(param) {
-        var index, entry;
+        var index, entry, timestamp;
 
         index = parseInt(param.entryIndex, 10);
+        entry = timestamp = this.state.entries[index];
 
         if (param.input === 'end') {
-            entry = this.state.entries[index].end;
+            timestamp = entry.end;
         }
         if (param.input === 'start') {
-            entry = this.state.entries[index].start;
+            timestamp = entry.start;
         }
 
-        if (entry !== undefined) {
+        if (timestamp !== undefined) {
             if (param.type === 'time') {
-                entry.string.time = param.value;
+                timestamp.string.time = param.value;
             }
             if (param.type === 'date') {
-                entry.string.date = param.value;
+                timestamp.string.date = param.value;
             }
         }
+
+        this.calculateDiffForEntry(entry);
     }
 
     clearData() {
@@ -142,24 +147,25 @@ export default class TimeTracking extends LightningElement {
 
     calculateDiffs() {
         this.state.entries.forEach(entry => {
-            if (entry.start && entry.end) {
-                let diff = entry.end.value - entry.start.value;
-                entry.diff = diff;
-            }
+            this.calculateDiffForEntry(entry);
         });
     }
 
     calculateDiffForEntry(entry) {
         var start, startStr, end, endStr;
 
-        if (entry !== undefined) {
+        if (
+            entry !== undefined &&
+            entry.start !== undefined &&
+            entry.end !== undefined
+        ) {
             startStr = entry.start.string.date + 'T' + entry.start.string.time;
             endStr = entry.end.string.date + 'T' + entry.end.string.time;
 
             start = new Date(startStr);
             end = new Date(endStr);
 
-            entry.diff = end - start;
+            entry.diff = (end - start) / (60 * 60 * 1000);
         }
     }
 
