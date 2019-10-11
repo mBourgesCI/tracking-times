@@ -33,6 +33,7 @@ div.entry {
 }
 
 div.hoverinput {
+    padding: 5px;
     height: 15pt;
     vertical-align: middle;
 }
