@@ -37,19 +37,26 @@ div.hoverinput {
     vertical-align: middle;
 }
 
+/* select output span of hoverinput-container ... */
 div.hoverinput > span.output {
+    /* ... and make it initaly visible */
     display: block;
 }
 
+/* select input span of hoverinput-container ... */
 div.hoverinput > span.input {
+    /* ... and make it initaly invisible */
     display: none;
 }
 
+/* select output span inside a - hovered - hoverinput-container ... */
 div.hoverinput:hover > span.output {
+    /* ... and make it invisible */
     display: none;
 }
-
+/* select input span inside a - hovered - hoverinput-container ... */
 div.hoverinput:hover > span.input {
+    /* ... and make it visible */
     display: block;
 }
 
