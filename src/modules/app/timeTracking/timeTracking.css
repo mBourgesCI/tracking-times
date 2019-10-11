@@ -43,8 +43,8 @@ div.hoverinput > span.output {
     display: block;
 }
 
-/* select input span of hoverinput-container ... */
-div.hoverinput > span.input {
+/* select input of hoverinput-container ... */
+div.hoverinput > input {
     /* ... and make it initaly invisible */
     display: none;
 }
@@ -54,8 +54,8 @@ div.hoverinput:hover > span.output {
     /* ... and make it invisible */
     display: none;
 }
-/* select input span inside a - hovered - hoverinput-container ... */
-div.hoverinput:hover > span.input {
+/* select input inside a - hovered - hoverinput-container ... */
+div.hoverinput:hover > input {
     /* ... and make it visible */
     display: block;
 }
