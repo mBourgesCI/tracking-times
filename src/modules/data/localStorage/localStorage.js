@@ -1,15 +1,13 @@
-class Storage {
-    save(obj) {
-        localStorage.setItem('storage', JSON.stringify(obj));
-    }
-
-    load() {
-        return JSON.parse(localStorage.getItem('storage'));
-    }
-
-    clear() {
-        localStorage.removeItem('storage');
-    }
+function save(obj) {
+    localStorage.setItem('storage', JSON.stringify(obj));
 }
 
-export { Storage };
+function load() {
+    return JSON.parse(localStorage.getItem('storage'));
+}
+
+function clear() {
+    localStorage.removeItem('storage');
+}
+
+export { save, load, clear };
