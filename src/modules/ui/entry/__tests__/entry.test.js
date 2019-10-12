@@ -186,4 +186,27 @@ describe('inputs fire compond events with value if changed', () => {
         expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
         expect(handler.mock.calls[0][0].detail.name).toBe('end-date');
     });
+
+    test('event on end time change', () => {
+        const testvalue = '13:30:00';
+        const handler = jest.fn();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.addEventListener('change', handler);
+        document.body.appendChild(element);
+
+        const endTimeInput = element.shadowRoot.querySelector('input.end-time');
+        endTimeInput.value = testvalue;
+        endTimeInput.dispatchEvent(new CustomEvent('change', {}));
+
+        expect(handler).toHaveBeenCalled();
+        expect(handler.mock.calls.length).toBe(1);
+        expect(handler.mock.calls[0].length).toBe(1);
+        expect(handler.mock.calls[0][0]).toBeDefined();
+        expect(handler.mock.calls[0][0].bubbles).toBe(true);
+        expect(handler.mock.calls[0][0].composed).toBe(true);
+        expect(handler.mock.calls[0][0].detail).toBeDefined();
+        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
+        expect(handler.mock.calls[0][0].detail.name).toBe('end-time');
+    });
 });

@@ -50,6 +50,7 @@ export default class Entry extends LightningElement {
         };
         this.createAndFireChangeEvent(param);
     }
+
     handleChangeStartTime(internalEvent) {
         var param = {
             value: internalEvent.target.value,
@@ -62,6 +63,14 @@ export default class Entry extends LightningElement {
         var param = {
             value: internalEvent.target.value,
             name: 'end-date'
+        };
+        this.createAndFireChangeEvent(param);
+    }
+
+    handleChangeEndTime(internalEvent) {
+        var param = {
+            value: internalEvent.target.value,
+            name: 'end-time'
         };
         this.createAndFireChangeEvent(param);
     }
