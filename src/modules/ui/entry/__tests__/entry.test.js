@@ -316,6 +316,13 @@ describe('inputs fire compond events with value if changed', () => {
 });
 
 describe('behavior on change', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
     test('start date output gets updated on input change.', () => {
         const oldValue = '1900-01-01';
         const newValue = '1900-01-02';
@@ -336,6 +343,29 @@ describe('behavior on change', () => {
                 'span.start-date'
             );
             expect(startDateOutput.textContent).toBe(newValue);
+        });
+    });
+
+    test('start time output gets updated on input change.', () => {
+        const oldValue = '13:00';
+        const newValue = '14:00';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.startTime = oldValue;
+        document.body.appendChild(element);
+
+        const startTimeInput = element.shadowRoot.querySelector(
+            'input.start-time'
+        );
+
+        startTimeInput.value = newValue;
+        startTimeInput.dispatchEvent(new CustomEvent('change'));
+
+        return Promise.resolve().then(() => {
+            const startTimeOutput = element.shadowRoot.querySelector(
+                'span.start-time'
+            );
+            expect(startTimeOutput.textContent).toBe(newValue);
         });
     });
 });
