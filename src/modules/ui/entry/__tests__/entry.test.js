@@ -2,7 +2,7 @@ import { createElement } from 'lwc';
 import Entry from 'ui/entry';
 
 describe('static tests', () => {
-    test('test structure', () => {
+    test('outer ccontainer exists', () => {
         const element = createElement('ui-entry', { is: Entry });
         document.body.appendChild(element);
 
