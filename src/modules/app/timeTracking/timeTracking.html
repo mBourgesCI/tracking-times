@@ -98,8 +98,8 @@
                     </template>
                 </div>
                 <div key={entry.id} class="hoverinput">
-                    <span class="output">text</span>
-                    <input class="input" type="text" />
+                    <span class="output">{entry.comment}</span>
+                    <input class="input" type="text" value={entry.comment} />
                 </div>
             </div>
         </template>
