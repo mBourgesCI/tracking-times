@@ -70,11 +70,11 @@
                     >
                         <span class="output">{entry.end.string.date}</span>
                         <input
-                                class="input"
-                                data-entry={entry.id}
-                                type="date"
-                                value={entry.end.string.date}
-                                onchange={handleChangeEndDate}
+                            class="input"
+                            data-entry={entry.id}
+                            type="date"
+                            value={entry.end.string.date}
+                            onchange={handleChangeEndDate}
                         />
                     </div>
                     <div
@@ -83,19 +83,29 @@
                     >
                         <span class="output">{entry.end.string.time}</span>
                         <input
-                                class="input"
-                                data-entry={entry.id}
-                                type="time"
-                                step="900"
-                                value={entry.end.string.time}
-                                onchange={handleChangeEndtime}
-                            />
+                            class="input"
+                            data-entry={entry.id}
+                            type="time"
+                            step="900"
+                            value={entry.end.string.time}
+                            onchange={handleChangeEndtime}
+                        />
                     </div>
                 </template>
                 <div>
                     <template if:true={entry.diff}>
                         <div>{entry.diff}</div>
                     </template>
+                </div>
+                <div key={entry.id} class="hoverinput">
+                    <span class="output">{entry.comment}</span>
+                    <input
+                        class="input"
+                        data-entry={entry.id}
+                        type="text"
+                        value={entry.comment}
+                        onchange={handleChangeComment}
+                    />
                 </div>
             </div>
         </template>

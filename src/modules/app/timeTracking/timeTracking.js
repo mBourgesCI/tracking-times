@@ -72,11 +72,20 @@ export default class TimeTracking extends LightningElement {
         this.changeTime(param);
     }
 
+    handleChangeComment(event) {
+        var param = {};
+
+        param.entryIndex = event.target.getAttribute('data-entry');
+        param.value = event.target.value;
+
+        this.changeComment(param);
+    }
+
     changeTime(param) {
         var index, entry, timestamp;
 
         index = parseInt(param.entryIndex, 10);
-        entry = timestamp = this.state.entries[index];
+        entry = this.state.entries[index];
 
         if (param.input === 'end') {
             timestamp = entry.end;
@@ -95,6 +104,15 @@ export default class TimeTracking extends LightningElement {
         }
 
         this.calculateDiffForEntry(entry);
+    }
+
+    changeComment(param) {
+        var index, entry;
+
+        index = parseInt(param.entryIndex, 10);
+        entry = this.state.entries[index];
+
+        entry.comment = param.value;
     }
 
     clearData() {
@@ -128,7 +146,8 @@ export default class TimeTracking extends LightningElement {
             this.state.entries.push({
                 id: this.state.entries.length,
                 start: timeStamp,
-                diff: null
+                diff: null,
+                comment: ''
             });
         } else {
             if (entries[entries.length - 1].end === undefined) {
@@ -139,7 +158,8 @@ export default class TimeTracking extends LightningElement {
                 this.state.entries.push({
                     id: this.state.entries.length,
                     start: timeStamp,
-                    diff: null
+                    diff: null,
+                    comment: ''
                 });
             }
         }
