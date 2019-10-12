@@ -92,12 +92,16 @@ describe('check inputs exist', () => {
     });
 
     test('component has an input for comments', () => {
+        const comment = 'abcde';
         const element = createElement('ui-entry', { is: Entry });
+        element.comment = comment;
         document.body.appendChild(element);
 
         const commentInput = element.shadowRoot.querySelector('input.comment');
         expect(commentInput).toBeTruthy();
         expect(commentInput.hasAttribute('type')).toBeTruthy();
         expect(commentInput.getAttribute('type')).toBe('text');
+        expect(commentInput.value).toBeDefined();
+        expect(commentInput.value).toBe(comment);
     });
 });

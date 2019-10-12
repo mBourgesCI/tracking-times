@@ -5,4 +5,5 @@ export default class Entry extends LightningElement {
     @api startTime;
     @api endDate;
     @api endTime;
+    @api comment;
 }
