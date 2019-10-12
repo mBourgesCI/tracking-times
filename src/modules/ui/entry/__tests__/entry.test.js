@@ -46,4 +46,16 @@ describe('static tests', () => {
         expect(startTimeInput.getAttribute('type')).toBe('time');
         expect(startTimeInput.value).toBeDefined();
     });
+
+    test('component has an input for end date', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const endDateInput = element.shadowRoot.querySelector('input.end-date');
+
+        expect(endDateInput).toBeTruthy();
+        expect(endDateInput.hasAttribute('type')).toBeTruthy();
+        expect(endDateInput.getAttribute('type')).toBe('date');
+        expect(endDateInput.value).toBeDefined();
+    });
 });
