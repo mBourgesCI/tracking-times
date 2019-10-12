@@ -32,7 +32,7 @@ div.entry {
     grid-template-columns: 15% 15% 15% 15% 15% 25%;
 }
 
-div.hoverinput {
+div.entry > div {
     padding: 5px;
     height: 15pt;
     vertical-align: middle;
