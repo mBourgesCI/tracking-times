@@ -154,6 +154,18 @@ describe('check outputs exsist', () => {
         expect(commentOutput.textContent).toBe(endDate);
     });
 
+    test('components has an output for end time', () => {
+        const endTime = '19:00:00';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.endTime = endTime;
+        document.body.appendChild(element);
+
+        const commentOutput = element.shadowRoot.querySelector('span.end-time');
+        expect(commentOutput).toBeTruthy();
+        expect(commentOutput.textContent).toBe(endTime);
+    });
+
     test('components has an output for comment', () => {
         const comment = 'abcde';
 
