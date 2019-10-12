@@ -46,11 +46,12 @@ export default class Entry extends LightningElement {
     // eslint-disable-next-line no-unused-vars
     handleChangeStartDate(internalEvent) {
         var valueToPropagate = internalEvent.target.value;
+        var nameOfChangedInput = 'start-date';
 
         var externalEvent = new CustomEvent('change', {
             bubbles: true,
             composed: true,
-            detail: { value: valueToPropagate }
+            detail: { value: valueToPropagate, name: nameOfChangedInput }
         });
         this.dispatchEvent(externalEvent);
     }
