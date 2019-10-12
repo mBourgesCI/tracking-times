@@ -43,28 +43,27 @@ export default class Entry extends LightningElement {
 
     state = { api: {} };
 
-    // eslint-disable-next-line no-unused-vars
     handleChangeStartDate(internalEvent) {
-        var valueToPropagate = internalEvent.target.value;
-        var nameOfChangedInput = 'start-date';
-
-        var externalEvent = new CustomEvent('change', {
-            bubbles: true,
-            composed: true,
-            detail: { value: valueToPropagate, name: nameOfChangedInput }
-        });
-        this.dispatchEvent(externalEvent);
+        var param = {
+            value: internalEvent.target.value,
+            name: 'start-date'
+        };
+        this.createAndFireChangeEvent(param);
     }
 
-    // eslint-disable-next-line no-unused-vars
     handleChangeEndDate(internalEvent) {
-        var valueToPropagate = internalEvent.target.value;
-        var nameOfChangedInput = 'end-date';
+        var param = {
+            value: internalEvent.target.value,
+            name: 'end-date'
+        };
+        this.createAndFireChangeEvent(param);
+    }
 
+    createAndFireChangeEvent(detailParam) {
         var externalEvent = new CustomEvent('change', {
             bubbles: true,
             composed: true,
-            detail: { value: valueToPropagate, name: nameOfChangedInput }
+            detail: detailParam
         });
         this.dispatchEvent(externalEvent);
     }

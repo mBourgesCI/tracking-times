@@ -114,7 +114,7 @@ describe('inputs fire compond events with value if changed', () => {
         }
     });
 
-    test('event in start date change', () => {
+    test('event on start date change', () => {
         const testvalue = '1900-01-01';
         const handler = jest.fn();
 
@@ -139,7 +139,7 @@ describe('inputs fire compond events with value if changed', () => {
         expect(handler.mock.calls[0][0].detail.name).toBe('start-date');
     });
 
-    test('event in end date change', () => {
+    test('event on end date change', () => {
         const testvalue = '1900-01-01';
         const handler = jest.fn();
 
