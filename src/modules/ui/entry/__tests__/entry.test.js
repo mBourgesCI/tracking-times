@@ -428,4 +428,28 @@ describe('behavior on change', () => {
 
         expect(diffOutput.textContent).toBe('1');
     });
+
+    test('difference is calculated on change.', () => {
+        const startDate = '1900-01-01';
+        const startTime = '13:00';
+        const endDate = '1900-01-01';
+        const oldEndTime = '14:00';
+        const newEndTime = '15:00';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.startDate = startDate;
+        element.startTime = startTime;
+        element.endDate = endDate;
+        element.endTime = oldEndTime;
+        document.body.appendChild(element);
+
+        const endTimeInput = element.shadowRoot.querySelector('input.end-time');
+        endTimeInput.value = newEndTime;
+        endTimeInput.dispatchEvent(new CustomEvent('change'));
+
+        return Promise.resolve().then(() => {
+            const diffOutput = element.shadowRoot.querySelector('span.diff');
+            expect(diffOutput.textContent).toBe('2');
+        });
+    });
 });
