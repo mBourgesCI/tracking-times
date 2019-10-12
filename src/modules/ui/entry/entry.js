@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 
 export default class Entry extends LightningElement {
     @api
@@ -41,6 +41,18 @@ export default class Entry extends LightningElement {
         this.state.api.comment = value;
     }
 
+    get difference() {
+        var startTimestamp = this.startDate + 'T' + this.startTime;
+        var endTimestamp = this.endDate + 'T' + this.endTime;
+
+        let startDate = new Date(startTimestamp);
+        let endDate = new Date(endTimestamp);
+
+        let difference = endDate - startDate;
+        return difference / (1000 * 60 * 60);
+    }
+
+    @track
     state = { api: {} };
 
     handleChangeStartDate(internalEvent) {
@@ -48,6 +60,7 @@ export default class Entry extends LightningElement {
             value: internalEvent.target.value,
             name: 'start-date'
         };
+        this.startDate = internalEvent.target.value;
         this.createAndFireChangeEvent(param);
     }
 
@@ -56,6 +69,7 @@ export default class Entry extends LightningElement {
             value: internalEvent.target.value,
             name: 'start-time'
         };
+        this.startTime = internalEvent.target.value;
         this.createAndFireChangeEvent(param);
     }
 
@@ -64,6 +78,7 @@ export default class Entry extends LightningElement {
             value: internalEvent.target.value,
             name: 'end-date'
         };
+        this.endDate = internalEvent.target.value;
         this.createAndFireChangeEvent(param);
     }
 
@@ -72,6 +87,7 @@ export default class Entry extends LightningElement {
             value: internalEvent.target.value,
             name: 'end-time'
         };
+        this.endTime = internalEvent.target.value;
         this.createAndFireChangeEvent(param);
     }
 
