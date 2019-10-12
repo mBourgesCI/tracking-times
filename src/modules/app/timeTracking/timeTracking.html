@@ -99,7 +99,12 @@
                 </div>
                 <div key={entry.id} class="hoverinput">
                     <span class="output">{entry.comment}</span>
-                    <input class="input" type="text" value={entry.comment} />
+                    <input
+                        class="input"
+                        type="text"
+                        value={entry.comment}
+                        onchange={handleChangeComment}
+                    />
                 </div>
             </div>
         </template>
