@@ -42,4 +42,7 @@ export default class Entry extends LightningElement {
     }
 
     state = { api: {} };
+
+    // eslint-disable-next-line no-unused-vars
+    handleChangeStartDate(event) {}
 }

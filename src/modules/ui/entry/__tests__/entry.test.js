@@ -127,5 +127,7 @@ describe('inputs fire compond events with value if changed', () => {
         );
         startDateInput.value = testvalue;
         startDateInput.dispatchEvent(new CustomEvent('change', {}));
+
+        expect(handler).toHaveBeenCalled();
     });
 });
