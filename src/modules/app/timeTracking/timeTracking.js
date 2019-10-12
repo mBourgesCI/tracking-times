@@ -128,7 +128,8 @@ export default class TimeTracking extends LightningElement {
             this.state.entries.push({
                 id: this.state.entries.length,
                 start: timeStamp,
-                diff: null
+                diff: null,
+                comment: ''
             });
         } else {
             if (entries[entries.length - 1].end === undefined) {
@@ -139,7 +140,8 @@ export default class TimeTracking extends LightningElement {
                 this.state.entries.push({
                     id: this.state.entries.length,
                     start: timeStamp,
-                    diff: null
+                    diff: null,
+                    comment: ''
                 });
             }
         }
