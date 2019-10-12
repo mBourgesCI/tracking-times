@@ -38,3 +38,11 @@ div.content > div > span {
 div.content > div > input {
     display: none;
 }
+
+div.content > div:hover > span {
+    display: none;
+}
+
+div.content > div:hover > input {
+    display: block;
+}
