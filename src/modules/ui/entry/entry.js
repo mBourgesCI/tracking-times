@@ -41,6 +41,17 @@ export default class Entry extends LightningElement {
         this.state.api.comment = value;
     }
 
+    get difference() {
+        var startTimestamp = this.startDate + 'T' + this.startTime;
+        var endTimestamp = this.endDate + 'T' + this.endTime;
+
+        let startDate = new Date(startTimestamp);
+        let endDate = new Date(endTimestamp);
+
+        let difference = endDate - startDate;
+        return difference / (1000 * 60 * 60);
+    }
+
     @track
     state = { api: {} };
 

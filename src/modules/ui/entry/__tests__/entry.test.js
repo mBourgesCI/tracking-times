@@ -410,4 +410,22 @@ describe('behavior on change', () => {
             expect(endTimeOutput.textContent).toBe(newValue);
         });
     });
+
+    test('difference is calculated initialy.', () => {
+        const startDate = '1900-01-01';
+        const startTime = '13:00';
+        const endDate = '1900-01-01';
+        const endTime = '14:00';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.startDate = startDate;
+        element.startTime = startTime;
+        element.endDate = endDate;
+        element.endTime = endTime;
+        document.body.appendChild(element);
+
+        const diffOutput = element.shadowRoot.querySelector('span.diff');
+
+        expect(diffOutput.textContent).toBe('1');
+    });
 });
