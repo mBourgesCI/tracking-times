@@ -78,7 +78,9 @@ describe('check inputs exist', () => {
     });
 
     test('component has an input for end time', () => {
+        const endTime = '01:00:00';
         const element = createElement('ui-entry', { is: Entry });
+        element.endTime = endTime;
         document.body.appendChild(element);
 
         const endTimeInput = element.shadowRoot.querySelector('input.end-time');
@@ -86,6 +88,7 @@ describe('check inputs exist', () => {
         expect(endTimeInput.hasAttribute('type')).toBeTruthy();
         expect(endTimeInput.getAttribute('type')).toBe('time');
         expect(endTimeInput.value).toBeDefined();
+        expect(endTimeInput.value).toBe(endTime);
     });
 
     test('component has an input for comments', () => {
