@@ -107,6 +107,27 @@ describe('check inputs exist', () => {
 });
 
 describe('check outputs exsist', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
+    test('components has an output for start date', () => {
+        const startDate = '1900-01-01';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.startDate = startDate;
+        document.body.appendChild(element);
+
+        const commentOutput = element.shadowRoot.querySelector(
+            'span.start-date'
+        );
+        expect(commentOutput).toBeTruthy();
+        expect(commentOutput.textContent).toBe(startDate);
+    });
+
     test('components has an output for comment', () => {
         const comment = 'abcde';
 
