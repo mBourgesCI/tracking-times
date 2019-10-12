@@ -106,6 +106,12 @@ describe('check inputs exist', () => {
     });
 });
 
+describe('check outputs exsist', () => {
+  test('', ()=>{
+    
+  })
+});
+
 describe('inputs fire compond events with value if changed', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
