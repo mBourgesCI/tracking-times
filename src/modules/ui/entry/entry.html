@@ -1,6 +1,6 @@
 <template
     ><div class="content">
-        <div>
+        <div class="container-start-date">
             <span class="start-date">{startDate}</span>
             <input
                 class="start-date"
@@ -9,7 +9,7 @@
                 onchange={handleChangeStartDate}
             />
         </div>
-        <div>
+        <div class="container-start-time">
             <span class="start-time">{startTime}</span>
             <input
                 class="start-time"
@@ -18,7 +18,7 @@
                 onchange={handleChangeStartTime}
             />
         </div>
-        <div>
+        <div class="container-end-date">
             <span class="end-date">{endDate}</span>
             <input
                 class="end-date"
@@ -27,7 +27,7 @@
                 onchange={handleChangeEndDate}
             />
         </div>
-        <div>
+        <div class="container-start-time">
             <span class="end-time">{endTime}</span>
             <input
                 class="end-time"
@@ -36,10 +36,10 @@
                 onchange={handleChangeEndTime}
             />
         </div>
-        <div>
+        <div class="container-diff">
             <span class="diff">{difference}</span>
         </div>
-        <div>
+        <div class="container-comment">
             <span class="comment">{comment}</span>
             <input
                 class="comment"
