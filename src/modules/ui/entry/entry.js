@@ -50,6 +50,13 @@ export default class Entry extends LightningElement {
         };
         this.createAndFireChangeEvent(param);
     }
+    handleChangeStartTime(internalEvent) {
+        var param = {
+            value: internalEvent.target.value,
+            name: 'start-time'
+        };
+        this.createAndFireChangeEvent(param);
+    }
 
     handleChangeEndDate(internalEvent) {
         var param = {
