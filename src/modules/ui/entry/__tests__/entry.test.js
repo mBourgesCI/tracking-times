@@ -389,4 +389,25 @@ describe('behavior on change', () => {
             expect(endDateOutput.textContent).toBe(newValue);
         });
     });
+
+    test('end time output gets updated on input change.', () => {
+        const oldValue = '13:00';
+        const newValue = '14:00';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.endTime = oldValue;
+        document.body.appendChild(element);
+
+        const endTimeInput = element.shadowRoot.querySelector('input.end-time');
+
+        endTimeInput.value = newValue;
+        endTimeInput.dispatchEvent(new CustomEvent('change'));
+
+        return Promise.resolve().then(() => {
+            const endTimeOutput = element.shadowRoot.querySelector(
+                'span.end-time'
+            );
+            expect(endTimeOutput.textContent).toBe(newValue);
+        });
+    });
 });
