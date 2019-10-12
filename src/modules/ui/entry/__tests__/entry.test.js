@@ -78,4 +78,14 @@ describe('check inputs exist', () => {
         expect(endTimeInput.getAttribute('type')).toBe('time');
         expect(endTimeInput.value).toBeDefined();
     });
+
+    test('component has an input for comments', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const commentInput = element.shadowRoot.querySelector('input.comment');
+        expect(commentInput).toBeTruthy();
+        expect(commentInput.hasAttribute('type')).toBeTruthy();
+        expect(commentInput.getAttribute('type')).toBe('text');
+    });
 });
