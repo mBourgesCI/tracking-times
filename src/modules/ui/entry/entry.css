@@ -1,0 +1,32 @@
+div.content {
+    width: 100%;
+    display: grid;
+    grid-template-areas:
+        'startDate startTime comment '
+        'endDate endTime comment'
+        'diff diff comment';
+}
+
+div.container-start-date {
+    grid-area: startDate;
+}
+
+div.container-start-time {
+    grid-area: startTime;
+}
+
+div.container-end-date {
+    grid-area: endDate;
+}
+
+div.container-end-time {
+    grid-area: endTime;
+}
+
+div.container-diff {
+    grid-area: diff;
+}
+
+div.container-comment {
+    grid-area: comment;
+}
