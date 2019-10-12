@@ -114,5 +114,11 @@ describe('inputs fire compond events with value if changed', () => {
         }
     });
 
-    test('', () => {});
+    test('event in start date change', () => {
+        const handler = jest.fn();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.addEventListener('change', handler);
+        document.body.appendChild(element);
+    });
 });
