@@ -1,40 +1,52 @@
 <template
     ><div class="content">
-        <span class="start-date">{startDate}</span>
-        <input
-            class="start-date"
-            type="date"
-            value={startDate}
-            onchange={handleChangeStartDate}
-        />
-        <span class="start-time">{startTime}</span>
-        <input
-            class="start-time"
-            type="time"
-            value={startTime}
-            onchange={handleChangeStartTime}
-        />
-        <span class="end-date">{endDate}</span>
-        <input
-            class="end-date"
-            type="date"
-            value={endDate}
-            onchange={handleChangeEndDate}
-        />
-        <span class="end-time">{endTime}</span>
-        <input
-            class="end-time"
-            type="time"
-            value={endTime}
-            onchange={handleChangeEndTime}
-        />
-        <span class="diff">{difference}</span>
-        <span class="comment">{comment}</span>
-        <input
-            class="comment"
-            type="text"
-            value={comment}
-            onchange={handleChangeComment}
-        />
+        <div class="container-start-date">
+            <span class="start-date">{startDate}</span>
+            <input
+                class="start-date"
+                type="date"
+                value={startDate}
+                onchange={handleChangeStartDate}
+            />
+        </div>
+        <div class="container-start-time">
+            <span class="start-time">{startTime}</span>
+            <input
+                class="start-time"
+                type="time"
+                value={startTime}
+                onchange={handleChangeStartTime}
+            />
+        </div>
+        <div class="container-end-date">
+            <span class="end-date">{endDate}</span>
+            <input
+                class="end-date"
+                type="date"
+                value={endDate}
+                onchange={handleChangeEndDate}
+            />
+        </div>
+        <div class="container-start-time">
+            <span class="end-time">{endTime}</span>
+            <input
+                class="end-time"
+                type="time"
+                value={endTime}
+                onchange={handleChangeEndTime}
+            />
+        </div>
+        <div class="container-diff">
+            <span class="diff">{difference}</span>
+        </div>
+        <div class="container-comment">
+            <span class="comment">{comment}</span>
+            <input
+                class="comment"
+                type="text"
+                value={comment}
+                onchange={handleChangeComment}
+            />
+        </div>
     </div>
 </template>
