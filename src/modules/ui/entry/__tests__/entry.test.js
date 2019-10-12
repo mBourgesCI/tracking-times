@@ -60,7 +60,9 @@ describe('check inputs exist', () => {
     });
 
     test('component has an input for end date', () => {
+        const endDate = '1900-01-01';
         const element = createElement('ui-entry', { is: Entry });
+        element.endDate = endDate;
         document.body.appendChild(element);
 
         const endDateInput = element.shadowRoot.querySelector('input.end-date');
@@ -69,6 +71,7 @@ describe('check inputs exist', () => {
         expect(endDateInput.hasAttribute('type')).toBeTruthy();
         expect(endDateInput.getAttribute('type')).toBe('date');
         expect(endDateInput.value).toBeDefined();
+        expect(endDateInput.value).toBe(endDate);
     });
 
     test('component has an input for end time', () => {
