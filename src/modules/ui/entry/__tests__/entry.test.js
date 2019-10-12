@@ -314,3 +314,7 @@ describe('inputs fire compond events with value if changed', () => {
         expect(handler.mock.calls[0][0].detail.name).toBe('comment');
     });
 });
+
+describe('behavior on change', () => {
+    test('start date output gets updated on input change', () => {});
+});
