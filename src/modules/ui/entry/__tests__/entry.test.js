@@ -105,3 +105,14 @@ describe('check inputs exist', () => {
         expect(commentInput.value).toBe(comment);
     });
 });
+
+describe('inputs fire compond events with value if changed', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
+    test('', () => {});
+});
