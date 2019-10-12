@@ -46,3 +46,7 @@ div.content > div:hover > span {
 div.content > div:hover > input {
     display: block;
 }
+
+div.content > div > span.diff {
+    display: block;
+}
