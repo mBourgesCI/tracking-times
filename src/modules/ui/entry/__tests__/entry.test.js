@@ -128,6 +128,18 @@ describe('check outputs exsist', () => {
         expect(commentOutput.textContent).toBe(startDate);
     });
 
+    test('components has an output for end date', () => {
+        const endDate = '1900-01-01';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.endDate = endDate;
+        document.body.appendChild(element);
+
+        const commentOutput = element.shadowRoot.querySelector('span.end-date');
+        expect(commentOutput).toBeTruthy();
+        expect(commentOutput.textContent).toBe(endDate);
+    });
+
     test('components has an output for comment', () => {
         const comment = 'abcde';
 
