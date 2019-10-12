@@ -20,15 +20,16 @@ describe('static tests', () => {
         expect(contentContainer).toBeTruthy();
     });
 
-    test('component has an input for startdate', ()=>{
-      const element = createElement('ui-entry', { is: Entry });
-      document.body.appendChild(element);
+    test('component has an input for startdate', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
 
-      const startDateInput = element.shadowRoot.querySelector(
-        'input.date-start'
-      );
-      
-      
-      expect(startDateInput).toBeTruthy();
+        const startDateInput = element.shadowRoot.querySelector(
+            'input.date-start'
+        );
+
+        expect(startDateInput).toBeTruthy();
+        expect(startDateInput.hasAttribute('type')).toBeTruthy();
+        expect(startDateInput.getAttribute('type')).toBe('date');
     });
 });
