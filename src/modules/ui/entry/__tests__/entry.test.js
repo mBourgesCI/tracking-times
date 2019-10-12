@@ -134,5 +134,7 @@ describe('inputs fire compond events with value if changed', () => {
         expect(handler.mock.calls[0][0]).toBeDefined();
         expect(handler.mock.calls[0][0].bubbles).toBe(true);
         expect(handler.mock.calls[0][0].composed).toBe(true);
+        expect(handler.mock.calls[0][0].detail).toBeDefined();
+        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
     });
 });
