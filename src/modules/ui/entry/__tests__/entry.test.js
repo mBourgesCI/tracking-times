@@ -107,9 +107,17 @@ describe('check inputs exist', () => {
 });
 
 describe('check outputs exsist', () => {
-  test('', ()=>{
-    
-  })
+    test('components has an output for comment', () => {
+        const comment = 'abcde';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.comment = comment;
+        document.body.appendChild(element);
+
+        const commentOutput = element.shadowRoot.querySelector('span.comment');
+        expect(commentOutput).toBeTruthy();
+        expect(commentOutput.textContent).toBe(comment);
+    });
 });
 
 describe('inputs fire compond events with value if changed', () => {
