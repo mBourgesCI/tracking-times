@@ -106,6 +106,15 @@ export default class TimeTracking extends LightningElement {
         this.calculateDiffForEntry(entry);
     }
 
+    changeComment(param) {
+        var index, entry;
+
+        index = parseInt(param.entryIndex, 10);
+        entry = this.state.entries[index];
+
+        entry.comment = param.value;
+    }
+
     clearData() {
         this.state.entries = [];
         clear();
