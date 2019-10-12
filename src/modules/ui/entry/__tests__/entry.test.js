@@ -129,5 +129,8 @@ describe('inputs fire compond events with value if changed', () => {
         startDateInput.dispatchEvent(new CustomEvent('change', {}));
 
         expect(handler).toHaveBeenCalled();
+        expect(handler.mock.calls.length).toBe(1);
+        expect(handler.mock.calls[0].length).toBe(1);
+        expect(handler.mock.calls[0][0]).toBeDefined();
     });
 });
