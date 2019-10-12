@@ -20,19 +20,6 @@ describe('static tests', () => {
         expect(contentContainer).toBeTruthy();
     });
 
-    test('passed value is shown', () => {
-        const element = createElement('ui-entry', { is: Entry });
-        element.timestamps = 'abc';
-        document.body.appendChild(element);
-
-        const contentContainer = element.shadowRoot.querySelector(
-            'div.content'
-        );
-
-        expect(contentContainer.textContent).toBeTruthy();
-        expect(contentContainer.textContent).toBe('abc');
-    });
-
     test('component has an input for startdate', ()=>{
       const element = createElement('ui-entry', { is: Entry });
       document.body.appendChild(element);
