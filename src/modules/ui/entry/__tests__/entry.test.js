@@ -166,6 +166,14 @@ describe('check outputs exsist', () => {
         expect(commentOutput.textContent).toBe(endTime);
     });
 
+    test('components has an output for difference', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const commentOutput = element.shadowRoot.querySelector('span.diff');
+        expect(commentOutput).toBeTruthy();
+    });
+
     test('components has an output for comment', () => {
         const comment = 'abcde';
 
