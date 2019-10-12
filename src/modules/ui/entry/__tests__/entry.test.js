@@ -19,8 +19,17 @@ describe('static tests', () => {
 
         expect(contentContainer).toBeTruthy();
     });
+});
 
-    test('component has an input for startdate', () => {
+describe('check inputs exist', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
+    test('component has an input for start date', () => {
         const element = createElement('ui-entry', { is: Entry });
         document.body.appendChild(element);
 
