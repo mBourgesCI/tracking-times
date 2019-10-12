@@ -25,7 +25,7 @@ describe('static tests', () => {
         document.body.appendChild(element);
 
         const startDateInput = element.shadowRoot.querySelector(
-            'input.date-start'
+            'input.start-date'
         );
 
         expect(startDateInput).toBeTruthy();
