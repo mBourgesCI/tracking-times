@@ -85,7 +85,7 @@ export default class TimeTracking extends LightningElement {
         var index, entry, timestamp;
 
         index = parseInt(param.entryIndex, 10);
-        entry = timestamp = this.state.entries[index];
+        entry = this.state.entries[index];
 
         if (param.input === 'end') {
             timestamp = entry.end;
