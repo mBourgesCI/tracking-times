@@ -30,3 +30,23 @@ div.container-diff {
 div.container-comment {
     grid-area: comment;
 }
+
+div.content > div > span {
+    display: block;
+}
+
+div.content > div > input {
+    display: none;
+}
+
+div.content > div:hover > span {
+    display: none;
+}
+
+div.content > div:hover > input {
+    display: block;
+}
+
+div.content > div > span.diff {
+    display: block;
+}
