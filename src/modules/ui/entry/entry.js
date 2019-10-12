@@ -67,6 +67,7 @@ export default class Entry extends LightningElement {
             value: internalEvent.target.value,
             name: 'end-date'
         };
+        this.endDate = internalEvent.target.value;
         this.createAndFireChangeEvent(param);
     }
 

@@ -368,4 +368,25 @@ describe('behavior on change', () => {
             expect(startTimeOutput.textContent).toBe(newValue);
         });
     });
+
+    test('end date output gets updated on input change.', () => {
+        const oldValue = '1900-01-01';
+        const newValue = '1900-01-02';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.endDate = oldValue;
+        document.body.appendChild(element);
+
+        const endDateInput = element.shadowRoot.querySelector('input.end-date');
+
+        endDateInput.value = newValue;
+        endDateInput.dispatchEvent(new CustomEvent('change'));
+
+        return Promise.resolve().then(() => {
+            const endDateOutput = element.shadowRoot.querySelector(
+                'span.end-date'
+            );
+            expect(endDateOutput.textContent).toBe(newValue);
+        });
+    });
 });
