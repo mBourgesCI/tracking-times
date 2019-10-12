@@ -30,7 +30,9 @@ describe('check inputs exist', () => {
     });
 
     test('component has an input for start date', () => {
+        const startDate = '1900-01-01';
         const element = createElement('ui-entry', { is: Entry });
+        element.startDate = startDate;
         document.body.appendChild(element);
 
         const startDateInput = element.shadowRoot.querySelector(
@@ -41,6 +43,7 @@ describe('check inputs exist', () => {
         expect(startDateInput.hasAttribute('type')).toBeTruthy();
         expect(startDateInput.getAttribute('type')).toBe('date');
         expect(startDateInput.value).toBeDefined();
+        expect(startDateInput.value).toBe(startDate);
     });
 
     test('component has an input for start time', () => {
