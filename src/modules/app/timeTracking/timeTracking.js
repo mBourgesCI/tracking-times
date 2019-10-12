@@ -72,6 +72,15 @@ export default class TimeTracking extends LightningElement {
         this.changeTime(param);
     }
 
+    handleChangeComment(event) {
+        var param = {};
+
+        param.entryIndex = event.target.getAttribute('data-entry');
+        param.value = event.target.value;
+
+        this.changeComment(param);
+    }
+
     changeTime(param) {
         var index, entry, timestamp;
 
