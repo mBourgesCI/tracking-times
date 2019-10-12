@@ -115,10 +115,17 @@ describe('inputs fire compond events with value if changed', () => {
     });
 
     test('event in start date change', () => {
+        const testvalue = '1900-01-01';
         const handler = jest.fn();
 
         const element = createElement('ui-entry', { is: Entry });
         element.addEventListener('change', handler);
         document.body.appendChild(element);
+
+        const startDateInput = element.shadowRoot.querySelector(
+            'input.start-date'
+        );
+        startDateInput.value = testvalue;
+        startDateInput.dispatchEvent(new CustomEvent('change', {}));
     });
 });
