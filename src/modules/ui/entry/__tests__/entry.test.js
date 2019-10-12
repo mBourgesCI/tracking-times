@@ -32,4 +32,16 @@ describe('static tests', () => {
         expect(contentContainer.textContent).toBeTruthy();
         expect(contentContainer.textContent).toBe('abc');
     });
+
+    test('component has an input for startdate', ()=>{
+      const element = createElement('ui-entry', { is: Entry });
+      document.body.appendChild(element);
+
+      const startDateInput = element.shadowRoot.querySelector(
+        'input.date-start'
+      );
+      
+      
+      expect(startDateInput).toBeTruthy();
+    });
 });
