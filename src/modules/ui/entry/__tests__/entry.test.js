@@ -33,4 +33,17 @@ describe('static tests', () => {
         expect(startDateInput.getAttribute('type')).toBe('date');
         expect(startDateInput.value).toBeDefined();
     });
+
+    test('component has an input for start time', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const startTimeInput = element.shadowRoot.querySelector(
+            'input.start-time'
+        );
+        expect(startTimeInput).toBeTruthy();
+        expect(startTimeInput.hasAttribute('type')).toBeTruthy();
+        expect(startTimeInput.getAttribute('type')).toBe('time');
+        expect(startTimeInput.value).toBeDefined();
+    });
 });
