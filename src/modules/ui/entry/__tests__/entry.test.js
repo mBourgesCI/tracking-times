@@ -105,3 +105,131 @@ describe('check inputs exist', () => {
         expect(commentInput.value).toBe(comment);
     });
 });
+
+describe('inputs fire compond events with value if changed', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
+    test('event on start date change', () => {
+        const testvalue = '1900-01-01';
+        const handler = jest.fn();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.addEventListener('change', handler);
+        document.body.appendChild(element);
+
+        const startDateInput = element.shadowRoot.querySelector(
+            'input.start-date'
+        );
+        startDateInput.value = testvalue;
+        startDateInput.dispatchEvent(new CustomEvent('change', {}));
+
+        expect(handler).toHaveBeenCalled();
+        expect(handler.mock.calls.length).toBe(1);
+        expect(handler.mock.calls[0].length).toBe(1);
+        expect(handler.mock.calls[0][0]).toBeDefined();
+        expect(handler.mock.calls[0][0].bubbles).toBe(true);
+        expect(handler.mock.calls[0][0].composed).toBe(true);
+        expect(handler.mock.calls[0][0].detail).toBeDefined();
+        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
+        expect(handler.mock.calls[0][0].detail.name).toBe('start-date');
+    });
+
+    test('event on start time change', () => {
+        const testvalue = '13:30:00';
+        const handler = jest.fn();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.addEventListener('change', handler);
+        document.body.appendChild(element);
+
+        const startTimeInput = element.shadowRoot.querySelector(
+            'input.start-time'
+        );
+        startTimeInput.value = testvalue;
+        startTimeInput.dispatchEvent(new CustomEvent('change', {}));
+
+        expect(handler).toHaveBeenCalled();
+        expect(handler.mock.calls.length).toBe(1);
+        expect(handler.mock.calls[0].length).toBe(1);
+        expect(handler.mock.calls[0][0]).toBeDefined();
+        expect(handler.mock.calls[0][0].bubbles).toBe(true);
+        expect(handler.mock.calls[0][0].composed).toBe(true);
+        expect(handler.mock.calls[0][0].detail).toBeDefined();
+        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
+        expect(handler.mock.calls[0][0].detail.name).toBe('start-time');
+    });
+
+    test('event on end date change', () => {
+        const testvalue = '1900-01-01';
+        const handler = jest.fn();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.addEventListener('change', handler);
+        document.body.appendChild(element);
+
+        const endDateInput = element.shadowRoot.querySelector('input.end-date');
+        endDateInput.value = testvalue;
+        endDateInput.dispatchEvent(new CustomEvent('change', {}));
+
+        expect(handler).toHaveBeenCalled();
+        expect(handler.mock.calls.length).toBe(1);
+        expect(handler.mock.calls[0].length).toBe(1);
+        expect(handler.mock.calls[0][0]).toBeDefined();
+        expect(handler.mock.calls[0][0].bubbles).toBe(true);
+        expect(handler.mock.calls[0][0].composed).toBe(true);
+        expect(handler.mock.calls[0][0].detail).toBeDefined();
+        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
+        expect(handler.mock.calls[0][0].detail.name).toBe('end-date');
+    });
+
+    test('event on end time change', () => {
+        const testvalue = '13:30:00';
+        const handler = jest.fn();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.addEventListener('change', handler);
+        document.body.appendChild(element);
+
+        const endTimeInput = element.shadowRoot.querySelector('input.end-time');
+        endTimeInput.value = testvalue;
+        endTimeInput.dispatchEvent(new CustomEvent('change', {}));
+
+        expect(handler).toHaveBeenCalled();
+        expect(handler.mock.calls.length).toBe(1);
+        expect(handler.mock.calls[0].length).toBe(1);
+        expect(handler.mock.calls[0][0]).toBeDefined();
+        expect(handler.mock.calls[0][0].bubbles).toBe(true);
+        expect(handler.mock.calls[0][0].composed).toBe(true);
+        expect(handler.mock.calls[0][0].detail).toBeDefined();
+        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
+        expect(handler.mock.calls[0][0].detail.name).toBe('end-time');
+    });
+
+    test('event on comment change', () => {
+        const testvalue = 'abcde1234';
+        const handler = jest.fn();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.addEventListener('change', handler);
+        document.body.appendChild(element);
+
+        const commentInput = element.shadowRoot.querySelector('input.comment');
+        commentInput.value = testvalue;
+        commentInput.dispatchEvent(new CustomEvent('change', {}));
+
+        expect(handler).toHaveBeenCalled();
+        expect(handler.mock.calls.length).toBe(1);
+        expect(handler.mock.calls[0].length).toBe(1);
+        expect(handler.mock.calls[0][0]).toBeDefined();
+        expect(handler.mock.calls[0][0].bubbles).toBe(true);
+        expect(handler.mock.calls[0][0].composed).toBe(true);
+        expect(handler.mock.calls[0][0].detail).toBeDefined();
+        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
+        expect(handler.mock.calls[0][0].detail.name).toBe('comment');
+    });
+});

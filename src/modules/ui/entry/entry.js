@@ -42,4 +42,53 @@ export default class Entry extends LightningElement {
     }
 
     state = { api: {} };
+
+    handleChangeStartDate(internalEvent) {
+        var param = {
+            value: internalEvent.target.value,
+            name: 'start-date'
+        };
+        this.createAndFireChangeEvent(param);
+    }
+
+    handleChangeStartTime(internalEvent) {
+        var param = {
+            value: internalEvent.target.value,
+            name: 'start-time'
+        };
+        this.createAndFireChangeEvent(param);
+    }
+
+    handleChangeEndDate(internalEvent) {
+        var param = {
+            value: internalEvent.target.value,
+            name: 'end-date'
+        };
+        this.createAndFireChangeEvent(param);
+    }
+
+    handleChangeEndTime(internalEvent) {
+        var param = {
+            value: internalEvent.target.value,
+            name: 'end-time'
+        };
+        this.createAndFireChangeEvent(param);
+    }
+
+    handleChangeComment(internalEvent) {
+        var param = {
+            value: internalEvent.target.value,
+            name: 'comment'
+        };
+        this.createAndFireChangeEvent(param);
+    }
+
+    createAndFireChangeEvent(detailParam) {
+        var externalEvent = new CustomEvent('change', {
+            bubbles: true,
+            composed: true,
+            detail: detailParam
+        });
+        this.dispatchEvent(externalEvent);
+    }
 }

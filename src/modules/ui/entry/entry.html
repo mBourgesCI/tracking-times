@@ -1,9 +1,34 @@
 <template
     ><div class="content">
-        <input class="start-date" type="date" value={startDate} />
-        <input class="start-time" type="time" value={startTime} />
-        <input class="end-date" type="date" value={endDate} />
-        <input class="end-time" type="time" value={endTime} />
-        <input class="comment" type="text" value={comment} />
+        <input
+            class="start-date"
+            type="date"
+            value={startDate}
+            onchange={handleChangeStartDate}
+        />
+        <input
+            class="start-time"
+            type="time"
+            value={startTime}
+            onchange={handleChangeStartTime}
+        />
+        <input
+            class="end-date"
+            type="date"
+            value={endDate}
+            onchange={handleChangeEndDate}
+        />
+        <input
+            class="end-time"
+            type="time"
+            value={endTime}
+            onchange={handleChangeEndTime}
+        />
+        <input
+            class="comment"
+            type="text"
+            value={comment}
+            onchange={handleChangeComment}
+        />
     </div>
 </template>
