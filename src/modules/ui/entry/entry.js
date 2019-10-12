@@ -55,4 +55,17 @@ export default class Entry extends LightningElement {
         });
         this.dispatchEvent(externalEvent);
     }
+
+    // eslint-disable-next-line no-unused-vars
+    handleChangeEndDate(internalEvent) {
+        var valueToPropagate = internalEvent.target.value;
+        var nameOfChangedInput = 'end-date';
+
+        var externalEvent = new CustomEvent('change', {
+            bubbles: true,
+            composed: true,
+            detail: { value: valueToPropagate, name: nameOfChangedInput }
+        });
+        this.dispatchEvent(externalEvent);
+    }
 }
