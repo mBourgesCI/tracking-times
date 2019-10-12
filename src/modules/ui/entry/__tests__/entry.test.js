@@ -316,5 +316,26 @@ describe('inputs fire compond events with value if changed', () => {
 });
 
 describe('behavior on change', () => {
-    test('start date output gets updated on input change', () => {});
+    test('start date output gets updated on input change.', () => {
+        const oldValue = '1900-01-01';
+        const newValue = '1900-01-02';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.startDate = oldValue;
+        document.body.appendChild(element);
+
+        const startDateInput = element.shadowRoot.querySelector(
+            'input.start-date'
+        );
+
+        startDateInput.value = newValue;
+        startDateInput.dispatchEvent(new CustomEvent('change'));
+
+        return Promise.resolve().then(() => {
+            const startDateOutput = element.shadowRoot.querySelector(
+                'span.start-date'
+            );
+            expect(startDateOutput.textContent).toBe(newValue);
+        });
+    });
 });

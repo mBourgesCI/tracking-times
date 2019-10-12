@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 
 export default class Entry extends LightningElement {
     @api
@@ -41,6 +41,7 @@ export default class Entry extends LightningElement {
         this.state.api.comment = value;
     }
 
+    @track
     state = { api: {} };
 
     handleChangeStartDate(internalEvent) {
@@ -48,6 +49,7 @@ export default class Entry extends LightningElement {
             value: internalEvent.target.value,
             name: 'start-date'
         };
+        this.startDate = internalEvent.target.value;
         this.createAndFireChangeEvent(param);
     }
 
