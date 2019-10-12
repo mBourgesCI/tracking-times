@@ -51,13 +51,7 @@ describe('test creation of new entries', () => {
             ).toBeTruthy();
             expect(
                 entryContainers_ToCheck.childNodes[0].childNodes.length
-            ).toBe(2);
-            expect(
-                entryContainers_ToCheck.childNodes[0].childNodes[0].textContent
-            ).toBe('start');
-            expect(
-                entryContainers_ToCheck.childNodes[0].childNodes[1].textContent
-            ).toBeTruthy();
+            ).toBe(4);
         });
     });
 
@@ -90,18 +84,16 @@ describe('test creation of new entries', () => {
             ).toBeTruthy();
             expect(
                 entryContainers_ToCheck.childNodes[0].childNodes.length
-            ).toBe(4);
+            ).toBe(6);
+
+            //first Timestamp
             expect(
                 entryContainers_ToCheck.childNodes[0].childNodes[0].textContent
-            ).toBe('start');
-            expect(
-                entryContainers_ToCheck.childNodes[0].childNodes[1].textContent
             ).toBeTruthy();
+
+            //second Timestamp
             expect(
                 entryContainers_ToCheck.childNodes[0].childNodes[2].textContent
-            ).toBe('end');
-            expect(
-                entryContainers_ToCheck.childNodes[0].childNodes[3].textContent
             ).toBeTruthy();
         });
     });
@@ -136,27 +128,18 @@ describe('test creation of new entries', () => {
             ).toBeTruthy();
             expect(
                 entryContainers_ToCheck.childNodes[0].childNodes.length
-            ).toBe(4);
+            ).toBe(6);
             //first Timestamp
             expect(
                 entryContainers_ToCheck.childNodes[0].childNodes[0].textContent
-            ).toBe('start');
-            expect(
-                entryContainers_ToCheck.childNodes[0].childNodes[1].textContent
             ).toBeTruthy();
             //second Timestamp
             expect(
                 entryContainers_ToCheck.childNodes[0].childNodes[2].textContent
-            ).toBe('end');
-            expect(
-                entryContainers_ToCheck.childNodes[0].childNodes[3].textContent
             ).toBeTruthy();
             //third Timestamp
             expect(
-                entryContainers_ToCheck.childNodes[0].childNodes[0].textContent
-            ).toBe('start');
-            expect(
-                entryContainers_ToCheck.childNodes[0].childNodes[1].textContent
+                entryContainers_ToCheck.childNodes[1].childNodes[0].textContent
             ).toBeTruthy();
         });
     });
