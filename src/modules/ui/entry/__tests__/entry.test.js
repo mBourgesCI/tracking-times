@@ -31,5 +31,7 @@ describe('static tests', () => {
         expect(startDateInput).toBeTruthy();
         expect(startDateInput.hasAttribute('type')).toBeTruthy();
         expect(startDateInput.getAttribute('type')).toBe('date');
+        expect(startDateInput.hasAttribute('class')).toBeTruthy();
+        expect(startDateInput.getAttribute('class').includes('date-start')).toBeTruthy();
     });
 });
