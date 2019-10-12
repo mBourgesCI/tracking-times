@@ -75,6 +75,14 @@ export default class Entry extends LightningElement {
         this.createAndFireChangeEvent(param);
     }
 
+    handleChangeComment(internalEvent) {
+        var param = {
+            value: internalEvent.target.value,
+            name: 'comment'
+        };
+        this.createAndFireChangeEvent(param);
+    }
+
     createAndFireChangeEvent(detailParam) {
         var externalEvent = new CustomEvent('change', {
             bubbles: true,

@@ -209,4 +209,27 @@ describe('inputs fire compond events with value if changed', () => {
         expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
         expect(handler.mock.calls[0][0].detail.name).toBe('end-time');
     });
+
+    test('event on comment change', () => {
+        const testvalue = 'abcde1234';
+        const handler = jest.fn();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.addEventListener('change', handler);
+        document.body.appendChild(element);
+
+        const commentInput = element.shadowRoot.querySelector('input.comment');
+        commentInput.value = testvalue;
+        commentInput.dispatchEvent(new CustomEvent('change', {}));
+
+        expect(handler).toHaveBeenCalled();
+        expect(handler.mock.calls.length).toBe(1);
+        expect(handler.mock.calls[0].length).toBe(1);
+        expect(handler.mock.calls[0][0]).toBeDefined();
+        expect(handler.mock.calls[0][0].bubbles).toBe(true);
+        expect(handler.mock.calls[0][0].composed).toBe(true);
+        expect(handler.mock.calls[0][0].detail).toBeDefined();
+        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
+        expect(handler.mock.calls[0][0].detail.name).toBe('comment');
+    });
 });
