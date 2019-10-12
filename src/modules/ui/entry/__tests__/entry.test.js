@@ -128,6 +128,20 @@ describe('check outputs exsist', () => {
         expect(commentOutput.textContent).toBe(startDate);
     });
 
+    test('components has an output for start time', () => {
+        const startTime = '19:00:00';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.startTime = startTime;
+        document.body.appendChild(element);
+
+        const commentOutput = element.shadowRoot.querySelector(
+            'span.start-time'
+        );
+        expect(commentOutput).toBeTruthy();
+        expect(commentOutput.textContent).toBe(startTime);
+    });
+
     test('components has an output for end date', () => {
         const endDate = '1900-01-01';
 
