@@ -35,6 +35,7 @@ describe('check json', () => {
 
         const valueInput = element.shadowRoot.querySelector('input');
         valueInput.value = newValue;
+        valueInput.dispatchEvent(new CustomEvent('change'));
 
         return Promise.resolve().then(() => {
             const valueSpan = element.shadowRoot.querySelector('span');
