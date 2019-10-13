@@ -16,6 +16,7 @@ export default class Entry extends LightningElement {
             if (value.start !== undefined && value.start.value !== undefined) {
                 startTimeStamp = value.start.value;
                 this.state.startTimeStamp = startTimeStamp;
+                this.setDisplayStartDate();
             }
             if (value.end !== undefined && value.end.value !== undefined) {
                 endTimeStamp = value.end.value;
@@ -28,6 +29,19 @@ export default class Entry extends LightningElement {
 
     @track
     displayState = {};
+
+    setDisplayStartDate() {
+        this.displayState.startdate = this.extractDateStringFromTimeStamp(
+            this.state.startTimeStamp
+        );
+    }
+
+    extractDateStringFromTimeStamp(timestamp) {
+        var fullDate = new Date(timestamp);
+        var dateString = fullDate.toISOString().split('T')[0];
+
+        return dateString;
+    }
 
     @api
     get startDate() {

@@ -31,8 +31,9 @@ describe('check inputs exist', () => {
 
     test('component has an input for start date', () => {
         const startDate = '1900-01-01';
+        const jsonInput = { start: { value: new Date(startDate).getTime() } };
         const element = createElement('ui-entry', { is: Entry });
-        element.startDate = startDate;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const startDateInput = element.shadowRoot.querySelector(
