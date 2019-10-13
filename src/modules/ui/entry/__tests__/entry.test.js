@@ -122,9 +122,7 @@ describe('check outputs exsist', () => {
         element.startDate = startDate;
         document.body.appendChild(element);
 
-        const commentOutput = element.shadowRoot.querySelector(
-            'span.start-date'
-        );
+        const commentOutput = element.shadowRoot.querySelector('span.comment');
         expect(commentOutput).toBeTruthy();
         expect(commentOutput.textContent).toBe(startDate);
     });
