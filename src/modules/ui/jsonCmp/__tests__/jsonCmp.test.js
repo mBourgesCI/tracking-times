@@ -11,5 +11,6 @@ describe('check json', () => {
 
         const valueInput = element.shadowRoot.querySelector('input');
         expect(valueInput).toBeTruthy();
+        expect(valueInput.value).toBe(jsonInput.value);
     });
 });
