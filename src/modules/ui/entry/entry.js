@@ -110,15 +110,15 @@ export default class Entry extends LightningElement {
     state = { api: {} };
 
     handleChangeStartDate(internalEvent) {
-        const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
         var newStartDate, param;
         if (this.internalState.startTimeStamp !== undefined) {
-            let timePart =
-                this.internalState.startTimeStamp % MILLISECONDS_PER_DAY;
-            //let datePart = this.state.startTimeStamp - timePart;
+            let separatedTimestamp = splitTimeStampIntegerIntoDateAndTime(
+                this.internalState.startTimeStamp
+            );
 
             newStartDate = new Date(internalEvent.target.value).getTime();
-            this.internalState.startTimeStamp = newStartDate + timePart;
+            this.internalState.startTimeStamp =
+                newStartDate + separatedTimestamp.time;
             this.setDisplayStartDate();
 
             param = {
@@ -172,4 +172,19 @@ export default class Entry extends LightningElement {
         });
         this.dispatchEvent(externalEvent);
     }
+}
+
+function splitTimeStampIntegerIntoDateAndTime(timestamp) {
+    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+    var intValue, timeInt, dateInt, result;
+    if (timestamp !== undefined) {
+        intValue = parseInt(timestamp, 10);
+
+        timeInt = intValue % MILLISECONDS_PER_DAY;
+        dateInt = intValue - timeInt;
+
+        result = { date: dateInt, time: timeInt };
+        return result;
+    }
+    return undefined;
 }
