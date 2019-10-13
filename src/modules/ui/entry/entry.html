@@ -1,14 +1,16 @@
 <template
     ><div class="content">
-        <div class="container-start-date">
-            <span class="start-date">{startDate}</span>
-            <input
+        <template if:true={displayState.startdate}>
+            <div class="container-start-date">
+                <span class="start-date">{startDate}</span>
+                <input
                 class="start-date"
                 type="date"
                 value={startDate}
                 onchange={handleChangeStartDate}
-            />
-        </div>
+                />
+            </div>
+        </template>
         <div class="container-start-time">
             <span class="start-time">{startTime}</span>
             <input
