@@ -5,6 +5,13 @@ export default class JsonCmp extends LightningElement {
     get inputJson() {
         return this.state.api.value;
     }
+    /**
+     * It is possible to store the input-json as-is. But in that case
+     * it will be immutable. Attempting of change it will result in
+     * an error.
+     * Therefore the value needs to be extracted from the input and
+     * stored separatly.
+     */
     set inputJson(value) {
         this.state.api.value = value.value;
     }
