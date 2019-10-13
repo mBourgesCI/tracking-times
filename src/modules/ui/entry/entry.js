@@ -38,15 +38,21 @@ export default class Entry extends LightningElement {
 
     extractDateStringFromTimeStamp(timestamp) {
         var fullDate, dateString;
-        // eslint-disable-next-line no-console
-        console.log(timestamp);
         fullDate = new Date(timestamp);
-        // eslint-disable-next-line no-console
-        console.log(fullDate);
         dateString = fullDate.toISOString().split('T')[0];
-        // eslint-disable-next-line no-console
-        console.log(dateString);
         return dateString;
+    }
+
+    extractTimeStringFromTimeStamp(timestamp) {
+        var fullDate, timeString;
+
+        fullDate = new Date(timestamp);
+        timeString = fullDate
+            .toISOString()
+            .split('T')[1]
+            .substr(0, 5);
+
+        return timeString;
     }
 
     @api
@@ -104,12 +110,22 @@ export default class Entry extends LightningElement {
     state = { api: {} };
 
     handleChangeStartDate(internalEvent) {
-        var param = {
-            value: internalEvent.target.value,
-            name: 'start-date'
-        };
-        this.startDate = internalEvent.target.value;
-        this.createAndFireChangeEvent(param);
+        const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+        var newStartDate, param;
+        if (this.state.startTimeStamp !== undefined) {
+            let timePart = this.state.startTimeStamp % MILLISECONDS_PER_DAY;
+            //let datePart = this.state.startTimeStamp - timePart;
+
+            newStartDate = new Date(internalEvent.target.value).getTime();
+            this.state.startTimeStamp = newStartDate + timePart;
+            this.setDisplayStartDate();
+
+            param = {
+                value: this.displayState.startdate,
+                name: 'start-date'
+            };
+            this.createAndFireChangeEvent(param);
+        }
     }
 
     handleChangeStartTime(internalEvent) {
