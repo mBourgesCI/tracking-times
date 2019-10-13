@@ -11,28 +11,28 @@ export default class Entry extends LightningElement {
         if (value !== undefined) {
             if (value.comment !== undefined) {
                 comment = value.comment;
-                this.state.comment = comment;
+                this.internalState.comment = comment;
             }
             if (value.start !== undefined && value.start.value !== undefined) {
                 startTimeStamp = value.start.value;
-                this.state.startTimeStamp = startTimeStamp;
+                this.internalState.startTimeStamp = startTimeStamp;
                 this.setDisplayStartDate();
             }
             if (value.end !== undefined && value.end.value !== undefined) {
                 endTimeStamp = value.end.value;
-                this.state.endTimeStamp = endTimeStamp;
+                this.internalState.endTimeStamp = endTimeStamp;
             }
         }
     }
 
-    state = {};
+    internalState = {};
 
     @track
     displayState = {};
 
     setDisplayStartDate() {
         this.displayState.startdate = this.extractDateStringFromTimeStamp(
-            this.state.startTimeStamp
+            this.internalState.startTimeStamp
         );
     }
 
@@ -112,12 +112,13 @@ export default class Entry extends LightningElement {
     handleChangeStartDate(internalEvent) {
         const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
         var newStartDate, param;
-        if (this.state.startTimeStamp !== undefined) {
-            let timePart = this.state.startTimeStamp % MILLISECONDS_PER_DAY;
+        if (this.internalState.startTimeStamp !== undefined) {
+            let timePart =
+                this.internalState.startTimeStamp % MILLISECONDS_PER_DAY;
             //let datePart = this.state.startTimeStamp - timePart;
 
             newStartDate = new Date(internalEvent.target.value).getTime();
-            this.state.startTimeStamp = newStartDate + timePart;
+            this.internalState.startTimeStamp = newStartDate + timePart;
             this.setDisplayStartDate();
 
             param = {
