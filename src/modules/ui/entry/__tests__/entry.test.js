@@ -31,8 +31,9 @@ describe('check inputs exist', () => {
 
     test('component has an input for start date', () => {
         const startDate = '1900-01-01';
+        const jsonInput = { start: { value: new Date(startDate).getTime() } };
         const element = createElement('ui-entry', { is: Entry });
-        element.startDate = startDate;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const startDateInput = element.shadowRoot.querySelector(
@@ -116,16 +117,17 @@ describe('check outputs exsist', () => {
 
     test('components has an output for start date', () => {
         const startDate = '1900-01-01';
+        const jsonInput = { start: { value: new Date(startDate).getTime() } };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.startDate = startDate;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
-        const commentOutput = element.shadowRoot.querySelector(
+        const startDateOutput = element.shadowRoot.querySelector(
             'span.start-date'
         );
-        expect(commentOutput).toBeTruthy();
-        expect(commentOutput.textContent).toBe(startDate);
+        expect(startDateOutput).toBeTruthy();
+        expect(startDateOutput.textContent).toBe(startDate);
     });
 
     test('components has an output for start time', () => {
@@ -196,11 +198,14 @@ describe('inputs fire compond events with value if changed', () => {
     });
 
     test('event on start date change', () => {
-        const testvalue = '1900-01-01';
+        const startDate = '1900-01-01';
+        const testvalue = '1900-01-02';
+        const jsonInput = { start: { value: new Date(startDate).getTime() } };
         const handler = jest.fn();
 
         const element = createElement('ui-entry', { is: Entry });
         element.addEventListener('change', handler);
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const startDateInput = element.shadowRoot.querySelector(
@@ -324,11 +329,13 @@ describe('behavior on change', () => {
     });
 
     test('start date output gets updated on input change.', () => {
-        const oldValue = '1900-01-01';
+        const startDate = '1900-01-01';
+        const jsonInput = { start: { value: new Date(startDate).getTime() } };
+
         const newValue = '1900-01-02';
 
         const element = createElement('ui-entry', { is: Entry });
-        element.startDate = oldValue;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const startDateInput = element.shadowRoot.querySelector(

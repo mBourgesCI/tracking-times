@@ -11,23 +11,49 @@ export default class Entry extends LightningElement {
         if (value !== undefined) {
             if (value.comment !== undefined) {
                 comment = value.comment;
-                this.state.comment = comment;
+                this.internalState.comment = comment;
             }
             if (value.start !== undefined && value.start.value !== undefined) {
                 startTimeStamp = value.start.value;
-                this.state.startTimeStamp = startTimeStamp;
+                this.internalState.startTimeStamp = startTimeStamp;
+                this.setDisplayStartDate();
             }
             if (value.end !== undefined && value.end.value !== undefined) {
                 endTimeStamp = value.end.value;
-                this.state.endTimeStamp = endTimeStamp;
+                this.internalState.endTimeStamp = endTimeStamp;
             }
         }
     }
 
-    state = {};
+    internalState = {};
 
     @track
     displayState = {};
+
+    setDisplayStartDate() {
+        this.displayState.startdate = this.extractDateStringFromTimeStamp(
+            this.internalState.startTimeStamp
+        );
+    }
+
+    extractDateStringFromTimeStamp(timestamp) {
+        var fullDate, dateString;
+        fullDate = new Date(timestamp);
+        dateString = fullDate.toISOString().split('T')[0];
+        return dateString;
+    }
+
+    extractTimeStringFromTimeStamp(timestamp) {
+        var fullDate, timeString;
+
+        fullDate = new Date(timestamp);
+        timeString = fullDate
+            .toISOString()
+            .split('T')[1]
+            .substr(0, 5);
+
+        return timeString;
+    }
 
     @api
     get startDate() {
@@ -84,12 +110,23 @@ export default class Entry extends LightningElement {
     state = { api: {} };
 
     handleChangeStartDate(internalEvent) {
-        var param = {
-            value: internalEvent.target.value,
-            name: 'start-date'
-        };
-        this.startDate = internalEvent.target.value;
-        this.createAndFireChangeEvent(param);
+        var newStartDate, param;
+        if (this.internalState.startTimeStamp !== undefined) {
+            let separatedTimestamp = splitTimeStampIntegerIntoDateAndTime(
+                this.internalState.startTimeStamp
+            );
+
+            newStartDate = new Date(internalEvent.target.value).getTime();
+            this.internalState.startTimeStamp =
+                newStartDate + separatedTimestamp.time;
+            this.setDisplayStartDate();
+
+            param = {
+                value: this.displayState.startdate,
+                name: 'start-date'
+            };
+            this.createAndFireChangeEvent(param);
+        }
     }
 
     handleChangeStartTime(internalEvent) {
@@ -135,4 +172,19 @@ export default class Entry extends LightningElement {
         });
         this.dispatchEvent(externalEvent);
     }
+}
+
+function splitTimeStampIntegerIntoDateAndTime(timestamp) {
+    const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+    var intValue, timeInt, dateInt, result;
+    if (timestamp !== undefined) {
+        intValue = parseInt(timestamp, 10);
+
+        timeInt = intValue % MILLISECONDS_PER_DAY;
+        dateInt = intValue - timeInt;
+
+        result = { date: dateInt, time: timeInt };
+        return result;
+    }
+    return undefined;
 }

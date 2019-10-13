@@ -1,11 +1,11 @@
 <template
     ><div class="content">
         <div class="container-start-date">
-            <span class="start-date">{startDate}</span>
+            <span class="start-date">{displayState.startdate}</span>
             <input
                 class="start-date"
                 type="date"
-                value={startDate}
+                value={displayState.startdate}
                 onchange={handleChangeStartDate}
             />
         </div>
