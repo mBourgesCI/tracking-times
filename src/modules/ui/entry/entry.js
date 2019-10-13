@@ -26,6 +26,9 @@ export default class Entry extends LightningElement {
 
     state = {};
 
+    @track
+    displayState = {};
+
     @api
     get startDate() {
         return this.state.api.startDate;
