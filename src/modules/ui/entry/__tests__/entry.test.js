@@ -117,14 +117,17 @@ describe('check outputs exsist', () => {
 
     test('components has an output for start date', () => {
         const startDate = '1900-01-01';
+        const jsonInput = { start: { value: new Date(startDate).getTime() } };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.startDate = startDate;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
-        const commentOutput = element.shadowRoot.querySelector('span.comment');
-        expect(commentOutput).toBeTruthy();
-        expect(commentOutput.textContent).toBe(startDate);
+        const startDateOutput = element.shadowRoot.querySelector(
+            'span.start-date'
+        );
+        expect(startDateOutput).toBeTruthy();
+        expect(startDateOutput.textContent).toBe(startDate);
     });
 
     test('components has an output for start time', () => {

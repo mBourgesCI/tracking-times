@@ -37,9 +37,15 @@ export default class Entry extends LightningElement {
     }
 
     extractDateStringFromTimeStamp(timestamp) {
-        var fullDate = new Date(timestamp);
-        var dateString = fullDate.toISOString().split('T')[0];
-
+        var fullDate, dateString;
+        // eslint-disable-next-line no-console
+        console.log(timestamp);
+        fullDate = new Date(timestamp);
+        // eslint-disable-next-line no-console
+        console.log(fullDate);
+        dateString = fullDate.toISOString().split('T')[0];
+        // eslint-disable-next-line no-console
+        console.log(dateString);
         return dateString;
     }
 
