@@ -1,4 +1,4 @@
-import createElement from 'lwc';
+import { createElement } from 'lwc';
 import JsonCmp from 'ui/jsonCmp';
 
 describe('check json', () => {
@@ -8,5 +8,8 @@ describe('check json', () => {
         const element = createElement('ui-json-cmp', { is: JsonCmp });
         element.inputJson = jsonInput;
         document.body.appendChild(element);
+
+        const valueInput = element.shadowRoot.querySelector('input');
+        expect(valueInput).toBeTruthy();
     });
 });
