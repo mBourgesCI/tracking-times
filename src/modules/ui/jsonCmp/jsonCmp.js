@@ -10,4 +10,6 @@ export default class JsonCmp extends LightningElement {
     }
 
     @track state = { api: {} };
+
+    handleChamge() {}
 }
