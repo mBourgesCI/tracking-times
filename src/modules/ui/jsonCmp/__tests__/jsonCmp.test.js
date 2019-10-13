@@ -24,4 +24,16 @@ describe('check json', () => {
         expect(valueSpan).toBeTruthy();
         expect(valueSpan.textContent).toBe(jsonInput.value);
     });
+
+    test('span changes on input change.', () => {
+        const jsonInput = { value: 'test' };
+        const newValue = 'abcd';
+
+        const element = createElement('ui-json-cmp', { is: JsonCmp });
+        element.inputJson = jsonInput;
+        document.body.appendChild(element);
+
+        const valueInput = element.shadowRoot.querySelector('input');
+        valueInput.value = newValue;
+    });
 });
