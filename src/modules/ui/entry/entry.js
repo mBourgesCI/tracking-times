@@ -2,6 +2,31 @@ import { LightningElement, api, track } from 'lwc';
 
 export default class Entry extends LightningElement {
     @api
+    get jsonInput() {
+        return {};
+    }
+    set jsonInput(value) {
+        var comment, startTimeStamp, endTimeStamp;
+
+        if (value !== undefined) {
+            if (value.comment !== undefined) {
+                comment = value.comment;
+                this.state.comment = comment;
+            }
+            if (value.start !== undefined && value.start.value !== undefined) {
+                startTimeStamp = value.start.value;
+                this.state.startTimeStamp = startTimeStamp;
+            }
+            if (value.end !== undefined && value.end.value !== undefined) {
+                endTimeStamp = value.end.value;
+                this.state.endTimeStamp = endTimeStamp;
+            }
+        }
+    }
+
+    state = {};
+
+    @api
     get startDate() {
         return this.state.api.startDate;
     }
