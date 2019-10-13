@@ -35,5 +35,11 @@ describe('check json', () => {
 
         const valueInput = element.shadowRoot.querySelector('input');
         valueInput.value = newValue;
+
+        return Promise.resolve().then(() => {
+            const valueSpan = element.shadowRoot.querySelector('span');
+            expect(valueSpan).toBeTruthy();
+            expect(valueSpan.textContent).toBe(newValue);
+        });
     });
 });
