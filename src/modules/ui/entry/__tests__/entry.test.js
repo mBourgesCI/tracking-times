@@ -48,9 +48,14 @@ describe('check inputs exist', () => {
     });
 
     test('component has an input for start time', () => {
-        const startTime = '01:00:00';
+        const startTime = '01:00';
+        const jsonInput = {
+            start: {
+                value: new Date('1970-01-01T' + startTime + 'Z').getTime()
+            }
+        };
         const element = createElement('ui-entry', { is: Entry });
-        element.startTime = startTime;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const startTimeInput = element.shadowRoot.querySelector(
@@ -131,10 +136,15 @@ describe('check outputs exsist', () => {
     });
 
     test('components has an output for start time', () => {
-        const startTime = '19:00:00';
+        const startTime = '19:00';
+        const jsonInput = {
+            start: {
+                value: new Date('1970-01-01T' + startTime + 'Z').getTime()
+            }
+        };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.startTime = startTime;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const commentOutput = element.shadowRoot.querySelector(
@@ -356,9 +366,12 @@ describe('behavior on change', () => {
     test('start time output gets updated on input change.', () => {
         const oldValue = '13:00';
         const newValue = '14:00';
+        const jsonInput = {
+            start: { value: new Date('1970-01-01T' + oldValue + 'Z').getTime() }
+        };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.startTime = oldValue;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const startTimeInput = element.shadowRoot.querySelector(
