@@ -102,6 +102,18 @@ export default class Entry extends LightningElement {
         this.state.api.comment = value;
     }
 
+    getStartDate() {
+        return splitTimeStampIntegerIntoDateAndTime(
+            this.internalState.startTimeStamp
+        ).date;
+    }
+
+    getStartTime() {
+        return splitTimeStampIntegerIntoDateAndTime(
+            this.internalState.startTimeStamp
+        ).time;
+    }
+
     get difference() {
         var startTimestamp = this.startDate + 'T' + this.startTime;
         var endTimestamp = this.endDate + 'T' + this.endTime;
@@ -136,11 +148,34 @@ export default class Entry extends LightningElement {
         }
     }
 
+    handleChangeStartTimeJSON(internalEvent) {
+        var newTimeString;
+
+        newTimeString = internalEvent.target.value;
+
+        if (this.internalState.startTimeStamp !== undefined) {
+            let separatedTimestamp = splitTimeStampIntegerIntoDateAndTime(
+                this.internalState.startTimeStamp
+            );
+
+            let dateValueOfNewTimeStamp = separatedTimestamp.date;
+            let timeValueOfNewTimeStamp = convertTimeToInteger(newTimeString);
+
+            let newTimestamp =
+                dateValueOfNewTimeStamp + timeValueOfNewTimeStamp;
+
+            this.internalState.startTimeStamp = newTimestamp;
+
+            this.setDisplayStartTime();
+        }
+    }
+
     handleChangeStartTime(internalEvent) {
         var param = {
             value: internalEvent.target.value,
             name: 'start-time'
         };
+        this.handleChangeStartTimeJSON(internalEvent);
         this.startTime = internalEvent.target.value;
         this.createAndFireChangeEvent(param);
     }
@@ -179,6 +214,22 @@ export default class Entry extends LightningElement {
         });
         this.dispatchEvent(externalEvent);
     }
+}
+
+function convertTimeToInteger(time) {
+    var timeValueArray, hourValue, minuteValue, timeInteger;
+
+    timeValueArray = time.split(':');
+
+    let hourInt = parseInt(timeValueArray[0], 10);
+    let minuteInt = parseInt(timeValueArray[1], 10);
+
+    hourValue = new Date(0).setHours(hourInt);
+    minuteValue = new Date(0).setMinutes(minuteInt);
+
+    timeInteger = hourValue + minuteValue;
+
+    return timeInteger;
 }
 
 function splitTimeStampIntegerIntoDateAndTime(timestamp) {
