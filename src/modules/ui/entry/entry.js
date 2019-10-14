@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { LightningElement, api, track } from 'lwc';
 
 export default class Entry extends LightningElement {
@@ -214,6 +215,24 @@ export default class Entry extends LightningElement {
         });
         this.dispatchEvent(externalEvent);
     }
+}
+
+function setTimeStringOfIntegerTimeStamp(params) {
+    var timeStampArray, timeStringValue, newTimeStamp;
+
+    // Guardians
+    if (params === undefined) return undefined;
+    if (params.originalTimeStamp === undefined) return undefined;
+    if (params.timeString === undefined) return undefined;
+
+    // Business logic
+    timeStampArray = splitTimeStampIntegerIntoDateAndTime(
+        params.originalTimeStamp
+    );
+    timeStringValue = convertTimeToInteger(params.timeString);
+
+    newTimeStamp = timeStampArray.date + timeStringValue;
+    return newTimeStamp;
 }
 
 function convertTimeToInteger(time) {
