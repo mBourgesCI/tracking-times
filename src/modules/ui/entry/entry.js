@@ -234,16 +234,23 @@ function convertTimeToInteger(time) {
     return new Date('1970-01-01T' + time + 'Z').getTime();
 }
 
-function splitTimeStampIntegerIntoDateAndTime(timestamp) {
+function extractTimeFromTimestamp(timestamp) {
     const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-    var intValue, timeInt, dateInt, result;
+    return timestamp % MILLISECONDS_PER_DAY;
+}
+
+function extractDateFromTimestamp(timestamp) {
+    let time = extractTimeFromTimestamp(timestamp);
+    return timestamp - time;
+}
+
+function splitTimeStampIntegerIntoDateAndTime(timestamp) {
+    var result;
     if (timestamp !== undefined) {
-        intValue = parseInt(timestamp, 10);
-
-        timeInt = intValue % MILLISECONDS_PER_DAY;
-        dateInt = intValue - timeInt;
-
-        result = { date: dateInt, time: timeInt };
+        result = { 
+            date: extractDateFromTimestamp(timestamp),
+            time: extractTimeFromTimestamp(timestamp)
+        };
         return result;
     }
     return undefined;
