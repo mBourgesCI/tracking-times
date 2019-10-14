@@ -130,23 +130,7 @@ export default class Entry extends LightningElement {
     state = { api: {} };
 
     handleChangeStartDate(internalEvent) {
-        var newStartDate, param;
-        if (this.internalState.startTimeStamp !== undefined) {
-            let separatedTimestamp = splitTimeStampIntegerIntoDateAndTime(
-                this.internalState.startTimeStamp
-            );
-
-            newStartDate = new Date(internalEvent.target.value).getTime();
-            this.internalState.startTimeStamp =
-                newStartDate + separatedTimestamp.time;
-            this.setDisplayStartDate();
-
-            param = {
-                value: this.displayState.startdate,
-                name: 'start-date'
-            };
-            this.createAndFireChangeEvent(param);
-        }
+        this.processNewStartDate(internalEvent.target.value);
     }
 
     handleChangeStartTimeJSON(internalEvent) {
@@ -202,6 +186,24 @@ export default class Entry extends LightningElement {
         this.createAndFireChangeEvent(param);
     }
 
+    processNewStartDate(newStartDateISOString) {
+        var param;
+        if (this.internalState.startTimeStamp !== undefined) {
+            let currentTimeValue = extractTimeFromTimestamp(
+                this.internalState.startTimeStamp
+            );
+            let newDateValue = convertISODateToInteger(newStartDateISOString);
+            this.internalState.startTimeStamp = newDateValue + currentTimeValue;
+            this.setDisplayStartDate();
+
+            param = {
+                value: this.displayState.startdate,
+                name: 'start-date'
+            };
+            this.createAndFireChangeEvent(param);
+        }
+    }
+
     createAndFireChangeEvent(detailParam) {
         var externalEvent = new CustomEvent('change', {
             bubbles: true,
@@ -251,7 +253,7 @@ function extractDateFromTimestamp(timestamp) {
 function splitTimeStampIntegerIntoDateAndTime(timestamp) {
     var result;
     if (timestamp !== undefined) {
-        result = { 
+        result = {
             date: extractDateFromTimestamp(timestamp),
             time: extractTimeFromTimestamp(timestamp)
         };
