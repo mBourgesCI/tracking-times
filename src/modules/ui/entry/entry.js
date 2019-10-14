@@ -234,6 +234,10 @@ function convertISOTimeToInteger(time) {
     return new Date('1970-01-01T' + time + 'Z').getTime();
 }
 
+function convertISODateToInteger(date) {
+    return new Date(date + 'T00:00:00.0000Z').getTime();
+}
+
 function extractTimeFromTimestamp(timestamp) {
     const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
     return timestamp % MILLISECONDS_PER_DAY;
