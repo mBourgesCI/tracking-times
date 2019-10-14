@@ -155,18 +155,13 @@ export default class Entry extends LightningElement {
         newTimeString = internalEvent.target.value;
 
         if (this.internalState.startTimeStamp !== undefined) {
-            let separatedTimestamp = splitTimeStampIntegerIntoDateAndTime(
-                this.internalState.startTimeStamp
-            );
+            let inputParam = {
+                originalTimeStamp: this.internalState.startTimeStamp,
+                timeString: newTimeString
+            };
 
-            let dateValueOfNewTimeStamp = separatedTimestamp.date;
-            let timeValueOfNewTimeStamp = convertTimeToInteger(newTimeString);
-
-            let newTimestamp =
-                dateValueOfNewTimeStamp + timeValueOfNewTimeStamp;
-
-            this.internalState.startTimeStamp = newTimestamp;
-
+            let newTimeStamp = setTimeStringOfIntegerTimeStamp(inputParam);
+            this.internalState.startTimeStamp = newTimeStamp;
             this.setDisplayStartTime();
         }
     }
