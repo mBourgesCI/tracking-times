@@ -231,21 +231,7 @@ function setTimeStringOfIntegerTimeStamp(params) {
 }
 
 function convertTimeToInteger(time) {
-    const MILLISECONDS_PER_HOUR = 1000 * 60 * 60;
-    const MILLISECONDS_PER_MINUTE = 1000 * 60;
-    var timeValueArray, hourValue, minuteValue, timeInteger;
-
-    timeValueArray = time.split(':');
-
-    let hourInt = parseInt(timeValueArray[0], 10);
-    let minuteInt = parseInt(timeValueArray[1], 10);
-
-    hourValue = MILLISECONDS_PER_HOUR * hourInt;
-    minuteValue = MILLISECONDS_PER_MINUTE * minuteInt;
-
-    timeInteger = hourValue + minuteValue;
-
-    return timeInteger;
+    return new Date('1970-01-01T' + time + 'Z').getTime();
 }
 
 function splitTimeStampIntegerIntoDateAndTime(timestamp) {
