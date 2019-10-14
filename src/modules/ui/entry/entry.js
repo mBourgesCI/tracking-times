@@ -224,13 +224,13 @@ function setTimeStringOfIntegerTimeStamp(params) {
     timeStampArray = splitTimeStampIntegerIntoDateAndTime(
         params.originalTimeStamp
     );
-    timeStringValue = convertTimeToInteger(params.timeString);
+    timeStringValue = convertISOTimeToInteger(params.timeString);
 
     newTimeStamp = timeStampArray.date + timeStringValue;
     return newTimeStamp;
 }
 
-function convertTimeToInteger(time) {
+function convertISOTimeToInteger(time) {
     return new Date('1970-01-01T' + time + 'Z').getTime();
 }
 
