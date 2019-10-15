@@ -252,15 +252,17 @@ describe('inputs fire compond events with value if changed', () => {
         startTimeInput.value = testvalue;
         startTimeInput.dispatchEvent(new CustomEvent('change', {}));
 
-        expect(handler).toHaveBeenCalled();
-        expect(handler.mock.calls.length).toBe(1);
-        expect(handler.mock.calls[0].length).toBe(1);
-        expect(handler.mock.calls[0][0]).toBeDefined();
-        expect(handler.mock.calls[0][0].bubbles).toBe(true);
-        expect(handler.mock.calls[0][0].composed).toBe(true);
-        expect(handler.mock.calls[0][0].detail).toBeDefined();
-        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
-        expect(handler.mock.calls[0][0].detail.name).toBe('start-time');
+        return Promise.resolve().then(() => {
+            expect(handler).toHaveBeenCalled();
+            expect(handler.mock.calls.length).toBe(1);
+            expect(handler.mock.calls[0].length).toBe(1);
+            expect(handler.mock.calls[0][0]).toBeDefined();
+            expect(handler.mock.calls[0][0].bubbles).toBe(true);
+            expect(handler.mock.calls[0][0].composed).toBe(true);
+            expect(handler.mock.calls[0][0].detail).toBeDefined();
+            expect(handler.mock.calls[0][0].detail.name).toBe('start-time');
+            expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
+        });
     });
 
     test('event on end date change', () => {
