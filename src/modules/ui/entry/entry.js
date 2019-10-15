@@ -204,6 +204,24 @@ export default class Entry extends LightningElement {
         }
     }
 
+    processNewStartTime(newStartDateISOString) {
+        var param;
+        if(this.internalState.startTimeStamp !== undefined) {
+            let currentDateValue = extractDateFromTimestamp(
+                this.internalState.startTimeStamp
+            );
+            let newTimeValue = convertISOTimeToInteger(newStartDateISOString);
+            this.internalState.startTimeStamp = currentDateValue + newTimeValue;
+            this.setDisplayStartDate();
+        }
+
+        param = {
+            value: this.displayState.starttime,
+            name: 'start-time'
+        };
+        this.createAndFireChangeEvent(param);
+    }
+
     createAndFireChangeEvent(detailParam) {
         var externalEvent = new CustomEvent('change', {
             bubbles: true,
