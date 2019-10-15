@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { LightningElement, api, track } from 'lwc';
 
 export default class Entry extends LightningElement {
@@ -17,6 +18,7 @@ export default class Entry extends LightningElement {
                 startTimeStamp = value.start.value;
                 this.internalState.startTimeStamp = startTimeStamp;
                 this.setDisplayStartDate();
+                this.setDisplayStartTime();
             }
             if (value.end !== undefined && value.end.value !== undefined) {
                 endTimeStamp = value.end.value;
@@ -32,6 +34,12 @@ export default class Entry extends LightningElement {
 
     setDisplayStartDate() {
         this.displayState.startdate = this.extractDateStringFromTimeStamp(
+            this.internalState.startTimeStamp
+        );
+    }
+
+    setDisplayStartTime() {
+        this.displayState.starttime = this.extractTimeStringFromTimeStamp(
             this.internalState.startTimeStamp
         );
     }
@@ -95,6 +103,18 @@ export default class Entry extends LightningElement {
         this.state.api.comment = value;
     }
 
+    getStartDate() {
+        return splitTimeStampIntegerIntoDateAndTime(
+            this.internalState.startTimeStamp
+        ).date;
+    }
+
+    getStartTime() {
+        return splitTimeStampIntegerIntoDateAndTime(
+            this.internalState.startTimeStamp
+        ).time;
+    }
+
     get difference() {
         var startTimestamp = this.startDate + 'T' + this.startTime;
         var endTimestamp = this.endDate + 'T' + this.endTime;
@@ -110,32 +130,11 @@ export default class Entry extends LightningElement {
     state = { api: {} };
 
     handleChangeStartDate(internalEvent) {
-        var newStartDate, param;
-        if (this.internalState.startTimeStamp !== undefined) {
-            let separatedTimestamp = splitTimeStampIntegerIntoDateAndTime(
-                this.internalState.startTimeStamp
-            );
-
-            newStartDate = new Date(internalEvent.target.value).getTime();
-            this.internalState.startTimeStamp =
-                newStartDate + separatedTimestamp.time;
-            this.setDisplayStartDate();
-
-            param = {
-                value: this.displayState.startdate,
-                name: 'start-date'
-            };
-            this.createAndFireChangeEvent(param);
-        }
+        this.processNewStartDate(internalEvent.target.value);
     }
 
     handleChangeStartTime(internalEvent) {
-        var param = {
-            value: internalEvent.target.value,
-            name: 'start-time'
-        };
-        this.startTime = internalEvent.target.value;
-        this.createAndFireChangeEvent(param);
+        this.processNewStartTime(internalEvent.target.value);
     }
 
     handleChangeEndDate(internalEvent) {
@@ -164,6 +163,43 @@ export default class Entry extends LightningElement {
         this.createAndFireChangeEvent(param);
     }
 
+    processNewStartDate(newStartDateISOString) {
+        var param;
+        if (this.internalState.startTimeStamp !== undefined) {
+            let currentTimeValue = extractTimeFromTimestamp(
+                this.internalState.startTimeStamp
+            );
+            let newDateValue = convertISODateToInteger(newStartDateISOString);
+            this.internalState.startTimeStamp = newDateValue + currentTimeValue;
+            this.setDisplayStartDate();
+
+            param = {
+                value: this.displayState.startdate,
+                name: 'start-date'
+            };
+            this.createAndFireChangeEvent(param);
+        }
+    }
+
+    processNewStartTime(newStartDateISOString) {
+        var param;
+
+        if (this.internalState.startTimeStamp !== undefined) {
+            let currentDateValue = extractDateFromTimestamp(
+                this.internalState.startTimeStamp
+            );
+            let newTimeValue = convertISOTimeToInteger(newStartDateISOString);
+            this.internalState.startTimeStamp = currentDateValue + newTimeValue;
+            this.setDisplayStartTime();
+        }
+
+        param = {
+            value: this.displayState.starttime,
+            name: 'start-time'
+        };
+        this.createAndFireChangeEvent(param);
+    }
+
     createAndFireChangeEvent(detailParam) {
         var externalEvent = new CustomEvent('change', {
             bubbles: true,
@@ -174,16 +210,49 @@ export default class Entry extends LightningElement {
     }
 }
 
-function splitTimeStampIntegerIntoDateAndTime(timestamp) {
+function setTimeStringOfIntegerTimeStamp(params) {
+    var timeStampArray, timeStringValue, newTimeStamp;
+
+    // Guardians
+    if (params === undefined) return undefined;
+    if (params.originalTimeStamp === undefined) return undefined;
+    if (params.timeString === undefined) return undefined;
+
+    // Business logic
+    timeStampArray = splitTimeStampIntegerIntoDateAndTime(
+        params.originalTimeStamp
+    );
+    timeStringValue = convertISOTimeToInteger(params.timeString);
+
+    newTimeStamp = timeStampArray.date + timeStringValue;
+    return newTimeStamp;
+}
+
+function convertISOTimeToInteger(time) {
+    return new Date('1970-01-01T' + time + 'Z').getTime();
+}
+
+function convertISODateToInteger(date) {
+    return new Date(date + 'T00:00:00.0000Z').getTime();
+}
+
+function extractTimeFromTimestamp(timestamp) {
     const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
-    var intValue, timeInt, dateInt, result;
+    return timestamp % MILLISECONDS_PER_DAY;
+}
+
+function extractDateFromTimestamp(timestamp) {
+    let time = extractTimeFromTimestamp(timestamp);
+    return timestamp - time;
+}
+
+function splitTimeStampIntegerIntoDateAndTime(timestamp) {
+    var result;
     if (timestamp !== undefined) {
-        intValue = parseInt(timestamp, 10);
-
-        timeInt = intValue % MILLISECONDS_PER_DAY;
-        dateInt = intValue - timeInt;
-
-        result = { date: dateInt, time: timeInt };
+        result = {
+            date: extractDateFromTimestamp(timestamp),
+            time: extractTimeFromTimestamp(timestamp)
+        };
         return result;
     }
     return undefined;

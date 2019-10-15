@@ -48,9 +48,14 @@ describe('check inputs exist', () => {
     });
 
     test('component has an input for start time', () => {
-        const startTime = '01:00:00';
+        const startTime = '01:00';
+        const jsonInput = {
+            start: {
+                value: new Date('1970-01-01T' + startTime + 'Z').getTime()
+            }
+        };
         const element = createElement('ui-entry', { is: Entry });
-        element.startTime = startTime;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const startTimeInput = element.shadowRoot.querySelector(
@@ -131,10 +136,15 @@ describe('check outputs exsist', () => {
     });
 
     test('components has an output for start time', () => {
-        const startTime = '19:00:00';
+        const startTime = '19:00';
+        const jsonInput = {
+            start: {
+                value: new Date('1970-01-01T' + startTime + 'Z').getTime()
+            }
+        };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.startTime = startTime;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const commentOutput = element.shadowRoot.querySelector(
@@ -226,10 +236,13 @@ describe('inputs fire compond events with value if changed', () => {
     });
 
     test('event on start time change', () => {
-        const testvalue = '13:30:00';
+        const startTime = '11:00';
+        const jsonInput = { start: { value: new Date('1970-01-01T' + startTime + 'Z').getTime() } };
+        const testvalue = '13:30';
         const handler = jest.fn();
 
         const element = createElement('ui-entry', { is: Entry });
+        element.jsonInput = jsonInput;
         element.addEventListener('change', handler);
         document.body.appendChild(element);
 
@@ -239,15 +252,17 @@ describe('inputs fire compond events with value if changed', () => {
         startTimeInput.value = testvalue;
         startTimeInput.dispatchEvent(new CustomEvent('change', {}));
 
-        expect(handler).toHaveBeenCalled();
-        expect(handler.mock.calls.length).toBe(1);
-        expect(handler.mock.calls[0].length).toBe(1);
-        expect(handler.mock.calls[0][0]).toBeDefined();
-        expect(handler.mock.calls[0][0].bubbles).toBe(true);
-        expect(handler.mock.calls[0][0].composed).toBe(true);
-        expect(handler.mock.calls[0][0].detail).toBeDefined();
-        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
-        expect(handler.mock.calls[0][0].detail.name).toBe('start-time');
+        return Promise.resolve().then(() => {
+            expect(handler).toHaveBeenCalled();
+            expect(handler.mock.calls.length).toBe(1);
+            expect(handler.mock.calls[0].length).toBe(1);
+            expect(handler.mock.calls[0][0]).toBeDefined();
+            expect(handler.mock.calls[0][0].bubbles).toBe(true);
+            expect(handler.mock.calls[0][0].composed).toBe(true);
+            expect(handler.mock.calls[0][0].detail).toBeDefined();
+            expect(handler.mock.calls[0][0].detail.name).toBe('start-time');
+            expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
+        });
     });
 
     test('event on end date change', () => {
@@ -356,9 +371,12 @@ describe('behavior on change', () => {
     test('start time output gets updated on input change.', () => {
         const oldValue = '13:00';
         const newValue = '14:00';
+        const jsonInput = {
+            start: { value: new Date('1970-01-01T' + oldValue + 'Z').getTime() }
+        };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.startTime = oldValue;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const startTimeInput = element.shadowRoot.querySelector(
