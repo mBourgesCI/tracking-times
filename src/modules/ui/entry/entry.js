@@ -133,31 +133,8 @@ export default class Entry extends LightningElement {
         this.processNewStartDate(internalEvent.target.value);
     }
 
-    handleChangeStartTimeJSON(internalEvent) {
-        var newTimeString;
-
-        newTimeString = internalEvent.target.value;
-
-        if (this.internalState.startTimeStamp !== undefined) {
-            let inputParam = {
-                originalTimeStamp: this.internalState.startTimeStamp,
-                timeString: newTimeString
-            };
-
-            let newTimeStamp = setTimeStringOfIntegerTimeStamp(inputParam);
-            this.internalState.startTimeStamp = newTimeStamp;
-            this.setDisplayStartTime();
-        }
-    }
-
     handleChangeStartTime(internalEvent) {
-        var param = {
-            value: internalEvent.target.value,
-            name: 'start-time'
-        };
-        this.handleChangeStartTimeJSON(internalEvent);
-        this.startTime = internalEvent.target.value;
-        this.createAndFireChangeEvent(param);
+        this.processNewStartTime(internalEvent.target.value);
     }
 
     handleChangeEndDate(internalEvent) {
