@@ -236,10 +236,13 @@ describe('inputs fire compond events with value if changed', () => {
     });
 
     test('event on start time change', () => {
-        const testvalue = '13:30:00';
+        const startTime = '11:00';
+        const jsonInput = { start: { value: new Date('1970-01-01T' + startTime + 'Z').getTime() } };
+        const testvalue = '13:30';
         const handler = jest.fn();
 
         const element = createElement('ui-entry', { is: Entry });
+        element.jsonInput = jsonInput;
         element.addEventListener('change', handler);
         document.body.appendChild(element);
 
