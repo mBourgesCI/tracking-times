@@ -158,8 +158,10 @@ describe('check outputs exsist', () => {
 
     test('components has an output for end date', () => {
         const endDate = '1900-01-01';
+        const jsonInput = { end: { value: new Date(endDate).getTime() } };
 
         const element = createElement('ui-entry', { is: Entry });
+        element.jsonInput = jsonInput;
         element.endDate = endDate;
         document.body.appendChild(element);
 
@@ -239,7 +241,11 @@ describe('inputs fire compond events with value if changed', () => {
 
     test('event on start time change', () => {
         const startTime = '11:00';
-        const jsonInput = { start: { value: new Date('1970-01-01T' + startTime + 'Z').getTime() } };
+        const jsonInput = {
+            start: {
+                value: new Date('1970-01-01T' + startTime + 'Z').getTime()
+            }
+        };
         const testvalue = '13:30';
         const handler = jest.fn();
 
