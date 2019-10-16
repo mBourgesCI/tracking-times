@@ -50,6 +50,7 @@ export default class Entry extends LightningElement {
             this.internalState.endTimeStamp
         );
     }
+
     extractDateStringFromTimeStamp(timestamp) {
         var fullDate, dateString;
         fullDate = new Date(timestamp);
@@ -144,12 +145,7 @@ export default class Entry extends LightningElement {
     }
 
     handleChangeEndDate(internalEvent) {
-        var param = {
-            value: internalEvent.target.value,
-            name: 'end-date'
-        };
-        this.endDate = internalEvent.target.value;
-        this.createAndFireChangeEvent(param);
+        this.processNewEndDate(internalEvent.target.value);
     }
 
     handleChangeEndTime(internalEvent) {
@@ -204,6 +200,27 @@ export default class Entry extends LightningElement {
             name: 'start-time'
         };
         this.createAndFireChangeEvent(param);
+    }
+
+    processNewEndDate(newEndDateISOString) {
+        var param;
+
+
+        if (this.internalState.endTimeStamp !== undefined) {
+            let currentTimeValue = extractTimeFromTimestamp(
+                this.internalState.endTimeStamp
+            );
+            let newDateValue = convertISODateToInteger(newEndDateISOString);
+            this.internalState.endTimeStamp = newDateValue + currentTimeValue;
+
+            this.setDisplayEndDate();
+
+            param = {
+                value: this.displayState.enddate,
+                name: 'end-date'
+            };
+            this.createAndFireChangeEvent(param);
+        }
     }
 
     createAndFireChangeEvent(detailParam) {
