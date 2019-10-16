@@ -70,7 +70,9 @@ describe('check inputs exist', () => {
 
     test('component has an input for end date', () => {
         const endDate = '1900-01-01';
+        const jsonInput = { end: { value: new Date(endDate).getTime() } };
         const element = createElement('ui-entry', { is: Entry });
+        element.jsonInput = jsonInput;
         element.endDate = endDate;
         document.body.appendChild(element);
 
