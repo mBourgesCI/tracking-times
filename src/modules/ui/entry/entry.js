@@ -231,7 +231,8 @@ export default class Entry extends LightningElement {
             let currentDateValue = extractDateFromTimestamp(
                 this.internalState.endTimeStamp
             );
-            let newDateValue = convertISODateToInteger(newEndTimeISOString);
+            let newTimeValue = convertISODateToInteger(newEndTimeISOString);
+            this.internalState.endTimeStamp = currentDateValue + newTimeValue;
 
             param = {
                 value: newEndTimeISOString,
