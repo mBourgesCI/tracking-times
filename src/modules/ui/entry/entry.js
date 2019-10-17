@@ -237,10 +237,9 @@ export default class Entry extends LightningElement {
             this.setDisplayEndTime();
 
             param = {
-                value: newEndTimeISOString,
+                value: this.displayState.endtime,
                 name: 'end-time'
             };
-            this.endTime = newEndTimeISOString;
             this.createAndFireChangeEvent(param);
         }
     }
