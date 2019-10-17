@@ -176,10 +176,15 @@ describe('check outputs exsist', () => {
     });
 
     test('components has an output for end time', () => {
-        const endTime = '19:00:00';
+        const endTime = '19:00';
+        const jsonInput = {
+            end: {
+                value: new Date('1970-01-01T' + endTime + 'Z').getTime()
+            }
+        };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.endTime = endTime;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const commentOutput = element.shadowRoot.querySelector('span.end-time');
