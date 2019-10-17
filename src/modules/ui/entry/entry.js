@@ -225,12 +225,16 @@ export default class Entry extends LightningElement {
     }
 
     processNewEndTime(newEndTimeISOString) {
-        var param = {
-            value: newEndTimeISOString,
-            name: 'end-time'
-        };
-        this.endTime = newEndTimeISOString;
-        this.createAndFireChangeEvent(param);
+        var param;
+
+        if (this.internalState.endTimeStamp !== undefined) {
+            param = {
+                value: newEndTimeISOString,
+                name: 'end-time'
+            };
+            this.endTime = newEndTimeISOString;
+            this.createAndFireChangeEvent(param);
+        }
     }
 
     createAndFireChangeEvent(detailParam) {
