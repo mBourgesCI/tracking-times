@@ -228,6 +228,10 @@ export default class Entry extends LightningElement {
         var param;
 
         if (this.internalState.endTimeStamp !== undefined) {
+            let currentDateValue = extractDateFromTimestamp(
+                this.internalState.endTimeStamp
+            );
+            
             param = {
                 value: newEndTimeISOString,
                 name: 'end-time'
