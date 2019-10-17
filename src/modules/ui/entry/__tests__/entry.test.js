@@ -86,9 +86,14 @@ describe('check inputs exist', () => {
     });
 
     test('component has an input for end time', () => {
-        const endTime = '01:00:00';
+        const endTime = '01:00';
+        const jsonInput = {
+            end: {
+                value: new Date('1970-01-01T' + endTime + 'Z').getTime()
+            }
+        };
         const element = createElement('ui-entry', { is: Entry });
-        element.endTime = endTime;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const endTimeInput = element.shadowRoot.querySelector('input.end-time');
