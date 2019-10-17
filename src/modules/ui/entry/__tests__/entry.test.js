@@ -450,13 +450,15 @@ describe('behavior on change', () => {
     test('end time output gets updated on input change.', () => {
         const oldValue = '13:00';
         const newValue = '14:00';
+        const jsonInput = {
+            end: { value: new Date('1970-01-01T' + oldValue + 'Z').getTime() }
+        };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.endTime = oldValue;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const endTimeInput = element.shadowRoot.querySelector('input.end-time');
-
         endTimeInput.value = newValue;
         endTimeInput.dispatchEvent(new CustomEvent('change'));
 
