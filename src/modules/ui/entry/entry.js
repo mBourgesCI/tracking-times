@@ -24,6 +24,7 @@ export default class Entry extends LightningElement {
                 endTimeStamp = value.end.value;
                 this.internalState.endTimeStamp = endTimeStamp;
                 this.setDisplayEndDate();
+                this.setDisplayEndTime();
             }
         }
     }
@@ -47,6 +48,12 @@ export default class Entry extends LightningElement {
 
     setDisplayEndDate() {
         this.displayState.enddate = this.extractDateStringFromTimeStamp(
+            this.internalState.endTimeStamp
+        );
+    }
+
+    setDisplayEndTime() {
+        this.displayState.endtime = this.extractTimeStringFromTimeStamp(
             this.internalState.endTimeStamp
         );
     }
@@ -204,7 +211,6 @@ export default class Entry extends LightningElement {
 
     processNewEndDate(newEndDateISOString) {
         var param;
-
 
         if (this.internalState.endTimeStamp !== undefined) {
             let currentTimeValue = extractTimeFromTimestamp(
