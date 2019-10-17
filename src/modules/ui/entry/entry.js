@@ -156,12 +156,7 @@ export default class Entry extends LightningElement {
     }
 
     handleChangeEndTime(internalEvent) {
-        var param = {
-            value: internalEvent.target.value,
-            name: 'end-time'
-        };
-        this.endTime = internalEvent.target.value;
-        this.createAndFireChangeEvent(param);
+        this.processNewEndTime(internalEvent.target.value);
     }
 
     handleChangeComment(internalEvent) {
@@ -227,6 +222,15 @@ export default class Entry extends LightningElement {
             };
             this.createAndFireChangeEvent(param);
         }
+    }
+
+    processNewEndTime(newEndTimeISOString) {
+        var param = {
+            value: newEndTimeISOString,
+            name: 'end-time'
+        };
+        this.endTime = newEndTimeISOString;
+        this.createAndFireChangeEvent(param);
     }
 
     createAndFireChangeEvent(detailParam) {
