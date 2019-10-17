@@ -70,7 +70,9 @@ describe('check inputs exist', () => {
 
     test('component has an input for end date', () => {
         const endDate = '1900-01-01';
+        const jsonInput = { end: { value: new Date(endDate).getTime() } };
         const element = createElement('ui-entry', { is: Entry });
+        element.jsonInput = jsonInput;
         element.endDate = endDate;
         document.body.appendChild(element);
 
@@ -156,8 +158,10 @@ describe('check outputs exsist', () => {
 
     test('components has an output for end date', () => {
         const endDate = '1900-01-01';
+        const jsonInput = { end: { value: new Date(endDate).getTime() } };
 
         const element = createElement('ui-entry', { is: Entry });
+        element.jsonInput = jsonInput;
         element.endDate = endDate;
         document.body.appendChild(element);
 
@@ -237,7 +241,11 @@ describe('inputs fire compond events with value if changed', () => {
 
     test('event on start time change', () => {
         const startTime = '11:00';
-        const jsonInput = { start: { value: new Date('1970-01-01T' + startTime + 'Z').getTime() } };
+        const jsonInput = {
+            start: {
+                value: new Date('1970-01-01T' + startTime + 'Z').getTime()
+            }
+        };
         const testvalue = '13:30';
         const handler = jest.fn();
 
@@ -266,10 +274,13 @@ describe('inputs fire compond events with value if changed', () => {
     });
 
     test('event on end date change', () => {
-        const testvalue = '1900-01-01';
+        const endDate = '1900-01-01';
+        const testvalue = '1900-01-02';
+        const jsonInput = { end: { value: new Date(endDate).getTime() } };
         const handler = jest.fn();
 
         const element = createElement('ui-entry', { is: Entry });
+        element.jsonInput = jsonInput;
         element.addEventListener('change', handler);
         document.body.appendChild(element);
 
@@ -284,8 +295,8 @@ describe('inputs fire compond events with value if changed', () => {
         expect(handler.mock.calls[0][0].bubbles).toBe(true);
         expect(handler.mock.calls[0][0].composed).toBe(true);
         expect(handler.mock.calls[0][0].detail).toBeDefined();
-        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
         expect(handler.mock.calls[0][0].detail.name).toBe('end-date');
+        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
     });
 
     test('event on end time change', () => {
@@ -397,9 +408,12 @@ describe('behavior on change', () => {
     test('end date output gets updated on input change.', () => {
         const oldValue = '1900-01-01';
         const newValue = '1900-01-02';
+        const jsonInput = {
+            end: { value: new Date(oldValue).getTime() }
+        };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.endDate = oldValue;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const endDateInput = element.shadowRoot.querySelector('input.end-date');
