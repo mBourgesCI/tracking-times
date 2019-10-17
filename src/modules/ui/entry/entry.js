@@ -24,6 +24,7 @@ export default class Entry extends LightningElement {
                 endTimeStamp = value.end.value;
                 this.internalState.endTimeStamp = endTimeStamp;
                 this.setDisplayEndDate();
+                this.setDisplayEndTime();
             }
         }
     }
@@ -47,6 +48,12 @@ export default class Entry extends LightningElement {
 
     setDisplayEndDate() {
         this.displayState.enddate = this.extractDateStringFromTimeStamp(
+            this.internalState.endTimeStamp
+        );
+    }
+
+    setDisplayEndTime() {
+        this.displayState.endtime = this.extractTimeStringFromTimeStamp(
             this.internalState.endTimeStamp
         );
     }
@@ -149,12 +156,7 @@ export default class Entry extends LightningElement {
     }
 
     handleChangeEndTime(internalEvent) {
-        var param = {
-            value: internalEvent.target.value,
-            name: 'end-time'
-        };
-        this.endTime = internalEvent.target.value;
-        this.createAndFireChangeEvent(param);
+        this.processNewEndTime(internalEvent.target.value);
     }
 
     handleChangeComment(internalEvent) {
@@ -205,7 +207,6 @@ export default class Entry extends LightningElement {
     processNewEndDate(newEndDateISOString) {
         var param;
 
-
         if (this.internalState.endTimeStamp !== undefined) {
             let currentTimeValue = extractTimeFromTimestamp(
                 this.internalState.endTimeStamp
@@ -218,6 +219,26 @@ export default class Entry extends LightningElement {
             param = {
                 value: this.displayState.enddate,
                 name: 'end-date'
+            };
+            this.createAndFireChangeEvent(param);
+        }
+    }
+
+    processNewEndTime(newEndTimeISOString) {
+        var param;
+
+        if (this.internalState.endTimeStamp !== undefined) {
+            let currentDateValue = extractDateFromTimestamp(
+                this.internalState.endTimeStamp
+            );
+            let newTimeValue = convertISOTimeToInteger(newEndTimeISOString);
+            this.internalState.endTimeStamp = currentDateValue + newTimeValue;
+
+            this.setDisplayEndTime();
+
+            param = {
+                value: this.displayState.endtime,
+                name: 'end-time'
             };
             this.createAndFireChangeEvent(param);
         }
