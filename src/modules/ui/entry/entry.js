@@ -234,6 +234,8 @@ export default class Entry extends LightningElement {
             let newTimeValue = convertISODateToInteger(newEndTimeISOString);
             this.internalState.endTimeStamp = currentDateValue + newTimeValue;
 
+            this.setDisplayEndTime();
+
             param = {
                 value: newEndTimeISOString,
                 name: 'end-time'
