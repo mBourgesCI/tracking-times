@@ -82,46 +82,6 @@ export default class Entry extends LightningElement {
         return timeString;
     }
 
-    @api
-    get startDate() {
-        return this.state.api.startDate;
-    }
-    set startDate(value) {
-        this.state.api.startDate = value;
-    }
-
-    @api
-    get startTime() {
-        return this.state.api.startTime;
-    }
-    set startTime(value) {
-        this.state.api.startTime = value;
-    }
-
-    @api
-    get endDate() {
-        return this.state.api.endDate;
-    }
-    set endDate(value) {
-        this.state.api.endDate = value;
-    }
-
-    @api
-    get endTime() {
-        return this.state.api.endTime;
-    }
-    set endTime(value) {
-        this.state.api.endTime = value;
-    }
-
-    @api
-    get comment() {
-        return this.state.api.comment;
-    }
-    set comment(value) {
-        this.state.api.comment = value;
-    }
-
     getStartDate() {
         return splitTimeStampIntegerIntoDateAndTime(
             this.internalState.startTimeStamp
@@ -141,9 +101,6 @@ export default class Entry extends LightningElement {
         let difference = endDate - startDate;
         return difference / (1000 * 60 * 60);
     }
-
-    @track
-    state = { api: {} };
 
     handleChangeStartDate(internalEvent) {
         this.processNewStartDate(internalEvent.target.value);
