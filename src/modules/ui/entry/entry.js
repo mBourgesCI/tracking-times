@@ -82,18 +82,6 @@ export default class Entry extends LightningElement {
         return timeString;
     }
 
-    getStartDate() {
-        return splitTimeStampIntegerIntoDateAndTime(
-            this.internalState.startTimeStamp
-        ).date;
-    }
-
-    getStartTime() {
-        return splitTimeStampIntegerIntoDateAndTime(
-            this.internalState.startTimeStamp
-        ).time;
-    }
-
     get difference() {
         let startDate = this.internalState.startTimeStamp;
         let endDate = this.internalState.endTimeStamp;
@@ -119,11 +107,7 @@ export default class Entry extends LightningElement {
     }
 
     handleChangeComment(internalEvent) {
-        var param = {
-            value: internalEvent.target.value,
-            name: 'comment'
-        };
-        this.createAndFireChangeEvent(param);
+        this.processNewComment(internalEvent.target.value);
     }
 
     processNewStartDate(newStartDateISOString) {
@@ -201,6 +185,14 @@ export default class Entry extends LightningElement {
             };
             this.createAndFireChangeEvent(param);
         }
+    }
+
+    processNewComment(newCommentString) {
+        var param = {
+            value: newCommentString,
+            name: 'comment'
+        };
+        this.createAndFireChangeEvent(param);
     }
 
     createAndFireChangeEvent(detailParam) {
