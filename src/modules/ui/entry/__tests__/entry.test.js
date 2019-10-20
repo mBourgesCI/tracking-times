@@ -1,6 +1,5 @@
 import { createElement } from 'lwc';
 import Entry from 'ui/entry';
-
 describe('static tests', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -471,16 +470,13 @@ describe('behavior on change', () => {
     });
 
     test('difference is calculated initialy.', () => {
-        const startDate = '1900-01-01';
-        const startTime = '13:00';
-        const endDate = '1900-01-01';
-        const endTime = '14:00';
+        const jsonInput = {
+            start: { value: new Date('1970-01-01T00:00:00.0000Z').getTime() },
+            end: { value: new Date('1970-01-01T01:00:00.0000Z').getTime() }
+        };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.startDate = startDate;
-        element.startTime = startTime;
-        element.endDate = endDate;
-        element.endTime = endTime;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const diffOutput = element.shadowRoot.querySelector('span.diff');
@@ -489,17 +485,15 @@ describe('behavior on change', () => {
     });
 
     test('difference is calculated on change.', () => {
-        const startDate = '1900-01-01';
-        const startTime = '13:00';
-        const endDate = '1900-01-01';
-        const oldEndTime = '14:00';
         const newEndTime = '15:00';
 
+        const jsonInput = {
+            start: { value: new Date('1970-01-01T13:00:00.0000Z').getTime() },
+            end: { value: new Date('1970-01-01T14:00:00.0000Z').getTime() }
+        };
+
         const element = createElement('ui-entry', { is: Entry });
-        element.startDate = startDate;
-        element.startTime = startTime;
-        element.endDate = endDate;
-        element.endTime = oldEndTime;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const endTimeInput = element.shadowRoot.querySelector('input.end-time');
