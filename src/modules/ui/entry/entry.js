@@ -13,6 +13,7 @@ export default class Entry extends LightningElement {
             if (value.comment !== undefined) {
                 comment = value.comment;
                 this.internalState.comment = comment;
+                this.setDisplayStateComment();
             }
             if (value.start !== undefined && value.start.value !== undefined) {
                 startTimeStamp = value.start.value;
@@ -56,6 +57,10 @@ export default class Entry extends LightningElement {
         this.displayState.endtime = this.extractTimeStringFromTimeStamp(
             this.internalState.endTimeStamp
         );
+    }
+
+    setDisplayStateComment() {
+        this.displayState.comment = this.internalState.comment;
     }
 
     extractDateStringFromTimeStamp(timestamp) {
