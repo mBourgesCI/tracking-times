@@ -1,38 +1,38 @@
 <template
     ><div class="content">
         <div class="container-start-date">
-            <span class="start-date">{startDate}</span>
+            <span class="start-date">{displayState.startdate}</span>
             <input
                 class="start-date"
                 type="date"
-                value={startDate}
+                value={displayState.startdate}
                 onchange={handleChangeStartDate}
             />
         </div>
         <div class="container-start-time">
-            <span class="start-time">{startTime}</span>
+            <span class="start-time">{displayState.starttime}</span>
             <input
                 class="start-time"
                 type="time"
-                value={startTime}
+                value={displayState.starttime}
                 onchange={handleChangeStartTime}
             />
         </div>
         <div class="container-end-date">
-            <span class="end-date">{endDate}</span>
+            <span class="end-date">{displayState.enddate}</span>
             <input
                 class="end-date"
                 type="date"
-                value={endDate}
+                value={displayState.enddate}
                 onchange={handleChangeEndDate}
             />
         </div>
-        <div class="container-start-time">
-            <span class="end-time">{endTime}</span>
+        <div class="container-end-time">
+            <span class="end-time">{displayState.endtime}</span>
             <input
                 class="end-time"
                 type="time"
-                value={endTime}
+                value={displayState.endtime}
                 onchange={handleChangeEndTime}
             />
         </div>
@@ -40,11 +40,11 @@
             <span class="diff">{difference}</span>
         </div>
         <div class="container-comment">
-            <span class="comment">{comment}</span>
+            <span class="comment">{displayState.comment}</span>
             <input
                 class="comment"
                 type="text"
-                value={comment}
+                value={displayState.comment}
                 onchange={handleChangeComment}
             />
         </div>
