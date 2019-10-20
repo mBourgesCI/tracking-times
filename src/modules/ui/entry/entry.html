@@ -40,11 +40,11 @@
             <span class="diff">{difference}</span>
         </div>
         <div class="container-comment">
-            <span class="comment">{comment}</span>
+            <span class="comment">{displayState.comment}</span>
             <input
                 class="comment"
                 type="text"
-                value={comment}
+                value={displayState.comment}
                 onchange={handleChangeComment}
             />
         </div>
