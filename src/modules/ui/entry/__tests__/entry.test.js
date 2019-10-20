@@ -495,6 +495,12 @@ describe('behavior on change', () => {
         const oldEndTime = '14:00';
         const newEndTime = '15:00';
 
+        // eslint-disable-next-line no-unused-vars
+        const jsonInput = {
+            start: { value: new Date('1970-01-01T00:00:00.0000Z').getTime() },
+            end: { value: new Date('1970-01-01T01:00:00.0000Z').getTime() }
+        };
+
         const element = createElement('ui-entry', { is: Entry });
         element.startDate = startDate;
         element.startTime = startTime;
