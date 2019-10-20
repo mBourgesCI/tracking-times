@@ -105,8 +105,11 @@ describe('check inputs exist', () => {
 
     test('component has an input for comments', () => {
         const comment = 'abcde';
+        const jsonInput = {
+            comment: comment
+        };
         const element = createElement('ui-entry', { is: Entry });
-        element.comment = comment;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const commentInput = element.shadowRoot.querySelector('input.comment');
@@ -201,9 +204,11 @@ describe('check outputs exsist', () => {
 
     test('components has an output for comment', () => {
         const comment = 'abcde';
-
+        const jsonInput = {
+            comment: comment
+        };
         const element = createElement('ui-entry', { is: Entry });
-        element.comment = comment;
+        element.jsonInput = jsonInput;
         document.body.appendChild(element);
 
         const commentOutput = element.shadowRoot.querySelector('span.comment');
