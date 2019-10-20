@@ -1,6 +1,5 @@
 import { createElement } from 'lwc';
 import Entry from 'ui/entry';
-
 describe('static tests', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -489,8 +488,8 @@ describe('behavior on change', () => {
         const newEndTime = '15:00';
 
         const jsonInput = {
-            start: { value: new Date('1970-01-01T00:00:00.0000Z').getTime() },
-            end: { value: new Date('1970-01-01T01:00:00.0000Z').getTime() }
+            start: { value: new Date('1970-01-01T13:00:00.0000Z').getTime() },
+            end: { value: new Date('1970-01-01T14:00:00.0000Z').getTime() }
         };
 
         const element = createElement('ui-entry', { is: Entry });
