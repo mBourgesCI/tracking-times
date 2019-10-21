@@ -32,6 +32,9 @@ export default class Entry extends LightningElement {
                 this.setDisplayEndDate();
                 this.setDisplayEndTime();
             }
+            if (value.id !== undefined) {
+                this.internalState.entryId = value.id;
+            }
         }
     }
 
@@ -205,7 +208,9 @@ export default class Entry extends LightningElement {
     }
 
     createAndFireChangeEvent(detailParam) {
-        var externalEvent = new CustomEvent('change', {
+        var externalEvent;
+        detailParam.entryId = this.internalState.entryId;
+        externalEvent = new CustomEvent('change', {
             bubbles: true,
             composed: true,
             detail: detailParam
