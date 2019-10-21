@@ -129,8 +129,8 @@ export default class Entry extends LightningElement {
             this.setDisplayStartDate();
 
             param = {
-                value: this.displayState.startdate,
-                name: 'start-date'
+                value: this.internalState.startTimeStamp,
+                name: 'start'
             };
             this.createAndFireChangeEvent(param);
         }
@@ -149,8 +149,8 @@ export default class Entry extends LightningElement {
         }
 
         param = {
-            value: this.displayState.starttime,
-            name: 'start-time'
+            value: this.internalState.startTimeStamp,
+            name: 'start'
         };
         this.createAndFireChangeEvent(param);
     }
@@ -168,8 +168,8 @@ export default class Entry extends LightningElement {
             this.setDisplayEndDate();
 
             param = {
-                value: this.displayState.enddate,
-                name: 'end-date'
+                value: this.internalState.endTimeStamp,
+                name: 'end'
             };
             this.createAndFireChangeEvent(param);
         }
@@ -188,8 +188,8 @@ export default class Entry extends LightningElement {
             this.setDisplayEndTime();
 
             param = {
-                value: this.displayState.endtime,
-                name: 'end-time'
+                value: this.internalState.endTimeStamp,
+                name: 'end'
             };
             this.createAndFireChangeEvent(param);
         }

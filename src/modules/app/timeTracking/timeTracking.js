@@ -53,8 +53,30 @@ export default class TimeTracking extends LightningElement {
     }
 
     processEntryChange(newDetail) {
-        // eslint-disable-next-line no-debugger
-        debugger;
+        var entryId, parameterName, parameterValue, entryString, entry;
+        entryId = parseInt(newDetail.entryId, 10);
+        parameterName = newDetail.name;
+        parameterValue = newDetail.value;
+
+        if (
+            entryId !== undefined &&
+            parameterName !== undefined &&
+            parameterValue !== undefined
+        ) {
+            entryString = this.state.entries[entryId];
+            entry = JSON.parse(entryString);
+
+            if (parameterName === 'comment') {
+                entry.comment = parameterValue;
+            }
+            if (parameterName === 'start') {
+                entry.start.value = parameterValue;
+            }
+            if (parameterName === 'end') {
+                entry.end.value = parameterValue;
+            }
+            this.state.entries[entryId] = JSON.stringify(entry);
+        }
     }
 
     createTimeStamp() {
