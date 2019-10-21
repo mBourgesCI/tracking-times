@@ -41,7 +41,9 @@ export default class TimeTracking extends LightningElement {
         if (loaded === undefined || loaded === null) {
             this.state.entries = [];
         } else {
-            this.state.entries = loaded;
+            loaded.forEach(loadedEntry => {
+                this.state.entries = JSON.stringify(loadedEntry);
+            });
         }
     }
 
