@@ -1,5 +1,5 @@
 import { createElement } from 'lwc';
-import JsonCmp from 'ui/jsonCmp';
+import JsonCmp from 'poc/jsonCmp';
 
 describe('check json', () => {
     afterEach(() => {
