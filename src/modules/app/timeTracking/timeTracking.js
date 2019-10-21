@@ -11,7 +11,7 @@ export default class TimeTracking extends LightningElement {
     }
 
     handleClickAdd() {
-        this.addTimeStamp();
+        this.processClickAdd();
     }
 
     handleClickSave() {
@@ -58,6 +58,12 @@ export default class TimeTracking extends LightningElement {
         this.processEntryChange(event.detail);
     }
 
+    processClickAdd() {
+        var newEntry;
+        newEntry = this.createListEntry();
+        this.state.entries.push(newEntry);
+    }
+
     processEntryChange(newDetail) {
         var entryId, parameterName, parameterValue, entryString, entry;
         entryId = parseInt(newDetail.entryId, 10);
@@ -90,32 +96,20 @@ export default class TimeTracking extends LightningElement {
         newEntryId = this.state.entries.length;
         newEntryId = newEntryId === undefined ? 0 : newEntryId;
         currentTime = new Date().getTime();
-        
+
         newEntryData = {};
         newEntryData.start = {};
         newEntryData.end = {};
         newEntryData.start.value = currentTime;
-        newEntryData.end.value = currentTime + 1000*60*60; 
+        newEntryData.end.value = currentTime + 1000 * 60 * 60;
         newEntryData.comment = '';
         newEntryData.id = newEntryId;
-        
+
         newEntry = {};
         newEntry.index = newEntryId;
         newEntry.data = JSON.stringify(newEntryData);
 
         return newEntry;
-    }
-
-    createTimeStamp() {
-        var result, timestamp;
-        timestamp = new Date();
-        result = {};
-
-        result.value = timestamp.getTime();
-        result.string = {};
-        result.string.date = timestamp.toISOString().split('T')[0];
-        result.string.time = timestamp.toLocaleTimeString().substr(0, 5);
-        return result;
     }
 
     isEmpty() {
