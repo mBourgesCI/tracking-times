@@ -1,3 +1,19 @@
+.bg-color-grey1 {
+    background-color: rgb(236, 236, 236);
+}
+
+.bg-color-grey2 {
+    background-color: rgb(210, 210, 210);
+}
+
+.bg-color-grey3 {
+    background-color: rgb(133, 133, 133);
+}
+
+.bg-color-grey4 {
+    background-color: rgb(168, 168, 168);
+}
+
 div.content {
     width: 100%;
     display: grid;
