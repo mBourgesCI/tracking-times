@@ -6,8 +6,10 @@ export default class Entry extends LightningElement {
     get jsonInput() {
         return {};
     }
-    set jsonInput(value) {
-        var comment, startTimeStamp, endTimeStamp;
+    set jsonInput(jsonString) {
+        var value, comment, startTimeStamp, endTimeStamp;
+
+        value = JSON.parse(jsonString);
 
         if (value !== undefined) {
             if (value.comment !== undefined) {
