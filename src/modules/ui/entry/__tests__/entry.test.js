@@ -32,7 +32,7 @@ describe('check inputs exist', () => {
         const startDate = '1900-01-01';
         const jsonInput = { start: { value: new Date(startDate).getTime() } };
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const startDateInput = element.shadowRoot.querySelector(
@@ -54,7 +54,7 @@ describe('check inputs exist', () => {
             }
         };
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const startTimeInput = element.shadowRoot.querySelector(
@@ -71,7 +71,7 @@ describe('check inputs exist', () => {
         const endDate = '1900-01-01';
         const jsonInput = { end: { value: new Date(endDate).getTime() } };
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         element.endDate = endDate;
         document.body.appendChild(element);
 
@@ -92,7 +92,7 @@ describe('check inputs exist', () => {
             }
         };
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const endTimeInput = element.shadowRoot.querySelector('input.end-time');
@@ -109,7 +109,7 @@ describe('check inputs exist', () => {
             comment: comment
         };
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const commentInput = element.shadowRoot.querySelector('input.comment');
@@ -134,7 +134,7 @@ describe('check outputs exsist', () => {
         const jsonInput = { start: { value: new Date(startDate).getTime() } };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const startDateOutput = element.shadowRoot.querySelector(
@@ -153,7 +153,7 @@ describe('check outputs exsist', () => {
         };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const commentOutput = element.shadowRoot.querySelector(
@@ -168,7 +168,7 @@ describe('check outputs exsist', () => {
         const jsonInput = { end: { value: new Date(endDate).getTime() } };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         element.endDate = endDate;
         document.body.appendChild(element);
 
@@ -186,7 +186,7 @@ describe('check outputs exsist', () => {
         };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const commentOutput = element.shadowRoot.querySelector('span.end-time');
@@ -208,7 +208,7 @@ describe('check outputs exsist', () => {
             comment: comment
         };
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const commentOutput = element.shadowRoot.querySelector('span.comment');
@@ -233,7 +233,7 @@ describe('inputs fire compond events with value if changed', () => {
 
         const element = createElement('ui-entry', { is: Entry });
         element.addEventListener('change', handler);
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const startDateInput = element.shadowRoot.querySelector(
@@ -264,7 +264,7 @@ describe('inputs fire compond events with value if changed', () => {
         const handler = jest.fn();
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         element.addEventListener('change', handler);
         document.body.appendChild(element);
 
@@ -294,7 +294,7 @@ describe('inputs fire compond events with value if changed', () => {
         const handler = jest.fn();
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         element.addEventListener('change', handler);
         document.body.appendChild(element);
 
@@ -325,7 +325,7 @@ describe('inputs fire compond events with value if changed', () => {
         };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         element.addEventListener('change', handler);
         document.body.appendChild(element);
 
@@ -383,7 +383,7 @@ describe('behavior on change', () => {
         const newValue = '1900-01-02';
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const startDateInput = element.shadowRoot.querySelector(
@@ -409,7 +409,7 @@ describe('behavior on change', () => {
         };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const startTimeInput = element.shadowRoot.querySelector(
@@ -435,7 +435,7 @@ describe('behavior on change', () => {
         };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const endDateInput = element.shadowRoot.querySelector('input.end-date');
@@ -459,7 +459,7 @@ describe('behavior on change', () => {
         };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const endTimeInput = element.shadowRoot.querySelector('input.end-time');
@@ -481,7 +481,7 @@ describe('behavior on change', () => {
         };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const diffOutput = element.shadowRoot.querySelector('span.diff');
@@ -498,7 +498,7 @@ describe('behavior on change', () => {
         };
 
         const element = createElement('ui-entry', { is: Entry });
-        element.jsonInput = jsonInput;
+        element.jsonInput = JSON.stringify(jsonInput);
         document.body.appendChild(element);
 
         const endTimeInput = element.shadowRoot.querySelector('input.end-time');
