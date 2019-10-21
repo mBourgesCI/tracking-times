@@ -9,31 +9,36 @@ export default class Entry extends LightningElement {
     set jsonInput(jsonString) {
         var value, comment, startTimeStamp, endTimeStamp;
 
-        value = JSON.parse(jsonString);
+        if (jsonString !== undefined) {
+            value = JSON.parse(jsonString);
 
-        if (value !== undefined) {
-            if (value.comment !== undefined) {
-                comment = value.comment;
-                this.internalState.comment = comment;
-                this.setDisplayStateComment();
-            } else {
-                this.internalState.comment = '';
-                this.setDisplayStateComment();
-            }
-            if (value.start !== undefined && value.start.value !== undefined) {
-                startTimeStamp = value.start.value;
-                this.internalState.startTimeStamp = startTimeStamp;
-                this.setDisplayStartDate();
-                this.setDisplayStartTime();
-            }
-            if (value.end !== undefined && value.end.value !== undefined) {
-                endTimeStamp = value.end.value;
-                this.internalState.endTimeStamp = endTimeStamp;
-                this.setDisplayEndDate();
-                this.setDisplayEndTime();
-            }
-            if (value.id !== undefined) {
-                this.internalState.entryId = value.id;
+            if (value !== undefined) {
+                if (value.comment !== undefined) {
+                    comment = value.comment;
+                    this.internalState.comment = comment;
+                    this.setDisplayStateComment();
+                } else {
+                    this.internalState.comment = '';
+                    this.setDisplayStateComment();
+                }
+                if (
+                    value.start !== undefined &&
+                    value.start.value !== undefined
+                ) {
+                    startTimeStamp = value.start.value;
+                    this.internalState.startTimeStamp = startTimeStamp;
+                    this.setDisplayStartDate();
+                    this.setDisplayStartTime();
+                }
+                if (value.end !== undefined && value.end.value !== undefined) {
+                    endTimeStamp = value.end.value;
+                    this.internalState.endTimeStamp = endTimeStamp;
+                    this.setDisplayEndDate();
+                    this.setDisplayEndTime();
+                }
+                if (value.id !== undefined) {
+                    this.internalState.entryId = value.id;
+                }
             }
         }
     }

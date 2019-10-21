@@ -42,8 +42,14 @@ export default class TimeTracking extends LightningElement {
             this.state.entries = [];
         } else {
             loaded.forEach(loadedEntry => {
-                loadedEntry.id = this.state.entries.length;
-                this.state.entries.push(JSON.stringify(loadedEntry));
+                let recordCount = this.state.entries.length;
+                let tempEntry = {};
+                loadedEntry.id = recordCount;
+
+                tempEntry.index = recordCount;
+                tempEntry.data = JSON.stringify(loadedEntry);
+
+                this.state.entries.push(tempEntry);
             });
         }
     }
@@ -63,7 +69,7 @@ export default class TimeTracking extends LightningElement {
             parameterName !== undefined &&
             parameterValue !== undefined
         ) {
-            entryString = this.state.entries[entryId];
+            entryString = this.state.entries[entryId].data;
             entry = JSON.parse(entryString);
 
             if (parameterName === 'comment') {
@@ -75,7 +81,7 @@ export default class TimeTracking extends LightningElement {
             if (parameterName === 'end') {
                 entry.end.value = parameterValue;
             }
-            this.state.entries[entryId] = JSON.stringify(entry);
+            this.state.entries[entryId].data = JSON.stringify(entry);
         }
     }
 
