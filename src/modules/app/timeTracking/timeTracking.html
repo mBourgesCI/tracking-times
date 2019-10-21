@@ -35,7 +35,11 @@
     </div>
     <div class="entries">
         <template for:each={state.entries} for:item="entry">
-            <ui-entry key={entry.id} json-input={entry}></ui-entry>
+            <ui-entry
+                key={entry.id}
+                json-input={entry}
+                onchange={handleChangeEntry}
+            ></ui-entry>
         </template>
     </div>
 </template>

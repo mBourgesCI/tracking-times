@@ -48,6 +48,15 @@ export default class TimeTracking extends LightningElement {
         }
     }
 
+    handleChangeEntry(event) {
+        this.processEntryChange(event.detail);
+    }
+
+    processEntryChange(newDetail) {
+        // eslint-disable-next-line no-debugger
+        debugger;
+    }
+
     createTimeStamp() {
         var result, timestamp;
         timestamp = new Date();
