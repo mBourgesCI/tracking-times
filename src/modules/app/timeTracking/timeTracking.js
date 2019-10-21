@@ -27,8 +27,8 @@ export default class TimeTracking extends LightningElement {
     }
 
     clearData() {
-        this.state.entries = [];
-        clear();
+        //this.state.entries = [];
+        //clear();
     }
 
     saveData() {
