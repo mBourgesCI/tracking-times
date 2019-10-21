@@ -16,6 +16,9 @@ export default class Entry extends LightningElement {
                 comment = value.comment;
                 this.internalState.comment = comment;
                 this.setDisplayStateComment();
+            } else {
+                this.internalState.comment = '';
+                this.setDisplayStateComment();
             }
             if (value.start !== undefined && value.start.value !== undefined) {
                 startTimeStamp = value.start.value;
@@ -190,7 +193,11 @@ export default class Entry extends LightningElement {
     }
 
     processNewComment(newCommentString) {
-        var param = {
+        var param;
+
+        this.internalState.comment = newCommentString;
+        this.setDisplayStateComment();
+        param = {
             value: newCommentString,
             name: 'comment'
         };
