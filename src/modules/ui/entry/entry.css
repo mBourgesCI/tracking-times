@@ -23,10 +23,10 @@ div.content {
     border-style: solid;
     width: 100%;
     display: grid;
-    /* grid-template-areas:
+    grid-template-areas:
         'startDate startTime comment '
         'endDate endTime comment'
-        'diff diff comment'; */
+        'diff diff comment';
 }
 
 div.container {
@@ -37,39 +37,27 @@ div.container {
 }
 
 div.container-start-date {
-    grid-column: 1;
-    grid-row: 1;
-    /* grid-area: startDate; */
+    grid-area: startDate;
 }
 
 div.container-start-time {
-    grid-column: 2;
-    grid-row: 1;
-    /* grid-area: startTime; */
+    grid-area: startTime;
 }
 
 div.container-end-date {
-    grid-column: 1;
-    grid-row: 2;
-    /* grid-area: endDate; */
+    grid-area: endDate;
 }
 
 div.container-end-time {
-    grid-column: 2;
-    grid-row: 2;
-    /* grid-area: endTime; */
+    grid-area: endTime;
 }
 
 div.container-diff {
-    grid-column: 1 / span 2;
-    grid-row: 3;
-    /* grid-area: diff; */
+    grid-area: diff;
 }
 
 div.container-comment {
-    grid-column: 3;
-    grid-row: 1 / span 3;
-    /* grid-area: comment; */
+    grid-area: comment;
 }
 
 div.content > div > span {
