@@ -47,7 +47,7 @@ export default class TimeTracking extends LightningElement {
                 loadedEntry.id = recordCount;
 
                 tempEntry.index = recordCount;
-                tempEntry.data = JSON.stringify(loadedEntry);
+                tempEntry.data = loadedEntry.data;
 
                 this.state.entries.push(tempEntry);
             });
