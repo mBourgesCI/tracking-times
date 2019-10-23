@@ -285,7 +285,9 @@ describe('inputs fire compond events with value if changed', () => {
             expect(handler.mock.calls[0][0].composed).toBe(true);
             expect(handler.mock.calls[0][0].detail).toBeDefined();
             expect(handler.mock.calls[0][0].detail.name).toBe('start');
-            expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
+            expect(handler.mock.calls[0][0].detail.value).toBe(
+                new Date('1970-01-01T' + testvalue + 'Z').getTime()
+            );
         });
     });
 
@@ -312,7 +314,9 @@ describe('inputs fire compond events with value if changed', () => {
         expect(handler.mock.calls[0][0].composed).toBe(true);
         expect(handler.mock.calls[0][0].detail).toBeDefined();
         expect(handler.mock.calls[0][0].detail.name).toBe('end');
-        expect(handler.mock.calls[0][0].detail.value).toBe(testvalue);
+        expect(handler.mock.calls[0][0].detail.value).toBe(
+            new Date(testvalue).getTime()
+        );
     });
 
     test('event on end time change', () => {
