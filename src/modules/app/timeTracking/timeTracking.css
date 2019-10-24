@@ -29,27 +29,35 @@ div.entry:nth-child(2n + 0) {
 div.entry {
     padding: 3px;
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 15% 15% 15% 15% 15% 25%;
 }
 
-div.hoverinput {
+div.entry > div {
+    padding: 5px;
     height: 15pt;
     vertical-align: middle;
 }
 
+/* select output span of hoverinput-container ... */
 div.hoverinput > span.output {
+    /* ... and make it initaly visible */
     display: block;
 }
 
-div.hoverinput > span.input {
+/* select input of hoverinput-container ... */
+div.hoverinput > input {
+    /* ... and make it initaly invisible */
     display: none;
 }
 
+/* select output span inside a - hovered - hoverinput-container ... */
 div.hoverinput:hover > span.output {
+    /* ... and make it invisible */
     display: none;
 }
-
-div.hoverinput:hover > span.input {
+/* select input inside a - hovered - hoverinput-container ... */
+div.hoverinput:hover > input {
+    /* ... and make it visible */
     display: block;
 }
 

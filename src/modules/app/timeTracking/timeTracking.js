@@ -8,12 +8,10 @@ export default class TimeTracking extends LightningElement {
     connectedCallback() {
         this.state.entries = [];
         this.loadData();
-        this.calculateDiffs();
     }
 
     handleClickAdd() {
-        this.addTimeStamp();
-        this.calculateDiffs();
+        this.processClickAdd();
     }
 
     handleClickSave() {
@@ -26,75 +24,6 @@ export default class TimeTracking extends LightningElement {
 
     handleClickClear() {
         this.clearData();
-    }
-
-    handleChangeEndtime(event) {
-        var param = {};
-
-        param.entryIndex = event.target.getAttribute('data-entry');
-        param.input = 'end';
-        param.type = 'time';
-        param.value = event.target.value;
-
-        this.changeTime(param);
-    }
-
-    handleChangeStarttime(event) {
-        var param = {};
-
-        param.entryIndex = event.target.getAttribute('data-entry');
-        param.input = 'start';
-        param.type = 'time';
-        param.value = event.target.value;
-
-        this.changeTime(param);
-    }
-
-    handleChangeStartDate(event) {
-        var param = {};
-
-        param.entryIndex = event.target.getAttribute('data-entry');
-        param.input = 'start';
-        param.type = 'date';
-        param.value = event.target.value;
-
-        this.changeTime(param);
-    }
-
-    handleChangeEndDate(event) {
-        var param = {};
-
-        param.entryIndex = event.target.getAttribute('data-entry');
-        param.input = 'end';
-        param.type = 'date';
-        param.value = event.target.value;
-
-        this.changeTime(param);
-    }
-
-    changeTime(param) {
-        var index, entry, timestamp;
-
-        index = parseInt(param.entryIndex, 10);
-        entry = timestamp = this.state.entries[index];
-
-        if (param.input === 'end') {
-            timestamp = entry.end;
-        }
-        if (param.input === 'start') {
-            timestamp = entry.start;
-        }
-
-        if (timestamp !== undefined) {
-            if (param.type === 'time') {
-                timestamp.string.time = param.value;
-            }
-            if (param.type === 'date') {
-                timestamp.string.date = param.value;
-            }
-        }
-
-        this.calculateDiffForEntry(entry);
     }
 
     clearData() {
@@ -112,73 +41,76 @@ export default class TimeTracking extends LightningElement {
         if (loaded === undefined || loaded === null) {
             this.state.entries = [];
         } else {
-            this.state.entries = loaded;
-        }
-    }
+            this.state.entries = [];
+            loaded.forEach(loadedEntry => {
+                let recordCount = this.state.entries.length;
+                let tempEntry = {};
+                loadedEntry.id = recordCount;
 
-    addTimeStamp() {
-        var entries;
+                tempEntry.index = recordCount;
+                tempEntry.data = loadedEntry.data;
 
-        let timeStamp = this.createTimeStamp();
-
-        entries = this.state.entries;
-
-        if (this.isEmpty()) {
-            // add new item with timestamp as start
-            this.state.entries.push({
-                id: this.state.entries.length,
-                start: timeStamp,
-                diff: null
+                this.state.entries.push(tempEntry);
             });
-        } else {
-            if (entries[entries.length - 1].end === undefined) {
-                // set timestamp as end time
-                entries[entries.length - 1].end = timeStamp;
-            } else {
-                // add new item with timestamp as start
-                this.state.entries.push({
-                    id: this.state.entries.length,
-                    start: timeStamp,
-                    diff: null
-                });
-            }
         }
     }
 
-    calculateDiffs() {
-        this.state.entries.forEach(entry => {
-            this.calculateDiffForEntry(entry);
-        });
+    handleChangeEntry(event) {
+        this.processEntryChange(event.detail);
     }
 
-    calculateDiffForEntry(entry) {
-        var start, startStr, end, endStr;
+    processClickAdd() {
+        var newEntry;
+        newEntry = this.createListEntry();
+        this.state.entries.push(newEntry);
+    }
+
+    processEntryChange(newDetail) {
+        var entryId, parameterName, parameterValue, entryString, entry;
+        entryId = parseInt(newDetail.entryId, 10);
+        parameterName = newDetail.name;
+        parameterValue = newDetail.value;
 
         if (
-            entry !== undefined &&
-            entry.start !== undefined &&
-            entry.end !== undefined
+            entryId !== undefined &&
+            parameterName !== undefined &&
+            parameterValue !== undefined
         ) {
-            startStr = entry.start.string.date + 'T' + entry.start.string.time;
-            endStr = entry.end.string.date + 'T' + entry.end.string.time;
+            entryString = this.state.entries[entryId].data;
+            entry = JSON.parse(entryString);
 
-            start = new Date(startStr);
-            end = new Date(endStr);
-
-            entry.diff = (end - start) / (60 * 60 * 1000);
+            if (parameterName === 'comment') {
+                entry.comment = parameterValue;
+            }
+            if (parameterName === 'start') {
+                entry.start.value = parameterValue;
+            }
+            if (parameterName === 'end') {
+                entry.end.value = parameterValue;
+            }
+            this.state.entries[entryId].data = JSON.stringify(entry);
         }
     }
 
-    createTimeStamp() {
-        var result, timestamp;
-        timestamp = new Date();
-        result = {};
+    createListEntry() {
+        var newEntry, newEntryData, currentTime, newEntryId;
+        newEntryId = this.state.entries.length;
+        newEntryId = newEntryId === undefined ? 0 : newEntryId;
+        currentTime = new Date().getTime();
 
-        result.value = timestamp.getTime();
-        result.string = {};
-        result.string.date = timestamp.toISOString().split('T')[0];
-        result.string.time = timestamp.toLocaleTimeString().substr(0, 5);
-        return result;
+        newEntryData = {};
+        newEntryData.start = {};
+        newEntryData.end = {};
+        newEntryData.start.value = currentTime;
+        newEntryData.end.value = currentTime + 1000 * 60 * 60;
+        newEntryData.comment = '';
+        newEntryData.id = newEntryId;
+
+        newEntry = {};
+        newEntry.index = newEntryId;
+        newEntry.data = JSON.stringify(newEntryData);
+
+        return newEntry;
     }
 
     isEmpty() {
