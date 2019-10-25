@@ -45,19 +45,12 @@ div.container-list {
     grid-area: list;
 }
 
-@media (max-width: 490px) {
-    div.entry {
-        grid-template-columns: 50% 50%;
-    }
+@media (max-width: 375px) {
     div.content {
-        grid-template-columns: 50% 50%;
-    }
-}
-@media (max-width: 260px) {
-    div.entry {
-        grid-template-columns: 100%;
-    }
-    div.content {
-        grid-template-columns: 100%;
+        grid-auto-columns: 50%;
+        grid-template-areas:
+            'clear load'
+            'list list'
+            'add save';
     }
 }
