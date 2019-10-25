@@ -1,6 +1,6 @@
 <template>
-    <div class="button-bar">
-        <div>
+    <div class="content">
+        <div class="container-button container-save">
             <input
                 type="button"
                 class="button button-save"
@@ -8,7 +8,7 @@
                 value="Save"
             />
         </div>
-        <div>
+        <div class="container-button container-load">
             <input
                 type="button"
                 class="button button-load"
@@ -16,7 +16,7 @@
                 value="Load"
             />
         </div>
-        <div>
+        <div class="container-button container-clear">
             <input
                 type="button"
                 class="button button-clear"
@@ -24,7 +24,7 @@
                 value="Clear"
             />
         </div>
-        <div>
+        <div class="container-button container-add">
             <input
                 type="button"
                 class="button button-add"
@@ -32,14 +32,18 @@
                 value="Add"
             />
         </div>
-    </div>
-    <div class="entries">
-        <template for:each={state.entries} for:item="entry" for:index="index">
-            <ui-entry
-                key={entry.index}
-                json-input={entry.data}
-                onchange={handleChangeEntry}
-            ></ui-entry>
-        </template>
+        <div class="container-list entries">
+            <template
+                for:each={state.entries}
+                for:item="entry"
+                for:index="index"
+            >
+                <ui-entry
+                    key={entry.index}
+                    json-input={entry.data}
+                    onchange={handleChangeEntry}
+                ></ui-entry>
+            </template>
+        </div>
     </div>
 </template>

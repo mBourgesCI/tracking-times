@@ -8,72 +8,49 @@ input {
     font-size: medium;
 }
 
-div.button-bar {
+div.content {
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-auto-columns: 25% 25% 25% 25%;
+    grid-template-areas:
+        'clear load add save'
+        'list list list list';
     margin-bottom: 15px;
 }
 
-div.entry:nth-child(2n + 0) {
-    margin-bottom: 10px;
-}
-
-.entry:nth-child(even) {
-    background-color: rgb(230, 228, 228);
-}
-
-.entry:nth-child(odd) {
-    background-color: rgb(240, 239, 239);
-}
-
-div.entry {
-    padding: 3px;
-    display: grid;
-    grid-template-columns: 15% 15% 15% 15% 15% 25%;
-}
-
-div.entry > div {
+div.container-button {
     padding: 5px;
-    height: 15pt;
-    vertical-align: middle;
+}
+div.container-button > input {
+    width: 30%;
 }
 
-/* select output span of hoverinput-container ... */
-div.hoverinput > span.output {
-    /* ... and make it initaly visible */
-    display: block;
+div.container-add {
+    grid-area: add;
 }
 
-/* select input of hoverinput-container ... */
-div.hoverinput > input {
-    /* ... and make it initaly invisible */
-    display: none;
+div.container-clear {
+    grid-area: clear;
 }
 
-/* select output span inside a - hovered - hoverinput-container ... */
-div.hoverinput:hover > span.output {
-    /* ... and make it invisible */
-    display: none;
-}
-/* select input inside a - hovered - hoverinput-container ... */
-div.hoverinput:hover > input {
-    /* ... and make it visible */
-    display: block;
+div.container-load {
+    grid-area: load;
 }
 
-@media (max-width: 490px) {
-    div.entry {
-        grid-template-columns: 50% 50%;
-    }
-    div.button-bar {
-        grid-template-columns: 50% 50%;
-    }
+div.container-save {
+    grid-area: save;
 }
-@media (max-width: 260px) {
-    div.entry {
-        grid-template-columns: 100%;
-    }
-    div.button-bar {
-        grid-template-columns: 100%;
+
+div.container-list {
+    margin-top: 15px;
+    grid-area: list;
+}
+
+@media (max-width: 375px) {
+    div.content {
+        grid-auto-columns: 50%;
+        grid-template-areas:
+            'clear load'
+            'list list'
+            'add save';
     }
 }
