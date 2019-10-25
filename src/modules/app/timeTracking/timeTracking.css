@@ -21,7 +21,8 @@ div.container-button {
     padding: 5px;
 }
 div.container-button > input {
-    width: 30%;
+    width: 90%;
+    margin: auto;
 }
 
 div.container-add {
