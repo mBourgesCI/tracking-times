@@ -14,53 +14,6 @@ div.content {
     margin-bottom: 15px;
 }
 
-div.entry:nth-child(2n + 0) {
-    margin-bottom: 10px;
-}
-
-.entry:nth-child(even) {
-    background-color: rgb(230, 228, 228);
-}
-
-.entry:nth-child(odd) {
-    background-color: rgb(240, 239, 239);
-}
-
-div.entry {
-    padding: 3px;
-    display: grid;
-    grid-template-columns: 15% 15% 15% 15% 15% 25%;
-}
-
-div.entry > div {
-    padding: 5px;
-    height: 15pt;
-    vertical-align: middle;
-}
-
-/* select output span of hoverinput-container ... */
-div.hoverinput > span.output {
-    /* ... and make it initaly visible */
-    display: block;
-}
-
-/* select input of hoverinput-container ... */
-div.hoverinput > input {
-    /* ... and make it initaly invisible */
-    display: none;
-}
-
-/* select output span inside a - hovered - hoverinput-container ... */
-div.hoverinput:hover > span.output {
-    /* ... and make it invisible */
-    display: none;
-}
-/* select input inside a - hovered - hoverinput-container ... */
-div.hoverinput:hover > input {
-    /* ... and make it visible */
-    display: block;
-}
-
 @media (max-width: 490px) {
     div.entry {
         grid-template-columns: 50% 50%;
