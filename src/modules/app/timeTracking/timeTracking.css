@@ -16,8 +16,12 @@ div.content {
         'list list list list';
     margin-bottom: 15px;
 }
-div.container-button {
 
+div.container-button {
+    padding: 5px;
+}
+div.container-button > input {
+    width: 30%;
 }
 
 div.container-add {
