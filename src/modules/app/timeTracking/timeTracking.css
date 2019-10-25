@@ -8,7 +8,7 @@ input {
     font-size: medium;
 }
 
-div.button-bar {
+div.content {
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
     margin-bottom: 15px;
@@ -65,7 +65,7 @@ div.hoverinput:hover > input {
     div.entry {
         grid-template-columns: 50% 50%;
     }
-    div.button-bar {
+    div.content {
         grid-template-columns: 50% 50%;
     }
 }
@@ -73,7 +73,7 @@ div.hoverinput:hover > input {
     div.entry {
         grid-template-columns: 100%;
     }
-    div.button-bar {
+    div.content {
         grid-template-columns: 100%;
     }
 }
