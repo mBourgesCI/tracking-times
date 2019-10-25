@@ -80,3 +80,14 @@ div.content > div:hover > input {
 div.content > div > span.diff {
     display: block;
 }
+
+@media (max-width: 450px) {
+    div.content {
+        grid-auto-columns: 50%;
+        grid-template-areas:
+            'startDate startTime'
+            'endDate endTime'
+            'comment comment'
+            'diff diff';
+    }
+}
