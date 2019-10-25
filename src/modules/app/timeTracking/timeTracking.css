@@ -17,6 +17,27 @@ div.content {
     margin-bottom: 15px;
 }
 
+div.container-add {
+    grid-area: add;
+}
+
+div.container-clear {
+    grid-area: clear;
+}
+
+div.container-load {
+    grid-area: load;
+}
+
+div.container-save {
+    grid-area: save;
+}
+
+div.container-list {
+    margin-top: 15px;
+    grid-area: list;
+}
+
 @media (max-width: 490px) {
     div.entry {
         grid-template-columns: 50% 50%;
