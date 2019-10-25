@@ -10,7 +10,10 @@ input {
 
 div.content {
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-auto-columns: 25% 25% 25% 25%;
+    grid-template-areas:
+        'clear load add save'
+        'list list list list';
     margin-bottom: 15px;
 }
 
