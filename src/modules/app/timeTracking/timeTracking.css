@@ -10,10 +10,11 @@ input {
 
 div.content {
     display: grid;
-    grid-auto-columns: 25% 25% 25% 25%;
+    grid-auto-columns: 50%;
     grid-template-areas:
-        'clear load add save'
-        'list list list list';
+        'clear load'
+        'list list'
+        'add save';
     margin-bottom: 15px;
 }
 
@@ -46,12 +47,11 @@ div.container-list {
     grid-area: list;
 }
 
-@media (max-width: 375px) {
+@media (min-width: 500px) {
     div.content {
-        grid-auto-columns: 50%;
+        grid-auto-columns: 25% 25% 25% 25%;
         grid-template-areas:
-            'clear load'
-            'list list'
-            'add save';
+            'clear load add save'
+            'list list list list';
     }
 }
