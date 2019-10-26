@@ -47,6 +47,19 @@ div.container-list {
     grid-area: list;
 }
 
+div.container-github {
+    background-color: lightslategray;
+    border-radius: 7px;
+    padding: 10px;
+    text-align: center;
+}
+
+a.button-github {
+    margin: auto;
+    color: white;
+    text-decoration: none;
+}
+
 @media (min-width: 500px) {
     div.content {
         grid-auto-columns: 25%;
