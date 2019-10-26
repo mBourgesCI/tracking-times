@@ -49,7 +49,7 @@ div.container-list {
 
 @media (min-width: 500px) {
     div.content {
-        grid-auto-columns: 25% 25% 25% 25%;
+        grid-auto-columns: 25%;
         grid-template-areas:
             'clear load add save'
             'list list list list';
