@@ -43,6 +43,54 @@ export default class Entry extends LightningElement {
         }
     }
 
+    @api
+    get version() {
+        return this.internalState.version;
+    }
+    set version(value) {
+        if (value !== undefined) {
+            this.internalState.version = value;
+        }
+    }
+
+    @api
+    get comment() {
+        return this.internalState.comment;
+    }
+    set comment(value) {
+        if (value !== undefined) {
+            this.internalState.comment = value;
+        }
+    }
+
+    @api
+    get start() {
+        return this.internalState.startTimeStamp;
+    }
+    set start(value) {
+        var integerValue;
+        if (value !== undefined) {
+            integerValue = parseInt(value, 10);
+            this.internalState.startTimeStamp = integerValue;
+            this.setDisplayStartDate();
+            this.setDisplayStartTime();
+        }
+    }
+
+    @api
+    get end() {
+        return this.internalState.endTimeStamp;
+    }
+    set end(value) {
+        var integerValue;
+        if (value !== undefined) {
+            integerValue = parseInt(value, 10);
+            this.internalState.endTimeStamp = integerValue;
+            this.setDisplayEndDate();
+            this.setDisplayEndTime();
+        }
+    }
+
     internalState = {};
 
     @track

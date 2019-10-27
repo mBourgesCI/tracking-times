@@ -518,4 +518,24 @@ describe('behavior on change', () => {
             expect(diffOutput.textContent).toBe('2');
         });
     });
+
+    describe('component can absorb version 0.3 data', () => {
+        test('simple input', () => {
+            var startStamp, endStamp, comment, versionString;
+            startStamp = 0;
+            endStamp = 1800000;
+            comment = 'new entry';
+            versionString = 'v0.3';
+
+            const element = createElement('ui-entry', { is: Entry });
+            element.version = versionString;
+            element.start = startStamp;
+            element.end = endStamp;
+            element.comment = comment;
+            document.body.appendChild(element);
+
+            const spans = element.shadowRoot.querySelector('span');
+            expect(spans).toBeTruthy();
+        });
+    });
 });
