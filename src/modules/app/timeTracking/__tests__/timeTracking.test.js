@@ -86,6 +86,11 @@ describe('check loading based on version', () => {
             //
             // not a best practice but necessary for
             // make sure nothing breakes on a fast way
+
+            const outputSpans = entries[0].shadowRoot.querySelectorAll('span');
+            expect(outputSpans).toBeTruthy();
+            expect(outputSpans.length).toBeTruthy();
+            expect(outputSpans.length).toBe(6);
         });
     });
 
