@@ -50,6 +50,13 @@ describe('check loading based on version', () => {
         return resultList[0];
     }
 
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
     test('load data without version', () => {
         const storageString = [
             {
