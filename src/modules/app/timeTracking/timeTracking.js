@@ -44,6 +44,9 @@ export default class TimeTracking extends LightningElement {
             if (loaded.settings === undefined) {
                 this.loadLegacyData(loaded);
             }
+            if (loaded.settings === 'v0.3') {
+                this.loadDataV03(loaded);
+            }
         }
     }
 
@@ -60,6 +63,8 @@ export default class TimeTracking extends LightningElement {
             this.state.entries.push(tempEntry);
         });
     }
+
+    loadDataV03(loaded) {}
 
     handleChangeEntry(event) {
         this.processEntryChange(event.detail);
