@@ -134,11 +134,14 @@ describe('check loading based on version', () => {
             const entries = element.shadowRoot.querySelectorAll('ui-entry');
             expect(entries).toBeTruthy();
             expect(entries.length).toBeTruthy();
-            expect(entries.length).toBe(1);
+            expect(entries.length).toBe(2);
 
             // penetrate component border
 
             const outputSpans = entries[0].shadowRoot.querySelectorAll('span');
+            expect(outputSpans).toBeTruthy();
+            expect(outputSpans.length).toBeTruthy();
+            expect(outputSpans.length).toBe(6);
         });
     });
 });

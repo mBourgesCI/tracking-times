@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { LightningElement, track } from 'lwc';
 import { save, load, clear } from 'data/localStorage';
 
@@ -51,6 +50,8 @@ export default class TimeTracking extends LightningElement {
     }
 
     loadLegacyData(loaded) {
+        // eslint-disable-next-line no-console
+        console.log('legacy loading');
         this.state.entries = [];
         loaded.forEach(loadedEntry => {
             let recordCount = this.state.entries.length;
@@ -64,7 +65,12 @@ export default class TimeTracking extends LightningElement {
         });
     }
 
-    loadDataV03(loaded) {}
+    loadDataV03(loaded) {
+        // eslint-disable-next-line no-console
+        console.log('legacy loading');
+        // eslint-disable-next-line no-console
+        console.log(loaded);
+    }
 
     handleChangeEntry(event) {
         this.processEntryChange(event.detail);
