@@ -111,7 +111,7 @@ describe('check loading based on version', () => {
             settings: {
                 version: 'v0.3'
             },
-            'time-entries': [
+            entries: [
                 {
                     comment: 'entry1',
                     start: 0,

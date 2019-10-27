@@ -4,7 +4,7 @@ local storage
   "settings": {
     "version":"v0.3"
   },
-  "time-entries": [
+  "entries": [
     {
       "comment": String,
       "start": Integer,
