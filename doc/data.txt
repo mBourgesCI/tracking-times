@@ -1,5 +1,7 @@
 local storage
 
+third version of data structure
+
 "tracking-times": {
   "settings": {
     "version":"v0.3"
