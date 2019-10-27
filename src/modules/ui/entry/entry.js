@@ -60,6 +60,7 @@ export default class Entry extends LightningElement {
     set comment(value) {
         if (value !== undefined) {
             this.internalState.comment = value;
+            this.setDisplayStateComment();
         }
     }
 
