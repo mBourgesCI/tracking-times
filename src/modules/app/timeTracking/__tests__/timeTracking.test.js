@@ -83,4 +83,8 @@ describe('check loading based on version', () => {
             expect(entries.length).toBe(2);
         });
     });
+
+    test('load data of version 0.3', () => {
+       
+    });
 });
