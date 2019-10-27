@@ -77,7 +77,8 @@ export default class TimeTracking extends LightningElement {
     }
 
     handleChangeEntry(event) {
-        this.processEntryChange(event.detail);
+        let index = event.srcElement.getAttribute('data-index');
+        this.processEntryChange(index, event.detail);
     }
 
     processClickAdd() {
@@ -86,30 +87,27 @@ export default class TimeTracking extends LightningElement {
         this.state.entries.push(newEntry);
     }
 
-    processEntryChange(newDetail) {
-        var entryId, parameterName, parameterValue, entryString, entry;
-        entryId = parseInt(newDetail.entryId, 10);
+    processEntryChange(index, newDetail) {
+        var parameterName, parameterValue, entry;
+
         parameterName = newDetail.name;
         parameterValue = newDetail.value;
 
         if (
-            entryId !== undefined &&
+            index !== undefined &&
             parameterName !== undefined &&
             parameterValue !== undefined
         ) {
-            entryString = this.state.entries[entryId].data;
-            entry = JSON.parse(entryString);
-
+            entry = this.state.entries[parseInt(index, 10)];
             if (parameterName === 'comment') {
                 entry.comment = parameterValue;
             }
             if (parameterName === 'start') {
-                entry.start.value = parameterValue;
+                entry.start = parameterValue;
             }
             if (parameterName === 'end') {
-                entry.end.value = parameterValue;
+                entry.end = parameterValue;
             }
-            this.state.entries[entryId].data = JSON.stringify(entry);
         }
     }
 
