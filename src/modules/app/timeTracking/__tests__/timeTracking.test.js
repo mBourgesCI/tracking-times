@@ -108,7 +108,7 @@ describe('check loading based on version', () => {
 
     test('load data of version 0.3', () => {
         const data = {
-            'settings': {
+            settings: {
                 version: 'v0.3'
             },
             'time-entries': [
@@ -129,5 +129,16 @@ describe('check loading based on version', () => {
 
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
+
+        return Promise.resolve().then(() => {
+            const entries = element.shadowRoot.querySelectorAll('ui-entry');
+            expect(entries).toBeTruthy();
+            expect(entries.length).toBeTruthy();
+            expect(entries.length).toBe(1);
+
+            // penetrate component border
+
+            const outputSpans = entries[0].shadowRoot.querySelectorAll('span');
+        });
     });
 });
