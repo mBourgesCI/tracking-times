@@ -6,6 +6,7 @@ local storage
   },
   "entries": [
     {
+      sortnumber: Integer,
       "comment": String,
       "start": Integer,
       "end": Integer
