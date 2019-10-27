@@ -112,11 +112,15 @@ export default class TimeTracking extends LightningElement {
     }
 
     createListEntry() {
+        const MILISECONDS_PER_MINUTE = 1000 * 60;
         var newEntry, currentTime, newEntryId;
 
         newEntryId = this.state.entries.length;
         newEntryId = newEntryId === undefined ? 0 : newEntryId;
         currentTime = new Date().getTime();
+        currentTime =
+            Math.floor(currentTime / MILISECONDS_PER_MINUTE) *
+            MILISECONDS_PER_MINUTE;
 
         newEntry = {};
         newEntry.sortnumber = newEntryId;
