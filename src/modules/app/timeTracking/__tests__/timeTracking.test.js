@@ -81,6 +81,11 @@ describe('check loading based on version', () => {
             expect(entries).toBeTruthy();
             expect(entries.length).toBeTruthy();
             expect(entries.length).toBe(2);
+
+            // penetrate the component boundary
+            //
+            // not a best practice but necessary for
+            // make sure nothing breakes on a fast way
         });
     });
 
