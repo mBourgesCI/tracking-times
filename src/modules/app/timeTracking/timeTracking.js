@@ -43,33 +43,31 @@ export default class TimeTracking extends LightningElement {
             if (loaded.settings === undefined) {
                 this.loadLegacyData(loaded);
             }
-            if (loaded.settings === 'v0.3') {
-                this.loadDataV03(loaded);
+            if (loaded.settings !== undefined) {
+                if (loaded.settings.version === 'v0.3') {
+                    this.loadDataV03(loaded);
+                }
             }
         }
     }
 
     loadLegacyData(loaded) {
-        // eslint-disable-next-line no-console
-        console.log('legacy loading');
         this.state.entries = [];
         loaded.forEach(loadedEntry => {
-            let recordCount = this.state.entries.length;
-            let tempEntry = {};
-            loadedEntry.id = recordCount;
-
-            tempEntry.index = recordCount;
-            tempEntry.data = loadedEntry.data;
-
+            let entryData = JSON.parse(loadedEntry.data);
+            let tempEntry = {
+                sortnumber: this.state.entries.length,
+                start: entryData.start.value,
+                end: entryData.end.value,
+                comment: entryData.comment
+            };
             this.state.entries.push(tempEntry);
         });
     }
 
     loadDataV03(loaded) {
-        // eslint-disable-next-line no-console
-        console.log('legacy loading');
-        // eslint-disable-next-line no-console
-        console.log(loaded);
+        this.state.version = loaded.settings.version;
+        this.state.entries = loaded.entries;
     }
 
     handleChangeEntry(event) {

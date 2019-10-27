@@ -113,11 +113,13 @@ describe('check loading based on version', () => {
             },
             entries: [
                 {
+                    sortnumber: 0,
                     comment: 'entry1',
                     start: 0,
                     end: 1000
                 },
                 {
+                    sortnumber: 1,
                     comment: 'entry2',
                     start: 0,
                     end: 1800000
@@ -125,7 +127,7 @@ describe('check loading based on version', () => {
             ]
         };
 
-        localStorage.setItem('tracking-times', JSON.stringify(data));
+        localStorage.setItem('storage', JSON.stringify(data));
 
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
@@ -142,6 +144,7 @@ describe('check loading based on version', () => {
             expect(outputSpans).toBeTruthy();
             expect(outputSpans.length).toBeTruthy();
             expect(outputSpans.length).toBe(6);
+            expect(outputSpans[0].textContent).toBe('1970-01-01');
         });
     });
 });
