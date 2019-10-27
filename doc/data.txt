@@ -1,0 +1,14 @@
+local storage
+
+"tracking-times": {
+  "settings": {
+    "version":"v0.3"
+  },
+  "time-entries": [
+    {
+      "comment": String,
+      "start": Integer,
+      "end": Integer
+    }
+  ]
+}
