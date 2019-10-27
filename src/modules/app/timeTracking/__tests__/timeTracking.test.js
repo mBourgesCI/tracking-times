@@ -91,6 +91,12 @@ describe('check loading based on version', () => {
             expect(outputSpans).toBeTruthy();
             expect(outputSpans.length).toBeTruthy();
             expect(outputSpans.length).toBe(6);
+            expect(outputSpans[0].classList[0]).toBe('start-date');
+            expect(outputSpans[1].classList[0]).toBe('start-time');
+            expect(outputSpans[2].classList[0]).toBe('end-date');
+            expect(outputSpans[3].classList[0]).toBe('end-time');
+            expect(outputSpans[4].classList[0]).toBe('diff');
+            expect(outputSpans[5].classList[0]).toBe('comment');
         });
     });
 
