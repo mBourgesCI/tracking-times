@@ -61,13 +61,8 @@ describe('check loading based on version', () => {
         const storageString = [
             {
                 data:
-                    '{"start":{"value":0},"end":{"value":1000},"comment":"legacy entry","id":0}',
+                    '{"start":{"value":0},"end":{"value":180000},"comment":"legacy entry","id":0}',
                 index: 0
-            },
-            {
-                data:
-                    '{"start":{"value":0},"end":{"value":1000},"comment":"legacy entry","id":1}',
-                index: 1
             }
         ];
         localStorage.setItem('storage', JSON.stringify(storageString));
@@ -80,7 +75,7 @@ describe('check loading based on version', () => {
             const entries = element.shadowRoot.querySelectorAll('ui-entry');
             expect(entries).toBeTruthy();
             expect(entries.length).toBeTruthy();
-            expect(entries.length).toBe(2);
+            expect(entries.length).toBe(1);
 
             // penetrate the component boundary
             //
