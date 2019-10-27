@@ -113,7 +113,7 @@ describe('check loading based on version', () => {
 
     test('load data of version 0.3', () => {
         const data = {
-            settings: {
+            'settings': {
                 version: 'v0.3'
             },
             'time-entries': [
@@ -125,7 +125,7 @@ describe('check loading based on version', () => {
                 {
                     comment: 'entry2',
                     start: 0,
-                    end: 1000
+                    end: 1800000
                 }
             ]
         };
