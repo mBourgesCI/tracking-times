@@ -39,8 +39,11 @@
                 for:index="index"
             >
                 <ui-entry
-                    key={entry.index}
-                    json-input={entry.data}
+                    key={entry.sortnumber}
+                    data-index={entry.sortnumber}
+                    start={entry.start}
+                    end={entry.end}
+                    comment={entry.comment}
                     onchange={handleChangeEntry}
                 ></ui-entry>
             </template>
