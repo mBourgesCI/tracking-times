@@ -85,6 +85,24 @@ describe('check loading based on version', () => {
     });
 
     test('load data of version 0.3', () => {
-       
+        const data = {
+            "settings": {
+                "version":"v0.3"
+            },
+            "time-entries": [
+                {
+                "comment": 'entry1',
+                "start": 0,
+                "end": 1000
+                },
+                {
+                "comment": 'entry2',
+                "start": 0,
+                "end": 1000
+                }
+            ]
+        };
+
+        localStorage.setItem('tracking-times', JSON.stringify(data));
     });
 });
