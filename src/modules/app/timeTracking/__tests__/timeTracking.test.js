@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { createElement } from 'lwc';
 import TimeTracking from 'app/timeTracking';
-/*
+
 describe('test core logic', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -29,7 +29,7 @@ describe('test creation of new entries', () => {
         }
     });
 });
-*/
+
 describe('check loading based on version', () => {
     function getSaveButton(shadowRoot) {
         return getButton(shadowRoot, '.button-save');
@@ -86,23 +86,26 @@ describe('check loading based on version', () => {
 
     test('load data of version 0.3', () => {
         const data = {
-            "settings": {
-                "version":"v0.3"
+            settings: {
+                version: 'v0.3'
             },
-            "time-entries": [
+            'time-entries': [
                 {
-                "comment": 'entry1',
-                "start": 0,
-                "end": 1000
+                    comment: 'entry1',
+                    start: 0,
+                    end: 1000
                 },
                 {
-                "comment": 'entry2',
-                "start": 0,
-                "end": 1000
+                    comment: 'entry2',
+                    start: 0,
+                    end: 1000
                 }
             ]
         };
 
         localStorage.setItem('tracking-times', JSON.stringify(data));
+
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
     });
 });
