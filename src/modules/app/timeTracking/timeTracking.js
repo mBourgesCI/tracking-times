@@ -31,8 +31,14 @@ export default class TimeTracking extends LightningElement {
     }
 
     saveData() {
-        let entries = this.state.entries;
-        save(entries);
+        var data = {
+            settings: {
+                version: 'v0.3'
+            },
+            entries: this.state.entries
+        };
+
+        save(data);
     }
 
     loadData() {
