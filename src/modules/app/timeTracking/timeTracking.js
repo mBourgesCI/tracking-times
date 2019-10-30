@@ -29,6 +29,9 @@ export default class TimeTracking extends LightningElement {
     clearData() {
         // eslint-disable-next-line no-unused-vars
         var clearConfirmation = this.fireClearDataConfirmation();
+        if (clearConfirmation) {
+            this.processClearData();
+        }
     }
 
     saveData() {
@@ -86,6 +89,11 @@ export default class TimeTracking extends LightningElement {
         // eslint-disable-next-line no-alert
         var confirmationResult = confirm();
         return confirmationResult;
+    }
+
+    processClearData() {
+        this.state.entries = [];
+        clear();
     }
 
     processClickAdd() {
