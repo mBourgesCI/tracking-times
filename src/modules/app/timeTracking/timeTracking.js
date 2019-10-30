@@ -1,4 +1,5 @@
 import { LightningElement, track } from 'lwc';
+// eslint-disable-next-line no-unused-vars
 import { save, load, clear } from 'data/localStorage';
 
 export default class TimeTracking extends LightningElement {
@@ -26,8 +27,8 @@ export default class TimeTracking extends LightningElement {
     }
 
     clearData() {
-        this.state.entries = [];
-        clear();
+        // eslint-disable-next-line no-unused-vars
+        var clearConfirmation = this.fireClearDataConfirmation();
     }
 
     saveData() {
