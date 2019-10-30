@@ -81,6 +81,12 @@ export default class TimeTracking extends LightningElement {
         this.processEntryChange(index, event.detail);
     }
 
+    fireClearDataConfirmation() {
+        // eslint-disable-next-line no-alert
+        var confirmationResult = confirm();
+        return confirmationResult;
+    }
+
     processClickAdd() {
         var newEntry;
         newEntry = this.createListEntry();
