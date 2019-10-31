@@ -137,8 +137,7 @@ export default class Entry extends LightningElement {
 
         fullDate = new Date(timestamp);
         timeString = fullDate
-            .toISOString()
-            .split('T')[1]
+            .toLocaleTimeString()
             .substr(0, 5);
 
         return timeString;
