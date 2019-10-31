@@ -136,10 +136,7 @@ export default class Entry extends LightningElement {
         var fullDate, timeString;
 
         fullDate = new Date(timestamp);
-        timeString = fullDate
-            .toISOString()
-            .split('T')[1]
-            .substr(0, 5);
+        timeString = fullDate.toLocaleTimeString().substr(0, 5);
 
         return timeString;
     }
@@ -191,14 +188,16 @@ export default class Entry extends LightningElement {
     }
 
     processNewStartTime(newStartDateISOString) {
-        var param;
+        var param, currentTimeStamp, newTimeStamp;
 
-        if (this.internalState.startTimeStamp !== undefined) {
-            let currentDateValue = extractDateFromTimestamp(
-                this.internalState.startTimeStamp
+        currentTimeStamp = this.internalState.startTimeStamp;
+
+        if (currentTimeStamp !== undefined) {
+            newTimeStamp = getNewTimestampByIsoTime(
+                currentTimeStamp,
+                newStartDateISOString
             );
-            let newTimeValue = convertISOTimeToInteger(newStartDateISOString);
-            this.internalState.startTimeStamp = currentDateValue + newTimeValue;
+            this.internalState.startTimeStamp = newTimeStamp;
             this.setDisplayStartTime();
         }
 
@@ -230,23 +229,24 @@ export default class Entry extends LightningElement {
     }
 
     processNewEndTime(newEndTimeISOString) {
-        var param;
+        var param, currentTimeStamp, newTimeStamp;
 
-        if (this.internalState.endTimeStamp !== undefined) {
-            let currentDateValue = extractDateFromTimestamp(
-                this.internalState.endTimeStamp
+        currentTimeStamp = this.internalState.endTimeStamp;
+
+        if (currentTimeStamp !== undefined) {
+            newTimeStamp = getNewTimestampByIsoTime(
+                currentTimeStamp,
+                newEndTimeISOString
             );
-            let newTimeValue = convertISOTimeToInteger(newEndTimeISOString);
-            this.internalState.endTimeStamp = currentDateValue + newTimeValue;
-
+            this.internalState.endTimeStamp = newTimeStamp;
             this.setDisplayEndTime();
-
-            param = {
-                value: this.internalState.endTimeStamp,
-                name: 'end'
-            };
-            this.createAndFireChangeEvent(param);
         }
+
+        param = {
+            value: this.internalState.endTimeStamp,
+            name: 'end'
+        };
+        this.createAndFireChangeEvent(param);
     }
 
     processNewComment(newCommentString) {
@@ -271,6 +271,18 @@ export default class Entry extends LightningElement {
         });
         this.dispatchEvent(externalEvent);
     }
+}
+
+function getNewTimestampByIsoTime(timestamp, isoTimeString) {
+    var splittedTime, hourInt, minuteInt, newTimeStamp;
+    if (timestamp !== undefined) {
+        splittedTime = isoTimeString.split(':');
+        hourInt = parseInt(splittedTime[0], 10);
+        minuteInt = parseInt(splittedTime[1], 10);
+
+        newTimeStamp = new Date(timestamp).setHours(hourInt, minuteInt);
+    }
+    return newTimeStamp;
 }
 
 function setTimeStringOfIntegerTimeStamp(params) {
