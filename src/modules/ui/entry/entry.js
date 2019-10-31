@@ -229,23 +229,24 @@ export default class Entry extends LightningElement {
     }
 
     processNewEndTime(newEndTimeISOString) {
-        var param;
+        var param, currentTimeStamp, newTimeStamp;
 
-        if (this.internalState.endTimeStamp !== undefined) {
-            let currentDateValue = extractDateFromTimestamp(
-                this.internalState.endTimeStamp
+        currentTimeStamp = this.internalState.endTimeStamp;
+
+        if (currentTimeStamp !== undefined) {
+            newTimeStamp = getNewTimestampByIsoTime(
+                currentTimeStamp,
+                newEndTimeISOString
             );
-            let newTimeValue = convertISOTimeToInteger(newEndTimeISOString);
-            this.internalState.endTimeStamp = currentDateValue + newTimeValue;
-
+            this.internalState.endTimeStamp = newTimeStamp;
             this.setDisplayEndTime();
-
-            param = {
-                value: this.internalState.endTimeStamp,
-                name: 'end'
-            };
-            this.createAndFireChangeEvent(param);
         }
+
+        param = {
+            value: this.internalState.endTimeStamp,
+            name: 'end'
+        };
+        this.createAndFireChangeEvent(param);
     }
 
     processNewComment(newCommentString) {
