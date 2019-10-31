@@ -1,36 +1,38 @@
 <template>
     <div class="content">
-        <div class="button container-save">
-            <input
-                type="button"
-                class="button button-save"
-                onclick={handleClickSave}
-                value="Save"
-            />
-        </div>
-        <div class="button container-load">
-            <input
-                type="button"
-                class="button button-load"
-                onclick={handleClickLoad}
-                value="Load"
-            />
-        </div>
-        <div class="button container-clear">
-            <input
-                type="button"
-                class="button button-clear"
-                onclick={handleClickClear}
-                value="Clear"
-            />
-        </div>
-        <div class="button container-add">
-            <input
-                type="button"
-                class="button button-add"
-                onclick={handleClickAdd}
-                value="Add"
-            />
+        <div class="button-bar">
+            <div class="button container-save">
+                <input
+                    type="button"
+                    class="button button-save"
+                    onclick={handleClickSave}
+                    value="Save"
+                />
+            </div>
+            <div class="button container-load">
+                <input
+                    type="button"
+                    class="button button-load"
+                    onclick={handleClickLoad}
+                    value="Load"
+                />
+            </div>
+            <div class="button container-clear">
+                <input
+                    type="button"
+                    class="button button-clear"
+                    onclick={handleClickClear}
+                    value="Clear"
+                />
+            </div>
+            <div class="button container-add">
+                <input
+                    type="button"
+                    class="button button-add"
+                    onclick={handleClickAdd}
+                    value="Add"
+                />
+            </div>
         </div>
         <div class="container-list entries">
             <template
