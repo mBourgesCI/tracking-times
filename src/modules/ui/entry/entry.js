@@ -136,9 +136,7 @@ export default class Entry extends LightningElement {
         var fullDate, timeString;
 
         fullDate = new Date(timestamp);
-        timeString = fullDate
-            .toLocaleTimeString()
-            .substr(0, 5);
+        timeString = fullDate.toLocaleTimeString().substr(0, 5);
 
         return timeString;
     }
@@ -190,14 +188,18 @@ export default class Entry extends LightningElement {
     }
 
     processNewStartTime(newStartDateISOString) {
-        var param;
+        var param, splittedTime, newTimeStamp, hourInt, minuteInt;
 
         if (this.internalState.startTimeStamp !== undefined) {
-            let currentDateValue = extractDateFromTimestamp(
-                this.internalState.startTimeStamp
+            splittedTime = newStartDateISOString.split(':');
+            hourInt = parseInt(splittedTime[0], 10);
+            minuteInt = parseInt(splittedTime[1], 10);
+            newTimeStamp = new Date(this.internalState.startTimeStamp).setHours(
+                hourInt,
+                minuteInt
             );
-            let newTimeValue = convertISOTimeToInteger(newStartDateISOString);
-            this.internalState.startTimeStamp = currentDateValue + newTimeValue;
+
+            this.internalState.startTimeStamp = newTimeStamp;
             this.setDisplayStartTime();
         }
 
