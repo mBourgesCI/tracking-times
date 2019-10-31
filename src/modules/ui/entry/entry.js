@@ -188,17 +188,15 @@ export default class Entry extends LightningElement {
     }
 
     processNewStartTime(newStartDateISOString) {
-        var param, splittedTime, newTimeStamp, hourInt, minuteInt;
+        var param, currentTimeStamp, newTimeStamp;
 
-        if (this.internalState.startTimeStamp !== undefined) {
-            splittedTime = newStartDateISOString.split(':');
-            hourInt = parseInt(splittedTime[0], 10);
-            minuteInt = parseInt(splittedTime[1], 10);
-            newTimeStamp = new Date(this.internalState.startTimeStamp).setHours(
-                hourInt,
-                minuteInt
+        currentTimeStamp = this.internalState.startTimeStamp;
+
+        if (currentTimeStamp !== undefined) {
+            newTimeStamp = getNewTimestampByIsoTime(
+                currentTimeStamp,
+                newStartDateISOString
             );
-
             this.internalState.startTimeStamp = newTimeStamp;
             this.setDisplayStartTime();
         }
@@ -272,6 +270,18 @@ export default class Entry extends LightningElement {
         });
         this.dispatchEvent(externalEvent);
     }
+}
+
+function getNewTimestampByIsoTime(timestamp, isoTimeString) {
+    var splittedTime, hourInt, minuteInt, newTimeStamp;
+    if (timestamp !== undefined) {
+        splittedTime = isoTimeString.split(':');
+        hourInt = parseInt(splittedTime[0], 10);
+        minuteInt = parseInt(splittedTime[1], 10);
+
+        newTimeStamp = new Date(timestamp).setHours(hourInt, minuteInt);
+    }
+    return newTimeStamp;
 }
 
 function setTimeStringOfIntegerTimeStamp(params) {
