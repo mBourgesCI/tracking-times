@@ -1,0 +1,17 @@
+local storage
+
+third version of data structure
+
+"tracking-times": {
+  "settings": {
+    "version":"v0.3"
+  },
+  "entries": [
+    {
+      sortnumber: Integer,
+      "comment": String,
+      "start": Integer,
+      "end": Integer
+    }
+  ]
+}

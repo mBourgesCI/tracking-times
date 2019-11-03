@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { LightningElement, track } from 'lwc';
 import { save, load, clear } from 'data/localStorage';
 
@@ -27,13 +26,22 @@ export default class TimeTracking extends LightningElement {
     }
 
     clearData() {
-        this.state.entries = [];
-        clear();
+        // eslint-disable-next-line no-unused-vars
+        var clearConfirmation = this.fireClearDataConfirmation();
+        if (clearConfirmation) {
+            this.processClearData();
+        }
     }
 
     saveData() {
-        let entries = this.state.entries;
-        save(entries);
+        var data = {
+            settings: {
+                version: 'v0.3'
+            },
+            entries: this.state.entries
+        };
+
+        save(data);
     }
 
     loadData() {
@@ -41,74 +49,103 @@ export default class TimeTracking extends LightningElement {
         if (loaded === undefined || loaded === null) {
             this.state.entries = [];
         } else {
-            this.state.entries = [];
-            loaded.forEach(loadedEntry => {
-                let recordCount = this.state.entries.length;
-                let tempEntry = {};
-                loadedEntry.id = recordCount;
-
-                tempEntry.index = recordCount;
-                tempEntry.data = loadedEntry.data;
-
-                this.state.entries.push(tempEntry);
-            });
+            if (loaded.settings === undefined) {
+                this.loadLegacyData(loaded);
+            }
+            if (loaded.settings !== undefined) {
+                if (loaded.settings.version === 'v0.3') {
+                    this.loadDataV03(loaded);
+                }
+            }
         }
     }
 
+    loadLegacyData(loaded) {
+        this.state.entries = [];
+        loaded.forEach(loadedEntry => {
+            let entryData = JSON.parse(loadedEntry.data);
+            let tempEntry = {
+                sortnumber: this.state.entries.length,
+                start: entryData.start.value,
+                end: entryData.end.value,
+                comment: entryData.comment
+            };
+            this.state.entries.push(tempEntry);
+        });
+    }
+
+    loadDataV03(loaded) {
+        this.state.version = loaded.settings.version;
+        this.state.entries = loaded.entries;
+    }
+
     handleChangeEntry(event) {
-        this.processEntryChange(event.detail);
+        let index = event.srcElement.getAttribute('data-index');
+        this.processEntryChange(index, event.detail);
+    }
+
+    fireClearDataConfirmation() {
+        // eslint-disable-next-line no-alert
+        var confirmationResult = confirm('Clear all entries?');
+        return confirmationResult;
+    }
+
+    processClearData() {
+        this.state.entries = [];
+        clear();
     }
 
     processClickAdd() {
         var newEntry;
         newEntry = this.createListEntry();
-        this.state.entries.push(newEntry);
+        this.state.entries.unshift(newEntry);
     }
 
-    processEntryChange(newDetail) {
-        var entryId, parameterName, parameterValue, entryString, entry;
-        entryId = parseInt(newDetail.entryId, 10);
+    processEntryChange(index, newDetail) {
+        var parameterName, parameterValue, entry;
+
         parameterName = newDetail.name;
         parameterValue = newDetail.value;
 
         if (
-            entryId !== undefined &&
+            index !== undefined &&
             parameterName !== undefined &&
             parameterValue !== undefined
         ) {
-            entryString = this.state.entries[entryId].data;
-            entry = JSON.parse(entryString);
+            let entryIndex = parseInt(index, 10);
+
+            entry = this.state.entries.find(function(tempEntry) {
+                return tempEntry.sortnumber === entryIndex;
+            });
 
             if (parameterName === 'comment') {
                 entry.comment = parameterValue;
             }
             if (parameterName === 'start') {
-                entry.start.value = parameterValue;
+                entry.start = parameterValue;
             }
             if (parameterName === 'end') {
-                entry.end.value = parameterValue;
+                entry.end = parameterValue;
             }
-            this.state.entries[entryId].data = JSON.stringify(entry);
         }
     }
 
     createListEntry() {
-        var newEntry, newEntryData, currentTime, newEntryId;
+        const MILISECONDS_PER_MINUTE = 1000 * 60;
+        var newEntry, currentTime, newEntryId;
+
         newEntryId = this.state.entries.length;
         newEntryId = newEntryId === undefined ? 0 : newEntryId;
         currentTime = new Date().getTime();
-
-        newEntryData = {};
-        newEntryData.start = {};
-        newEntryData.end = {};
-        newEntryData.start.value = currentTime;
-        newEntryData.end.value = currentTime + 1000 * 60 * 60;
-        newEntryData.comment = '';
-        newEntryData.id = newEntryId;
+        currentTime =
+            Math.floor(currentTime / MILISECONDS_PER_MINUTE) *
+            MILISECONDS_PER_MINUTE;
 
         newEntry = {};
-        newEntry.index = newEntryId;
-        newEntry.data = JSON.stringify(newEntryData);
+        newEntry.sortnumber = newEntryId;
+        newEntry.start = currentTime;
+        newEntry.end = currentTime + 1000 * 60 * 60;
+        newEntry.comment = '';
 
         return newEntry;
     }

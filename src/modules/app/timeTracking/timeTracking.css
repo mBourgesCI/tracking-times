@@ -10,70 +10,68 @@ input {
 
 div.button-bar {
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    margin-bottom: 15px;
+    grid-auto-columns: 100%;
+    grid-template-areas:
+        'clear'
+        'load'
+        'save'
+        'add';
 }
 
-div.entry:nth-child(2n + 0) {
-    margin-bottom: 10px;
-}
-
-.entry:nth-child(even) {
-    background-color: rgb(230, 228, 228);
-}
-
-.entry:nth-child(odd) {
-    background-color: rgb(240, 239, 239);
-}
-
-div.entry {
-    padding: 3px;
-    display: grid;
-    grid-template-columns: 15% 15% 15% 15% 15% 25%;
-}
-
-div.entry > div {
+div.button {
     padding: 5px;
-    height: 15pt;
-    vertical-align: middle;
+}
+div.button > input {
+    width: 100%;
+    margin: auto;
 }
 
-/* select output span of hoverinput-container ... */
-div.hoverinput > span.output {
-    /* ... and make it initaly visible */
-    display: block;
+div.container-add {
+    grid-area: add;
 }
 
-/* select input of hoverinput-container ... */
-div.hoverinput > input {
-    /* ... and make it initaly invisible */
-    display: none;
+div.container-clear {
+    grid-area: clear;
 }
 
-/* select output span inside a - hovered - hoverinput-container ... */
-div.hoverinput:hover > span.output {
-    /* ... and make it invisible */
-    display: none;
-}
-/* select input inside a - hovered - hoverinput-container ... */
-div.hoverinput:hover > input {
-    /* ... and make it visible */
-    display: block;
+div.container-load {
+    grid-area: load;
 }
 
-@media (max-width: 490px) {
-    div.entry {
-        grid-template-columns: 50% 50%;
-    }
+div.container-save {
+    grid-area: save;
+}
+
+div.container-list {
+    margin-top: 15px;
+    grid-area: list;
+}
+
+div.container-github {
+    background-color: lightslategray;
+    border-radius: 7px;
+    padding: 10px;
+    text-align: center;
+}
+
+a.button-github {
+    margin: auto;
+    color: white;
+    text-decoration: none;
+}
+
+@media (min-width: 500px) {
     div.button-bar {
-        grid-template-columns: 50% 50%;
+        grid-auto-columns: 50%;
+        grid-template-areas:
+            'clear load'
+            'add save';
     }
 }
-@media (max-width: 260px) {
-    div.entry {
-        grid-template-columns: 100%;
-    }
+
+@media (min-width: 1000px) {
     div.button-bar {
-        grid-template-columns: 100%;
+        grid-auto-columns: 25%;
+        grid-template-areas: 'clear load add save';
     }
 }

@@ -1,45 +1,62 @@
 <template>
-    <div class="button-bar">
-        <div>
-            <input
-                type="button"
-                class="button button-save"
-                onclick={handleClickSave}
-                value="Save"
-            />
+    <div class="content">
+        <div class="container-github">
+            <a
+                target="_blank"
+                href="https://github.com/DavidWalther/tracking-times/"
+                class="button-github"
+                >See the code on Github</a
+            >
         </div>
-        <div>
-            <input
-                type="button"
-                class="button button-load"
-                onclick={handleClickLoad}
-                value="Load"
-            />
+        <div class="button-bar">
+            <div class="button container-save">
+                <input
+                    type="button"
+                    class="button button-save"
+                    onclick={handleClickSave}
+                    value="Save"
+                />
+            </div>
+            <div class="button container-load">
+                <input
+                    type="button"
+                    class="button button-load"
+                    onclick={handleClickLoad}
+                    value="Load"
+                />
+            </div>
+            <div class="button container-clear">
+                <input
+                    type="button"
+                    class="button button-clear"
+                    onclick={handleClickClear}
+                    value="Clear"
+                />
+            </div>
+            <div class="button container-add">
+                <input
+                    type="button"
+                    class="button button-add"
+                    onclick={handleClickAdd}
+                    value="Add"
+                />
+            </div>
         </div>
-        <div>
-            <input
-                type="button"
-                class="button button-clear"
-                onclick={handleClickClear}
-                value="Clear"
-            />
+        <div class="container-list entries">
+            <template
+                for:each={state.entries}
+                for:item="entry"
+                for:index="index"
+            >
+                <ui-entry
+                    key={entry.sortnumber}
+                    data-index={entry.sortnumber}
+                    start={entry.start}
+                    end={entry.end}
+                    comment={entry.comment}
+                    onchange={handleChangeEntry}
+                ></ui-entry>
+            </template>
         </div>
-        <div>
-            <input
-                type="button"
-                class="button button-add"
-                onclick={handleClickAdd}
-                value="Add"
-            />
-        </div>
-    </div>
-    <div class="entries">
-        <template for:each={state.entries} for:item="entry" for:index="index">
-            <ui-entry
-                key={entry.index}
-                json-input={entry.data}
-                onchange={handleChangeEntry}
-            ></ui-entry>
-        </template>
     </div>
 </template>

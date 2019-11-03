@@ -518,4 +518,37 @@ describe('behavior on change', () => {
             expect(diffOutput.textContent).toBe('2');
         });
     });
+
+    describe('component can read version 0.3 data', () => {
+        test('simple input', () => {
+            var startStamp, endStamp, comment, versionString;
+            startStamp = 0;
+            endStamp = 1800000;
+            comment = 'new entry';
+            versionString = 'v0.3';
+
+            const element = createElement('ui-entry', { is: Entry });
+            element.version = versionString;
+            element.start = startStamp;
+            element.end = endStamp;
+            element.comment = comment;
+            document.body.appendChild(element);
+
+            const spans = element.shadowRoot.querySelectorAll('span');
+            expect(spans).toBeTruthy();
+            expect(spans.length).toBe(6);
+            expect(spans[0].classList[0]).toBe('start-date');
+            expect(spans[0].textContent).toBe('1970-01-01');
+            expect(spans[1].classList[0]).toBe('start-time');
+            expect(spans[1].textContent).toBe('00:00');
+            expect(spans[2].classList[0]).toBe('end-date');
+            expect(spans[2].textContent).toBe('1970-01-01');
+            expect(spans[3].classList[0]).toBe('end-time');
+            expect(spans[3].textContent).toBe('00:30');
+            expect(spans[4].classList[0]).toBe('diff');
+            expect(spans[4].textContent).toBe('0.5');
+            expect(spans[5].classList[0]).toBe('comment');
+            expect(spans[5].textContent).toBe(comment);
+        });
+    });
 });

@@ -12,6 +12,7 @@
         <div class="container container-start-time bg-color-grey2">
             <span class="start-time">{displayState.starttime}</span>
             <input
+                step="900"
                 class="start-time"
                 type="time"
                 value={displayState.starttime}
@@ -31,6 +32,7 @@
             <span class="end-time">{displayState.endtime}</span>
             <input
                 class="end-time"
+                step="900"
                 type="time"
                 value={displayState.endtime}
                 onchange={handleChangeEndTime}
