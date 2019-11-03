@@ -98,7 +98,7 @@ export default class TimeTracking extends LightningElement {
     processClickAdd() {
         var newEntry;
         newEntry = this.createListEntry();
-        this.state.entries.push(newEntry);
+        this.state.entries.unshift(newEntry);
     }
 
     processEntryChange(index, newDetail) {
