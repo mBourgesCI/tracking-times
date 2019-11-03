@@ -98,7 +98,7 @@ export default class TimeTracking extends LightningElement {
     processClickAdd() {
         var newEntry;
         newEntry = this.createListEntry();
-        this.state.entries.push(newEntry);
+        this.state.entries.unshift(newEntry);
     }
 
     processEntryChange(index, newDetail) {
@@ -112,7 +112,12 @@ export default class TimeTracking extends LightningElement {
             parameterName !== undefined &&
             parameterValue !== undefined
         ) {
-            entry = this.state.entries[parseInt(index, 10)];
+            let entryIndex = parseInt(index, 10);
+
+            entry = this.state.entries.find(function(tempEntry) {
+                return tempEntry.sortnumber === entryIndex;
+            });
+
             if (parameterName === 'comment') {
                 entry.comment = parameterValue;
             }

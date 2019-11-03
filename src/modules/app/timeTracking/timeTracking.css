@@ -8,21 +8,21 @@ input {
     font-size: medium;
 }
 
-div.content {
+div.button-bar {
     display: grid;
-    grid-auto-columns: 50%;
+    grid-auto-columns: 100%;
     grid-template-areas:
-        'clear load'
-        'list list'
-        'add save';
-    margin-bottom: 15px;
+        'clear'
+        'load'
+        'save'
+        'add';
 }
 
-div.container-button {
+div.button {
     padding: 5px;
 }
-div.container-button > input {
-    width: 90%;
+div.button > input {
+    width: 100%;
     margin: auto;
 }
 
@@ -61,10 +61,17 @@ a.button-github {
 }
 
 @media (min-width: 500px) {
-    div.content {
-        grid-auto-columns: 25%;
+    div.button-bar {
+        grid-auto-columns: 50%;
         grid-template-areas:
-            'clear load add save'
-            'list list list list';
+            'clear load'
+            'add save';
+    }
+}
+
+@media (min-width: 1000px) {
+    div.button-bar {
+        grid-auto-columns: 25%;
+        grid-template-areas: 'clear load add save';
     }
 }
