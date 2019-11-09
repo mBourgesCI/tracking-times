@@ -1,0 +1,24 @@
+<template>
+    <div class="modal">
+        <div class="modal-content">
+            <div class="modal-header">{label.title}</div>
+            <div class="modal-body">
+                <slot></slot>
+            </div>
+            <div class="modal-footer">
+                <input
+                    class="button confirm"
+                    type="button"
+                    value={label.button.confirm}
+                    onclick={handleButtonClickConfirm}
+                />
+                <input
+                    class="button cancel"
+                    type="button"
+                    value={label.button.cancel}
+                    onclick={handleButtonClickCancel}
+                />
+            </div>
+        </div>
+    </div>
+</template>
