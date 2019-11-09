@@ -9,9 +9,17 @@ export default class Entry extends LightningElement {
         }
     };
 
+    //----------------------
+    // Event handler
+    //----------------------
+
     handleButtonClickClose() {
         this.hideModal();
     }
+
+    //----------------------
+    // Busines logig
+    //----------------------
 
     hideModal() {
         var modalElem;
