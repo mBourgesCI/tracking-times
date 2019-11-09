@@ -1,12 +1,13 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, track } from 'lwc';
 
 export default class Entry extends LightningElement {
-  label = { 
-      title: 'Head',
-      button: { 
-        close: 'Close' 
-      }
-     };
+    @track
+    label = {
+        title: 'Head',
+        button: {
+            close: 'Close'
+        }
+    };
 
     handleButtonClickClose() {
         this.hideModal();
