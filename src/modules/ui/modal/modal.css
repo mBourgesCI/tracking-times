@@ -58,3 +58,11 @@ input.close {
     color: white;
     background-color: hsl(7, 92%, 64%);
 }
+
+input.confirm {
+    color: rgb(54, 51, 255);
+    border-width: 1px;
+    border-color: rgb(54, 51, 255);
+    border-style: solid;
+    margin-right: 15px;
+}

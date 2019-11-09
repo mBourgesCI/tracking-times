@@ -10,6 +10,7 @@ export default class Entry extends LightningElement {
     label = {
         title: 'Head',
         button: {
+            confirm: 'Save',
             cancel: 'Close'
         }
     };
