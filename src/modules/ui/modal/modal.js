@@ -10,7 +10,7 @@ export default class Entry extends LightningElement {
     label = {
         title: 'Head',
         button: {
-            close: 'Close'
+            cancel: 'Close'
         }
     };
 
@@ -18,13 +18,20 @@ export default class Entry extends LightningElement {
     // Event handler
     //----------------------
 
-    handleButtonClickClose() {
+    handleButtonClickCancel() {
         this.hideModal();
+        this.fireEventCancel();
     }
 
     //----------------------
     // Busines logig
     //----------------------
+
+    fireEventCancel() {
+        var evt;
+        evt = new CustomEvent('cancel');
+        this.dispatchEvent(evt);
+    }
 
     hideModal() {
         var modalElem;
