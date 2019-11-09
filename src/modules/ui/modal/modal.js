@@ -32,6 +32,12 @@ export default class Entry extends LightningElement {
         this.setElemDisplay(modalElem, 'none');
     }
 
+    showModal() {
+      var modalElem;
+      modalElem = this.getModalContainer();
+      this.setElemDisplay(modalElem, 'block');
+  }
+
     setElemDisplay(elem, displayValue) {
         elem.style.display = displayValue;
     }
