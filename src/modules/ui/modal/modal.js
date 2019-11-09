@@ -3,7 +3,7 @@ import { LightningElement, track, api } from 'lwc';
 export default class Entry extends LightningElement {
     @api
     show() {
-
+        this.showModal();
     }
 
     @track
@@ -33,10 +33,10 @@ export default class Entry extends LightningElement {
     }
 
     showModal() {
-      var modalElem;
-      modalElem = this.getModalContainer();
-      this.setElemDisplay(modalElem, 'block');
-  }
+        var modalElem;
+        modalElem = this.getModalContainer();
+        this.setElemDisplay(modalElem, 'block');
+    }
 
     setElemDisplay(elem, displayValue) {
         elem.style.display = displayValue;
