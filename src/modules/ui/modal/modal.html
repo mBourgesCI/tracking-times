@@ -1,15 +1,17 @@
 <template>
     <div class="modal">
-        <div class="modal-header"></div>
         <div class="modal-content">
-            <slot></slot>
-        </div>
-        <div class="modal-footer">
-            <input
-                type="button"
-                value={label.button.close}
-                onclick={handleButtonClickClose}
-            />
+            <div class="modal-header"></div>
+            <div class="modal-body">
+                <slot></slot>
+            </div>
+            <div class="modal-footer">
+                <input
+                    type="button"
+                    value={label.button.close}
+                    onclick={handleButtonClickClose}
+                />
+            </div>
         </div>
     </div>
 </template>
