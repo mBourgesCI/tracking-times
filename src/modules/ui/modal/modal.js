@@ -1,6 +1,11 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 
 export default class Entry extends LightningElement {
+    @api
+    show() {
+
+    }
+
     @track
     label = {
         title: 'Head',
