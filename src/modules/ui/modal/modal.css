@@ -26,12 +26,15 @@
 .modal-header {
   font-family: Arial, Helvetica, sans-serif;
   color: rgb(160, 160, 160);
-  padding-bottom: 5px;
-  margin-bottom: 5px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .modal-body {
 }
 
 .modal-footer {
+  padding-top: 10px;
+  margin-top: 10px;
+  text-align: right;
 }
