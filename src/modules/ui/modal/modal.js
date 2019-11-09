@@ -23,6 +23,11 @@ export default class Entry extends LightningElement {
         this.fireEventCancel();
     }
 
+    handleButtonClickConfirm() {
+        this.hideModal();
+        this.fireEventConfirm();
+    }
+
     //----------------------
     // Busines logig
     //----------------------
@@ -30,6 +35,12 @@ export default class Entry extends LightningElement {
     fireEventCancel() {
         var evt;
         evt = new CustomEvent('cancel');
+        this.dispatchEvent(evt);
+    }
+
+    fireEventConfirm() {
+        var evt;
+        evt = new CustomEvent('confirm');
         this.dispatchEvent(evt);
     }
 
