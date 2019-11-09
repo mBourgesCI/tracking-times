@@ -5,7 +5,11 @@
             <slot></slot>
         </div>
         <div class="modal-footer">
-            <input type="button" value={label.button.close} />
+            <input
+                type="button"
+                value={label.button.close}
+                onclick={handleButtonClickClose}
+            />
         </div>
     </div>
 </template>
