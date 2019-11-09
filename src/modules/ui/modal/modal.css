@@ -16,9 +16,18 @@
 /* Modal Content */
 .modal-content {
     background-color: #fefefe;
-    border-radius: 10px;;
+    border-radius: 10px;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
+}
+
+.modal-header {
+}
+
+.modal-body {
+}
+
+.modal-footer {
 }
