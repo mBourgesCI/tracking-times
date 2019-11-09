@@ -19,11 +19,15 @@ export default class Entry extends LightningElement {
         this.setElemDisplay(modalElem, 'none');
     }
 
-    getModalContainer() {
-        return this.template.querySelector('div.modal');
-    }
-
     setElemDisplay(elem, displayValue) {
         elem.style.display = displayValue;
+    }
+
+    //----------------------
+    // Element getter
+    //----------------------
+
+    getModalContainer() {
+        return this.template.querySelector('div.modal');
     }
 }
