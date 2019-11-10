@@ -97,6 +97,13 @@ export default class Entry extends LightningElement {
     label = {
         button: {
             edit: 'Edit'
+        },
+        input: {
+            startdate: 'Start date',
+            starttime: 'Start time',
+            enddate: 'Start date',
+            endtime: 'Start time',
+            comment: 'Comment'
         }
     };
 
