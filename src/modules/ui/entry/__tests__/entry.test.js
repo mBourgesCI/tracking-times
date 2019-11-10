@@ -341,6 +341,30 @@ describe('check Update of Outputs on Input change', () => {
             expect(output.textContent).toBe(newInputValue);
         });
     });
+
+    test('comment output changes on input change', () => {
+        const probeComment = 'abcd';
+        const newInputValue = 'a1b2c3d4';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.comment = probeComment;
+        document.body.appendChild(element);
+
+        const modalContainer = element.shadowRoot.querySelector('ui-modal');
+
+        const editButton = element.shadowRoot.querySelector('input.edit');
+        editButton.dispatchEvent(new CustomEvent('click'));
+
+        const input = element.shadowRoot.querySelector('input.comment');
+        input.value = newInputValue;
+        modalContainer.dispatchEvent(new CustomEvent('confirm'));
+
+        return Promise.resolve().then(() => {
+            const output = element.shadowRoot.querySelector('span.comment');
+            expect(output).toBeTruthy();
+            expect(output.textContent).toBe(newInputValue);
+        });
+    });
 });
 
 /*
