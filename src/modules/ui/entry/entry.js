@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { LightningElement, api, track } from 'lwc';
+import { thisTypeAnnotation } from '@babel/types';
 
 export default class Entry extends LightningElement {
     @api
@@ -302,6 +303,28 @@ export default class Entry extends LightningElement {
         return result;
     }
 
+    setStateValues(param) {
+        this.internalState.startTimeStamp = param.start;
+        this.internalState.endTimeStamp = param.end;
+        this.internalState.comment = param.comment;
+    }
+
+    //----------------------
+    // Output handlers
+    //----------------------
+
+    fillOutputs() {}
+
+    writeValuesToInternalState(values) {
+        var start, end, comment;
+        start = new Date(values.startDateStr + 'T' + values.startTimeStr);
+        end = new Date(values.endDateStr + 'T' + values.endTimeStr);
+        comment = values.comment;
+        this.internalState.startTimeStamp = start.getTime();
+        this.internalState.endTimeStamp = end.getTime();
+        this.internalState.comment = comment;
+    }
+
     //----------------------
     // Modal handlers
     //----------------------
@@ -328,11 +351,9 @@ export default class Entry extends LightningElement {
     }
 
     onModalConfirm() {
-        var inputValues, start, end, comment;
+        var inputValues;
         inputValues = this.readModalInputs();
-        start =  new Date(inputValues.startDateStr + 'T' + inputValues.startTimeStr);
-        end =  new Date(inputValues.endDateStr + 'T' + inputValues.endTimeStr);
-        comment = inputValues.comment;
+        this.writeValuesToInternalState(inputValues);
     }
 
     showEditModal() {
