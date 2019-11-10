@@ -83,6 +83,15 @@ describe('Check for Outputs', () => {
 
         expect(commentOutput).toBeTruthy();
     });
+
+    test('difference output exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const component = element.shadowRoot.querySelector('span.diff');
+
+        expect(component).toBeTruthy();
+    });
 });
 
 describe('Check for Inputs', () => {
