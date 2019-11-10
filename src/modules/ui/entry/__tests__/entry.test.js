@@ -1,6 +1,6 @@
 import { createElement } from 'lwc';
 import Entry from 'ui/entry';
-describe('static tests', () => {
+describe('check elements for existence', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
         while (document.body.firstChild) {
