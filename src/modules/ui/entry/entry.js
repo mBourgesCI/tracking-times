@@ -4,47 +4,6 @@ import { thisTypeAnnotation } from '@babel/types';
 
 export default class Entry extends LightningElement {
     @api
-    get jsonInput() {
-        return {};
-    }
-    set jsonInput(jsonString) {
-        var value, comment, startTimeStamp, endTimeStamp;
-
-        if (jsonString !== undefined) {
-            value = JSON.parse(jsonString);
-
-            if (value !== undefined) {
-                if (value.comment !== undefined) {
-                    comment = value.comment;
-                    this.internalState.comment = comment;
-                    this.setDisplayStateComment();
-                } else {
-                    this.internalState.comment = '';
-                    this.setDisplayStateComment();
-                }
-                if (
-                    value.start !== undefined &&
-                    value.start.value !== undefined
-                ) {
-                    startTimeStamp = value.start.value;
-                    this.internalState.startTimeStamp = startTimeStamp;
-                    this.setDisplayStartDate();
-                    this.setDisplayStartTime();
-                }
-                if (value.end !== undefined && value.end.value !== undefined) {
-                    endTimeStamp = value.end.value;
-                    this.internalState.endTimeStamp = endTimeStamp;
-                    this.setDisplayEndDate();
-                    this.setDisplayEndTime();
-                }
-                if (value.id !== undefined) {
-                    this.internalState.entryId = value.id;
-                }
-            }
-        }
-    }
-
-    @api
     get version() {
         return this.internalState.version;
     }
@@ -296,9 +255,9 @@ export default class Entry extends LightningElement {
         start = new Date(this.internalState.startTimeStamp);
         end = new Date(this.internalState.endTimeStamp);
         result.startdate = start.toISOString().split('T')[0];
-        result.starttime = start.toLocaleTimeString().substr(0,5);
+        result.starttime = start.toLocaleTimeString().substr(0, 5);
         result.enddate = end.toISOString().split('T')[0];
-        result.endtime = end.toLocaleTimeString().substr(0,5);
+        result.endtime = end.toLocaleTimeString().substr(0, 5);
         result.comment = this.internalState.comment;
         return result;
     }
