@@ -32,11 +32,49 @@ describe('static tests', () => {
         const element = createElement('ui-entry', { is: Entry });
         document.body.appendChild(element);
 
-        const startdateOutput = element.shadowRoot.querySelector(
+        const startDateOutput = element.shadowRoot.querySelector(
             'span.start-date'
         );
 
-        expect(startdateOutput).toBeTruthy();
+        expect(startDateOutput).toBeTruthy();
+    });
+
+    test('start time output exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const startTimeOutput = element.shadowRoot.querySelector(
+            'span.start-time'
+        );
+
+        expect(startTimeOutput).toBeTruthy();
+    });
+
+    test('end date output exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const endDateOutput = element.shadowRoot.querySelector('span.end-date');
+
+        expect(endDateOutput).toBeTruthy();
+    });
+
+    test('end time output exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const endTimeOutput = element.shadowRoot.querySelector('span.end-time');
+
+        expect(endTimeOutput).toBeTruthy();
+    });
+
+    test('comment output exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const commentOutput = element.shadowRoot.querySelector('span.comment');
+
+        expect(commentOutput).toBeTruthy();
     });
 });
 
