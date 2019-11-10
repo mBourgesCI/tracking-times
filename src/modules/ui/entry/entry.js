@@ -277,6 +277,13 @@ export default class Entry extends LightningElement {
         });
         this.dispatchEvent(externalEvent);
     }
+//----------------------
+// Modal handlers
+//----------------------
+
+    showEditModal() {
+        this.getEditModal().show();
+    }
 
     getEditModal() {
         return this.template.querySelector('div.modal-edit');
