@@ -136,7 +136,17 @@ describe('Check for Inputs', () => {
 
         expect(component).toBeTruthy();
     });
+
+    test('edit button exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const component = element.shadowRoot.querySelector('input.edit');
+
+        expect(component).toBeTruthy();
+    });
 });
+
 /*
 describe('check inputs exist', () => {
     afterEach(() => {
