@@ -83,6 +83,6 @@ div.container-button-bar > input {
             'startDate startTime'
             'endDate endTime'
             'comment comment'
-            'diff buttons';
+            'buttons diff';
     }
 }
