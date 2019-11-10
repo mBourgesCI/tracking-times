@@ -294,9 +294,9 @@ export default class Entry extends LightningElement {
         result = {};
         start = new Date(this.internalState.startTimeStamp);
         end = new Date(this.internalState.endTimeStamp);
-        result.startdate = start.toLocaleDateString();
+        result.startdate = start.toISOString().split('T')[0];
         result.starttime = start.toLocaleTimeString();
-        result.enddate = end.toLocaleDateString();
+        result.enddate = end.toISOString().split('T')[0];
         result.endtime = end.toLocaleTimeString();
         result.comment = this.internalState.comment;
         return result;
