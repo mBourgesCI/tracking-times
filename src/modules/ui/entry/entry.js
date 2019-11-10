@@ -252,12 +252,17 @@ export default class Entry extends LightningElement {
     getValuesForInputs() {
         var result, start, end;
         result = {};
-        start = new Date(this.internalState.startTimeStamp);
-        end = new Date(this.internalState.endTimeStamp);
-        result.startdate = start.toISOString().split('T')[0];
-        result.starttime = start.toLocaleTimeString().substr(0, 5);
-        result.enddate = end.toISOString().split('T')[0];
-        result.endtime = end.toLocaleTimeString().substr(0, 5);
+
+        if (this.isStartDefined()) {
+            start = new Date(this.internalState.startTimeStamp);
+            result.startdate = start.toISOString().split('T')[0];
+            result.starttime = start.toLocaleTimeString().substr(0, 5);
+        }
+        if (this.isEndDefined()) {
+            end = new Date(this.internalState.endTimeStamp);
+            result.enddate = end.toISOString().split('T')[0];
+            result.endtime = end.toLocaleTimeString().substr(0, 5);
+        }
         result.comment = this.internalState.comment;
         return result;
     }
@@ -329,39 +334,39 @@ export default class Entry extends LightningElement {
         this.getEditModal().show();
     }
 
-/**
- * --------------------
- * value Checker
- * --------------------
- */
+    /**
+     * --------------------
+     * value Checker
+     * --------------------
+     */
 
     isStartDefined() {
-        if(this.internalState.startTimeStamp === undefined) {
+        if (this.internalState.startTimeStamp === undefined) {
             return false;
         }
-        if(this.internalState.startTimeStamp === null) {
+        if (this.internalState.startTimeStamp === null) {
             return false;
         }
-        if(isNaN(this.internalState.startTimeStamp)) {
+        if (isNaN(this.internalState.startTimeStamp)) {
             return false;
         }
-        if(this.internalState.startTimeStamp === '') {
+        if (this.internalState.startTimeStamp === '') {
             return false;
         }
         return true;
     }
 
     isEndDefined() {
-        if(this.internalState.endTimeStamp === undefined) {
+        if (this.internalState.endTimeStamp === undefined) {
             return false;
         }
-        if(this.internalState.endTimeStamp === null) {
+        if (this.internalState.endTimeStamp === null) {
             return false;
         }
-        if(isNaN(this.internalState.endTimeStamp)) {
+        if (isNaN(this.internalState.endTimeStamp)) {
             return false;
         }
-        if(this.internalState.endTimeStamp === '') {
+        if (this.internalState.endTimeStamp === '') {
             return false;
         }
         return true;
