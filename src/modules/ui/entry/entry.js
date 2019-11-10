@@ -160,7 +160,6 @@ export default class Entry extends LightningElement {
                 value: this.internalState.startTimeStamp,
                 name: 'start'
             };
-            this.createAndFireChangeEvent(param);
         }
     }
 
@@ -182,7 +181,6 @@ export default class Entry extends LightningElement {
             value: this.internalState.startTimeStamp,
             name: 'start'
         };
-        this.createAndFireChangeEvent(param);
     }
 
     processNewEndDate(newEndDateISOString) {
@@ -201,7 +199,6 @@ export default class Entry extends LightningElement {
                 value: this.internalState.endTimeStamp,
                 name: 'end'
             };
-            this.createAndFireChangeEvent(param);
         }
     }
 
@@ -223,7 +220,6 @@ export default class Entry extends LightningElement {
             value: this.internalState.endTimeStamp,
             name: 'end'
         };
-        this.createAndFireChangeEvent(param);
     }
 
     processNewComment(newCommentString) {
@@ -235,16 +231,13 @@ export default class Entry extends LightningElement {
             value: newCommentString,
             name: 'comment'
         };
-        this.createAndFireChangeEvent(param);
     }
 
-    createAndFireChangeEvent(detailParam) {
+    createAndFireChangeEvent() {
         var externalEvent;
-        detailParam.entryId = this.internalState.entryId;
         externalEvent = new CustomEvent('change', {
             bubbles: true,
-            composed: true,
-            detail: detailParam
+            composed: true
         });
         this.dispatchEvent(externalEvent);
     }
@@ -327,6 +320,7 @@ export default class Entry extends LightningElement {
         inputValues = this.readModalInputs();
         this.writeValuesToInternalState(inputValues);
         this.fillOutputs();
+        this.createAndFireChangeEvent();
     }
 
     showEditModal() {

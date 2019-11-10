@@ -394,15 +394,39 @@ describe('check Update of Outputs on Input change', () => {
 });
 
 describe('check events on changed values', () => {
-    test('start timstamp is passed', () => {
-        expect(undefined).toBeTruthy();
-    });
+    test('new values are in change event', () => {
+        const handler = jest.fn();
 
-    test('end timstamp is passed', () => {
-        expect(undefined).toBeTruthy();
-    });
+        const probeStartTimestamp = new Date('1970-01-01T04:00').getTime();
+        const probeEndTimestamp = new Date('1970-01-01T09:00').getTime();
+        const probeComment = 'a1b2c3d4';
 
-    test('comment is passed', () => {
-        expect(undefined).toBeTruthy();
+        const newStartTimeValue = '05:00';
+        const newEndTimeValue = '08:00';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.start = probeStartTimestamp;
+        element.end = probeEndTimestamp;
+        element.comment = probeComment;
+        element.addEventListener('change', handler);
+        document.body.appendChild(element);
+
+        const modalContainer = element.shadowRoot.querySelector('ui-modal');
+
+        const editButton = element.shadowRoot.querySelector('input.edit');
+        editButton.dispatchEvent(new CustomEvent('click'));
+
+        const startTimeInput = element.shadowRoot.querySelector(
+            'input.start-time'
+        );
+        startTimeInput.value = newStartTimeValue;
+        const endTimeInput = element.shadowRoot.querySelector('input.end-time');
+        endTimeInput.value = newEndTimeValue;
+
+        modalContainer.dispatchEvent(new CustomEvent('confirm'));
+
+        return Promise.resolve().then(() => {
+            expect(handler).toHaveBeenCalled();
+        });
     });
 });
