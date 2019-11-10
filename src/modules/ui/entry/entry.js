@@ -329,6 +329,44 @@ export default class Entry extends LightningElement {
         this.getEditModal().show();
     }
 
+/**
+ * --------------------
+ * value Checker
+ * --------------------
+ */
+
+    isStartDefined() {
+        if(this.internalState.startTimeStamp === undefined) {
+            return false;
+        }
+        if(this.internalState.startTimeStamp === null) {
+            return false;
+        }
+        if(isNaN(this.internalState.startTimeStamp)) {
+            return false;
+        }
+        if(this.internalState.startTimeStamp === '') {
+            return false;
+        }
+        return true;
+    }
+
+    isEndDefined() {
+        if(this.internalState.endTimeStamp === undefined) {
+            return false;
+        }
+        if(this.internalState.endTimeStamp === null) {
+            return false;
+        }
+        if(isNaN(this.internalState.endTimeStamp)) {
+            return false;
+        }
+        if(this.internalState.endTimeStamp === '') {
+            return false;
+        }
+        return true;
+    }
+
     //----------------------
     // Element selectors
     //----------------------
