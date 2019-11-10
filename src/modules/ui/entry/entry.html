@@ -26,54 +26,26 @@
             />
         </div>
     </div>
-    <ui-modal class="modal-edit">
+    <ui-modal class="modal-edit" onconfirm={onModalConfirm}>
         <div>
             <label>{label.input.startdate}</label>
-            <input
-                class="start-date"
-                type="date"
-                value={displayState.startdate}
-                onchange={handleChangeStartDate}
-            />
+            <input class="start-date" type="date" />
         </div>
         <div>
             <label>{label.input.starttime}</label>
-            <input
-                step="900"
-                class="start-time"
-                type="time"
-                value={displayState.starttime}
-                onchange={handleChangeStartTime}
-            />
+            <input step="900" class="start-time" type="time" />
         </div>
         <div>
             <label>{label.input.enddate}</label>
-            <input
-                class="end-date"
-                type="date"
-                value={displayState.enddate}
-                onchange={handleChangeEndDate}
-            />
+            <input class="end-date" type="date" />
         </div>
         <div>
             <label>{label.input.endtime}</label>
-            <input
-                class="end-time"
-                step="900"
-                type="time"
-                value={displayState.endtime}
-                onchange={handleChangeEndTime}
-            />
+            <input class="end-time" step="900" type="time" />
         </div>
         <div>
             <label>{label.input.comment}</label>
-            <input
-                class="comment"
-                type="text"
-                value={displayState.comment}
-                onchange={handleChangeComment}
-                placeholder="comment"
-            />
+            <input class="comment" type="text" placeholder="comment" />
         </div>
     </ui-modal>
 </template>
