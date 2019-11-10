@@ -29,42 +29,23 @@
     <ui-modal class="modal-edit">
         <div>
             <label>{label.input.startdate}</label>
-            <input
-                class="start-date"
-                type="date"
-                value={displayState.startdate}
-            />
+            <input class="start-date" type="date" />
         </div>
         <div>
             <label>{label.input.starttime}</label>
-            <input
-                step="900"
-                class="start-time"
-                type="time"
-                value={displayState.starttime}
-            />
+            <input step="900" class="start-time" type="time" />
         </div>
         <div>
             <label>{label.input.enddate}</label>
-            <input class="end-date" type="date" value={displayState.enddate} />
+            <input class="end-date" type="date" />
         </div>
         <div>
             <label>{label.input.endtime}</label>
-            <input
-                class="end-time"
-                step="900"
-                type="time"
-                value={displayState.endtime}
-            />
+            <input class="end-time" step="900" type="time" />
         </div>
         <div>
             <label>{label.input.comment}</label>
-            <input
-                class="comment"
-                type="text"
-                value={displayState.comment}
-                placeholder="comment"
-            />
+            <input class="comment" type="text" placeholder="comment" />
         </div>
     </ui-modal>
 </template>
