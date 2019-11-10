@@ -293,6 +293,54 @@ describe('check Update of Outputs on Input change', () => {
             expect(output.textContent).toBe(newInputValue);
         });
     });
+
+    test('end date output changes on input change', () => {
+        const probeEndTimestamp = 0;
+        const newInputValue = '1900-01-01';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.end = probeEndTimestamp;
+        document.body.appendChild(element);
+
+        const modalContainer = element.shadowRoot.querySelector('ui-modal');
+
+        const editButton = element.shadowRoot.querySelector('input.edit');
+        editButton.dispatchEvent(new CustomEvent('click'));
+
+        const input = element.shadowRoot.querySelector('input.end-date');
+        input.value = newInputValue;
+        modalContainer.dispatchEvent(new CustomEvent('confirm'));
+
+        return Promise.resolve().then(() => {
+            const output = element.shadowRoot.querySelector('span.end-date');
+            expect(output).toBeTruthy();
+            expect(output.textContent).toBe(newInputValue);
+        });
+    });
+
+    test('end time output changes on input change', () => {
+        const probeEndTimestamp = 0;
+        const newInputValue = '14:00';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.end = probeEndTimestamp;
+        document.body.appendChild(element);
+
+        const modalContainer = element.shadowRoot.querySelector('ui-modal');
+
+        const editButton = element.shadowRoot.querySelector('input.edit');
+        editButton.dispatchEvent(new CustomEvent('click'));
+
+        const input = element.shadowRoot.querySelector('input.end-time');
+        input.value = newInputValue;
+        modalContainer.dispatchEvent(new CustomEvent('confirm'));
+
+        return Promise.resolve().then(() => {
+            const output = element.shadowRoot.querySelector('span.end-time');
+            expect(output).toBeTruthy();
+            expect(output.textContent).toBe(newInputValue);
+        });
+    });
 });
 
 /*
