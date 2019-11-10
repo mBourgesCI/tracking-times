@@ -8,7 +8,7 @@ describe('static tests', () => {
         }
     });
 
-    test('outer ccontainer exists', () => {
+    test('outer container exists', () => {
         const element = createElement('ui-entry', { is: Entry });
         document.body.appendChild(element);
 
