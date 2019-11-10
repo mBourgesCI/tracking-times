@@ -155,6 +155,10 @@ export default class Entry extends LightningElement {
         return difference / (1000 * 60 * 60);
     }
 
+    handleButtonClickEdit() {
+        this.showEditModal();
+    }
+
     handleChangeStartDate(internalEvent) {
         this.processNewStartDate(internalEvent.target.value);
     }
@@ -277,9 +281,9 @@ export default class Entry extends LightningElement {
         });
         this.dispatchEvent(externalEvent);
     }
-//----------------------
-// Modal handlers
-//----------------------
+    //----------------------
+    // Modal handlers
+    //----------------------
 
     showEditModal() {
         this.getEditModal().show();
