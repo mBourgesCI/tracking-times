@@ -327,6 +327,8 @@ export default class Entry extends LightningElement {
         return values;
     }
 
+    onModalConfirm() {}
+
     showEditModal() {
         this.fillModalInputs();
         this.getEditModal().show();
