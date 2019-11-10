@@ -327,7 +327,13 @@ export default class Entry extends LightningElement {
         return values;
     }
 
-    onModalConfirm() {}
+    onModalConfirm() {
+        var inputValues, start, end, comment;
+        inputValues = this.readModalInputs();
+        start =  new Date(inputValues.startDateStr + 'T' + inputValues.startTimeStr);
+        end =  new Date(inputValues.endDateStr + 'T' + inputValues.endTimeStr);
+        comment = inputValues.comment;
+    }
 
     showEditModal() {
         this.fillModalInputs();
