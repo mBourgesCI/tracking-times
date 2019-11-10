@@ -102,8 +102,8 @@ export default class Entry extends LightningElement {
         input: {
             startdate: 'Start date',
             starttime: 'Start time',
-            enddate: 'Start date',
-            endtime: 'Start time',
+            enddate: 'End date',
+            endtime: 'End time',
             comment: 'Comment'
         }
     };
