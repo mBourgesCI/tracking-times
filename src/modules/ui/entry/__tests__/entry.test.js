@@ -96,11 +96,45 @@ describe('Check for Inputs', () => {
         const element = createElement('ui-entry', { is: Entry });
         document.body.appendChild(element);
 
-        const startDateInput = element.shadowRoot.querySelector(
-            'input.start-date'
-        );
+        const component = element.shadowRoot.querySelector('input.start-date');
 
-        expect(startDateInput).toBeTruthy();
+        expect(component).toBeTruthy();
+    });
+
+    test('start time input exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const component = element.shadowRoot.querySelector('input.start-time');
+
+        expect(component).toBeTruthy();
+    });
+
+    test('end date input exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const component = element.shadowRoot.querySelector('input.end-date');
+
+        expect(component).toBeTruthy();
+    });
+
+    test('end time input exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const component = element.shadowRoot.querySelector('input.end-time');
+
+        expect(component).toBeTruthy();
+    });
+
+    test('comment input exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const component = element.shadowRoot.querySelector('input.comment');
+
+        expect(component).toBeTruthy();
     });
 });
 /*
