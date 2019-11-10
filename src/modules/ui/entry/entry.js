@@ -317,6 +317,26 @@ export default class Entry extends LightningElement {
     getEditModal() {
         return this.template.querySelector('.modal-edit');
     }
+
+    getInputStartDate() {
+        return this.template.querySelector('input.start-date');
+    }
+
+    getInputStartTime() {
+        return this.template.querySelector('input.start-time');
+    }
+
+    getInputEndDate() {
+        return this.template.querySelector('input.end-date');
+    }
+
+    getInputEndTime() {
+        return this.template.querySelector('input.end-time');
+    }
+
+    getInputComment() {
+        return this.template.querySelector('input.comment');
+    }
 }
 
 function getNewTimestampByIsoTime(timestamp, isoTimeString) {
