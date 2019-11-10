@@ -248,20 +248,26 @@ describe('check initial values', () => {
 describe('check Update of Outputs on Input change', () => {
     test('start date output changes on input change', () => {
         const probeStartTimestamp = 0;
+        const newInputValue = '1900-01-01';
 
         const element = createElement('ui-entry', { is: Entry });
         element.start = probeStartTimestamp;
         document.body.appendChild(element);
 
         const modalContainer = element.shadowRoot.querySelector('ui-modal');
-        //const input = element.shadowRoot.querySelector('input.start-date');
 
-        //input.value = '1900-01-01';
+        const editButton = element.shadowRoot.querySelector('input.edit');
+        editButton.dispatchEvent(new CustomEvent('click'));
+
+        const input = element.shadowRoot.querySelector('input.start-date');
+        input.value = newInputValue;
         modalContainer.dispatchEvent(new CustomEvent('confirm'));
-        /*
-        const output = element.shadowRoot.querySelector(
-            'span.start-date'
-        );*/
+
+        return Promise.resolve().then(() => {
+            const output = element.shadowRoot.querySelector('span.start-date');
+            expect(output).toBeTruthy();
+            expect(output.textContent).toBe(newInputValue);
+        });
     });
 });
 
