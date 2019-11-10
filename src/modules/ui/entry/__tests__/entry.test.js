@@ -156,6 +156,115 @@ describe('Check for Inputs', () => {
     });
 });
 
+describe('check initial values', () => {
+    test('output start date', () => {
+        const probeTimestamp = new Date('2000-01-01T13:00:00.0000').getTime();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.start = probeTimestamp;
+        document.body.appendChild(element);
+
+        const startDateOutput = element.shadowRoot.querySelector(
+            'span.start-date'
+        );
+
+        expect(startDateOutput).toBeTruthy();
+        expect(startDateOutput.textContent).toBe('2000-01-01');
+    });
+
+    test('output start time', () => {
+        const probeTimestamp = new Date('2000-01-01T13:00:00.0000').getTime();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.start = probeTimestamp;
+        document.body.appendChild(element);
+
+        const startTimeOutput = element.shadowRoot.querySelector(
+            'span.start-time'
+        );
+
+        expect(startTimeOutput).toBeTruthy();
+        expect(startTimeOutput.textContent).toBe('13:00');
+    });
+    test('output end date', () => {
+        const probeTimestamp = new Date('2000-01-01T13:00:00.0000').getTime();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.end = probeTimestamp;
+        document.body.appendChild(element);
+
+        const endDateOutput = element.shadowRoot.querySelector('span.end-date');
+
+        expect(endDateOutput).toBeTruthy();
+        expect(endDateOutput.textContent).toBe('2000-01-01');
+    });
+
+    test('output end time', () => {
+        const probeTimestamp = new Date('2000-01-01T13:00:00.0000').getTime();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.end = probeTimestamp;
+        document.body.appendChild(element);
+
+        const endTimeOutput = element.shadowRoot.querySelector('span.end-time');
+
+        expect(endTimeOutput).toBeTruthy();
+        expect(endTimeOutput.textContent).toBe('13:00');
+    });
+
+    test('output comment', () => {
+        const probeText = '1234abcd';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.comment = probeText;
+        document.body.appendChild(element);
+
+        const commentOutput = element.shadowRoot.querySelector('span.comment');
+
+        expect(commentOutput).toBeTruthy();
+        expect(commentOutput.textContent).toBe(probeText);
+    });
+
+    test('output initial diff calculation', () => {
+        const probeStartTimestamp = new Date(
+            '2000-01-01T13:00:00.0000'
+        ).getTime();
+        const probeEndTimestamp = new Date(
+            '2000-01-01T13:30:00.0000'
+        ).getTime();
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.start = probeStartTimestamp;
+        element.end = probeEndTimestamp;
+        document.body.appendChild(element);
+
+        const component = element.shadowRoot.querySelector('span.diff');
+
+        expect(component).toBeTruthy();
+        expect(component.textContent).toBe('0.5');
+    });
+});
+
+describe('check Update of Outputs on Input change', () => {
+    test('start date output changes on input change', () => {
+        const probeStartTimestamp = 0;
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.start = probeStartTimestamp;
+        document.body.appendChild(element);
+
+        const modalContainer = element.shadowRoot.querySelector('ui-modal');
+        //const input = element.shadowRoot.querySelector('input.start-date');
+
+        //input.value = '1900-01-01';
+        modalContainer.dispatchEvent(new CustomEvent('confirm'));
+        /*
+        const output = element.shadowRoot.querySelector(
+            'span.start-date'
+        );*/
+    });
+});
+
 /*
 describe('check inputs exist', () => {
     afterEach(() => {
