@@ -316,6 +316,17 @@ export default class Entry extends LightningElement {
         this.getInputComment().value = values.comment;
     }
 
+    readModalInputs() {
+        var values;
+        values = {};
+        values.startdate = this.getInputStartDate().value;
+        values.starttime = this.getInputStartTime().value;
+        values.enddate = this.getInputEndDate().value;
+        values.endtime = this.getInputEndTime().value;
+        values.comment = this.getInputComment().value;
+        return values;
+    }
+
     showEditModal() {
         this.getEditModal().show();
     }
