@@ -27,7 +27,9 @@ describe('check elements for existence', () => {
 
         expect(modalContainer).toBeTruthy();
     });
+});
 
+describe('Check for Outputs', () => {
     test('start date output exists', () => {
         const element = createElement('ui-entry', { is: Entry });
         document.body.appendChild(element);
