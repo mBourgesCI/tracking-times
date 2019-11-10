@@ -310,6 +310,10 @@ export default class Entry extends LightningElement {
         this.getEditModal().show();
     }
 
+    //----------------------
+    // Element selectors
+    //----------------------
+
     getEditModal() {
         return this.template.querySelector('.modal-edit');
     }
