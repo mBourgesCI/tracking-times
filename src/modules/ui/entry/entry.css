@@ -28,7 +28,7 @@ div.content {
     grid-template-areas:
         'startDate startTime comment '
         'endDate endTime comment'
-        'diff diff comment';
+        'buttons diff comment';
 }
 
 div.container {
@@ -68,23 +68,11 @@ div.container-comment {
     grid-area: comment;
 }
 
-div.content > div > span {
-    display: block;
+div.container-button-bar {
+    grid-area: buttons;
 }
 
-div.content > div > input {
-    display: none;
-}
-
-div.content > div:hover > span {
-    display: none;
-}
-
-div.content > div:hover > input {
-    display: block;
-}
-
-div.content > div > span.diff {
+div.container-button-bar > input {
     display: block;
 }
 

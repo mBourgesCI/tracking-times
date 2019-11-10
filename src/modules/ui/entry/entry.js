@@ -94,6 +94,12 @@ export default class Entry extends LightningElement {
 
     internalState = {};
 
+    label = {
+        button: {
+            edit: 'Edit'
+        }
+    };
+
     @track
     displayState = {};
 
