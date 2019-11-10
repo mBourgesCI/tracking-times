@@ -365,6 +365,32 @@ describe('check Update of Outputs on Input change', () => {
             expect(output.textContent).toBe(newInputValue);
         });
     });
+
+    test('diff output changes on input change', () => {
+        const probeStartTimestamp = 0;
+        const probeEndTimestamp = 1000 * 60 * 60;
+        const newInputValue = '05:00';
+
+        const element = createElement('ui-entry', { is: Entry });
+        element.start = probeStartTimestamp;
+        element.end = probeEndTimestamp;
+        document.body.appendChild(element);
+
+        const modalContainer = element.shadowRoot.querySelector('ui-modal');
+
+        const editButton = element.shadowRoot.querySelector('input.edit');
+        editButton.dispatchEvent(new CustomEvent('click'));
+
+        const input = element.shadowRoot.querySelector('input.end-time');
+        input.value = newInputValue;
+        modalContainer.dispatchEvent(new CustomEvent('confirm'));
+
+        return Promise.resolve().then(() => {
+            const output = element.shadowRoot.querySelector('span.diff');
+            expect(output).toBeTruthy();
+            expect(output.textContent).toBe('4');
+        });
+    });
 });
 
 /*
