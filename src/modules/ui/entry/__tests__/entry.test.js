@@ -392,3 +392,17 @@ describe('check Update of Outputs on Input change', () => {
         });
     });
 });
+
+describe('check events on changed values', () => {
+    test('start timstamp is passed', () => {
+        expect(undefined).toBeTruthy();
+    });
+
+    test('end timstamp is passed', () => {
+        expect(undefined).toBeTruthy();
+    });
+
+    test('comment is passed', () => {
+        expect(undefined).toBeTruthy();
+    });
+});
