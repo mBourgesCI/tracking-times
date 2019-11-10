@@ -288,6 +288,20 @@ export default class Entry extends LightningElement {
         });
         this.dispatchEvent(externalEvent);
     }
+
+    getValuesForInputs() {
+        var result, start, end;
+        result = {};
+        start = new Date(this.internalState.startTimeStamp);
+        end = new Date(this.internalState.endTimeStamp);
+        result.startdate = start.toLocaleDateString();
+        result.starttime = start.toLocaleTimeString();
+        result.enddate = end.toLocaleDateString();
+        result.endtime = end.toLocaleTimeString();
+        result.comment = this.internalState.comment;
+        return result;
+    }
+
     //----------------------
     // Modal handlers
     //----------------------
@@ -311,40 +325,6 @@ function getNewTimestampByIsoTime(timestamp, isoTimeString) {
         newTimeStamp = new Date(timestamp).setHours(hourInt, minuteInt);
     }
     return newTimeStamp;
-}
-
-/* 
-function setTimeStringOfIntegerTimeStamp(params) {
-    var timeStampArray, timeStringValue, newTimeStamp;
-
-    // Guardians
-    if (params === undefined) return undefined;
-    if (params.originalTimeStamp === undefined) return undefined;
-    if (params.timeString === undefined) return undefined;
-
-    // Business logic
-    timeStampArray = splitTimeStampIntegerIntoDateAndTime(
-        params.originalTimeStamp
-    );
-    timeStringValue = convertISOTimeToInteger(params.timeString);
-
-    newTimeStamp = timeStampArray.date + timeStringValue;
-    return newTimeStamp;
-}
- */
-
-function convertIntegerToIsoDatetring(dateInt) {
-    var fullDate, dateString;
-    fullDate = new Date(dateInt);
-    dateString = fullDate.toISOString().split('T')[0];
-    return dateString;
-}
-
-function convertIntegerToLocalTimeString(timeInt) {
-    var fullDate, timeString;
-    fullDate = new Date(timeInt);
-    timeString = fullDate.toLocaleTimeString().substr(0, 5);
-    return timeString;
 }
 
 function convertISOTimeToInteger(time) {
