@@ -319,10 +319,10 @@ export default class Entry extends LightningElement {
     readModalInputs() {
         var values;
         values = {};
-        values.startdate = this.getInputStartDate().value;
-        values.starttime = this.getInputStartTime().value;
-        values.enddate = this.getInputEndDate().value;
-        values.endtime = this.getInputEndTime().value;
+        values.startDateStr = this.getInputStartDate().value;
+        values.startTimeStr = this.getInputStartTime().value;
+        values.endDateStr = this.getInputEndDate().value;
+        values.endTimeStr = this.getInputEndTime().value;
         values.comment = this.getInputComment().value;
         return values;
     }
@@ -360,6 +360,26 @@ export default class Entry extends LightningElement {
 
     getInputComment() {
         return this.template.querySelector('input.comment');
+    }
+
+    getSpanStartDate() {
+        return this.template.querySelector('span.start-date');
+    }
+
+    getSpanStartTime() {
+        return this.template.querySelector('span.start-time');
+    }
+
+    getSpanEndDate() {
+        return this.template.querySelector('span.end-date');
+    }
+
+    getSpanEndTime() {
+        return this.template.querySelector('span.end-time');
+    }
+
+    getSpanComment() {
+        return this.template.querySelector('span.comment');
     }
 }
 
