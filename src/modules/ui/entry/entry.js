@@ -306,6 +306,16 @@ export default class Entry extends LightningElement {
     // Modal handlers
     //----------------------
 
+    fillModalInputs() {
+        var values;
+        values = this.getValuesForInputs();
+        this.getInputStartDate().value = values.startdate;
+        this.getInputStartTime().value = values.starttime;
+        this.getInputEndDate().value = values.enddate;
+        this.getInputEndTime().value = values.endtime;
+        this.getInputComment().value = values.comment;
+    }
+
     showEditModal() {
         this.getEditModal().show();
     }
