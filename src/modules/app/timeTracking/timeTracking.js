@@ -102,30 +102,29 @@ export default class TimeTracking extends LightningElement {
     }
 
     processEntryChange(index, newDetail) {
-        var parameterName, parameterValue, entry;
+        var entry, startValue, endValue, commentValue;
 
-        parameterName = newDetail.name;
-        parameterValue = newDetail.value;
+        startValue = newDetail.start;
+        endValue = newDetail.end;
+        commentValue = newDetail.comment;
 
-        if (
-            index !== undefined &&
-            parameterName !== undefined &&
-            parameterValue !== undefined
-        ) {
+        if (index !== undefined) {
             let entryIndex = parseInt(index, 10);
 
             entry = this.state.entries.find(function(tempEntry) {
                 return tempEntry.sortnumber === entryIndex;
             });
 
-            if (parameterName === 'comment') {
-                entry.comment = parameterValue;
-            }
-            if (parameterName === 'start') {
-                entry.start = parameterValue;
-            }
-            if (parameterName === 'end') {
-                entry.end = parameterValue;
+            if (entry !== undefined) {
+                if (startValue !== undefined) {
+                    entry.start = startValue;
+                }
+                if (endValue !== undefined) {
+                    entry.end = endValue;
+                }
+                if (commentValue !== undefined) {
+                    entry.comment = commentValue;
+                }
             }
         }
     }

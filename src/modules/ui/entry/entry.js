@@ -160,7 +160,6 @@ export default class Entry extends LightningElement {
                 value: this.internalState.startTimeStamp,
                 name: 'start'
             };
-            this.createAndFireChangeEvent(param);
         }
     }
 
@@ -182,7 +181,6 @@ export default class Entry extends LightningElement {
             value: this.internalState.startTimeStamp,
             name: 'start'
         };
-        this.createAndFireChangeEvent(param);
     }
 
     processNewEndDate(newEndDateISOString) {
@@ -201,7 +199,6 @@ export default class Entry extends LightningElement {
                 value: this.internalState.endTimeStamp,
                 name: 'end'
             };
-            this.createAndFireChangeEvent(param);
         }
     }
 
@@ -223,7 +220,6 @@ export default class Entry extends LightningElement {
             value: this.internalState.endTimeStamp,
             name: 'end'
         };
-        this.createAndFireChangeEvent(param);
     }
 
     processNewComment(newCommentString) {
@@ -235,16 +231,18 @@ export default class Entry extends LightningElement {
             value: newCommentString,
             name: 'comment'
         };
-        this.createAndFireChangeEvent(param);
     }
 
-    createAndFireChangeEvent(detailParam) {
+    createAndFireChangeEvent() {
         var externalEvent;
-        detailParam.entryId = this.internalState.entryId;
         externalEvent = new CustomEvent('change', {
             bubbles: true,
             composed: true,
-            detail: detailParam
+            detail: {
+                start: this.start,
+                end: this.end,
+                comment: this.comment
+            }
         });
         this.dispatchEvent(externalEvent);
     }
@@ -252,12 +250,17 @@ export default class Entry extends LightningElement {
     getValuesForInputs() {
         var result, start, end;
         result = {};
-        start = new Date(this.internalState.startTimeStamp);
-        end = new Date(this.internalState.endTimeStamp);
-        result.startdate = start.toISOString().split('T')[0];
-        result.starttime = start.toLocaleTimeString().substr(0, 5);
-        result.enddate = end.toISOString().split('T')[0];
-        result.endtime = end.toLocaleTimeString().substr(0, 5);
+
+        if (this.isStartDefined()) {
+            start = new Date(this.internalState.startTimeStamp);
+            result.startdate = start.toISOString().split('T')[0];
+            result.starttime = start.toLocaleTimeString().substr(0, 5);
+        }
+        if (this.isEndDefined()) {
+            end = new Date(this.internalState.endTimeStamp);
+            result.enddate = end.toISOString().split('T')[0];
+            result.endtime = end.toLocaleTimeString().substr(0, 5);
+        }
         result.comment = this.internalState.comment;
         return result;
     }
@@ -322,11 +325,50 @@ export default class Entry extends LightningElement {
         inputValues = this.readModalInputs();
         this.writeValuesToInternalState(inputValues);
         this.fillOutputs();
+        this.createAndFireChangeEvent();
     }
 
     showEditModal() {
         this.fillModalInputs();
         this.getEditModal().show();
+    }
+
+    /**
+     * --------------------
+     * value Checker
+     * --------------------
+     */
+
+    isStartDefined() {
+        if (this.internalState.startTimeStamp === undefined) {
+            return false;
+        }
+        if (this.internalState.startTimeStamp === null) {
+            return false;
+        }
+        if (isNaN(this.internalState.startTimeStamp)) {
+            return false;
+        }
+        if (this.internalState.startTimeStamp === '') {
+            return false;
+        }
+        return true;
+    }
+
+    isEndDefined() {
+        if (this.internalState.endTimeStamp === undefined) {
+            return false;
+        }
+        if (this.internalState.endTimeStamp === null) {
+            return false;
+        }
+        if (isNaN(this.internalState.endTimeStamp)) {
+            return false;
+        }
+        if (this.internalState.endTimeStamp === '') {
+            return false;
+        }
+        return true;
     }
 
     //----------------------

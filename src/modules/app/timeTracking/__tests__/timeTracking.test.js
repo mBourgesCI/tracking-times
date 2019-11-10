@@ -90,13 +90,13 @@ describe('check loading based on version', () => {
             expect(outputSpans[0].textContent).toBe('1970-01-01');
 
             expect(outputSpans[1].classList[0]).toBe('start-time');
-            expect(outputSpans[1].textContent).toBe('00:00');
+            expect(outputSpans[1].textContent).toBe('01:00');
 
             expect(outputSpans[2].classList[0]).toBe('end-date');
             expect(outputSpans[2].textContent).toBe('1970-01-01');
 
             expect(outputSpans[3].classList[0]).toBe('end-time');
-            expect(outputSpans[3].textContent).toBe('00:03');
+            expect(outputSpans[3].textContent).toBe('01:03');
 
             expect(outputSpans[4].classList[0]).toBe('diff');
             expect(outputSpans[4].textContent).toBe('0.05');
