@@ -33,7 +33,6 @@
                 class="start-date"
                 type="date"
                 value={displayState.startdate}
-                onchange={handleChangeStartDate}
             />
         </div>
         <div>
@@ -43,17 +42,11 @@
                 class="start-time"
                 type="time"
                 value={displayState.starttime}
-                onchange={handleChangeStartTime}
             />
         </div>
         <div>
             <label>{label.input.enddate}</label>
-            <input
-                class="end-date"
-                type="date"
-                value={displayState.enddate}
-                onchange={handleChangeEndDate}
-            />
+            <input class="end-date" type="date" value={displayState.enddate} />
         </div>
         <div>
             <label>{label.input.endtime}</label>
@@ -62,7 +55,6 @@
                 step="900"
                 type="time"
                 value={displayState.endtime}
-                onchange={handleChangeEndTime}
             />
         </div>
         <div>
@@ -71,7 +63,6 @@
                 class="comment"
                 type="text"
                 value={displayState.comment}
-                onchange={handleChangeComment}
                 placeholder="comment"
             />
         </div>
