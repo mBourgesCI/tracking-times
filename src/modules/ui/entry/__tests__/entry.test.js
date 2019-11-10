@@ -27,6 +27,17 @@ describe('static tests', () => {
 
         expect(modalContainer).toBeTruthy();
     });
+
+    test('start date output exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const startdateOutput = element.shadowRoot.querySelector(
+            'span.start-date'
+        );
+
+        expect(startdateOutput).toBeTruthy();
+    });
 });
 
 /*
