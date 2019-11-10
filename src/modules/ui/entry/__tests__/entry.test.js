@@ -2,7 +2,6 @@ import { createElement } from 'lwc';
 import Entry from 'ui/entry';
 describe('check elements for existence', () => {
     afterEach(() => {
-        // The jsdom instance is shared across test cases in a single file so reset the DOM
         while (document.body.firstChild) {
             document.body.removeChild(document.body.firstChild);
         }
@@ -30,6 +29,12 @@ describe('check elements for existence', () => {
 });
 
 describe('Check for Outputs', () => {
+    afterEach(() => {
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
     test('start date output exists', () => {
         const element = createElement('ui-entry', { is: Entry });
         document.body.appendChild(element);
@@ -81,6 +86,12 @@ describe('Check for Outputs', () => {
 });
 
 describe('Check for Inputs', () => {
+    afterEach(() => {
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
     test('start date input exists', () => {
         const element = createElement('ui-entry', { is: Entry });
         document.body.appendChild(element);
