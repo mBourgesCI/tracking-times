@@ -78,6 +78,18 @@ describe('check elements for existence', () => {
     });
 });
 
+describe('Check for Inputs', () => {
+    test('start date input exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const startDateInput = element.shadowRoot.querySelector(
+            'input.start-date'
+        );
+
+        expect(startDateInput).toBeTruthy();
+    });
+});
 /*
 describe('check inputs exist', () => {
     afterEach(() => {
