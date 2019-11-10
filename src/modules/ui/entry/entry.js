@@ -313,7 +313,15 @@ export default class Entry extends LightningElement {
     // Output handlers
     //----------------------
 
-    fillOutputs() {}
+    fillOutputs() {
+        var values;
+        values = this.getValuesForInputs();
+        this.displayState.startdate = values.startdate;
+        this.displayState.starttime = values.starttime;
+        this.displayState.enddate = values.enddate;
+        this.displayState.endtime = values.endtime;
+        this.displayState.comment = values.comment;
+    }
 
     writeValuesToInternalState(values) {
         var start, end, comment;
@@ -354,6 +362,7 @@ export default class Entry extends LightningElement {
         var inputValues;
         inputValues = this.readModalInputs();
         this.writeValuesToInternalState(inputValues);
+        this.fillOutputs();
     }
 
     showEditModal() {
