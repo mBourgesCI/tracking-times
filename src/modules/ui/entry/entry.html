@@ -51,7 +51,11 @@
             />
         </div>
         <div class="container container-button-bar">
-            <input type="button" value={label.button.edit} />
+            <input
+                type="button"
+                value={label.button.edit}
+                onclick={handleButtonClickEdit}
+            />
         </div>
     </div>
     <ui-modal class="modal-edit"></ui-modal>
