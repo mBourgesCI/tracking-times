@@ -18,6 +18,15 @@ describe('static tests', () => {
 
         expect(contentContainer).toBeTruthy();
     });
+
+    test('modal exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const modalContainer = element.shadowRoot.querySelector('ui-modal');
+
+        expect(modalContainer).toBeTruthy();
+    });
 });
 
 /*
