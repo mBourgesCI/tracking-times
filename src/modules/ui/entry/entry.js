@@ -277,6 +277,10 @@ export default class Entry extends LightningElement {
         });
         this.dispatchEvent(externalEvent);
     }
+
+    getEditModal() {
+        return this.template.querySelector('div.modal-edit');
+    }
 }
 
 function getNewTimestampByIsoTime(timestamp, isoTimeString) {
