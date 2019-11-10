@@ -396,9 +396,10 @@ describe('check Update of Outputs on Input change', () => {
 describe('check events on changed values', () => {
     test('new values are in change event', () => {
         const handler = jest.fn();
+        const baseDate = '1970-01-01';
 
-        const probeStartTimestamp = new Date('1970-01-01T04:00').getTime();
-        const probeEndTimestamp = new Date('1970-01-01T09:00').getTime();
+        const probeStartTimestamp = new Date(baseDate + 'T04:00').getTime();
+        const probeEndTimestamp = new Date(baseDate + 'T09:00').getTime();
         const probeComment = 'a1b2c3d4';
 
         const newStartTimeValue = '05:00';
@@ -427,6 +428,21 @@ describe('check events on changed values', () => {
 
         return Promise.resolve().then(() => {
             expect(handler).toHaveBeenCalled();
+            expect(handler.mock.calls.length).toBe(1);
+            expect(handler.mock.calls[0].length).toBe(1);
+            expect(handler.mock.calls[0][0].bubbles).toBe(true);
+            expect(handler.mock.calls[0][0].composed).toBe(true);
+            expect(handler.mock.calls[0][0].detail).toBeTruthy();
+            expect(handler.mock.calls[0][0].detail.start).toBeTruthy();
+            expect(handler.mock.calls[0][0].detail.start).toBe(
+                new Date(baseDate + 'T' + newStartTimeValue).getTime()
+            );
+            expect(handler.mock.calls[0][0].detail.end).toBeTruthy();
+            expect(handler.mock.calls[0][0].detail.end).toBe(
+                new Date(baseDate + 'T' + newEndTimeValue).getTime()
+            );
+            expect(handler.mock.calls[0][0].detail.comment).toBeTruthy();
+            expect(handler.mock.calls[0][0].detail.comment).toBe(probeComment);
         });
     });
 });

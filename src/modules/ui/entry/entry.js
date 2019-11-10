@@ -237,7 +237,12 @@ export default class Entry extends LightningElement {
         var externalEvent;
         externalEvent = new CustomEvent('change', {
             bubbles: true,
-            composed: true
+            composed: true,
+            detail: {
+                start: this.start,
+                end: this.end,
+                comment: this.comment
+            }
         });
         this.dispatchEvent(externalEvent);
     }
