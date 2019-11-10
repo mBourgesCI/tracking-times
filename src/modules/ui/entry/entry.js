@@ -290,7 +290,7 @@ export default class Entry extends LightningElement {
     }
 
     getEditModal() {
-        return this.template.querySelector('div.modal-edit');
+        return this.template.querySelector('.modal-edit');
     }
 }
 
