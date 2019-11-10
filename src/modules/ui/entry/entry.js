@@ -313,6 +313,7 @@ function getNewTimestampByIsoTime(timestamp, isoTimeString) {
     return newTimeStamp;
 }
 
+/* 
 function setTimeStringOfIntegerTimeStamp(params) {
     var timeStampArray, timeStringValue, newTimeStamp;
 
@@ -329,6 +330,21 @@ function setTimeStringOfIntegerTimeStamp(params) {
 
     newTimeStamp = timeStampArray.date + timeStringValue;
     return newTimeStamp;
+}
+ */
+
+function convertIntegerToIsoDatetring(dateInt) {
+    var fullDate, dateString;
+    fullDate = new Date(dateInt);
+    dateString = fullDate.toISOString().split('T')[0];
+    return dateString;
+}
+
+function convertIntegerToLocalTimeString(timeInt) {
+    var fullDate, timeString;
+    fullDate = new Date(timeInt);
+    timeString = fullDate.toLocaleTimeString().substr(0, 5);
+    return timeString;
 }
 
 function convertISOTimeToInteger(time) {
