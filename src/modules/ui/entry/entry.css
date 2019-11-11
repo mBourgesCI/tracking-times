@@ -63,15 +63,34 @@ div.container-button-bar > input {
 
 div.container-modal {
     display: grid;
-    grid-row-gap: 15px;
-    grid-template-columns: 50% 50%;
+    grid-row-gap: 10px;
+    grid-template-columns: 100%;
+}
+
+div.container-modal > label {
+    color: hsl(0, 0%, 60%);
+    font-size: small;
+}
+
+div.container-modal > input {
+    color: hsl(0, 0%, 30%);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+}
+
+@media (min-width: 500px) {
+    div.container-modal {
+        display: grid;
+        grid-row-gap: 15px;
+        grid-template-columns: 50% 50%;
+    }
 }
 
 @media (min-width: 786px) {
     div.content {
         grid-auto-columns: 33.33%;
         grid-template-areas:
-            'startDate startTimecomment'
+            'startDate startTime comment'
             'endDate endTime comment'
             'buttons diff comment';
     }
