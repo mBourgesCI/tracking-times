@@ -28,24 +28,16 @@
         </div>
     </div>
     <ui-modal class="modal-edit" onconfirm={onModalConfirm}>
-        <div>
-            <label>{label.input.startdate}</label>
+        <div class="container-modal">
+            <label class="start-date">{label.input.startdate}</label>
             <input class="start-date" type="date" />
-        </div>
-        <div>
-            <label>{label.input.starttime}</label>
-            <input step="900" class="start-time" type="time" />
-        </div>
-        <div>
-            <label>{label.input.enddate}</label>
+            <label class="start-time">{label.input.starttime}</label>
+            <input class="start-time" step="900" type="time" />
+            <label class="end-date">{label.input.enddate}</label>
             <input class="end-date" type="date" />
-        </div>
-        <div>
-            <label>{label.input.endtime}</label>
+            <label class="end-time">{label.input.endtime}</label>
             <input class="end-time" step="900" type="time" />
-        </div>
-        <div>
-            <label>{label.input.comment}</label>
+            <label class="comment">{label.input.comment}</label>
             <input class="comment" type="text" placeholder="comment" />
         </div>
     </ui-modal>

@@ -61,6 +61,12 @@ div.container-button-bar > input {
     display: block;
 }
 
+div.container-modal {
+    display: grid;
+    grid-row-gap: 15px;
+    grid-template-columns: 50% 50%;
+}
+
 @media (min-width: 786px) {
     div.content {
         grid-auto-columns: 33.33%;
