@@ -24,11 +24,12 @@ div.content {
     border-style: solid;
     width: 100%;
     display: grid;
-    grid-auto-columns: 33.33%;
+    grid-auto-columns: 50%;
     grid-template-areas:
-        'startDate startTime comment '
-        'endDate endTime comment'
-        'buttons diff comment';
+        'startDate startTime'
+        'endDate endTime'
+        'comment comment'
+        'buttons diff';
 }
 
 div.container {
@@ -76,13 +77,12 @@ div.container-button-bar > input {
     display: block;
 }
 
-@media (max-width: 450px) {
+@media (min-width: 786px) {
     div.content {
-        grid-auto-columns: 50%;
+        grid-auto-columns: 33.33%;
         grid-template-areas:
-            'startDate startTime'
-            'endDate endTime'
-            'comment comment'
-            'buttons diff';
+            'startDate startTimecomment'
+            'endDate endTime comment'
+            'buttons diff comment';
     }
 }
