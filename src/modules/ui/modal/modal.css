@@ -3,7 +3,7 @@
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 20px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -15,8 +15,9 @@
 
 /* Modal Content */
 .modal-content {
-    height: calc(80vh - 150px);
+    height: calc(80vh - 35px);
     max-height: 400px;
+    min-height: 50px;
     overflow: auto;
     background-color: #fefefe;
     border-radius: 10px;
