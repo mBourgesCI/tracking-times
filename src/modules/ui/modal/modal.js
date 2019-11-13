@@ -54,7 +54,7 @@ export default class Entry extends LightningElement {
     showModal() {
         var modalElem;
         modalElem = this.getModalContainer();
-        this.setElemDisplay(modalElem, 'block');
+        this.setElemDisplay(modalElem, 'flex');
     }
 
     setElemDisplay(elem, displayValue) {

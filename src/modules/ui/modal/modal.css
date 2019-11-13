@@ -1,9 +1,10 @@
 /* The Modal (background) */
 .modal {
+    justify-content: center;
+    align-items: center;
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 20px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -15,15 +16,20 @@
 
 /* Modal Content */
 .modal-content {
-    height: calc(80vh - 35px);
-    max-height: 400px;
-    min-height: 50px;
-    overflow: auto;
+    /* white border */
+    border: 1px solid #888;
     background-color: #fefefe;
     border-radius: 10px;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
+
+    /* layout of content */
+    display: grid;
+    grid-template-rows: 39px auto 56px;
+    overflow: auto;
+
+    /* sizing */
+    height: calc(80vh - 35px);
+    max-height: 330px;
+    min-height: 50px;
     width: 80%;
     max-width: 600px;
 }
@@ -33,24 +39,30 @@
     font-weight: bold;
     font-size: medium;
     color: rgb(160, 160, 160);
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-    border-bottom-style: solid;
-    border-bottom-color: rgb(233, 233, 233);
-    border-bottom-width: 1px;
+    padding: 10px;
 }
 
 .modal-body {
     font-size: medium;
-}
 
-.modal-footer {
-    padding-top: 10px;
-    margin-top: 10px;
-    text-align: right;
+    padding: 10px;
+    /* separating lines */
+    /* bottom */
+    border-bottom-style: solid;
+    border-bottom-color: rgb(233, 233, 233);
+    border-bottom-width: 1px;
+    /* top */
     border-top-style: solid;
     border-top-color: rgb(233, 233, 233);
     border-top-width: 1px;
+}
+
+.modal-footer {
+    /* align buttons to the right */
+    text-align: right;
+
+    /* white separator to content and bottom */
+    padding: 10px;
 }
 
 input.button {
@@ -62,18 +74,19 @@ input.button {
     font-family: Arial, Helvetica, sans-serif;
     font-size: medium;
     user-select: none;
+    border-width: 1px;
+    border-style: solid;
 }
 
 input.cancel {
     color: white;
     background-color: hsl(7, 92%, 64%);
+    border-color: hsl(7, 92%, 64%);
 }
 
 input.confirm {
     color: rgb(54, 51, 255);
     background-color: white;
-    border-width: 1px;
     border-color: rgb(54, 51, 255);
-    border-style: solid;
-    margin-right: 15px;
+    margin-right: 10px;
 }
