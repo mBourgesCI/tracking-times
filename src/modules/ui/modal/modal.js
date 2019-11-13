@@ -2,6 +2,14 @@ import { LightningElement, track, api } from 'lwc';
 
 export default class Entry extends LightningElement {
     @api
+    get title() {
+        return this.label.title;
+    }
+    set title(value) {
+        this.label.title = value;
+    }
+
+    @api
     show() {
         this.showModal();
     }
