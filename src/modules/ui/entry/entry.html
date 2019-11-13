@@ -27,7 +27,11 @@
             />
         </div>
     </div>
-    <ui-modal class="modal-edit" onconfirm={onModalConfirm}>
+    <ui-modal
+        class="modal-edit"
+        onconfirm={onModalConfirm}
+        title={label.modal.title}
+    >
         <div class="container-modal">
             <label class="start-date">{label.input.startdate}</label>
             <input class="start-date" type="date" />
