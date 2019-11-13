@@ -55,6 +55,9 @@ export default class Entry extends LightningElement {
     internalState = {};
 
     label = {
+        modal: {
+            title: 'Entry Details'
+        },
         button: {
             edit: 'Edit'
         },
