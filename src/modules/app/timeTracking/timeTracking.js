@@ -2,16 +2,16 @@ import { LightningElement, track } from 'lwc';
 import { save, load, clear } from 'data/localStorage';
 
 export default class TimeTracking extends LightningElement {
-    @track label = {
-        button: {
-            save: 'Save',
-            load: 'Load',
-            clear: 'Clear',
-            add: 'Add'
+    @track state = {
+        label: {
+            button: {
+                save: 'Save',
+                load: 'Load',
+                clear: 'Clear',
+                add: 'Add'
+            }
         }
     };
-
-    @track state = {};
 
     connectedCallback() {
         this.state.entries = [];
