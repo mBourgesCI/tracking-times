@@ -26,14 +26,13 @@
 
     /* layout of content */
     display: grid;
-    grid-template-rows: 29px auto 36px;
+    grid-template-rows: 29px auto 56px;
     overflow: auto;
 
     /* sizing */
     height: calc(80vh - 35px);
     max-height: 330px;
     min-height: 50px;
-
     width: 80%;
     max-width: 600px;
 }
@@ -44,23 +43,30 @@
     font-size: medium;
     color: rgb(160, 160, 160);
     padding-bottom: 10px;
-    border-bottom-style: solid;
-    border-bottom-color: rgb(233, 233, 233);
-    border-bottom-width: 1px;
 }
 
 .modal-body {
-    padding-top: 10px;
-    padding-bottom: 10px;
     font-size: medium;
-}
 
-.modal-footer {
-    padding-top: 10px;
-    text-align: right;
+    /* separating lines */
+    /* bottom */
+    border-bottom-style: solid;
+    border-bottom-color: rgb(233, 233, 233);
+    border-bottom-width: 1px;
+    padding-bottom: 10px;
+    /* top */
     border-top-style: solid;
     border-top-color: rgb(233, 233, 233);
     border-top-width: 1px;
+    padding-top: 10px;
+}
+
+.modal-footer {
+    /* align buttons to the right */
+    text-align: right;
+
+    /* white separator to content and bottom */
+    padding-top: 10px;
 }
 
 input.button {
