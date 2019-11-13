@@ -16,8 +16,10 @@
 /* Modal Content */
 .modal-content {
     height: calc(80vh - 35px);
-    max-height: 400px;
+    max-height: 330px;
     min-height: 50px;
+    display: grid;
+    grid-template-rows: 29px auto 36px;
     overflow: auto;
     background-color: #fefefe;
     border-radius: 10px;
@@ -34,19 +36,19 @@
     font-size: medium;
     color: rgb(160, 160, 160);
     padding-bottom: 10px;
-    margin-bottom: 10px;
     border-bottom-style: solid;
     border-bottom-color: rgb(233, 233, 233);
     border-bottom-width: 1px;
 }
 
 .modal-body {
+    padding-top: 10px;
+    padding-bottom: 10px;
     font-size: medium;
 }
 
 .modal-footer {
     padding-top: 10px;
-    margin-top: 10px;
     text-align: right;
     border-top-style: solid;
     border-top-color: rgb(233, 233, 233);
