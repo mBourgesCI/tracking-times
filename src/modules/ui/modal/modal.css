@@ -19,14 +19,13 @@
     border: 1px solid #888;
     background-color: #fefefe;
     border-radius: 10px;
-    padding: 20px;
 
     /* positioning in center */
     margin: auto;
 
     /* layout of content */
     display: grid;
-    grid-template-rows: 29px auto 56px;
+    grid-template-rows: 39px auto 56px;
     overflow: auto;
 
     /* sizing */
@@ -42,23 +41,22 @@
     font-weight: bold;
     font-size: medium;
     color: rgb(160, 160, 160);
-    padding-bottom: 10px;
+    padding: 10px;
 }
 
 .modal-body {
     font-size: medium;
 
+    padding: 10px;
     /* separating lines */
     /* bottom */
     border-bottom-style: solid;
     border-bottom-color: rgb(233, 233, 233);
     border-bottom-width: 1px;
-    padding-bottom: 10px;
     /* top */
     border-top-style: solid;
     border-top-color: rgb(233, 233, 233);
     border-top-width: 1px;
-    padding-top: 10px;
 }
 
 .modal-footer {
@@ -66,7 +64,7 @@
     text-align: right;
 
     /* white separator to content and bottom */
-    padding-top: 10px;
+    padding: 10px;
 }
 
 input.button {
@@ -92,5 +90,5 @@ input.confirm {
     color: rgb(54, 51, 255);
     background-color: white;
     border-color: rgb(54, 51, 255);
-    margin-right: 15px;
+    margin-right: 10px;
 }
