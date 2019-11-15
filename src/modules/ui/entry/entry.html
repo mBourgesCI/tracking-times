@@ -2,53 +2,47 @@
     ><div class="content">
         <div class="container container-start-date bg-color-grey1">
             <span class="start-date">{displayState.startdate}</span>
-            <input
-                class="start-date"
-                type="date"
-                value={displayState.startdate}
-                onchange={handleChangeStartDate}
-            />
         </div>
         <div class="container container-start-time bg-color-grey2">
             <span class="start-time">{displayState.starttime}</span>
-            <input
-                step="900"
-                class="start-time"
-                type="time"
-                value={displayState.starttime}
-                onchange={handleChangeStartTime}
-            />
         </div>
         <div class="container container-end-date bg-color-grey1">
             <span class="end-date">{displayState.enddate}</span>
-            <input
-                class="end-date"
-                type="date"
-                value={displayState.enddate}
-                onchange={handleChangeEndDate}
-            />
         </div>
         <div class="container container-end-time bg-color-grey2">
             <span class="end-time">{displayState.endtime}</span>
-            <input
-                class="end-time"
-                step="900"
-                type="time"
-                value={displayState.endtime}
-                onchange={handleChangeEndTime}
-            />
         </div>
         <div class="container container-diff bg-color-grey3">
             <span class="diff">{difference}</span>
         </div>
         <div class="container container-comment bg-color-grey4">
             <span class="comment">{displayState.comment}</span>
+        </div>
+        <div class="container container-button-bar">
             <input
-                class="comment"
-                type="text"
-                value={displayState.comment}
-                onchange={handleChangeComment}
+                class="button edit"
+                type="button"
+                value={label.button.edit}
+                onclick={handleButtonClickEdit}
             />
         </div>
     </div>
+    <ui-modal
+        class="modal-edit"
+        onconfirm={onModalConfirm}
+        title={label.modal.title}
+    >
+        <div class="container-modal">
+            <label class="start-date">{label.input.startdate}</label>
+            <input class="start-date" type="date" />
+            <label class="start-time">{label.input.starttime}</label>
+            <input class="start-time" step="900" type="time" />
+            <label class="end-date">{label.input.enddate}</label>
+            <input class="end-date" type="date" />
+            <label class="end-time">{label.input.endtime}</label>
+            <input class="end-time" step="900" type="time" />
+            <label class="comment">{label.input.comment}</label>
+            <input class="comment" type="text" />
+        </div>
+    </ui-modal>
 </template>

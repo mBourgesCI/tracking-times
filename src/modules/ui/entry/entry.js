@@ -1,48 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { LightningElement, api, track } from 'lwc';
+import { thisTypeAnnotation } from '@babel/types';
 
 export default class Entry extends LightningElement {
-    @api
-    get jsonInput() {
-        return {};
-    }
-    set jsonInput(jsonString) {
-        var value, comment, startTimeStamp, endTimeStamp;
-
-        if (jsonString !== undefined) {
-            value = JSON.parse(jsonString);
-
-            if (value !== undefined) {
-                if (value.comment !== undefined) {
-                    comment = value.comment;
-                    this.internalState.comment = comment;
-                    this.setDisplayStateComment();
-                } else {
-                    this.internalState.comment = '';
-                    this.setDisplayStateComment();
-                }
-                if (
-                    value.start !== undefined &&
-                    value.start.value !== undefined
-                ) {
-                    startTimeStamp = value.start.value;
-                    this.internalState.startTimeStamp = startTimeStamp;
-                    this.setDisplayStartDate();
-                    this.setDisplayStartTime();
-                }
-                if (value.end !== undefined && value.end.value !== undefined) {
-                    endTimeStamp = value.end.value;
-                    this.internalState.endTimeStamp = endTimeStamp;
-                    this.setDisplayEndDate();
-                    this.setDisplayEndTime();
-                }
-                if (value.id !== undefined) {
-                    this.internalState.entryId = value.id;
-                }
-            }
-        }
-    }
-
     @api
     get version() {
         return this.internalState.version;
@@ -93,6 +53,22 @@ export default class Entry extends LightningElement {
     }
 
     internalState = {};
+
+    label = {
+        modal: {
+            title: 'Entry Details'
+        },
+        button: {
+            edit: 'Edit'
+        },
+        input: {
+            startdate: 'Start date',
+            starttime: 'Start time',
+            enddate: 'End date',
+            endtime: 'End time',
+            comment: 'Comment'
+        }
+    };
 
     @track
     displayState = {};
@@ -149,6 +125,10 @@ export default class Entry extends LightningElement {
         return difference / (1000 * 60 * 60);
     }
 
+    handleButtonClickEdit() {
+        this.showEditModal();
+    }
+
     handleChangeStartDate(internalEvent) {
         this.processNewStartDate(internalEvent.target.value);
     }
@@ -183,7 +163,6 @@ export default class Entry extends LightningElement {
                 value: this.internalState.startTimeStamp,
                 name: 'start'
             };
-            this.createAndFireChangeEvent(param);
         }
     }
 
@@ -205,7 +184,6 @@ export default class Entry extends LightningElement {
             value: this.internalState.startTimeStamp,
             name: 'start'
         };
-        this.createAndFireChangeEvent(param);
     }
 
     processNewEndDate(newEndDateISOString) {
@@ -224,7 +202,6 @@ export default class Entry extends LightningElement {
                 value: this.internalState.endTimeStamp,
                 name: 'end'
             };
-            this.createAndFireChangeEvent(param);
         }
     }
 
@@ -246,7 +223,6 @@ export default class Entry extends LightningElement {
             value: this.internalState.endTimeStamp,
             name: 'end'
         };
-        this.createAndFireChangeEvent(param);
     }
 
     processNewComment(newCommentString) {
@@ -258,18 +234,192 @@ export default class Entry extends LightningElement {
             value: newCommentString,
             name: 'comment'
         };
-        this.createAndFireChangeEvent(param);
     }
 
-    createAndFireChangeEvent(detailParam) {
+    createAndFireChangeEvent() {
         var externalEvent;
-        detailParam.entryId = this.internalState.entryId;
         externalEvent = new CustomEvent('change', {
             bubbles: true,
             composed: true,
-            detail: detailParam
+            detail: {
+                start: this.start,
+                end: this.end,
+                comment: this.comment
+            }
         });
         this.dispatchEvent(externalEvent);
+    }
+
+    getValuesForInputs() {
+        var result, start, end;
+        result = {};
+
+        if (this.isStartDefined()) {
+            start = new Date(this.internalState.startTimeStamp);
+            result.startdate = start.toISOString().split('T')[0];
+            result.starttime = start.toLocaleTimeString().substr(0, 5);
+        }
+        if (this.isEndDefined()) {
+            end = new Date(this.internalState.endTimeStamp);
+            result.enddate = end.toISOString().split('T')[0];
+            result.endtime = end.toLocaleTimeString().substr(0, 5);
+        }
+        result.comment = this.internalState.comment;
+        return result;
+    }
+
+    setStateValues(param) {
+        this.internalState.startTimeStamp = param.start;
+        this.internalState.endTimeStamp = param.end;
+        this.internalState.comment = param.comment;
+    }
+
+    //----------------------
+    // Output handlers
+    //----------------------
+
+    fillOutputs() {
+        var values;
+        values = this.getValuesForInputs();
+        this.displayState.startdate = values.startdate;
+        this.displayState.starttime = values.starttime;
+        this.displayState.enddate = values.enddate;
+        this.displayState.endtime = values.endtime;
+        this.displayState.comment = values.comment;
+    }
+
+    writeValuesToInternalState(values) {
+        var start, end, comment;
+        start = new Date(values.startDateStr + 'T' + values.startTimeStr);
+        end = new Date(values.endDateStr + 'T' + values.endTimeStr);
+        comment = values.comment;
+        this.internalState.startTimeStamp = start.getTime();
+        this.internalState.endTimeStamp = end.getTime();
+        this.internalState.comment = comment;
+    }
+
+    //----------------------
+    // Modal handlers
+    //----------------------
+
+    fillModalInputs() {
+        var values;
+        values = this.getValuesForInputs();
+        this.getInputStartDate().value = values.startdate;
+        this.getInputStartTime().value = values.starttime;
+        this.getInputEndDate().value = values.enddate;
+        this.getInputEndTime().value = values.endtime;
+        this.getInputComment().value = values.comment;
+    }
+
+    readModalInputs() {
+        var values;
+        values = {};
+        values.startDateStr = this.getInputStartDate().value;
+        values.startTimeStr = this.getInputStartTime().value;
+        values.endDateStr = this.getInputEndDate().value;
+        values.endTimeStr = this.getInputEndTime().value;
+        values.comment = this.getInputComment().value;
+        return values;
+    }
+
+    onModalConfirm() {
+        var inputValues;
+        inputValues = this.readModalInputs();
+        this.writeValuesToInternalState(inputValues);
+        this.fillOutputs();
+        this.createAndFireChangeEvent();
+    }
+
+    showEditModal() {
+        this.fillModalInputs();
+        this.getEditModal().show();
+    }
+
+    /**
+     * --------------------
+     * value Checker
+     * --------------------
+     */
+
+    isStartDefined() {
+        if (this.internalState.startTimeStamp === undefined) {
+            return false;
+        }
+        if (this.internalState.startTimeStamp === null) {
+            return false;
+        }
+        if (isNaN(this.internalState.startTimeStamp)) {
+            return false;
+        }
+        if (this.internalState.startTimeStamp === '') {
+            return false;
+        }
+        return true;
+    }
+
+    isEndDefined() {
+        if (this.internalState.endTimeStamp === undefined) {
+            return false;
+        }
+        if (this.internalState.endTimeStamp === null) {
+            return false;
+        }
+        if (isNaN(this.internalState.endTimeStamp)) {
+            return false;
+        }
+        if (this.internalState.endTimeStamp === '') {
+            return false;
+        }
+        return true;
+    }
+
+    //----------------------
+    // Element selectors
+    //----------------------
+
+    getEditModal() {
+        return this.template.querySelector('.modal-edit');
+    }
+
+    getInputStartDate() {
+        return this.template.querySelector('input.start-date');
+    }
+
+    getInputStartTime() {
+        return this.template.querySelector('input.start-time');
+    }
+
+    getInputEndDate() {
+        return this.template.querySelector('input.end-date');
+    }
+
+    getInputEndTime() {
+        return this.template.querySelector('input.end-time');
+    }
+
+    getInputComment() {
+        return this.template.querySelector('input.comment');
+    }
+
+    getSpanStartDate() {
+        return this.template.querySelector('span.start-date');
+    }
+
+    getSpanStartTime() {
+        return this.template.querySelector('span.start-time');
+    }
+
+    getSpanEndDate() {
+        return this.template.querySelector('span.end-date');
+    }
+
+    getSpanEndTime() {
+        return this.template.querySelector('span.end-time');
+    }
+
+    getSpanComment() {
+        return this.template.querySelector('span.comment');
     }
 }
 
@@ -282,24 +432,6 @@ function getNewTimestampByIsoTime(timestamp, isoTimeString) {
 
         newTimeStamp = new Date(timestamp).setHours(hourInt, minuteInt);
     }
-    return newTimeStamp;
-}
-
-function setTimeStringOfIntegerTimeStamp(params) {
-    var timeStampArray, timeStringValue, newTimeStamp;
-
-    // Guardians
-    if (params === undefined) return undefined;
-    if (params.originalTimeStamp === undefined) return undefined;
-    if (params.timeString === undefined) return undefined;
-
-    // Business logic
-    timeStampArray = splitTimeStampIntegerIntoDateAndTime(
-        params.originalTimeStamp
-    );
-    timeStringValue = convertISOTimeToInteger(params.timeString);
-
-    newTimeStamp = timeStampArray.date + timeStringValue;
     return newTimeStamp;
 }
 
