@@ -53,7 +53,7 @@ div.container-comment {
     /* assign to grid area */
     grid-area: comment;
 
-    /* sizing */ 
+    /* sizing */
     max-height: 50px;
     overflow: scroll;
 }
@@ -72,15 +72,16 @@ div.container-modal {
     grid-template-columns: 100%;
 }
 
-div.container-modal > label {
-    color: hsl(0, 0%, 60%);
-    font-size: small;
-}
-
-div.container-modal > input {
+div.container-modal > .modal-input {
     color: hsl(0, 0%, 30%);
     font-family: Arial, Helvetica, sans-serif;
     font-size: medium;
+    resize: none;
+}
+
+div.container-modal > label {
+    color: hsl(0, 0%, 60%);
+    font-size: small;
 }
 
 @media (min-width: 500px) {
