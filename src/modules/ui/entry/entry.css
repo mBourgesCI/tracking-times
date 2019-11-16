@@ -50,7 +50,12 @@ div.container-diff {
 }
 
 div.container-comment {
+    /* assign to grid area */
     grid-area: comment;
+
+    /* sizing */ 
+    max-height: 50px;
+    overflow: scroll;
 }
 
 div.container-button-bar {
