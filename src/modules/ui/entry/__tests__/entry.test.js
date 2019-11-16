@@ -141,6 +141,15 @@ describe('Check for Inputs', () => {
         const element = createElement('ui-entry', { is: Entry });
         document.body.appendChild(element);
 
+        const component = element.shadowRoot.querySelector('textarea.comment');
+
+        expect(component).toBeTruthy();
+    });
+
+    test('comment textarea exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
         const component = element.shadowRoot.querySelector('input.comment');
 
         expect(component).toBeTruthy();
