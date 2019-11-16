@@ -355,7 +355,7 @@ describe('check Update of Outputs on Input change', () => {
         const editButton = element.shadowRoot.querySelector('input.edit');
         editButton.dispatchEvent(new CustomEvent('click'));
 
-        const input = element.shadowRoot.querySelector('input.comment');
+        const input = element.shadowRoot.querySelector('textarea.comment');
         input.value = newInputValue;
         modalContainer.dispatchEvent(new CustomEvent('confirm'));
 
