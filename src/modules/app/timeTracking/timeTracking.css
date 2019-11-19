@@ -18,9 +18,6 @@ div.button-bar {
         'add';
 }
 
-div.button {
-    padding: 5px;
-}
 div.button > input {
     width: 100%;
     margin: auto;
