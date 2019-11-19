@@ -11,6 +11,7 @@ input {
 div.button-bar {
     display: grid;
     grid-auto-columns: auto;
+    gap: 5px;
     grid-template-areas:
         'clear'
         'load'
@@ -59,7 +60,6 @@ a.button-github {
 
 @media (min-width: 500px) {
     div.button-bar {
-        
         grid-template-columns: auto auto;
         grid-template-areas:
             'clear load'
