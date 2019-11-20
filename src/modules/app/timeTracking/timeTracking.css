@@ -16,7 +16,6 @@ input {
 
 div.button-bar {
     display: grid;
-    grid-auto-columns: auto;
     gap: 5px;
     grid-template-areas:
         'clear'
