@@ -6,7 +6,7 @@ body {
 
 div.content {
     display: grid;
-    gap:5px;
+    gap: 5px;
     grid-template-columns: auto;
 }
 
@@ -44,11 +44,6 @@ div.container-load {
 
 div.container-save {
     grid-area: save;
-}
-
-div.container-list {
-    margin-top: 15px;
-    grid-area: list;
 }
 
 div.container-github {
