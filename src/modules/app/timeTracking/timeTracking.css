@@ -4,6 +4,12 @@ body {
     padding: 5px;
 }
 
+div.content {
+    display: grid;
+    gap:5px;
+    grid-template-columns: auto;
+}
+
 input {
     font-size: medium;
 }
