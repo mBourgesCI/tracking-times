@@ -31,25 +31,6 @@ describe('test creation of new entries', () => {
 });
 
 describe('check loading based on version', () => {
-    function getSaveButton(shadowRoot) {
-        return getButton(shadowRoot, '.button-save');
-    }
-
-    function getAddButton(shadowRoot) {
-        return getButton(shadowRoot, '.button-add');
-    }
-
-    function getLoadButton(shadowRoot) {
-        return getButton(shadowRoot, '.button-load');
-    }
-
-    function getButton(shadowRoot, classname) {
-        const resultList = shadowRoot.querySelectorAll(classname);
-        expect(resultList).toBeTruthy();
-        expect(resultList.length).toBe(1);
-        return resultList[0];
-    }
-
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
         while (document.body.firstChild) {
@@ -163,3 +144,26 @@ describe('check buttons', () => {
         document.body.appendChild(element);
     });
 });
+
+function getSaveButton(shadowRoot) {
+    return getButton(shadowRoot, '.button-save');
+}
+
+function getAddButton(shadowRoot) {
+    return getButton(shadowRoot, '.button-add');
+}
+
+function getLoadButton(shadowRoot) {
+    return getButton(shadowRoot, '.button-load');
+}
+
+function getClearButton(shadowRoot) {
+    return getButton(shadowRoot, '.button-clear');
+}
+
+function getButton(shadowRoot, classname) {
+    const resultList = shadowRoot.querySelectorAll(classname);
+    expect(resultList).toBeTruthy();
+    expect(resultList.length).toBe(1);
+    return resultList[0];
+}
