@@ -141,7 +141,6 @@ export default class TimeTracking extends LightningElement {
     createListEntry() {
         const MILISECONDS_PER_MINUTE = 1000 * 60;
         const MILISECONDS_PER_FIFTEEN_MINUTE = MILISECONDS_PER_MINUTE * 15;
-        // eslint-disable-next-line no-unused-vars
         const MILISECONDS_PER_HOUR = MILISECONDS_PER_MINUTE * 60;
         var newEntry, currentTime, newEntryId;
 
@@ -155,7 +154,7 @@ export default class TimeTracking extends LightningElement {
         newEntry = {};
         newEntry.sortnumber = newEntryId;
         newEntry.start = currentTime;
-        newEntry.end = currentTime + 1000 * 60 * 60;
+        newEntry.end = currentTime + MILISECONDS_PER_HOUR;
         newEntry.comment = '';
 
         return newEntry;
