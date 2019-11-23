@@ -140,7 +140,6 @@ export default class TimeTracking extends LightningElement {
 
     createListEntry() {
         const MILISECONDS_PER_MINUTE = 1000 * 60;
-        // eslint-disable-next-line no-unused-vars
         const MILISECONDS_PER_FIFTEEN_MINUTE = MILISECONDS_PER_MINUTE * 15;
         // eslint-disable-next-line no-unused-vars
         const MILISECONDS_PER_HOUR = MILISECONDS_PER_MINUTE * 60;
@@ -150,8 +149,8 @@ export default class TimeTracking extends LightningElement {
         newEntryId = newEntryId === undefined ? 0 : newEntryId;
         currentTime = new Date().getTime();
         currentTime =
-            Math.round(currentTime / MILISECONDS_PER_MINUTE) *
-            MILISECONDS_PER_MINUTE;
+            Math.round(currentTime / MILISECONDS_PER_FIFTEEN_MINUTE) *
+            MILISECONDS_PER_FIFTEEN_MINUTE;
 
         newEntry = {};
         newEntry.sortnumber = newEntryId;
