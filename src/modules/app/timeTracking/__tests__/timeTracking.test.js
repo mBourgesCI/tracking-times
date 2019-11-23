@@ -8,6 +8,7 @@ describe('test core logic', () => {
         while (document.body.firstChild) {
             document.body.removeChild(document.body.firstChild);
         }
+        clearStorage();
     });
 
     test('test entry-container exists', () => {
@@ -36,6 +37,7 @@ describe('check loading based on version', () => {
         while (document.body.firstChild) {
             document.body.removeChild(document.body.firstChild);
         }
+        clearStorage();
     });
 
     test('load data without version', () => {
@@ -146,6 +148,7 @@ describe('check buttons', () => {
         while (document.body.firstChild) {
             document.body.removeChild(document.body.firstChild);
         }
+        clearStorage();
     });
 
     test('Add button exists and adds ui-entries', () => {
@@ -167,6 +170,16 @@ describe('check buttons', () => {
         });
     });
 });
+
+function clearStorage() {
+    const data = {
+        settings: {
+            version: 'v0.3'
+        },
+        entries: []
+    };
+    localStorage.setItem('storage', JSON.stringify(data));   
+}
 
 function getSaveButton(shadowRoot) {
     return getButton(shadowRoot, '.button-save');
