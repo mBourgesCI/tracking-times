@@ -148,16 +148,13 @@ export default class TimeTracking extends LightningElement {
         }
     }
 
-    createListEntry() {
+    createListEntry(entryConfig) {
         var newEntry, currentTime, newEntryId;
 
         newEntryId = this.state.entries.length;
         newEntryId = newEntryId === undefined ? 0 : newEntryId;
         currentTime = new Date().getTime();
-        currentTime =
-            Math.round(currentTime / MILISECONDS_PER_FIFTEEN_MINUTE) *
-            MILISECONDS_PER_FIFTEEN_MINUTE;
-
+        currentTime = this.createNewTimestamp(entryConfig);
         newEntry = {};
         newEntry.sortnumber = newEntryId;
         newEntry.start = currentTime;
@@ -165,6 +162,32 @@ export default class TimeTracking extends LightningElement {
         newEntry.comment = '';
 
         return newEntry;
+    }
+
+    createNewTimestamp(entryConfig) {
+        var currentTime, cuttingType, cuttingAccuracy, method;
+        cuttingType =
+            entryConfig.cuttingType !== undefined
+                ? entryConfig.cuttingType
+                : CUTTING_TYPE_ROUND;
+        cuttingAccuracy =
+            entryConfig.cuttingAccuracy !== undefined
+                ? entryConfig.cuttingAccuracy
+                : MILISECONDS_PER_FIFTEEN_MINUTE;
+
+        // method will be a function
+        if (cuttingType === CUTTING_TYPE_ROUND) {
+            method = Math.round;
+        }
+
+        if (method === undefined) {
+            method = Math.round;
+        }
+
+        currentTime = new Date().getTime();
+        currentTime = method(currentTime / cuttingAccuracy) * cuttingAccuracy;
+
+        return currentTime;
     }
 
     isEmpty() {
