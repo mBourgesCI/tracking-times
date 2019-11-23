@@ -150,7 +150,7 @@ export default class TimeTracking extends LightningElement {
         newEntryId = newEntryId === undefined ? 0 : newEntryId;
         currentTime = new Date().getTime();
         currentTime =
-            Math.floor(currentTime / MILISECONDS_PER_MINUTE) *
+            Math.round(currentTime / MILISECONDS_PER_MINUTE) *
             MILISECONDS_PER_MINUTE;
 
         newEntry = {};
