@@ -156,4 +156,10 @@ describe('check buttons', () => {
             document.body.removeChild(document.body.firstChild);
         }
     });
+
+    test('Add button exists', () => {
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+
+        document.body.appendChild(element);
+    });
 });
