@@ -131,6 +131,16 @@ describe('check loading based on version', () => {
 });
 
 describe('check buttons', () => {
+    beforeEach(() => {
+        const data = {
+            settings: {
+                version: 'v0.3'
+            },
+            entries: []
+        };
+        localStorage.setItem('storage', JSON.stringify(data));
+    });
+
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
         while (document.body.firstChild) {
@@ -138,10 +148,23 @@ describe('check buttons', () => {
         }
     });
 
-    test('Add button exists', () => {
+    test('Add button exists and adds ui-entries', () => {
         const element = createElement('app-timeTracking', { is: TimeTracking });
-
         document.body.appendChild(element);
+
+        const addButton = getAddButton(element.shadowRoot);
+        expect(addButton).toBeTruthy();
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+
+        return Promise.resolve().then(() => {
+            const entries = element.shadowRoot.querySelectorAll('ui-entry');
+
+            expect(entries).toBeTruthy();
+            expect(entries.length).toBeTruthy();
+            expect(entries.length).toBe(3);
+        });
     });
 });
 
