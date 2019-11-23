@@ -1,6 +1,10 @@
 import { LightningElement, track } from 'lwc';
 import { save, load, clear } from 'data/localStorage';
 
+const MILISECONDS_PER_MINUTE = 1000 * 60;
+const MILISECONDS_PER_FIFTEEN_MINUTE = MILISECONDS_PER_MINUTE * 15;
+const MILISECONDS_PER_HOUR = MILISECONDS_PER_MINUTE * 60;
+
 export default class TimeTracking extends LightningElement {
     @track state = {
         label: {
@@ -139,9 +143,6 @@ export default class TimeTracking extends LightningElement {
     }
 
     createListEntry() {
-        const MILISECONDS_PER_MINUTE = 1000 * 60;
-        const MILISECONDS_PER_FIFTEEN_MINUTE = MILISECONDS_PER_MINUTE * 15;
-        const MILISECONDS_PER_HOUR = MILISECONDS_PER_MINUTE * 60;
         var newEntry, currentTime, newEntryId;
 
         newEntryId = this.state.entries.length;
