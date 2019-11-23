@@ -4,6 +4,8 @@ import { save, load, clear } from 'data/localStorage';
 const MILISECONDS_PER_MINUTE = 1000 * 60;
 const MILISECONDS_PER_FIFTEEN_MINUTE = MILISECONDS_PER_MINUTE * 15;
 const MILISECONDS_PER_HOUR = MILISECONDS_PER_MINUTE * 60;
+const CUTTING_TYPE_CEIL = 'ceil';
+const CUTTING_TYPE_FLOOR = 'floor';
 const CUTTING_TYPE_ROUND = 'round';
 
 export default class TimeTracking extends LightningElement {
@@ -166,24 +168,37 @@ export default class TimeTracking extends LightningElement {
 
     createNewTimestamp(entryConfig) {
         var currentTime, cuttingType, cuttingAccuracy, method;
-        cuttingType =
-            entryConfig.cuttingType !== undefined
-                ? entryConfig.cuttingType
-                : CUTTING_TYPE_ROUND;
-        cuttingAccuracy =
-            entryConfig.cuttingAccuracy !== undefined
-                ? entryConfig.cuttingAccuracy
-                : MILISECONDS_PER_FIFTEEN_MINUTE;
 
-        // method will be a function
+        //set default values for cutting typ and accuracy
+        cuttingType = CUTTING_TYPE_ROUND;
+        cuttingAccuracy = MILISECONDS_PER_FIFTEEN_MINUTE;
+
+        if (entryConfig !== undefined) {
+            // set cutting type
+            cuttingType =
+                entryConfig.cuttingType !== undefined
+                    ? entryConfig.cuttingType
+                    : CUTTING_TYPE_ROUND;
+
+            // set cutting accuracy
+            cuttingAccuracy =
+                entryConfig.cuttingAccuracy !== undefined
+                    ? entryConfig.cuttingAccuracy
+                    : MILISECONDS_PER_FIFTEEN_MINUTE;
+        }
+
+        // Select algorithm by cutting type
         if (cuttingType === CUTTING_TYPE_ROUND) {
             method = Math.round;
         }
-
-        if (method === undefined) {
-            method = Math.round;
+        if (cuttingType === CUTTING_TYPE_CEIL) {
+            method = Math.ceil;
+        }
+        if (cuttingType === CUTTING_TYPE_FLOOR) {
+            method = Math.floor;
         }
 
+        // do calculations
         currentTime = new Date().getTime();
         currentTime = method(currentTime / cuttingAccuracy) * cuttingAccuracy;
 
