@@ -4,6 +4,7 @@ import { save, load, clear } from 'data/localStorage';
 const MILISECONDS_PER_MINUTE = 1000 * 60;
 const MILISECONDS_PER_FIFTEEN_MINUTE = MILISECONDS_PER_MINUTE * 15;
 const MILISECONDS_PER_HOUR = MILISECONDS_PER_MINUTE * 60;
+const CUTTING_TYPE_ROUND = 'round';
 
 export default class TimeTracking extends LightningElement {
     @track state = {
@@ -109,8 +110,13 @@ export default class TimeTracking extends LightningElement {
     }
 
     processClickAdd() {
-        var newEntry;
-        newEntry = this.createListEntry();
+        var newEntry, entryConfig;
+        entryConfig = {
+            cuttingType: CUTTING_TYPE_ROUND,
+            cuttingAccuracy: MILISECONDS_PER_FIFTEEN_MINUTE,
+            defaultDuration: MILISECONDS_PER_HOUR
+        };
+        newEntry = this.createListEntry(entryConfig);
         this.state.entries.unshift(newEntry);
     }
 
