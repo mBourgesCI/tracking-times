@@ -197,6 +197,14 @@ describe('check buttons', () => {
             expect(loadedData.entries[2].end).toBeTruthy();
         });
     });
+
+    test('Load button exists', () => {
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        const loadButton = getLoadButton(element.shadowRoot);
+        expect(loadButton).toBeTruthy();
+    });
 });
 
 function clearStorage() {
