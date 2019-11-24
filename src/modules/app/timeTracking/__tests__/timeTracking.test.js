@@ -179,23 +179,28 @@ describe('check buttons', () => {
         const currentStorage = localStorage.getItem('storage');
         expect(currentStorage).toBeTruthy();
         expect(currentStorage).toBe('{}');
-        return Promise.resolve().then(() => {
-
         const saveButton = getSaveButton(element.shadowRoot);
         saveButton.dispatchEvent(new CustomEvent('click'));
 
+        return Promise.resolve().then(() => {
+            const loadedString = localStorage.getItem('storage');
+            const loadedData = JSON.parse(loadedString);
+            expect(loadedData).toBeTruthy();
+            expect(loadedData.settings).toBeTruthy();
+            expect(loadedData.entries).toBeTruthy();
+            expect(loadedData.entries.length).toBe(3);
+            expect(loadedData.entries[0].start).toBeTruthy();
+            expect(loadedData.entries[0].end).toBeTruthy();
+            expect(loadedData.entries[1].start).toBeTruthy();
+            expect(loadedData.entries[1].end).toBeTruthy();
+            expect(loadedData.entries[2].start).toBeTruthy();
+            expect(loadedData.entries[2].end).toBeTruthy();
         });
     });
 });
 
 function clearStorage() {
-    const data = {
-        settings: {
-            version: 'v0.3'
-        },
-        entries: []
-    };
-    localStorage.setItem('storage', JSON.stringify({}));   
+    localStorage.setItem('storage', JSON.stringify({}));
 }
 
 function getSaveButton(shadowRoot) {
