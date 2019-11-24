@@ -205,6 +205,27 @@ describe('check buttons', () => {
         const loadButton = getLoadButton(element.shadowRoot);
         expect(loadButton).toBeTruthy();
     });
+
+    test('Load button clears unsaved entry list', () => {
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+
+        const addButton = getLoadButton(element.shadowRoot);
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+        // adds to entries to list proven by 'add'-tests
+
+        const loadButton = getLoadButton(element.shadowRoot);
+        expect(loadButton).toBeTruthy();
+        loadButton.dispatchEvent(new CustomEvent('click'));
+
+        return Promise.resolve().then(() => {
+            const entries = element.shadowRoot.querySelectorAll('ui-entry');
+            expect(entries).toBeTruthy();
+            expect(entries.length).toBe(0);
+        });
+    });
 });
 
 function clearStorage() {
