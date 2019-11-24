@@ -130,19 +130,15 @@ describe('check loading based on version', () => {
             expect(outputSpans[0].textContent).toBe('1970-01-01');
         });
     });
+
+    test('storage is empty from begin with', () => {
+        const currentStorage = localStorage.getItem('storage');
+        expect(currentStorage).toBeTruthy();
+        expect(currentStorage).toBe('{}');
+    });
 });
 
 describe('check buttons', () => {
-    beforeEach(() => {
-        const data = {
-            settings: {
-                version: 'v0.3'
-            },
-            entries: []
-        };
-        localStorage.setItem('storage', JSON.stringify(data));
-    });
-
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
         while (document.body.firstChild) {
@@ -169,6 +165,27 @@ describe('check buttons', () => {
             expect(entries.length).toBe(3);
         });
     });
+
+    test('Save button exists and saves data to local storage', () => {
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        const addButton = getAddButton(element.shadowRoot);
+        expect(addButton).toBeTruthy();
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+
+        const currentStorage = localStorage.getItem('storage');
+        expect(currentStorage).toBeTruthy();
+        expect(currentStorage).toBe('{}');
+        return Promise.resolve().then(() => {
+
+        const saveButton = getSaveButton(element.shadowRoot);
+        saveButton.dispatchEvent(new CustomEvent('click'));
+
+        });
+    });
 });
 
 function clearStorage() {
@@ -178,7 +195,7 @@ function clearStorage() {
         },
         entries: []
     };
-    localStorage.setItem('storage', JSON.stringify(data));   
+    localStorage.setItem('storage', JSON.stringify({}));   
 }
 
 function getSaveButton(shadowRoot) {
