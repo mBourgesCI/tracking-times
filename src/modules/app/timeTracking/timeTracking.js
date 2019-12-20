@@ -1,6 +1,13 @@
 import { LightningElement, track } from 'lwc';
 import { save, load, clear } from 'data/localStorage';
 
+const MILISECONDS_PER_MINUTE = 1000 * 60;
+const MILISECONDS_PER_FIFTEEN_MINUTE = MILISECONDS_PER_MINUTE * 15;
+const MILISECONDS_PER_HOUR = MILISECONDS_PER_MINUTE * 60;
+const CUTTING_TYPE_CEIL = 'ceil';
+const CUTTING_TYPE_FLOOR = 'floor';
+const CUTTING_TYPE_ROUND = 'round';
+
 export default class TimeTracking extends LightningElement {
     @track state = {
         label: {
@@ -71,16 +78,18 @@ export default class TimeTracking extends LightningElement {
 
     loadLegacyData(loaded) {
         this.state.entries = [];
-        loaded.forEach(loadedEntry => {
-            let entryData = JSON.parse(loadedEntry.data);
-            let tempEntry = {
-                sortnumber: this.state.entries.length,
-                start: entryData.start.value,
-                end: entryData.end.value,
-                comment: entryData.comment
-            };
-            this.state.entries.push(tempEntry);
-        });
+        if (loaded.length !== undefined) {
+            loaded.forEach(loadedEntry => {
+                let entryData = JSON.parse(loadedEntry.data);
+                let tempEntry = {
+                    sortnumber: this.state.entries.length,
+                    start: entryData.start.value,
+                    end: entryData.end.value,
+                    comment: entryData.comment
+                };
+                this.state.entries.push(tempEntry);
+            });
+        }
     }
 
     loadDataV03(loaded) {
@@ -105,8 +114,13 @@ export default class TimeTracking extends LightningElement {
     }
 
     processClickAdd() {
-        var newEntry;
-        newEntry = this.createListEntry();
+        var newEntry, entryConfig;
+        entryConfig = {
+            cuttingType: CUTTING_TYPE_ROUND,
+            cuttingAccuracy: MILISECONDS_PER_FIFTEEN_MINUTE,
+            defaultDuration: MILISECONDS_PER_HOUR
+        };
+        newEntry = this.createListEntry(entryConfig);
         this.state.entries.unshift(newEntry);
     }
 
@@ -138,24 +152,59 @@ export default class TimeTracking extends LightningElement {
         }
     }
 
-    createListEntry() {
-        const MILISECONDS_PER_MINUTE = 1000 * 60;
+    createListEntry(entryConfig) {
         var newEntry, currentTime, newEntryId;
 
         newEntryId = this.state.entries.length;
         newEntryId = newEntryId === undefined ? 0 : newEntryId;
         currentTime = new Date().getTime();
-        currentTime =
-            Math.floor(currentTime / MILISECONDS_PER_MINUTE) *
-            MILISECONDS_PER_MINUTE;
-
+        currentTime = this.createNewTimestamp(entryConfig);
         newEntry = {};
         newEntry.sortnumber = newEntryId;
         newEntry.start = currentTime;
-        newEntry.end = currentTime + 1000 * 60 * 60;
+        newEntry.end = currentTime + MILISECONDS_PER_HOUR;
         newEntry.comment = '';
 
         return newEntry;
+    }
+
+    createNewTimestamp(entryConfig) {
+        var currentTime, cuttingType, cuttingAccuracy, method;
+
+        //set default values for cutting typ and accuracy
+        cuttingType = CUTTING_TYPE_ROUND;
+        cuttingAccuracy = MILISECONDS_PER_FIFTEEN_MINUTE;
+
+        if (entryConfig !== undefined) {
+            // set cutting type
+            cuttingType =
+                entryConfig.cuttingType !== undefined
+                    ? entryConfig.cuttingType
+                    : CUTTING_TYPE_ROUND;
+
+            // set cutting accuracy
+            cuttingAccuracy =
+                entryConfig.cuttingAccuracy !== undefined
+                    ? entryConfig.cuttingAccuracy
+                    : MILISECONDS_PER_FIFTEEN_MINUTE;
+        }
+
+        // Select algorithm by cutting type
+        if (cuttingType === CUTTING_TYPE_ROUND) {
+            method = Math.round;
+        }
+        if (cuttingType === CUTTING_TYPE_CEIL) {
+            method = Math.ceil;
+        }
+        if (cuttingType === CUTTING_TYPE_FLOOR) {
+            method = Math.floor;
+        }
+
+        // do calculations
+        currentTime = new Date().getTime();
+        currentTime = method(currentTime / cuttingAccuracy) * cuttingAccuracy;
+
+        return currentTime;
     }
 
     isEmpty() {

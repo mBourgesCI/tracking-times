@@ -4,13 +4,19 @@ body {
     padding: 5px;
 }
 
+div.content {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: auto;
+}
+
 input {
     font-size: medium;
 }
 
 div.button-bar {
     display: grid;
-    grid-auto-columns: 100%;
+    gap: 5px;
     grid-template-areas:
         'clear'
         'load'
@@ -18,9 +24,6 @@ div.button-bar {
         'add';
 }
 
-div.button {
-    padding: 5px;
-}
 div.button > input {
     width: 100%;
     margin: auto;
@@ -42,11 +45,6 @@ div.container-save {
     grid-area: save;
 }
 
-div.container-list {
-    margin-top: 15px;
-    grid-area: list;
-}
-
 div.container-github {
     background-color: lightslategray;
     border-radius: 7px;
@@ -62,7 +60,7 @@ a.button-github {
 
 @media (min-width: 500px) {
     div.button-bar {
-        grid-auto-columns: 50%;
+        grid-template-columns: auto auto;
         grid-template-areas:
             'clear load'
             'add save';
@@ -71,7 +69,7 @@ a.button-github {
 
 @media (min-width: 1000px) {
     div.button-bar {
-        grid-auto-columns: 25%;
+        grid-template-columns: auto auto auto auto;
         grid-template-areas: 'clear load add save';
     }
 }

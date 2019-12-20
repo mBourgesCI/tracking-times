@@ -137,11 +137,11 @@ describe('Check for Inputs', () => {
         expect(component).toBeTruthy();
     });
 
-    test('comment input exists', () => {
+    test('comment textarea exists', () => {
         const element = createElement('ui-entry', { is: Entry });
         document.body.appendChild(element);
 
-        const component = element.shadowRoot.querySelector('input.comment');
+        const component = element.shadowRoot.querySelector('textarea.comment');
 
         expect(component).toBeTruthy();
     });
@@ -355,7 +355,7 @@ describe('check Update of Outputs on Input change', () => {
         const editButton = element.shadowRoot.querySelector('input.edit');
         editButton.dispatchEvent(new CustomEvent('click'));
 
-        const input = element.shadowRoot.querySelector('input.comment');
+        const input = element.shadowRoot.querySelector('textarea.comment');
         input.value = newInputValue;
         modalContainer.dispatchEvent(new CustomEvent('confirm'));
 
