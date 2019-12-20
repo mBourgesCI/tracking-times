@@ -190,7 +190,6 @@ describe('check buttons', () => {
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
 
-
         const addButton = getLoadButton(element.shadowRoot);
         addButton.dispatchEvent(new CustomEvent('click'));
         addButton.dispatchEvent(new CustomEvent('click'));
@@ -204,6 +203,35 @@ describe('check buttons', () => {
             const entries = element.shadowRoot.querySelectorAll('ui-entry');
             expect(entries).toBeTruthy();
             expect(entries.length).toBe(0);
+        });
+    });
+
+    test('Load button reloads from last saved state', () => {
+        setVersion3DummyData();
+
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        const addButton = getAddButton(element.shadowRoot);
+        // adds to entries to list proven by 'add'-tests
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+
+        return Promise.resolve().then(() => {
+            const entriesBeforeReload = element.shadowRoot.querySelectorAll(
+                'ui-entry'
+            );
+            expect(entriesBeforeReload.length).toBe(4);
+
+            //click load button to return to saved state
+            const loadButton = getLoadButton(element.shadowRoot);
+            loadButton.dispatchEvent(new CustomEvent('click'));
+            return Promise.resolve().then(() => {
+                const entriesAfterReload = element.shadowRoot.querySelectorAll(
+                    'ui-entry'
+                );
+                expect(entriesAfterReload.length).toBe(2);
+            });
         });
     });
 });
