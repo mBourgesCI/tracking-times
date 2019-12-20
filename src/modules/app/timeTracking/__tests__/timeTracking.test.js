@@ -62,8 +62,8 @@ describe('check loading based on version', () => {
 
             // penetrate the component boundary
             //
-            // not a best practice but necessary for
-            // make sure nothing breakes on a fast way
+            // not a best practice but necessary/fast for
+            // make sure nothing breakes
 
             const outputSpans = entries[0].shadowRoot.querySelectorAll('span');
             expect(outputSpans).toBeTruthy();
@@ -90,27 +90,7 @@ describe('check loading based on version', () => {
     });
 
     test('load data of version 0.3', () => {
-        const data = {
-            settings: {
-                version: 'v0.3'
-            },
-            entries: [
-                {
-                    sortnumber: 0,
-                    comment: 'entry1',
-                    start: 0,
-                    end: 1000
-                },
-                {
-                    sortnumber: 1,
-                    comment: 'entry2',
-                    start: 0,
-                    end: 1800000
-                }
-            ]
-        };
-
-        localStorage.setItem('storage', JSON.stringify(data));
+        setVersion3DummyData();
 
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
@@ -230,6 +210,30 @@ describe('check buttons', () => {
 
 function clearStorage() {
     localStorage.setItem('storage', JSON.stringify({}));
+}
+
+function setVersion3DummyData() {
+    const data = {
+        settings: {
+            version: 'v0.3'
+        },
+        entries: [
+            {
+                sortnumber: 0,
+                comment: 'entry1',
+                start: 0,
+                end: 1000
+            },
+            {
+                sortnumber: 1,
+                comment: 'entry2',
+                start: 0,
+                end: 1800000
+            }
+        ]
+    };
+
+    localStorage.setItem('storage', JSON.stringify(data));
 }
 
 function getSaveButton(shadowRoot) {
