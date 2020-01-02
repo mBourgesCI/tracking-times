@@ -252,10 +252,16 @@ describe('check buttons', () => {
 
         //wait for confirm-click to be processed
         return Promise.resolve().then(() => {
+            // check entry list
             const entriesAfterClearing = element.shadowRoot.querySelectorAll(
                 'ui-entry'
             );
             expect(entriesAfterClearing.length).toBe(0);
+
+            // check storage
+            let storageStr = localStorage.getItem('storage');
+            // the whole 'storage key got removed'
+            expect(storageStr).toBe(null);
         });
     });
 });
