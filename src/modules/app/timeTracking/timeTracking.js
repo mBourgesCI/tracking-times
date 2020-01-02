@@ -220,6 +220,10 @@ export default class TimeTracking extends LightningElement {
         return false;
     }
 
+    showClearModal() {
+        this.getClearModal().show();
+    }
+
     //----------------------
     // Element selectors
     //----------------------
