@@ -59,6 +59,10 @@
             </template>
         </div>
     </div>
-    <ui-modal class="modal-clear" title={state.label.modal.clear.title}>
+    <ui-modal
+        class="modal-clear"
+        onconfirm={handleClickClearConfirm}
+        title={state.label.modal.clear.title}
+    >
     </ui-modal>
 </template>
