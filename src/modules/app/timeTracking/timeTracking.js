@@ -219,4 +219,12 @@ export default class TimeTracking extends LightningElement {
         if (this.state.entries.length === 0) return true;
         return false;
     }
+
+    //----------------------
+    // Element selectors
+    //----------------------
+
+    getClearModal() {
+        return this.template.querySelector('.modal-clear');
+    }
 }
