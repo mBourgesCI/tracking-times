@@ -16,6 +16,12 @@ export default class TimeTracking extends LightningElement {
                 load: 'Load',
                 clear: 'Clear',
                 add: 'Add'
+            },
+            modal: {
+                clear: {
+                    title: 'Clear',
+                    body: 'Clear all entries?'
+                }
             }
         }
     };
