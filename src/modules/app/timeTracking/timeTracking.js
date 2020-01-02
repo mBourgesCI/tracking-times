@@ -16,6 +16,12 @@ export default class TimeTracking extends LightningElement {
                 load: 'Load',
                 clear: 'Clear',
                 add: 'Add'
+            },
+            modal: {
+                clear: {
+                    title: 'Clear',
+                    body: 'Clear all entries?'
+                }
             }
         }
     };
@@ -38,15 +44,11 @@ export default class TimeTracking extends LightningElement {
     }
 
     handleClickClear() {
-        this.clearData();
+        this.showClearModal();
     }
 
-    clearData() {
-        // eslint-disable-next-line no-unused-vars
-        var clearConfirmation = this.fireClearDataConfirmation();
-        if (clearConfirmation) {
-            this.processClearData();
-        }
+    handleClickClearConfirm() {
+        this.processClearData();
     }
 
     saveData() {
@@ -212,5 +214,17 @@ export default class TimeTracking extends LightningElement {
         if (this.state.entries === null) return true;
         if (this.state.entries.length === 0) return true;
         return false;
+    }
+
+    showClearModal() {
+        this.getClearModal().show();
+    }
+
+    //----------------------
+    // Element selectors
+    //----------------------
+
+    getClearModal() {
+        return this.template.querySelector('.modal-clear');
     }
 }

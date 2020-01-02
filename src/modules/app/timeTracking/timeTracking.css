@@ -52,6 +52,11 @@ div.container-github {
     text-align: center;
 }
 
+div.modal-clear-body {
+    height: 100%;
+    text-align: center;
+}
+
 a.button-github {
     margin: auto;
     color: white;

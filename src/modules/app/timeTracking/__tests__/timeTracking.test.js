@@ -235,9 +235,7 @@ describe('check buttons', () => {
         });
     });
 
-    // This test won't work as currently clearing triggers an alert.
-    // Alerts can't be fired in the Jest test DOM and reslut in an error
-    test('Clear button resets list and storage.', () => {
+    test('confirm of the clear modal resets list and storage.', () => {
         setVersion3DummyData();
 
         const element = createElement('app-timeTracking', { is: TimeTracking });
@@ -248,14 +246,22 @@ describe('check buttons', () => {
         );
         expect(entriesBeforeClearing.length).toBe(2);
 
-        //click clear button
-        const clearButton = getClearButton(element.shadowRoot);
-        //clearButton.dispatchEvent(new CustomEvent('click'));
+        const clearingModal = element.shadowRoot.querySelector('.modal-clear');
 
-        //wait for clear-click to be processed
+        clearingModal.dispatchEvent(new CustomEvent('confirm'));
+
+        //wait for confirm-click to be processed
         return Promise.resolve().then(() => {
-            //const entriesAfterClearing = element.shadowRoot.querySelectorAll('ui-entry');
-            //expect(entriesAfterClearing.length).toBe(0);
+            // check entry list
+            const entriesAfterClearing = element.shadowRoot.querySelectorAll(
+                'ui-entry'
+            );
+            expect(entriesAfterClearing.length).toBe(0);
+
+            // check storage
+            let storageStr = localStorage.getItem('storage');
+            // the whole 'storage key got removed'
+            expect(storageStr).toBe(null);
         });
     });
 });
