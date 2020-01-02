@@ -44,7 +44,8 @@ export default class TimeTracking extends LightningElement {
     }
 
     handleClickClear() {
-        this.clearData();
+        this.showClearModal();
+        //this.clearData();
     }
 
     clearData() {
