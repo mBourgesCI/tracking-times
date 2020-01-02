@@ -48,6 +48,10 @@ export default class TimeTracking extends LightningElement {
         //this.clearData();
     }
 
+    handleClickClearConfirm() {
+        this.processClearData();
+    }
+
     clearData() {
         // eslint-disable-next-line no-unused-vars
         var clearConfirmation = this.fireClearDataConfirmation();
