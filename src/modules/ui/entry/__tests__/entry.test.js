@@ -474,5 +474,8 @@ describe('check single entry delete', () => {
             'input.button-delete'
         );
         expect(deleteButton).toBeTruthy();
+
+        // click delete button
+        deleteButton.dispatchEvent(new CustomEvent('click'));
     });
 });
