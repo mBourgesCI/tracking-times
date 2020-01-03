@@ -446,3 +446,5 @@ describe('check events on changed values', () => {
         });
     });
 });
+
+describe('check single entry delete', () => {});
