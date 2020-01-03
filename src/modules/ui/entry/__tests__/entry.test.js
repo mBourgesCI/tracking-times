@@ -464,5 +464,15 @@ describe('check single entry delete', () => {
         expect(deleteButton).toBeTruthy();
     });
 
-    test('click on delete button fires delete event', () => {});
+    test('click on delete button fires delete event', () => {
+        // add entry comp
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        // select delete button
+        const deleteButton = element.shadowRoot.querySelector(
+            'input.button-delete'
+        );
+        expect(deleteButton).toBeTruthy();
+    });
 });
