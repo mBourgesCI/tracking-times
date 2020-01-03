@@ -130,7 +130,9 @@ export default class Entry extends LightningElement {
         this.showEditModal();
     }
 
-    handleButtonClickDelete() {}
+    handleButtonClickDelete() {
+        this.dispatchEvent(new CustomEvent('delete'));
+    }
 
     handleChangeStartDate(internalEvent) {
         this.processNewStartDate(internalEvent.target.value);
