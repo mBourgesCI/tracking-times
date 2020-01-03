@@ -479,5 +479,8 @@ describe('check single entry delete', () => {
 
         // click delete button
         deleteButton.dispatchEvent(new CustomEvent('click'));
+
+        // check for event of type 'delete'
+        return Promise.resolve().then(() => {});
     });
 });
