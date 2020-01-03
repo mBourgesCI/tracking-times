@@ -59,7 +59,8 @@ export default class Entry extends LightningElement {
             title: 'Entry Details'
         },
         button: {
-            edit: 'Edit'
+            edit: 'Edit',
+            delete: 'Delete'
         },
         input: {
             startdate: 'Start date',
@@ -127,6 +128,10 @@ export default class Entry extends LightningElement {
 
     handleButtonClickEdit() {
         this.showEditModal();
+    }
+
+    handleButtonClickDelete() {
+        this.processDelete();
     }
 
     handleChangeStartDate(internalEvent) {
@@ -234,6 +239,10 @@ export default class Entry extends LightningElement {
             value: newCommentString,
             name: 'comment'
         };
+    }
+
+    processDelete() {
+        this.dispatchEvent(new CustomEvent('delete'));
     }
 
     createAndFireChangeEvent() {
