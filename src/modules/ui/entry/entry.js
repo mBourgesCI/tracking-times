@@ -59,7 +59,8 @@ export default class Entry extends LightningElement {
             title: 'Entry Details'
         },
         button: {
-            edit: 'Edit'
+            edit: 'Edit',
+            delete: 'Delete'
         },
         input: {
             startdate: 'Start date',
