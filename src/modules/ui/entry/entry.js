@@ -131,7 +131,7 @@ export default class Entry extends LightningElement {
     }
 
     handleButtonClickDelete() {
-        this.dispatchEvent(new CustomEvent('delete'));
+        this.processDelete();
     }
 
     handleChangeStartDate(internalEvent) {
@@ -239,6 +239,10 @@ export default class Entry extends LightningElement {
             value: newCommentString,
             name: 'comment'
         };
+    }
+
+    processDelete() {
+        this.dispatchEvent(new CustomEvent('delete'));
     }
 
     createAndFireChangeEvent() {
