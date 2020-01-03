@@ -465,8 +465,10 @@ describe('check single entry delete', () => {
     });
 
     test('click on delete button fires delete event', () => {
+        var handler = jest.fn();
         // add entry comp
         const element = createElement('ui-entry', { is: Entry });
+        element.addEventListener('delete', handler);
         document.body.appendChild(element);
 
         // select delete button
