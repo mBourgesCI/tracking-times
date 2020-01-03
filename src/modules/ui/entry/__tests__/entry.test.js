@@ -451,5 +451,10 @@ describe('check single entry delete', () => {
     test('delete button exists', () => {
         const element = createElement('ui-entry', { is: Entry });
         document.body.appendChild(element);
+
+        const deleteButton = element.shadowRoot.querySelector(
+            'input.button-delete'
+        );
+        expect(deleteButton).toBeTruthy();
     });
 });
