@@ -448,5 +448,8 @@ describe('check events on changed values', () => {
 });
 
 describe('check single entry delete', () => {
-    test('delete button exists', () => {});
+    test('delete button exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+    });
 });
