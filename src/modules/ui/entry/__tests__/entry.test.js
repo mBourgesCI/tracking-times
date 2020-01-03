@@ -463,4 +463,6 @@ describe('check single entry delete', () => {
         );
         expect(deleteButton).toBeTruthy();
     });
+
+    test('click on delete button fires delete event', () => {});
 });
