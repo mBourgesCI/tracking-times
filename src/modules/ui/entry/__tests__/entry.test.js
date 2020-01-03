@@ -447,4 +447,6 @@ describe('check events on changed values', () => {
     });
 });
 
-describe('check single entry delete', () => {});
+describe('check single entry delete', () => {
+    test('delete button exists', () => {});
+});
