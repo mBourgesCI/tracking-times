@@ -481,6 +481,8 @@ describe('check single entry delete', () => {
         deleteButton.dispatchEvent(new CustomEvent('click'));
 
         // check for event of type 'delete'
-        return Promise.resolve().then(() => {});
+        return Promise.resolve().then(() => {
+            expect(handler).toHaveBeenCalled();
+        });
     });
 });
