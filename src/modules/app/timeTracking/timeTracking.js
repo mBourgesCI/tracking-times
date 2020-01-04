@@ -51,8 +51,20 @@ export default class TimeTracking extends LightningElement {
         this.processClearData();
     }
 
-    // eslint-disable-next-line no-unused-vars
-    handleEventDelete(event) {}
+    handleEventDelete(event) {
+        // eslint-disable-next-line no-unused-vars
+        var itemSortNumber, entryIndex;
+
+        // get Index of entry
+        itemSortNumber = event.target.getAttribute('data-index');
+        itemSortNumber = parseInt(itemSortNumber, 10);
+        entryIndex = this.state.entries.length - itemSortNumber - 1;
+
+        // delete entry
+        this.state.entries.splice(entryIndex, 1);
+
+        // rewrite sort numbers
+    }
 
     saveData() {
         var data = {
