@@ -51,6 +51,9 @@ export default class TimeTracking extends LightningElement {
         this.processClearData();
     }
 
+    // eslint-disable-next-line no-unused-vars
+    handleEventDelete(event) {}
+
     saveData() {
         var data = {
             settings: {
