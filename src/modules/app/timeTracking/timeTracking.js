@@ -75,7 +75,7 @@ export default class TimeTracking extends LightningElement {
     saveData() {
         var data = {
             settings: {
-                version: 'v0.3'
+                version: 'v0.4'
             },
             entries: this.state.entries
         };
@@ -94,6 +94,9 @@ export default class TimeTracking extends LightningElement {
             if (loaded.settings !== undefined) {
                 if (loaded.settings.version === 'v0.3') {
                     this.loadDataV03(loaded);
+                }
+                if (loaded.settings.version === 'v0.4') {
+                    this.loadDataV04(loaded);
                 }
             }
         }
@@ -125,6 +128,11 @@ export default class TimeTracking extends LightningElement {
             loadedEntry.itemId = loadedEntry.start + itemCounter;
             itemCounter++;
         });
+    }
+
+    loadDataV04(loaded) {
+        this.state.version = loaded.settings.version;
+        this.state.entries = loaded.entries;
     }
 
     handleChangeEntry(event) {
