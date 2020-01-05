@@ -198,7 +198,9 @@ export default class TimeTracking extends LightningElement {
         currentTime = new Date().getTime();
         approximatedTime = this.createNewTimestamp(entryConfig);
         newEntry = {};
-        newEntry.itemId = currentTime;
+        // tests add all entries in the very same millisecond which causes key-values to not unique
+        // => to tackle the we add as many milliseconds as there are entries in the entry list
+        newEntry.itemId = currentTime + this.state.entries.length;
         newEntry.sortnumber = newEntryId;
         newEntry.start = approximatedTime;
         newEntry.end = approximatedTime + MILISECONDS_PER_HOUR;
