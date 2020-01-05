@@ -294,6 +294,32 @@ function setVersion3DummyData() {
     localStorage.setItem('storage', JSON.stringify(data));
 }
 
+function setVersion4DummyData() {
+    const data = {
+        settings: {
+            version: 'v0.4'
+        },
+        entries: [
+            {
+                itemId: 0,
+                sortnumber: 0,
+                comment: 'entry1',
+                start: 0,
+                end: 1000
+            },
+            {
+                itemId: 1,
+                sortnumber: 1,
+                comment: 'entry2',
+                start: 50,
+                end: 1800000
+            }
+        ]
+    };
+
+    localStorage.setItem('storage', JSON.stringify(data));
+}
+
 function getSaveButton(shadowRoot) {
     return getButton(shadowRoot, '.button-save');
 }
