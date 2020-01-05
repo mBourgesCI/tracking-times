@@ -207,7 +207,7 @@ describe('check buttons', () => {
     });
 
     test('Load button reloads from last saved state', () => {
-        setVersion3DummyData();
+        setVersion4DummyData();
 
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
@@ -236,7 +236,7 @@ describe('check buttons', () => {
     });
 
     test('confirm of the clear modal resets list and storage.', () => {
-        setVersion3DummyData();
+        setVersion4DummyData();
 
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
