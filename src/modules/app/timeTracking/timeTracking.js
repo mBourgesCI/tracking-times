@@ -191,16 +191,17 @@ export default class TimeTracking extends LightningElement {
     }
 
     createListEntry(entryConfig) {
-        var newEntry, currentTime, newEntryId;
+        var newEntry, currentTime, approximatedTime, newEntryId;
 
         newEntryId = this.state.entries.length;
         newEntryId = newEntryId === undefined ? 0 : newEntryId;
         currentTime = new Date().getTime();
-        currentTime = this.createNewTimestamp(entryConfig);
+        approximatedTime = this.createNewTimestamp(entryConfig);
         newEntry = {};
+        newEntry.itemId = currentTime;
         newEntry.sortnumber = newEntryId;
-        newEntry.start = currentTime;
-        newEntry.end = currentTime + MILISECONDS_PER_HOUR;
+        newEntry.start = approximatedTime;
+        newEntry.end = approximatedTime + MILISECONDS_PER_HOUR;
         newEntry.comment = '';
 
         return newEntry;
