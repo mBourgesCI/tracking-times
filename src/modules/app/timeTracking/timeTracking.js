@@ -106,6 +106,7 @@ export default class TimeTracking extends LightningElement {
                 let entryData = JSON.parse(loadedEntry.data);
                 let tempEntry = {
                     sortnumber: this.state.entries.length,
+                    itemId: entryData.start.value + this.state.entries.length,
                     start: entryData.start.value,
                     end: entryData.end.value,
                     comment: entryData.comment
@@ -116,8 +117,14 @@ export default class TimeTracking extends LightningElement {
     }
 
     loadDataV03(loaded) {
+        var itemCounter;
+        itemCounter = 0;
         this.state.version = loaded.settings.version;
         this.state.entries = loaded.entries;
+        this.state.entries.forEach(loadedEntry => {
+            loadedEntry.itemId = loadedEntry.start + itemCounter;
+            itemCounter++;
+        });
     }
 
     handleChangeEntry(event) {
