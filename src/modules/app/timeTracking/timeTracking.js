@@ -36,10 +36,6 @@ export default class TimeTracking extends LightningElement {
         this.saveData();
     }
 
-    handleClickLoad() {
-
-    }
-
     handleClickClear() {
         this.showClearModal();
     }
