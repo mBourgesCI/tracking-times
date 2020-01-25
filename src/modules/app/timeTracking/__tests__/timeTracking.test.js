@@ -90,32 +90,6 @@ describe('check loading based on version', () => {
     });
 });
 
-describe('check buttons exist', () => {
-    afterEach(() => {
-        // The jsdom instance is shared across test cases in a single file so reset the DOM
-        while (document.body.firstChild) {
-            document.body.removeChild(document.body.firstChild);
-        }
-        clearStorage();
-    });
-
-    test('Save button exists', () => {
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-
-        const saveButton = getSaveButton(element.shadowRoot);
-        expect(saveButton).toBeTruthy();
-    });
-
-    test('Load button exists', () => {
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-
-        const loadButton = getLoadButton(element.shadowRoot);
-        expect(loadButton).toBeTruthy();
-    });
-});
-
 describe('Add related tests', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -300,97 +274,6 @@ describe('Clear related tests', () => {
     });
 });
 
-describe('check buttons', () => {
-    afterEach(() => {
-        // The jsdom instance is shared across test cases in a single file so reset the DOM
-        while (document.body.firstChild) {
-            document.body.removeChild(document.body.firstChild);
-        }
-        clearStorage();
-    });
-
-    test('Save button exists and saves data to local storage', () => {
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-
-        const addButton = getAddButton(element.shadowRoot);
-        expect(addButton).toBeTruthy();
-        addButton.dispatchEvent(new CustomEvent('click'));
-        addButton.dispatchEvent(new CustomEvent('click'));
-        addButton.dispatchEvent(new CustomEvent('click'));
-
-        const currentStorage = localStorage.getItem('storage');
-        expect(currentStorage).toBeTruthy();
-        expect(currentStorage).toBe('{}');
-        const saveButton = getSaveButton(element.shadowRoot);
-        saveButton.dispatchEvent(new CustomEvent('click'));
-
-        return Promise.resolve().then(() => {
-            const loadedString = localStorage.getItem('storage');
-            const loadedData = JSON.parse(loadedString);
-            expect(loadedData).toBeTruthy();
-            expect(loadedData.settings).toBeTruthy();
-            expect(loadedData.entries).toBeTruthy();
-            expect(loadedData.entries.length).toBe(3);
-            expect(loadedData.entries[0].start).toBeTruthy();
-            expect(loadedData.entries[0].end).toBeTruthy();
-            expect(loadedData.entries[1].start).toBeTruthy();
-            expect(loadedData.entries[1].end).toBeTruthy();
-            expect(loadedData.entries[2].start).toBeTruthy();
-            expect(loadedData.entries[2].end).toBeTruthy();
-        });
-    });
-
-    test('Load button clears unsaved entry list', () => {
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-
-        const addButton = getLoadButton(element.shadowRoot);
-        addButton.dispatchEvent(new CustomEvent('click'));
-        addButton.dispatchEvent(new CustomEvent('click'));
-        // adds to entries to list proven by 'add'-tests
-
-        const loadButton = getLoadButton(element.shadowRoot);
-        expect(loadButton).toBeTruthy();
-        loadButton.dispatchEvent(new CustomEvent('click'));
-
-        return Promise.resolve().then(() => {
-            const entries = element.shadowRoot.querySelectorAll('ui-entry');
-            expect(entries).toBeTruthy();
-            expect(entries.length).toBe(0);
-        });
-    });
-
-    test('Load button reloads from last saved state', () => {
-        setCurrentVersionDummyData();
-
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-
-        const addButton = getAddButton(element.shadowRoot);
-        // adds to entries to list proven by 'add'-tests
-        addButton.dispatchEvent(new CustomEvent('click'));
-        addButton.dispatchEvent(new CustomEvent('click'));
-
-        return Promise.resolve().then(() => {
-            const entriesBeforeReload = element.shadowRoot.querySelectorAll(
-                'ui-entry'
-            );
-            expect(entriesBeforeReload.length).toBe(4);
-
-            //click load button to return to saved state
-            const loadButton = getLoadButton(element.shadowRoot);
-            loadButton.dispatchEvent(new CustomEvent('click'));
-            return Promise.resolve().then(() => {
-                const entriesAfterReload = element.shadowRoot.querySelectorAll(
-                    'ui-entry'
-                );
-                expect(entriesAfterReload.length).toBe(2);
-            });
-        });
-    });
-});
-
 describe('check delete', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -522,16 +405,8 @@ function setVersion4DummyData() {
     localStorage.setItem('storage', JSON.stringify(data));
 }
 
-function getSaveButton(shadowRoot) {
-    return getButton(shadowRoot, '.button-save');
-}
-
 function getAddButton(shadowRoot) {
     return getButton(shadowRoot, '.button-add');
-}
-
-function getLoadButton(shadowRoot) {
-    return getButton(shadowRoot, '.button-load');
 }
 
 function getClearButton(shadowRoot) {
