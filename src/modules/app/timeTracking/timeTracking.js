@@ -52,15 +52,16 @@ export default class TimeTracking extends LightningElement {
     }
 
     handleEventDelete(event) {
-        // eslint-disable-next-line no-unused-vars
-        var itemSortNumber, entryIndex, newlength;
+        var itemSortNumber = event.target.getAttribute('data-index');
+        this.processEntryDelete(itemSortNumber);
+    }
 
-        // get Index of entry
-        itemSortNumber = event.target.getAttribute('data-index');
-        itemSortNumber = parseInt(itemSortNumber, 10);
+    processEntryDelete(itemSortNumber) {
+        let index, entryIndex, newlength;
 
+        index = parseInt(itemSortNumber, 10);
         entryIndex = this.state.entries.findIndex(entry => {
-            return entry.sortnumber === itemSortNumber;
+            return entry.sortnumber === index;
         });
 
         // delete entry
@@ -69,9 +70,9 @@ export default class TimeTracking extends LightningElement {
         // rewrite sort numbers
         newlength = this.state.entries.length;
 
-        for (let index = 0; index < this.state.entries.length; index++) {
-            const element = this.state.entries[index];
-            element.sortnumber = newlength - index;
+        for (let i = 0; i < this.state.entries.length; i++) {
+            const element = this.state.entries[i];
+            element.sortnumber = newlength - i;
         }
     }
 
