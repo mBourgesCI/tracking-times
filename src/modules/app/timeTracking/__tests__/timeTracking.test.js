@@ -307,6 +307,15 @@ describe('check delete', () => {
             // When
             let thirdEntry = entriesOriginal[2];
             thirdEntry.dispatchEvent(new CustomEvent('delete'));
+
+            // Then
+            return Promise.resolve().then(() => {
+                const entriesResult = element.shadowRoot.querySelectorAll(
+                    'ui-entry'
+                );
+                // One Entry was removed
+                expect(entriesResult.length).toBe(3);
+            });
         });
     });
 });
