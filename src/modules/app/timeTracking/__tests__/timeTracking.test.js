@@ -304,6 +304,13 @@ describe('check delete', () => {
             );
             expect(entriesOriginal.length).toBe(4);
 
+            // store itemIds
+            let itemIds = [];
+            for (let index = 0; index < entriesOriginal.length; index++) {
+                const entry = entriesOriginal[index];
+                itemIds.push(entry.getAttribute('data-index'));
+            }
+
             // When
             let thirdEntry = entriesOriginal[2];
             thirdEntry.dispatchEvent(new CustomEvent('delete'));
