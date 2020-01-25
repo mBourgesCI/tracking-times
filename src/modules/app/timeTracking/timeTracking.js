@@ -33,6 +33,7 @@ export default class TimeTracking extends LightningElement {
 
     handleClickAdd() {
         this.processClickAdd();
+        this.saveData();
     }
 
     handleClickSave() {
@@ -54,6 +55,7 @@ export default class TimeTracking extends LightningElement {
     handleEventDelete(event) {
         var itemSortNumber = event.target.getAttribute('data-index');
         this.processEntryDelete(itemSortNumber);
+        this.saveData();
     }
 
     processEntryDelete(itemSortNumber) {
@@ -142,6 +144,7 @@ export default class TimeTracking extends LightningElement {
     handleChangeEntry(event) {
         let index = event.srcElement.getAttribute('data-index');
         this.processEntryChange(index, event.detail);
+        this.saveData();
     }
 
     fireClearDataConfirmation() {
