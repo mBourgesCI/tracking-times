@@ -287,6 +287,21 @@ describe('check delete', () => {
          * 1. third entry is removed.
          * 2. 1st, 2nd, 4th entry remain in list
          */
+
+        // Given
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        const addButton = getAddButton(element.shadowRoot);
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+
+        return Promise.resolve().then(() => {
+            const entries = element.shadowRoot.querySelectorAll('ui-entry');
+            expect(entries.length).toBe(4);
+        });
     });
 });
 
