@@ -21,7 +21,7 @@ describe('test core logic', () => {
         expect(entryListContainer).toBeTruthy();
     });
 });
-
+/*
 describe('test creation of new entries', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -30,7 +30,7 @@ describe('test creation of new entries', () => {
         }
     });
 });
-
+*/
 describe('check loading based on version', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -264,6 +264,10 @@ describe('check buttons', () => {
             expect(storageStr).toBe(null);
         });
     });
+});
+
+describe('check delete', () => {
+    test('check delete', () => {});
 });
 
 function clearStorage() {

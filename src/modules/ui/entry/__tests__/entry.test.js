@@ -482,6 +482,7 @@ describe('check single entry delete', () => {
 
         // check for event of type 'delete'
         return Promise.resolve().then(() => {
+            //asserts the 'delete'-event has been fired
             expect(handler).toHaveBeenCalled();
         });
     });
