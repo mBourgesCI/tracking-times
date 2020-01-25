@@ -287,7 +287,7 @@ describe('check delete', () => {
          * 1. third entry is removed.
          * 2. 1st, 2nd, 4th entry remain in list
          */
-        const indexAttributeName = "data-index";
+        const indexAttributeName = 'data-index';
 
         // Given
         const element = createElement('app-timeTracking', { is: TimeTracking });
@@ -305,16 +305,11 @@ describe('check delete', () => {
             );
             expect(entriesOriginal.length).toBe(4);
 
-            // store itemIds
-            let itemIds = [];
+            // add comment for identifying entries
             for (let index = 0; index < entriesOriginal.length; index++) {
-                const entry = entriesOriginal[index];
-                itemIds.push(entry.getAttribute(indexAttributeName));
+                const entryOriginal = entriesOriginal[index];
+                entryOriginal.comment = 'entry ' + index;
             }
-
-            itemIds.forEach(itemId => {
-                expect(itemId).toBeTruthy();
-            });
 
             // When
             let thirdEntry = entriesOriginal[2];
@@ -329,16 +324,15 @@ describe('check delete', () => {
 
                 // check one Entry was removed
                 expect(entriesResult.length).toBe(3);
-
-                // check entry with 'thirdEntryItemId' is gone
-                expect(entriesResult[0].getAttribute(indexAttributeName)).toBe(
-                    itemIds[0]
+                expect(entriesResult[0].comment).toBe(
+                    entriesOriginal[0].comment
                 );
-                expect(entriesResult[1].getAttribute(indexAttributeName)).toBe(
-                    itemIds[1]
+                expect(entriesResult[1].comment).toBe(
+                    entriesOriginal[1].comment
                 );
-                expect(entriesResult[2].getAttribute(indexAttributeName)).toBe(
-                    itemIds[3]
+                // entriesOriginal[2] is missing now
+                expect(entriesResult[2].comment).toBe(
+                    entriesOriginal[3].comment
                 );
             });
         });
