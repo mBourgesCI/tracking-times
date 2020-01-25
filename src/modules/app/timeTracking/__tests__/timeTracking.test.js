@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { createElement } from 'lwc';
+import { save, load, clear } from 'data/localStorage';
 import TimeTracking from 'app/timeTracking';
 /*
 describe('test core logic', () => {
@@ -120,14 +121,6 @@ describe('check buttons exist', () => {
         clearStorage();
     });
 
-    test('Add button exists', () => {
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-
-        const addButton = getAddButton(element.shadowRoot);
-        expect(addButton).toBeTruthy();
-    });
-
     test('Save button exists', () => {
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
@@ -153,7 +146,7 @@ describe('check buttons exist', () => {
     });
 });
 
-describe('Save is called on every change', () => {
+describe('Add related tests', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
         while (document.body.firstChild) {
@@ -162,28 +155,102 @@ describe('Save is called on every change', () => {
         clearStorage();
     });
 
-    test('Save is called on Add', () => {
+    test('Add button exists', () => {
         /**
          * Given
          * Component is Loaded
          * 
-         * When
-         * Clicking the Add Button
-         * 
          * Then
-         * 1. A new Entry is created
-         * 2. It's immedeatly saved
+         * The Add-button exists
+         *
          */
+
+         //Given
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
+
+        // Then
+        const addButton = getAddButton(element.shadowRoot);
+        expect(addButton).toBeTruthy();
+    });
+
+    test('Add button adds ui-entries', () => {
+        /**
+         * Given
+         * Component is Loaded
+         *
+         * When
+         * Clicking the Add Button three times
+         *
+         * Then
+         * Three new entries are created
+         */
+
+         //Given
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        // When
+        const addButton = getAddButton(element.shadowRoot);
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+
+        return Promise.resolve().then(() => {
+            // Then
+            const entries = element.shadowRoot.querySelectorAll('ui-entry');
+
+            expect(entries).toBeTruthy();
+            expect(entries.length).toBeTruthy();
+            expect(entries.length).toBe(3);
+        });
+    });
+
+    test('Save is called on Add', () => {
+        /**
+         * Given
+         * Component is Loaded
+         *
+         * When
+         * Clicking the Add Button
+         *
+         * Then
+         * The new entry is saved
+         */
+        
+        //Given
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        // When
+        const addButton = getAddButton(element.shadowRoot);
+        addButton.dispatchEvent(new CustomEvent('click'));
+
+        return Promise.resolve().then(() => {
+            // Then
+            expect(localStorage.getItem('storage')).toBeTruthy();
+            let storage = load();
+            expect(storage.entries[0]).toBeTruthy();
+        });
+    });
+});
+
+describe('Save is called on every change', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
     });
 
     test('Save is called on Edit', () => {
+        setCurrentVersionDummyData();
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
     });
 
     test('Save is called on Delete', () => {
+        setCurrentVersionDummyData();
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
     });
@@ -196,25 +263,6 @@ describe('check buttons', () => {
             document.body.removeChild(document.body.firstChild);
         }
         clearStorage();
-    });
-
-    test('Add button exists and adds ui-entries', () => {
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-
-        const addButton = getAddButton(element.shadowRoot);
-        expect(addButton).toBeTruthy();
-        addButton.dispatchEvent(new CustomEvent('click'));
-        addButton.dispatchEvent(new CustomEvent('click'));
-        addButton.dispatchEvent(new CustomEvent('click'));
-
-        return Promise.resolve().then(() => {
-            const entries = element.shadowRoot.querySelectorAll('ui-entry');
-
-            expect(entries).toBeTruthy();
-            expect(entries.length).toBeTruthy();
-            expect(entries.length).toBe(3);
-        });
     });
 
     test('Save button exists and saves data to local storage', () => {
@@ -278,7 +326,7 @@ describe('check buttons', () => {
     });
 
     test('Load button reloads from last saved state', () => {
-        setVersion4DummyData();
+        setCurrentVersionDummyData();
 
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
@@ -307,7 +355,7 @@ describe('check buttons', () => {
     });
 
     test('confirm of the clear modal resets list and storage.', () => {
-        setVersion4DummyData();
+        setCurrentVersionDummyData();
 
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
@@ -412,6 +460,10 @@ describe('check delete', () => {
 
 function clearStorage() {
     localStorage.setItem('storage', JSON.stringify({}));
+}
+
+function setCurrentVersionDummyData() {
+    setVersion4DummyData();
 }
 
 function setVersion3DummyData() {
