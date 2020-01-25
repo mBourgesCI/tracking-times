@@ -287,6 +287,7 @@ describe('check delete', () => {
          * 1. third entry is removed.
          * 2. 1st, 2nd, 4th entry remain in list
          */
+        const indexAttributeName = "data-index";
 
         // Given
         const element = createElement('app-timeTracking', { is: TimeTracking });
@@ -308,7 +309,7 @@ describe('check delete', () => {
             let itemIds = [];
             for (let index = 0; index < entriesOriginal.length; index++) {
                 const entry = entriesOriginal[index];
-                itemIds.push(entry.getAttribute('data-index'));
+                itemIds.push(entry.getAttribute(indexAttributeName));
             }
 
             itemIds.forEach(itemId => {
@@ -330,13 +331,13 @@ describe('check delete', () => {
                 expect(entriesResult.length).toBe(3);
 
                 // check entry with 'thirdEntryItemId' is gone
-                expect(entriesResult[0].getAttribute('data-index')).toBe(
+                expect(entriesResult[0].getAttribute(indexAttributeName)).toBe(
                     itemIds[0]
                 );
-                expect(entriesResult[1].getAttribute('data-index')).toBe(
+                expect(entriesResult[1].getAttribute(indexAttributeName)).toBe(
                     itemIds[1]
                 );
-                expect(entriesResult[2].getAttribute('data-index')).toBe(
+                expect(entriesResult[2].getAttribute(indexAttributeName)).toBe(
                     itemIds[3]
                 );
             });
