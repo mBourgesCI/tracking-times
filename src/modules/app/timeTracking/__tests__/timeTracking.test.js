@@ -118,6 +118,48 @@ describe('check loading based on version', () => {
     });
 });
 
+describe('check buttons exist', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+        clearStorage();
+    });
+
+    test('Add button exists', () => {
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        const addButton = getAddButton(element.shadowRoot);
+        expect(addButton).toBeTruthy();
+    });
+
+    test('Save button exists', () => {
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        const saveButton = getSaveButton(element.shadowRoot);
+        expect(saveButton).toBeTruthy();
+    });
+
+    test('Load button exists', () => {
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        const loadButton = getLoadButton(element.shadowRoot);
+        expect(loadButton).toBeTruthy();
+    });
+
+    test('Clear button exists', () => {
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        const clearButton = getClearButton(element.shadowRoot);
+        expect(clearButton).toBeTruthy();
+    });
+});
+
 describe('check buttons', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
