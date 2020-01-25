@@ -321,11 +321,24 @@ describe('check delete', () => {
 
             // Then
             return Promise.resolve().then(() => {
+                // get list of new entries
                 const entriesResult = element.shadowRoot.querySelectorAll(
                     'ui-entry'
                 );
-                // One Entry was removed
+
+                // check one Entry was removed
                 expect(entriesResult.length).toBe(3);
+
+                // check entry with 'thirdEntryItemId' is gone
+                expect(entriesResult[0].getAttribute('data-index')).toBe(
+                    itemIds[0]
+                );
+                expect(entriesResult[1].getAttribute('data-index')).toBe(
+                    itemIds[1]
+                );
+                expect(entriesResult[2].getAttribute('data-index')).toBe(
+                    itemIds[3]
+                );
             });
         });
     });
