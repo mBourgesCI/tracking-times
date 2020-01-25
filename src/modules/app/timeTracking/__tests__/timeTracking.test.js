@@ -136,14 +136,6 @@ describe('check buttons exist', () => {
         const loadButton = getLoadButton(element.shadowRoot);
         expect(loadButton).toBeTruthy();
     });
-
-    test('Clear button exists', () => {
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-
-        const clearButton = getClearButton(element.shadowRoot);
-        expect(clearButton).toBeTruthy();
-    });
 });
 
 describe('Add related tests', () => {
@@ -159,13 +151,13 @@ describe('Add related tests', () => {
         /**
          * Given
          * Component is Loaded
-         * 
+         *
          * Then
          * The Add-button exists
          *
          */
 
-         //Given
+        // Given
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
 
@@ -186,7 +178,7 @@ describe('Add related tests', () => {
          * Three new entries are created
          */
 
-         //Given
+        // Given
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
 
@@ -217,8 +209,8 @@ describe('Add related tests', () => {
          * Then
          * The new entry is saved
          */
-        
-        //Given
+
+        // Given
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
 
@@ -231,6 +223,101 @@ describe('Add related tests', () => {
             expect(localStorage.getItem('storage')).toBeTruthy();
             let storage = load();
             expect(storage.entries[0]).toBeTruthy();
+        });
+    });
+});
+
+describe('Clear related tests', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
+    test('Clear button exists', () => {
+        /**
+         * Given
+         * Component is Loaded
+         *
+         * Then
+         * The Clear-button exists
+         *
+         */
+
+        // Given
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        // Then
+        const clearButton = getClearButton(element.shadowRoot);
+        expect(clearButton).toBeTruthy();
+    });
+
+    test('confirm of the clear modal resets list', () => {
+        /**
+         * Given
+         * 1. Component is Loaded
+         * 2. Has existing Entries
+         *
+         * When
+         * Clear-Modal is confirmed
+         *
+         * Then
+         * All entries are removed
+         */
+
+        // Given
+        setCurrentVersionDummyData();
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        const entriesBeforeClearing = element.shadowRoot.querySelectorAll(
+            'ui-entry'
+        );
+        expect(entriesBeforeClearing.length).toBe(2);
+
+        // When
+        const clearingModal = element.shadowRoot.querySelector('.modal-clear');
+        clearingModal.dispatchEvent(new CustomEvent('confirm'));
+
+        //wait for confirm-click to be processed
+        return Promise.resolve().then(() => {
+            // Then
+            const entriesAfterClearing = element.shadowRoot.querySelectorAll(
+                'ui-entry'
+            );
+            expect(entriesAfterClearing.length).toBe(0);
+        });
+    });
+
+    test('confirm of the clear modal clears storage', () => {
+        /**
+         * Given
+         * 1. Component is Loaded
+         * 2. Has existing Entries
+         *
+         * When
+         * Clear-Modal is confirmed
+         *
+         * Then
+         * Storage is cleared
+         */
+
+        // Given
+        setCurrentVersionDummyData();
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        // When
+        const clearingModal = element.shadowRoot.querySelector('.modal-clear');
+        clearingModal.dispatchEvent(new CustomEvent('confirm'));
+
+        //wait for confirm-click to be processed
+        return Promise.resolve().then(() => {
+            // Then
+            let storageString = localStorage.getItem('storage');
+            expect(storageString).toBe(null);
         });
     });
 });
@@ -351,36 +438,6 @@ describe('check buttons', () => {
                 );
                 expect(entriesAfterReload.length).toBe(2);
             });
-        });
-    });
-
-    test('confirm of the clear modal resets list and storage.', () => {
-        setCurrentVersionDummyData();
-
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-
-        const entriesBeforeClearing = element.shadowRoot.querySelectorAll(
-            'ui-entry'
-        );
-        expect(entriesBeforeClearing.length).toBe(2);
-
-        const clearingModal = element.shadowRoot.querySelector('.modal-clear');
-
-        clearingModal.dispatchEvent(new CustomEvent('confirm'));
-
-        //wait for confirm-click to be processed
-        return Promise.resolve().then(() => {
-            // check entry list
-            const entriesAfterClearing = element.shadowRoot.querySelectorAll(
-                'ui-entry'
-            );
-            expect(entriesAfterClearing.length).toBe(0);
-
-            // check storage
-            let storageStr = localStorage.getItem('storage');
-            // the whole 'storage key got removed'
-            expect(storageStr).toBe(null);
         });
     });
 });
