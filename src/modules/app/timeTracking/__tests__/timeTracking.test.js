@@ -287,6 +287,7 @@ describe('check delete', () => {
          * 1. third entry is removed.
          * 2. 1st, 2nd, 4th entry remain in list
          */
+        const indexAttributeName = 'data-index';
 
         // Given
         const element = createElement('app-timeTracking', { is: TimeTracking });
@@ -304,17 +305,35 @@ describe('check delete', () => {
             );
             expect(entriesOriginal.length).toBe(4);
 
+            // add comment for identifying entries
+            for (let index = 0; index < entriesOriginal.length; index++) {
+                const entryOriginal = entriesOriginal[index];
+                entryOriginal.comment = 'entry ' + index;
+            }
+
             // When
             let thirdEntry = entriesOriginal[2];
             thirdEntry.dispatchEvent(new CustomEvent('delete'));
 
             // Then
             return Promise.resolve().then(() => {
+                // get list of new entries
                 const entriesResult = element.shadowRoot.querySelectorAll(
                     'ui-entry'
                 );
-                // One Entry was removed
+
+                // check one Entry was removed
                 expect(entriesResult.length).toBe(3);
+                expect(entriesResult[0].comment).toBe(
+                    entriesOriginal[0].comment
+                );
+                expect(entriesResult[1].comment).toBe(
+                    entriesOriginal[1].comment
+                );
+                // entriesOriginal[2] is missing now
+                expect(entriesResult[2].comment).toBe(
+                    entriesOriginal[3].comment
+                );
             });
         });
     });
