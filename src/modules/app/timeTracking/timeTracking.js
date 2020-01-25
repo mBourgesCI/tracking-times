@@ -54,6 +54,7 @@ export default class TimeTracking extends LightningElement {
     handleEventDelete(event) {
         var itemSortNumber = event.target.getAttribute('data-index');
         this.processEntryDelete(itemSortNumber);
+        this.saveData();
     }
 
     processEntryDelete(itemSortNumber) {
