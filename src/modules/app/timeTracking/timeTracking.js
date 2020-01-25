@@ -143,6 +143,7 @@ export default class TimeTracking extends LightningElement {
     handleChangeEntry(event) {
         let index = event.srcElement.getAttribute('data-index');
         this.processEntryChange(index, event.detail);
+        this.saveData();
     }
 
     fireClearDataConfirmation() {
