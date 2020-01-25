@@ -49,12 +49,13 @@
                 for:index="index"
             >
                 <ui-entry
-                    key={entry.sortnumber}
+                    key={entry.itemId}
                     data-index={entry.sortnumber}
                     start={entry.start}
                     end={entry.end}
                     comment={entry.comment}
                     onchange={handleChangeEntry}
+                    ondelete={handleEventDelete}
                 ></ui-entry>
             </template>
         </div>

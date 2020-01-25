@@ -21,7 +21,7 @@ describe('test core logic', () => {
         expect(entryListContainer).toBeTruthy();
     });
 });
-
+/*
 describe('test creation of new entries', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -30,7 +30,7 @@ describe('test creation of new entries', () => {
         }
     });
 });
-
+*/
 describe('check loading based on version', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -207,7 +207,7 @@ describe('check buttons', () => {
     });
 
     test('Load button reloads from last saved state', () => {
-        setVersion3DummyData();
+        setVersion4DummyData();
 
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
@@ -236,7 +236,7 @@ describe('check buttons', () => {
     });
 
     test('confirm of the clear modal resets list and storage.', () => {
-        setVersion3DummyData();
+        setVersion4DummyData();
 
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
@@ -266,6 +266,79 @@ describe('check buttons', () => {
     });
 });
 
+describe('check delete', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+        clearStorage();
+    });
+
+    test('check delete', () => {
+        /**
+         * Given
+         * Four entries
+         *
+         * When
+         * Recieving delete-event of third entry
+         *
+         * Then
+         * 1. third entry is removed.
+         * 2. 1st, 2nd, 4th entry remain in list
+         */
+        const indexAttributeName = 'data-index';
+
+        // Given
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+
+        const addButton = getAddButton(element.shadowRoot);
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+        addButton.dispatchEvent(new CustomEvent('click'));
+
+        return Promise.resolve().then(() => {
+            const entriesOriginal = element.shadowRoot.querySelectorAll(
+                'ui-entry'
+            );
+            expect(entriesOriginal.length).toBe(4);
+
+            // add comment for identifying entries
+            for (let index = 0; index < entriesOriginal.length; index++) {
+                const entryOriginal = entriesOriginal[index];
+                entryOriginal.comment = 'entry ' + index;
+            }
+
+            // When
+            let thirdEntry = entriesOriginal[2];
+            thirdEntry.dispatchEvent(new CustomEvent('delete'));
+
+            // Then
+            return Promise.resolve().then(() => {
+                // get list of new entries
+                const entriesResult = element.shadowRoot.querySelectorAll(
+                    'ui-entry'
+                );
+
+                // check one Entry was removed
+                expect(entriesResult.length).toBe(3);
+                expect(entriesResult[0].comment).toBe(
+                    entriesOriginal[0].comment
+                );
+                expect(entriesResult[1].comment).toBe(
+                    entriesOriginal[1].comment
+                );
+                // entriesOriginal[2] is missing now
+                expect(entriesResult[2].comment).toBe(
+                    entriesOriginal[3].comment
+                );
+            });
+        });
+    });
+});
+
 function clearStorage() {
     localStorage.setItem('storage', JSON.stringify({}));
 }
@@ -286,6 +359,32 @@ function setVersion3DummyData() {
                 sortnumber: 1,
                 comment: 'entry2',
                 start: 0,
+                end: 1800000
+            }
+        ]
+    };
+
+    localStorage.setItem('storage', JSON.stringify(data));
+}
+
+function setVersion4DummyData() {
+    const data = {
+        settings: {
+            version: 'v0.4'
+        },
+        entries: [
+            {
+                itemId: 0,
+                sortnumber: 0,
+                comment: 'entry1',
+                start: 0,
+                end: 1000
+            },
+            {
+                itemId: 1,
+                sortnumber: 1,
+                comment: 'entry2',
+                start: 50,
                 end: 1800000
             }
         ]
