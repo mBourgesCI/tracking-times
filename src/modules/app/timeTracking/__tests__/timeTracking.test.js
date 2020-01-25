@@ -2,29 +2,7 @@
 import { createElement } from 'lwc';
 import { save, load, clear } from 'data/localStorage';
 import TimeTracking from 'app/timeTracking';
-/*
-describe('test core logic', () => {
 
-    test('test entry-container exists', () => {
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-
-        const entryListContainer = element.shadowRoot.querySelector(
-            'div.entries'
-        );
-        expect(entryListContainer).toBeTruthy();
-    });
-});
-
-describe('test creation of new entries', () => {
-    afterEach(() => {
-        // The jsdom instance is shared across test cases in a single file so reset the DOM
-        while (document.body.firstChild) {
-            document.body.removeChild(document.body.firstChild);
-        }
-    });
-});
-*/
 describe('check loading based on version', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -322,27 +300,6 @@ describe('Clear related tests', () => {
     });
 });
 
-describe('Save is called on every change', () => {
-    afterEach(() => {
-        // The jsdom instance is shared across test cases in a single file so reset the DOM
-        while (document.body.firstChild) {
-            document.body.removeChild(document.body.firstChild);
-        }
-    });
-
-    test('Save is called on Edit', () => {
-        setCurrentVersionDummyData();
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-    });
-
-    test('Save is called on Delete', () => {
-        setCurrentVersionDummyData();
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-    });
-});
-
 describe('check buttons', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -382,14 +339,6 @@ describe('check buttons', () => {
             expect(loadedData.entries[2].start).toBeTruthy();
             expect(loadedData.entries[2].end).toBeTruthy();
         });
-    });
-
-    test('Load button exists', () => {
-        const element = createElement('app-timeTracking', { is: TimeTracking });
-        document.body.appendChild(element);
-
-        const loadButton = getLoadButton(element.shadowRoot);
-        expect(loadButton).toBeTruthy();
     });
 
     test('Load button clears unsaved entry list', () => {
