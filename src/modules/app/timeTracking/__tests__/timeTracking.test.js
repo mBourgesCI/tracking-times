@@ -275,7 +275,19 @@ describe('check delete', () => {
         clearStorage();
     });
 
-    test('check delete', () => {});
+    test('check delete', () => {
+        /**
+         * Given
+         * Four entries
+         *
+         * When
+         * Recieving delete-event of third entry
+         *
+         * Then
+         * 1. third entry is removed.
+         * 2. 1st, 2nd, 4th entry remain in list
+         */
+    });
 });
 
 function clearStorage() {
