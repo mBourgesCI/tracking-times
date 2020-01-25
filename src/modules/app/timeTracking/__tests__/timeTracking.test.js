@@ -299,8 +299,14 @@ describe('check delete', () => {
         addButton.dispatchEvent(new CustomEvent('click'));
 
         return Promise.resolve().then(() => {
-            const entries = element.shadowRoot.querySelectorAll('ui-entry');
-            expect(entries.length).toBe(4);
+            const entriesOriginal = element.shadowRoot.querySelectorAll(
+                'ui-entry'
+            );
+            expect(entriesOriginal.length).toBe(4);
+
+            // When
+            let thirdEntry = entriesOriginal[2];
+            thirdEntry.dispatchEvent(new CustomEvent('delete'));
         });
     });
 });
