@@ -311,6 +311,10 @@ describe('check delete', () => {
                 itemIds.push(entry.getAttribute('data-index'));
             }
 
+            itemIds.forEach(itemId => {
+                expect(itemId).toBeTruthy();
+            });
+
             // When
             let thirdEntry = entriesOriginal[2];
             thirdEntry.dispatchEvent(new CustomEvent('delete'));
