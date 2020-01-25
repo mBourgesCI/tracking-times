@@ -163,6 +163,17 @@ describe('Save is called on every change', () => {
     });
 
     test('Save is called on Add', () => {
+        /**
+         * Given
+         * Component is Loaded
+         * 
+         * When
+         * Clicking the Add Button
+         * 
+         * Then
+         * 1. A new Entry is created
+         * 2. It's immedeatly saved
+         */
         const element = createElement('app-timeTracking', { is: TimeTracking });
         document.body.appendChild(element);
     });
