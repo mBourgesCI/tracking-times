@@ -1,15 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { createElement } from 'lwc';
 import TimeTracking from 'app/timeTracking';
-
+/*
 describe('test core logic', () => {
-    afterEach(() => {
-        // The jsdom instance is shared across test cases in a single file so reset the DOM
-        while (document.body.firstChild) {
-            document.body.removeChild(document.body.firstChild);
-        }
-        clearStorage();
-    });
 
     test('test entry-container exists', () => {
         const element = createElement('app-timeTracking', { is: TimeTracking });
@@ -21,7 +14,7 @@ describe('test core logic', () => {
         expect(entryListContainer).toBeTruthy();
     });
 });
-/*
+
 describe('test creation of new entries', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -157,6 +150,31 @@ describe('check buttons exist', () => {
 
         const clearButton = getClearButton(element.shadowRoot);
         expect(clearButton).toBeTruthy();
+    });
+});
+
+describe('Save is called on every change', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+        clearStorage();
+    });
+
+    test('Save is called on Add', () => {
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+    });
+
+    test('Save is called on Edit', () => {
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
+    });
+
+    test('Save is called on Delete', () => {
+        const element = createElement('app-timeTracking', { is: TimeTracking });
+        document.body.appendChild(element);
     });
 });
 
