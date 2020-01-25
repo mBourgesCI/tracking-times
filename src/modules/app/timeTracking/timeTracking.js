@@ -58,7 +58,10 @@ export default class TimeTracking extends LightningElement {
         // get Index of entry
         itemSortNumber = event.target.getAttribute('data-index');
         itemSortNumber = parseInt(itemSortNumber, 10);
-        entryIndex = this.state.entries.length - itemSortNumber - 1;
+
+        entryIndex = this.state.entries.findIndex(entry => {
+            return entry.sortnumber === itemSortNumber;
+        });
 
         // delete entry
         this.state.entries.splice(entryIndex, 1);
