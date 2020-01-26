@@ -19,8 +19,6 @@ div.button-bar {
     gap: 5px;
     grid-template-areas:
         'clear'
-        'load'
-        'save'
         'add';
 }
 
@@ -37,18 +35,15 @@ div.container-clear {
     grid-area: clear;
 }
 
-div.container-load {
-    grid-area: load;
-}
-
-div.container-save {
-    grid-area: save;
-}
-
 div.container-github {
     background-color: lightslategray;
     border-radius: 7px;
     padding: 10px;
+    text-align: center;
+}
+
+div.modal-clear-body {
+    height: 100%;
     text-align: center;
 }
 
@@ -61,15 +56,6 @@ a.button-github {
 @media (min-width: 500px) {
     div.button-bar {
         grid-template-columns: auto auto;
-        grid-template-areas:
-            'clear load'
-            'add save';
-    }
-}
-
-@media (min-width: 1000px) {
-    div.button-bar {
-        grid-template-columns: auto auto auto auto;
-        grid-template-areas: 'clear load add save';
+        grid-template-areas: 'clear add';
     }
 }

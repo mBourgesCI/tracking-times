@@ -446,3 +446,44 @@ describe('check events on changed values', () => {
         });
     });
 });
+
+describe('check single entry delete', () => {
+    afterEach(() => {
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
+    test('delete button exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const deleteButton = element.shadowRoot.querySelector(
+            'input.button-delete'
+        );
+        expect(deleteButton).toBeTruthy();
+    });
+
+    test('click on delete button fires delete event', () => {
+        var handler = jest.fn();
+        // add entry comp
+        const element = createElement('ui-entry', { is: Entry });
+        element.addEventListener('delete', handler);
+        document.body.appendChild(element);
+
+        // select delete button
+        const deleteButton = element.shadowRoot.querySelector(
+            'input.button-delete'
+        );
+        expect(deleteButton).toBeTruthy();
+
+        // click delete button
+        deleteButton.dispatchEvent(new CustomEvent('click'));
+
+        // check for event of type 'delete'
+        return Promise.resolve().then(() => {
+            //asserts the 'delete'-event has been fired
+            expect(handler).toHaveBeenCalled();
+        });
+    });
+});

@@ -16,6 +16,12 @@ export default class TimeTracking extends LightningElement {
                 load: 'Load',
                 clear: 'Clear',
                 add: 'Add'
+            },
+            modal: {
+                clear: {
+                    title: 'Clear',
+                    body: 'Clear all entries?'
+                }
             }
         }
     };
@@ -27,32 +33,47 @@ export default class TimeTracking extends LightningElement {
 
     handleClickAdd() {
         this.processClickAdd();
-    }
-
-    handleClickSave() {
         this.saveData();
     }
 
-    handleClickLoad() {
-        this.loadData();
-    }
-
     handleClickClear() {
-        this.clearData();
+        this.showClearModal();
     }
 
-    clearData() {
-        // eslint-disable-next-line no-unused-vars
-        var clearConfirmation = this.fireClearDataConfirmation();
-        if (clearConfirmation) {
-            this.processClearData();
+    handleClickClearConfirm() {
+        this.processClearData();
+    }
+
+    handleEventDelete(event) {
+        var itemSortNumber = event.target.getAttribute('data-index');
+        this.processEntryDelete(itemSortNumber);
+        this.saveData();
+    }
+
+    processEntryDelete(itemSortNumber) {
+        let index, entryIndex, newlength;
+
+        index = parseInt(itemSortNumber, 10);
+        entryIndex = this.state.entries.findIndex(entry => {
+            return entry.sortnumber === index;
+        });
+
+        // delete entry
+        this.state.entries.splice(entryIndex, 1);
+
+        // rewrite sort numbers
+        newlength = this.state.entries.length;
+
+        for (let i = 0; i < this.state.entries.length; i++) {
+            const element = this.state.entries[i];
+            element.sortnumber = newlength - i;
         }
     }
 
     saveData() {
         var data = {
             settings: {
-                version: 'v0.3'
+                version: 'v0.4'
             },
             entries: this.state.entries
         };
@@ -72,6 +93,9 @@ export default class TimeTracking extends LightningElement {
                 if (loaded.settings.version === 'v0.3') {
                     this.loadDataV03(loaded);
                 }
+                if (loaded.settings.version === 'v0.4') {
+                    this.loadDataV04(loaded);
+                }
             }
         }
     }
@@ -83,6 +107,7 @@ export default class TimeTracking extends LightningElement {
                 let entryData = JSON.parse(loadedEntry.data);
                 let tempEntry = {
                     sortnumber: this.state.entries.length,
+                    itemId: entryData.start.value + this.state.entries.length,
                     start: entryData.start.value,
                     end: entryData.end.value,
                     comment: entryData.comment
@@ -93,6 +118,17 @@ export default class TimeTracking extends LightningElement {
     }
 
     loadDataV03(loaded) {
+        var itemCounter;
+        itemCounter = 0;
+        this.state.version = loaded.settings.version;
+        this.state.entries = loaded.entries;
+        this.state.entries.forEach(loadedEntry => {
+            loadedEntry.itemId = loadedEntry.start + itemCounter;
+            itemCounter++;
+        });
+    }
+
+    loadDataV04(loaded) {
         this.state.version = loaded.settings.version;
         this.state.entries = loaded.entries;
     }
@@ -100,6 +136,7 @@ export default class TimeTracking extends LightningElement {
     handleChangeEntry(event) {
         let index = event.srcElement.getAttribute('data-index');
         this.processEntryChange(index, event.detail);
+        this.saveData();
     }
 
     fireClearDataConfirmation() {
@@ -153,16 +190,19 @@ export default class TimeTracking extends LightningElement {
     }
 
     createListEntry(entryConfig) {
-        var newEntry, currentTime, newEntryId;
+        var newEntry, currentTime, approximatedTime, newEntryId;
 
         newEntryId = this.state.entries.length;
         newEntryId = newEntryId === undefined ? 0 : newEntryId;
         currentTime = new Date().getTime();
-        currentTime = this.createNewTimestamp(entryConfig);
+        approximatedTime = this.createNewTimestamp(entryConfig);
         newEntry = {};
+        // tests add all entries in the very same millisecond which causes key-values to not unique
+        // => to tackle the we add as many milliseconds as there are entries in the entry list
+        newEntry.itemId = currentTime + this.state.entries.length;
         newEntry.sortnumber = newEntryId;
-        newEntry.start = currentTime;
-        newEntry.end = currentTime + MILISECONDS_PER_HOUR;
+        newEntry.start = approximatedTime;
+        newEntry.end = approximatedTime + MILISECONDS_PER_HOUR;
         newEntry.comment = '';
 
         return newEntry;
@@ -212,5 +252,17 @@ export default class TimeTracking extends LightningElement {
         if (this.state.entries === null) return true;
         if (this.state.entries.length === 0) return true;
         return false;
+    }
+
+    showClearModal() {
+        this.getClearModal().show();
+    }
+
+    //----------------------
+    // Element selectors
+    //----------------------
+
+    getClearModal() {
+        return this.template.querySelector('.modal-clear');
     }
 }
