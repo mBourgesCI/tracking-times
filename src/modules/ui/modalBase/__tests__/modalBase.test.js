@@ -1,3 +1,8 @@
+// eslint-disable-next-line no-unused-vars
+import { createElement } from 'lwc';
+// eslint-disable-next-line no-unused-vars
+import ModalBase from 'ui/modalBase';
+
 describe('', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
