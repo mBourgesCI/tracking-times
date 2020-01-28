@@ -11,5 +11,8 @@ describe('Control visibility', () => {
         }
     });
 
-    test('check isVisible', () => {});
+    test('check isVisible', () => {
+        const element = createElement('ui-modal-base', { is: ModalBase });
+        document.body.appendChild(element);
+    });
 });
