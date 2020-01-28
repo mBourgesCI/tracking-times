@@ -15,7 +15,7 @@
 /* Modal Content */
 .modal-content {
     /* placing of box */
-    z-index: 1001; /* Sit on top */
+    z-index: 1001;
 
     /* center horizontaly and verticaly */
     position: absolute;
@@ -24,14 +24,15 @@
     transform: translate(-50%, -50%);
 
     /* sizing */
-    max-width: 80%;
+    max-width: 800pt;
     max-height: 80%;
-    min-width: 10%;
-    min-height: 10%;
+    width: 70%;
 
     /* white border */
     padding: 10px;
     border: 1px solid #888;
     background-color: #fefefe;
     border-radius: 10px;
+
+    overflow: auto;
 }
