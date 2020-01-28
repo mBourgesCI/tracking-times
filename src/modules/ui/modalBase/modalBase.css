@@ -34,9 +34,4 @@
     border: 1px solid #888;
     background-color: #fefefe;
     border-radius: 10px;
-
-    /* layout of content */
-    display: grid;
-    grid-template-rows: auto auto auto;
-    overflow: auto;
 }
