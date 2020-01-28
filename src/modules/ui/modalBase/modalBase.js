@@ -12,4 +12,9 @@ export default class ModalBase extends LightningElement {
     hide() {
         this.visible = false;
     }
+
+    @api
+    show() {
+        this.visible = true;
+    }
 }

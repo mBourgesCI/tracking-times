@@ -32,4 +32,16 @@ describe('Control visibility', () => {
         isVisible = element.isVisible();
         expect(isVisible).toBe(false);
     });
+
+    test('check show is defined and turns visibility on', () => {
+        const element = createElement('ui-modal-base', { is: ModalBase });
+        let isVisible;
+
+        document.body.appendChild(element);
+
+        element.show();
+
+        isVisible = element.isVisible();
+        expect(isVisible).toBe(true);
+    });
 });
