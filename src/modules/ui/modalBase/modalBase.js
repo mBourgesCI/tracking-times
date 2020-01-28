@@ -1,3 +1,8 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, api } from 'lwc';
 
-export default class ModalBase extends LightningElement {}
+export default class ModalBase extends LightningElement {
+    @api
+    isVisible() {
+        return false;
+    }
+}

@@ -11,8 +11,12 @@ describe('Control visibility', () => {
         }
     });
 
-    test('check isVisible', () => {
+    test('check isVisible is defined and initially false', () => {
         const element = createElement('ui-modal-base', { is: ModalBase });
+        let isVisible;
         document.body.appendChild(element);
+
+        isVisible = element.isVisible();
+        expect(isVisible).toBe(false);
     });
 });
