@@ -1,6 +1,7 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 
 export default class ModalBase extends LightningElement {
+    @track
     visible = false;
 
     @api
