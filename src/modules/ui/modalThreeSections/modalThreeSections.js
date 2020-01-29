@@ -11,6 +11,11 @@ export default class ModalThreeSections extends LightningElement {
         return this.getBaseModal().show();
     }
 
+    @api
+    hide() {
+        return this.getBaseModal().hide();
+    }
+
     getBaseModal() {
         return this.template.querySelector('.modal-base');
     }

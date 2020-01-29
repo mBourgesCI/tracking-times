@@ -51,11 +51,39 @@ describe('visibility controls', () => {
          * Calling 'show' method
          */
         element.show();
+
         /**
          * Then
          * The Component is Visible
          */
         isVisible = element.isVisible();
         expect(isVisible).toBe(true);
+    });
+
+    test('has hide method', () => {
+        let isVisible;
+        /**
+         * Given
+         * 1. The DOM contains the component
+         * 2. The Modal is visible
+         */
+        const element = createElement('ui-modal-three-sections', {
+            is: ModalThreeSections
+        });
+        document.body.appendChild(element);
+        element.show();
+
+        /**
+         * When
+         * Calling 'hide' method
+         */
+        element.hide();
+
+        /**
+         * Then
+         * The Modal is hidden
+         */
+        isVisible = element.isVisible();
+        expect(isVisible).toBe(false);
     });
 });
