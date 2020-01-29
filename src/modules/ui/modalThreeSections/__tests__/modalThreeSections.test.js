@@ -34,4 +34,28 @@ describe('visibility controls', () => {
          */
         expect(isVisible).toBe(false);
     });
+
+    test('has show function', () => {
+        let isVisible;
+        /**
+         * Given
+         * The DOM contains the component
+         */
+        const element = createElement('ui-modal-three-sections', {
+            is: ModalThreeSections
+        });
+        document.body.appendChild(element);
+
+        /**
+         * When
+         * Calling 'show' method
+         */
+        element.show();
+        /**
+         * Then
+         * The Component is Visible
+         */
+        isVisible = element.isVisible();
+        expect(isVisible).toBe(true);
+    });
 });
