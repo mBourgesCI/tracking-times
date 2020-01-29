@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { createElement } from 'lwc';
 // eslint-disable-next-line no-unused-vars
-import ModalConfirm from 'ui/modalConfirm';
+import ModalThreeSections from 'ui/modalThreeSections';
 
 describe('', () => {
     afterEach(() => {
