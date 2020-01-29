@@ -1,6 +1,4 @@
-// eslint-disable-next-line no-unused-vars
 import { createElement } from 'lwc';
-// eslint-disable-next-line no-unused-vars
 import ModalBase from 'ui/modalBase';
 
 describe('Control visibility', () => {
