@@ -1,5 +1,26 @@
 import { createElement } from 'lwc';
 import Entry from 'ui/entry';
+
+describe('check edit modal', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
+    test('check modal exists', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const modalElement = element.shadowRoot.querySelector(
+            'ui-modal-three-sections'
+        );
+
+        expect(modalElement).toBeTruthy();
+    });
+});
+
 describe('check elements for existence', () => {
     afterEach(() => {
         while (document.body.firstChild) {
