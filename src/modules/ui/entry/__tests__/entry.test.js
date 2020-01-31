@@ -35,6 +35,16 @@ describe('check edit modal', () => {
         );
         expect(footerElement).toBeTruthy();
     });
+
+    test('check header span', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const headerSpanElement = element.shadowRoot.querySelector(
+            'span.header'
+        );
+        expect(headerSpanElement).toBeTruthy();
+    });
 });
 
 describe('check elements for existence', () => {
