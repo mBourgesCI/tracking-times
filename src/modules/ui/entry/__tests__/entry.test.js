@@ -19,6 +19,22 @@ describe('check edit modal', () => {
 
         expect(modalElement).toBeTruthy();
     });
+
+    test('check modal has three children', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const headerElement = element.shadowRoot.querySelector(
+            'div[slot=header]'
+        );
+        expect(headerElement).toBeTruthy();
+        const bodyElement = element.shadowRoot.querySelector('div[slot=body]');
+        expect(bodyElement).toBeTruthy();
+        const footerElement = element.shadowRoot.querySelector(
+            'div[slot=footer]'
+        );
+        expect(footerElement).toBeTruthy();
+    });
 });
 
 describe('check elements for existence', () => {
