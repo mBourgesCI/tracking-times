@@ -70,6 +70,13 @@ div.container-button-bar > input {
     display: grid;
     grid-row-gap: 10px;
     grid-template-columns: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: lightgray;
+    border-left-style: none;
+    border-right-style: none;
 }
 
 .modal-edit > div[slot='header'] {
