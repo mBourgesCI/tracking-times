@@ -141,7 +141,7 @@ export default class Entry extends LightningElement {
     }
 
     handleButtonClickEdit() {
-        this.showEditModal();
+        this.processEdit();
     }
 
     handleButtonClickDelete() {
@@ -168,18 +168,22 @@ export default class Entry extends LightningElement {
         this.processNewComment(internalEvent.target.value);
     }
 
-//----------------------------
-// process events
-//----------------------------
+    //----------------------------
+    // process events
+    //----------------------------
 
     processModalSave() {
-        let modelInputValues;
-        modelInputValues = this.readModalInputs()
-        this.getNewEditModal().hide();
+        let inputValues;
+
+        this.getEditModal().hide();
+        inputValues = this.readModalInputs();
+        this.writeValuesToInternalState(inputValues);
+        this.fillOutputs();
+        this.createAndFireChangeEvent();
     }
 
     processModalCancel() {
-        this.getNewEditModal().hide();
+        this.getEditModal().hide();
     }
 
     processNewStartDate(newStartDateISOString) {
@@ -273,6 +277,11 @@ export default class Entry extends LightningElement {
         this.dispatchEvent(new CustomEvent('delete'));
     }
 
+    processEdit() {
+        this.fillModalInputs();
+        this.getEditModal().show();
+    }
+
     createAndFireChangeEvent() {
         let externalEvent;
         externalEvent = new CustomEvent('change', {
@@ -360,21 +369,6 @@ export default class Entry extends LightningElement {
         return values;
     }
 
-    onModalConfirm() {
-        let inputValues;
-        inputValues = this.readModalInputs();
-        this.writeValuesToInternalState(inputValues);
-        this.fillOutputs();
-        this.createAndFireChangeEvent();
-    }
-
-    showEditModal() {
-        this.fillModalInputs();
-        this.getEditModal().show();
-    }
-
-    on;
-
     /**
      * --------------------
      * value Checker
@@ -416,10 +410,6 @@ export default class Entry extends LightningElement {
     //----------------------
     // Element selectors
     //----------------------
-
-    getNewEditModal() {
-        return this.template.querySelector('.modal-edit-new');
-    }
 
     getEditModal() {
         return this.template.querySelector('.modal-edit');
