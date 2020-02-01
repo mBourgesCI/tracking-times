@@ -89,7 +89,7 @@ describe('check elements for existence', () => {
         const element = createElement('ui-entry', { is: Entry });
         document.body.appendChild(element);
 
-        const modalContainer = element.shadowRoot.querySelector('ui-modal');
+        const modalContainer = element.shadowRoot.querySelector('ui-modal-three-sections');
 
         expect(modalContainer).toBeTruthy();
     });
