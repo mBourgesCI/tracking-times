@@ -29,7 +29,7 @@ export default class Entry extends LightningElement {
         return this.internalState.startTimeStamp;
     }
     set start(value) {
-        var integerValue;
+        let integerValue;
         if (value !== undefined) {
             integerValue = parseInt(value, 10);
             this.internalState.startTimeStamp = integerValue;
@@ -43,7 +43,7 @@ export default class Entry extends LightningElement {
         return this.internalState.endTimeStamp;
     }
     set end(value) {
-        var integerValue;
+        let integerValue;
         if (value !== undefined) {
             integerValue = parseInt(value, 10);
             this.internalState.endTimeStamp = integerValue;
@@ -60,7 +60,9 @@ export default class Entry extends LightningElement {
         },
         button: {
             edit: 'Edit',
-            delete: 'Delete'
+            delete: 'Delete',
+            save: 'Save',
+            cancel: 'Cancel'
         },
         input: {
             startdate: 'Start date',
@@ -103,14 +105,14 @@ export default class Entry extends LightningElement {
     }
 
     extractDateStringFromTimeStamp(timestamp) {
-        var fullDate, dateString;
+        let fullDate, dateString;
         fullDate = new Date(timestamp);
         dateString = fullDate.toISOString().split('T')[0];
         return dateString;
     }
 
     extractTimeStringFromTimeStamp(timestamp) {
-        var fullDate, timeString;
+        let fullDate, timeString;
 
         fullDate = new Date(timestamp);
         timeString = fullDate.toLocaleTimeString().substr(0, 5);
@@ -126,8 +128,20 @@ export default class Entry extends LightningElement {
         return difference / (1000 * 60 * 60);
     }
 
+    //----------------------------
+    // event handlers
+    //----------------------------
+
+    handleButtonClickModalSave() {
+        this.processModalSave();
+    }
+
+    handleButtonClickModalCancel() {
+        this.processModalCancel();
+    }
+
     handleButtonClickEdit() {
-        this.showEditModal();
+        this.processEdit();
     }
 
     handleButtonClickDelete() {
@@ -154,8 +168,26 @@ export default class Entry extends LightningElement {
         this.processNewComment(internalEvent.target.value);
     }
 
+    //----------------------------
+    // process events
+    //----------------------------
+
+    processModalSave() {
+        let inputValues;
+
+        this.getEditModal().hide();
+        inputValues = this.readModalInputs();
+        this.writeValuesToInternalState(inputValues);
+        this.fillOutputs();
+        this.createAndFireChangeEvent();
+    }
+
+    processModalCancel() {
+        this.getEditModal().hide();
+    }
+
     processNewStartDate(newStartDateISOString) {
-        var param;
+        let param;
         if (this.internalState.startTimeStamp !== undefined) {
             let currentTimeValue = extractTimeFromTimestamp(
                 this.internalState.startTimeStamp
@@ -172,7 +204,7 @@ export default class Entry extends LightningElement {
     }
 
     processNewStartTime(newStartDateISOString) {
-        var param, currentTimeStamp, newTimeStamp;
+        let param, currentTimeStamp, newTimeStamp;
 
         currentTimeStamp = this.internalState.startTimeStamp;
 
@@ -192,7 +224,7 @@ export default class Entry extends LightningElement {
     }
 
     processNewEndDate(newEndDateISOString) {
-        var param;
+        let param;
 
         if (this.internalState.endTimeStamp !== undefined) {
             let currentTimeValue = extractTimeFromTimestamp(
@@ -211,7 +243,7 @@ export default class Entry extends LightningElement {
     }
 
     processNewEndTime(newEndTimeISOString) {
-        var param, currentTimeStamp, newTimeStamp;
+        let param, currentTimeStamp, newTimeStamp;
 
         currentTimeStamp = this.internalState.endTimeStamp;
 
@@ -231,7 +263,7 @@ export default class Entry extends LightningElement {
     }
 
     processNewComment(newCommentString) {
-        var param;
+        let param;
 
         this.internalState.comment = newCommentString;
         this.setDisplayStateComment();
@@ -245,8 +277,13 @@ export default class Entry extends LightningElement {
         this.dispatchEvent(new CustomEvent('delete'));
     }
 
+    processEdit() {
+        this.fillModalInputs();
+        this.getEditModal().show();
+    }
+
     createAndFireChangeEvent() {
-        var externalEvent;
+        let externalEvent;
         externalEvent = new CustomEvent('change', {
             bubbles: true,
             composed: true,
@@ -260,7 +297,7 @@ export default class Entry extends LightningElement {
     }
 
     getValuesForInputs() {
-        var result, start, end;
+        let result, start, end;
         result = {};
 
         if (this.isStartDefined()) {
@@ -288,7 +325,7 @@ export default class Entry extends LightningElement {
     //----------------------
 
     fillOutputs() {
-        var values;
+        let values;
         values = this.getValuesForInputs();
         this.displayState.startdate = values.startdate;
         this.displayState.starttime = values.starttime;
@@ -298,7 +335,7 @@ export default class Entry extends LightningElement {
     }
 
     writeValuesToInternalState(values) {
-        var start, end, comment;
+        let start, end, comment;
         start = new Date(values.startDateStr + 'T' + values.startTimeStr);
         end = new Date(values.endDateStr + 'T' + values.endTimeStr);
         comment = values.comment;
@@ -312,7 +349,7 @@ export default class Entry extends LightningElement {
     //----------------------
 
     fillModalInputs() {
-        var values;
+        let values;
         values = this.getValuesForInputs();
         this.getInputStartDate().value = values.startdate;
         this.getInputStartTime().value = values.starttime;
@@ -322,7 +359,7 @@ export default class Entry extends LightningElement {
     }
 
     readModalInputs() {
-        var values;
+        let values;
         values = {};
         values.startDateStr = this.getInputStartDate().value;
         values.startTimeStr = this.getInputStartTime().value;
@@ -330,19 +367,6 @@ export default class Entry extends LightningElement {
         values.endTimeStr = this.getInputEndTime().value;
         values.comment = this.getInputComment().value;
         return values;
-    }
-
-    onModalConfirm() {
-        var inputValues;
-        inputValues = this.readModalInputs();
-        this.writeValuesToInternalState(inputValues);
-        this.fillOutputs();
-        this.createAndFireChangeEvent();
-    }
-
-    showEditModal() {
-        this.fillModalInputs();
-        this.getEditModal().show();
     }
 
     /**
@@ -433,7 +457,7 @@ export default class Entry extends LightningElement {
 }
 
 function getNewTimestampByIsoTime(timestamp, isoTimeString) {
-    var splittedTime, hourInt, minuteInt, newTimeStamp;
+    let splittedTime, hourInt, minuteInt, newTimeStamp;
     if (timestamp !== undefined) {
         splittedTime = isoTimeString.split(':');
         hourInt = parseInt(splittedTime[0], 10);
@@ -463,7 +487,7 @@ function extractDateFromTimestamp(timestamp) {
 }
 
 function splitTimeStampIntegerIntoDateAndTime(timestamp) {
-    var result;
+    let result;
     if (timestamp !== undefined) {
         result = {
             date: extractDateFromTimestamp(timestamp),
