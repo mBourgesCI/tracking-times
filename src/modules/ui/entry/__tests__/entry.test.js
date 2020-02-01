@@ -462,6 +462,12 @@ describe('check Update of Outputs on Input change', () => {
 
 describe('check events on changed values', () => {
     test('new values are in change event', () => {
+        /**
+         * Given
+         * The entry component is added to a component with 
+         * filled start, end and comment
+         * 
+         */ 
         const handler = jest.fn();
         const baseDate = '1970-01-01';
 
@@ -479,11 +485,16 @@ describe('check events on changed values', () => {
         element.addEventListener('change', handler);
         document.body.appendChild(element);
 
-        const modalContainer = element.shadowRoot.querySelector('ui-modal');
-
         const editButton = element.shadowRoot.querySelector('input.edit');
         editButton.dispatchEvent(new CustomEvent('click'));
 
+        /**
+         * When
+         * 1. The start time and end time are changed 
+         * 2. The Save-Buttom is clicked
+         */
+
+         // When.1
         const startTimeInput = element.shadowRoot.querySelector(
             'input.start-time'
         );
@@ -491,14 +502,25 @@ describe('check events on changed values', () => {
         const endTimeInput = element.shadowRoot.querySelector('input.end-time');
         endTimeInput.value = newEndTimeValue;
 
-        modalContainer.dispatchEvent(new CustomEvent('confirm'));
+        // When.2
+        const saveButton = element.shadowRoot.querySelector('input.edit-save');
+        saveButton.dispatchEvent(new CustomEvent('click'));
 
         return Promise.resolve().then(() => {
+            /**
+             * Then
+             * 1. Change-event is fired
+             * 2. The event contains the all information of the entry cmp
+             */
+            
+             // Then.1
             expect(handler).toHaveBeenCalled();
             expect(handler.mock.calls.length).toBe(1);
             expect(handler.mock.calls[0].length).toBe(1);
             expect(handler.mock.calls[0][0].bubbles).toBe(true);
             expect(handler.mock.calls[0][0].composed).toBe(true);
+            
+            // Then.2
             expect(handler.mock.calls[0][0].detail).toBeTruthy();
             expect(handler.mock.calls[0][0].detail.start).toBeTruthy();
             expect(handler.mock.calls[0][0].detail.start).toBe(
