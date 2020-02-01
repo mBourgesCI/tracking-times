@@ -60,7 +60,9 @@ export default class Entry extends LightningElement {
         },
         button: {
             edit: 'Edit',
-            delete: 'Delete'
+            delete: 'Delete',
+            save: 'Save',
+            cancel: 'Cancel'
         },
         input: {
             startdate: 'Start date',
@@ -126,6 +128,18 @@ export default class Entry extends LightningElement {
         return difference / (1000 * 60 * 60);
     }
 
+    //----------------------------
+    // event handlers
+    //----------------------------
+
+    handleButtonClickModalSave() {
+        this.processModalSave();
+    }
+
+    handleButtonClickModalCancel() {
+        this.processModalCancel();
+    }
+
     handleButtonClickEdit() {
         this.showEditModal();
     }
@@ -152,6 +166,20 @@ export default class Entry extends LightningElement {
 
     handleChangeComment(internalEvent) {
         this.processNewComment(internalEvent.target.value);
+    }
+
+//----------------------------
+// process events
+//----------------------------
+
+    processModalSave() {
+        let modelInputValues;
+        modelInputValues = this.readModalInputs()
+        this.getNewEditModal().hide();
+    }
+
+    processModalCancel() {
+        this.getNewEditModal().hide();
     }
 
     processNewStartDate(newStartDateISOString) {
@@ -345,6 +373,8 @@ export default class Entry extends LightningElement {
         this.getEditModal().show();
     }
 
+    on;
+
     /**
      * --------------------
      * value Checker
@@ -386,6 +416,10 @@ export default class Entry extends LightningElement {
     //----------------------
     // Element selectors
     //----------------------
+
+    getNewEditModal() {
+        return this.template.querySelector('.modal-edit-new');
+    }
 
     getEditModal() {
         return this.template.querySelector('.modal-edit');

@@ -51,11 +51,24 @@
             <textarea class="modal-input comment"></textarea>
         </div>
     </ui-modal>
-    <ui-modal-three-sections>
+    <ui-modal-three-sections class="model-edit-new">
         <div slot="header">
             <span class="header">{label.modal.title}</span>
         </div>
         <div slot="body"></div>
-        <div slot="footer"></div>
+        <div slot="footer">
+            <input
+                type="button"
+                class="edit-save"
+                value={label.button.save}
+                onclick={handleButtonClickModalSave}
+            />
+            <input
+                type="button"
+                class="edit-cancel"
+                value={label.button.cancel}
+                onclick={handleButtonClickModalCancel}
+            />
+        </div>
     </ui-modal-three-sections>
 </template>

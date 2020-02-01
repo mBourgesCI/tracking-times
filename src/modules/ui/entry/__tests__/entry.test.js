@@ -45,6 +45,26 @@ describe('check edit modal', () => {
         );
         expect(headerSpanElement).toBeTruthy();
     });
+
+    test('modal has save button', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const saveButton = element.shadowRoot.querySelector(
+            'div[slot=footer] > input.edit-save'
+        );
+        expect(saveButton).toBeTruthy();
+    });
+
+    test('modal has cancel button', () => {
+        const element = createElement('ui-entry', { is: Entry });
+        document.body.appendChild(element);
+
+        const cancelButton = element.shadowRoot.querySelector(
+            'div[slot=footer] > input.edit-cancel'
+        );
+        expect(cancelButton).toBeTruthy();
+    });
 });
 
 describe('check elements for existence', () => {
