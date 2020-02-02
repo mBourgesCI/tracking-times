@@ -34,4 +34,56 @@ describe('visibility controls', () => {
          */
         expect(isVisible).toBe(false);
     });
+
+    test('has show function', () => {
+        let isVisible;
+        /**
+         * Given
+         * The DOM contains the component
+         */
+        const element = createElement('ui-modal-confirmable', {
+            is: ModalConfirmable
+        });
+        document.body.appendChild(element);
+
+        /**
+         * When
+         * Calling 'show' method
+         */
+        element.show();
+
+        /**
+         * Then
+         * The Component is Visible
+         */
+        isVisible = element.isVisible();
+        expect(isVisible).toBe(true);
+    });
+
+    test('has hide method', () => {
+        let isVisible;
+        /**
+         * Given
+         * 1. The DOM contains the component
+         * 2. The Modal is visible
+         */
+        const element = createElement('ui-modal-confirmable', {
+            is: ModalConfirmable
+        });
+        document.body.appendChild(element);
+        element.show();
+
+        /**
+         * When
+         * Calling 'hide' method
+         */
+        element.hide();
+
+        /**
+         * Then
+         * The Modal is hidden
+         */
+        isVisible = element.isVisible();
+        expect(isVisible).toBe(false);
+    });
 });
