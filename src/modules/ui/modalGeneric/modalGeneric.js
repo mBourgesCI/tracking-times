@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 
-export default class ModalThreeSections extends LightningElement {
+export default class ModalGeneric extends LightningElement {
     @api
     isVisible() {
         return this.getBaseModal().isVisible();

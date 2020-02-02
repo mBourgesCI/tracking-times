@@ -14,7 +14,7 @@ describe('check edit modal', () => {
         document.body.appendChild(element);
 
         const modalElement = element.shadowRoot.querySelector(
-            'ui-modal-three-sections'
+            'ui-modal-generic'
         );
 
         expect(modalElement).toBeTruthy();
@@ -90,7 +90,7 @@ describe('check elements for existence', () => {
         document.body.appendChild(element);
 
         const modalContainer = element.shadowRoot.querySelector(
-            'ui-modal-three-sections'
+            'ui-modal-generic'
         );
 
         expect(modalContainer).toBeTruthy();
