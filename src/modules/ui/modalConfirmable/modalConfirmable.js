@@ -33,7 +33,25 @@ export default class ModalConfirmable extends LightningElement {
     @api
     cancelLabel;
 
+    //----------------------------
+    // Handlers
+    //----------------------------
+
+    handleButtonClickConfirm() {
+        this.fireEventConfirm();
+    }
+
+    //----------------------------
+    // Util
+    //----------------------------
+
     getBaseModal() {
         return this.template.querySelector('.modal-base');
+    }
+
+    fireEventConfirm() {
+        var evt;
+        evt = new CustomEvent('confirm');
+        this.dispatchEvent(evt);
     }
 }

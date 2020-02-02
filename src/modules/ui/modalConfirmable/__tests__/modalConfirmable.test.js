@@ -342,27 +342,40 @@ describe('Slots', () => {
 });
 
 describe('Events', () => {
-  afterEach(() => {
-    // The jsdom instance is shared across test cases in a single file so reset the DOM
-    while (document.body.firstChild) {
-      document.body.removeChild(document.body.firstChild);
-    }
-  });
-
-  test('check confirm event', () => {
-    const handler = jest.fn();
-    /**
-     * Given
-     * The DOM contains the component
-     */
-    const element = createElement('ui-modal-confirmable', {
-      is: ModalConfirmable
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
     });
-    document.body.appendChild(element);
 
-    /**
-     * When
-     * The confirm-button is clicked
-     */    
-  });
+    test('check confirm event', () => {
+        const handler = jest.fn();
+        /**
+         * Given
+         * The DOM contains the component
+         */
+        const element = createElement('ui-modal-confirmable', {
+            is: ModalConfirmable
+        });
+        element.addEventListener('confirm', handler);
+        document.body.appendChild(element);
+
+        /**
+         * When
+         * The confirm-button is clicked
+         */
+        const confirmButton = element.shadowRoot.querySelector(
+            'div[slot=footer] > input.confirm'
+        );
+        confirmButton.dispatchEvent(new CustomEvent('click'));
+
+        return Promise.resolve().then(() => {
+            /**
+             * Then
+             * A confirm-event is fired
+             */
+            expect(handler).toHaveBeenCalled();
+        });
+    });
 });
