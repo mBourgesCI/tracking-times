@@ -2,6 +2,9 @@
     <ui-modal-generic class="modal-base">
         <span slot="header">{title}</span>
         <slot slot="body"></slot>
-        <div slot="footer"></div>
+        <div slot="footer">
+            <input type="button" class="confirm" />
+            <input type="button" class="cancel" />
+        </div>
     </ui-modal-generic>
 </template>

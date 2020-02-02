@@ -169,6 +169,7 @@ describe('Slots', () => {
             expect(bodyContainers.length).toBe(1);
         });
     });
+
     describe('Footer', () => {
         afterEach(() => {
             // The jsdom instance is shared across test cases in a single file so reset the DOM
@@ -194,12 +195,63 @@ describe('Slots', () => {
 
             /**
              * Then
-             * a slot for the body exits and redirects into the generic body-slot
+             * 1. A slot for the body exits and redirects into the generic body-slot
+             * 2. The footer contains a confirm button
              */
             const footerContainers = element.shadowRoot.querySelectorAll(
                 'div[slot=footer]'
             );
             expect(footerContainers.length).toBe(1);
+        });
+
+        test('Confirm button', () => {
+            /**
+             * Given
+             * The DOM contains the component
+             */
+            const element = createElement('ui-modal-confirmable', {
+                is: ModalConfirmable
+            });
+            document.body.appendChild(element);
+
+            /**
+             * When
+             * -
+             */
+
+            /**
+             * Then
+             * The footer contains a confirm button
+             */
+            const confirmButtons = element.shadowRoot.querySelectorAll(
+                'div[slot=footer] > input.confirm'
+            );
+            expect(confirmButtons.length).toBe(1);
+        });
+
+        test('Cancel button', () => {
+            /**
+             * Given
+             * The DOM contains the component
+             */
+            const element = createElement('ui-modal-confirmable', {
+                is: ModalConfirmable
+            });
+            document.body.appendChild(element);
+
+            /**
+             * When
+             * -
+             */
+
+            /**
+             * Then
+             * The footer contains a cancel button
+             */
+            const cancelButtons = element.shadowRoot.querySelectorAll(
+                'div[slot=footer] > input.cancel'
+            );
+            expect(cancelButtons.length).toBe(1);
         });
     });
 });
