@@ -30,6 +30,9 @@ export default class ModalConfirmable extends LightningElement {
     @api
     confirmLabel;
 
+    @api
+    cancelLabel;
+
     getBaseModal() {
         return this.template.querySelector('.modal-base');
     }

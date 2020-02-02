@@ -148,10 +148,39 @@ describe('check api attributes', () => {
          * The confirm-button has the given label
          */
 
-        const headerContainers = element.shadowRoot.querySelectorAll(
+        const confirmButtons = element.shadowRoot.querySelectorAll(
             'input.confirm'
         );
-        expect(headerContainers[0].value).toBe(testLabel);
+        expect(confirmButtons[0].value).toBe(testLabel);
+    });
+
+    test('cancel-button has shows cancelLabel-attribute', () => {
+        /**
+         * Given
+         * 1. The DOM contains the component
+         * 2. The component markup contains a title
+         */
+        const testLabel = 'A1B2';
+        const element = createElement('ui-modal-confirmable', {
+            is: ModalConfirmable
+        });
+        element.cancelLabel = testLabel;
+        document.body.appendChild(element);
+
+        /**
+         * When
+         * -
+         */
+
+        /**
+         * Then
+         * The confirm-button has the given label
+         */
+
+        const cancelButtons = element.shadowRoot.querySelectorAll(
+            'input.cancel'
+        );
+        expect(cancelButtons[0].value).toBe(testLabel);
     });
 });
 
