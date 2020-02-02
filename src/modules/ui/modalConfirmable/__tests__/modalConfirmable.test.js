@@ -94,35 +94,112 @@ describe('check api attributes', () => {
             document.body.removeChild(document.body.firstChild);
         }
     });
+});
 
-    test('shows "title" attribute', () => {
-        /**
-         * Given
-         * 1. The DOM contains the component
-         * 2. The component markup contains a title
-         */
-        const testTitle = 'A1B2';
-        const element = createElement('ui-modal-confirmable', {
-            is: ModalConfirmable
+describe('Slots', () => {
+    describe('Header', () => {
+        afterEach(() => {
+            // The jsdom instance is shared across test cases in a single file so reset the DOM
+            while (document.body.firstChild) {
+                document.body.removeChild(document.body.firstChild);
+            }
         });
-        element.title = testTitle;
-        document.body.appendChild(element);
 
-        /**
-         * When
-         * -
-         */
+        test('shows "title" attribute', () => {
+            /**
+             * Given
+             * 1. The DOM contains the component
+             * 2. The component markup contains a title
+             */
+            const testTitle = 'A1B2';
+            const element = createElement('ui-modal-confirmable', {
+                is: ModalConfirmable
+            });
+            element.title = testTitle;
+            document.body.appendChild(element);
 
-        /**
-         * Then
-         * The header section contains the given title
-         */
+            /**
+             * When
+             * -
+             */
 
-        const headerContainers = element.shadowRoot.querySelectorAll(
-            'span[slot=header]'
-        );
-        expect(headerContainers.length).toBe(1);
-        // eslint-disable-next-line @lwc/lwc/no-inner-html
-        expect(headerContainers[0].innerHTML).toBe(testTitle);
+            /**
+             * Then
+             * The header section contains the given title
+             */
+
+            const headerContainers = element.shadowRoot.querySelectorAll(
+                'span[slot=header]'
+            );
+            expect(headerContainers.length).toBe(1);
+            // eslint-disable-next-line @lwc/lwc/no-inner-html
+            expect(headerContainers[0].innerHTML).toBe(testTitle);
+        });
+    });
+    describe('Body', () => {
+        afterEach(() => {
+            // The jsdom instance is shared across test cases in a single file so reset the DOM
+            while (document.body.firstChild) {
+                document.body.removeChild(document.body.firstChild);
+            }
+        });
+
+        test('check body exists and is assigned', () => {
+            /**
+             * Given
+             * The DOM contains the component
+             */
+            const element = createElement('ui-modal-confirmable', {
+                is: ModalConfirmable
+            });
+            document.body.appendChild(element);
+
+            /**
+             * When
+             * -
+             */
+
+            /**
+             * Then
+             * a slot for the body exits and redirects into the generic body-slot
+             */
+            const bodyContainers = element.shadowRoot.querySelectorAll(
+                'slot[slot=body]'
+            );
+            expect(bodyContainers.length).toBe(1);
+        });
+    });
+    describe('Footer', () => {
+        afterEach(() => {
+            // The jsdom instance is shared across test cases in a single file so reset the DOM
+            while (document.body.firstChild) {
+                document.body.removeChild(document.body.firstChild);
+            }
+        });
+
+        test('Footer exists', () => {
+            /**
+             * Given
+             * The DOM contains the component
+             */
+            const element = createElement('ui-modal-confirmable', {
+                is: ModalConfirmable
+            });
+            document.body.appendChild(element);
+
+            /**
+             * When
+             * -
+             */
+
+            /**
+             * Then
+             * a slot for the body exits and redirects into the generic body-slot
+             */
+            const footerContainers = element.shadowRoot.querySelectorAll(
+                'div[slot=footer]'
+            );
+            expect(footerContainers.length).toBe(1);
+        });
     });
 });

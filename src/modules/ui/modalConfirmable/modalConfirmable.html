@@ -1,5 +1,7 @@
 <template>
     <ui-modal-generic class="modal-base">
         <span slot="header">{title}</span>
+        <slot slot="body"></slot>
+        <div slot="footer"></div>
     </ui-modal-generic>
 </template>
