@@ -87,12 +87,71 @@ describe('visibility controls', () => {
         expect(isVisible).toBe(false);
     });
 });
+
 describe('check api attributes', () => {
     afterEach(() => {
         // The jsdom instance is shared across test cases in a single file so reset the DOM
         while (document.body.firstChild) {
             document.body.removeChild(document.body.firstChild);
         }
+    });
+
+    test('Header shows title-attribute', () => {
+        /**
+         * Given
+         * 1. The DOM contains the component
+         * 2. The component markup contains a title
+         */
+        const testTitle = 'A1B2';
+        const element = createElement('ui-modal-confirmable', {
+            is: ModalConfirmable
+        });
+        element.title = testTitle;
+        document.body.appendChild(element);
+
+        /**
+         * When
+         * -
+         */
+
+        /**
+         * Then
+         * The header section contains the given title
+         */
+
+        const headerContainers = element.shadowRoot.querySelectorAll(
+            'span[slot=header]'
+        );
+        expect(headerContainers[0].innerHTML).toBe(testTitle);
+    });
+
+    test('confirm-button has shows confirmLabel-attribute', () => {
+        /**
+         * Given
+         * 1. The DOM contains the component
+         * 2. The component markup contains a title
+         */
+        const testLabel = 'A1B2';
+        const element = createElement('ui-modal-confirmable', {
+            is: ModalConfirmable
+        });
+        element.confirmLabel = testLabel;
+        document.body.appendChild(element);
+
+        /**
+         * When
+         * -
+         */
+
+        /**
+         * Then
+         * The confirm-button has the given label
+         */
+
+        const headerContainers = element.shadowRoot.querySelectorAll(
+            'input.confirm'
+        );
+        expect(headerContainers[0].value).toBe(testLabel);
     });
 });
 
@@ -108,8 +167,7 @@ describe('Slots', () => {
         test('shows "title" attribute', () => {
             /**
              * Given
-             * 1. The DOM contains the component
-             * 2. The component markup contains a title
+             * The DOM contains the component
              */
             const testTitle = 'A1B2';
             const element = createElement('ui-modal-confirmable', {
@@ -132,8 +190,6 @@ describe('Slots', () => {
                 'span[slot=header]'
             );
             expect(headerContainers.length).toBe(1);
-            // eslint-disable-next-line @lwc/lwc/no-inner-html
-            expect(headerContainers[0].innerHTML).toBe(testTitle);
         });
     });
     describe('Body', () => {
