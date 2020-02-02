@@ -1,17 +1,17 @@
 <template>
     <ui-modal-generic class="modal-base">
-        <span slot="header">{title}</span>
+        <div slot="header"><span>{title}</span></div>
         <slot slot="body"></slot>
         <div slot="footer">
             <input
                 type="button"
-                class="confirm"
+                class="button confirm"
                 value={confirmLabel}
                 onclick={handleButtonClickConfirm}
             />
             <input
                 type="button"
-                class="cancel"
+                class="button cancel"
                 value={cancelLabel}
                 onclick={handleButtonClickCancel}
             />

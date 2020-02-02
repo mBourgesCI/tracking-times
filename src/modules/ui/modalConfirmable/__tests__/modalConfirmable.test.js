@@ -120,7 +120,7 @@ describe('check api attributes', () => {
          */
 
         const headerContainers = element.shadowRoot.querySelectorAll(
-            'span[slot=header]'
+            'div[slot=header] > span'
         );
         expect(headerContainers[0].innerHTML).toBe(testTitle);
     });
@@ -216,7 +216,7 @@ describe('Slots', () => {
              */
 
             const headerContainers = element.shadowRoot.querySelectorAll(
-                'span[slot=header]'
+                'div[slot=header] > span'
             );
             expect(headerContainers.length).toBe(1);
         });
