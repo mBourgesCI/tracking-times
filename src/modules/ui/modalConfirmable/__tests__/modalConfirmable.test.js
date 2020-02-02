@@ -87,3 +87,42 @@ describe('visibility controls', () => {
         expect(isVisible).toBe(false);
     });
 });
+describe('check api attributes', () => {
+    afterEach(() => {
+        // The jsdom instance is shared across test cases in a single file so reset the DOM
+        while (document.body.firstChild) {
+            document.body.removeChild(document.body.firstChild);
+        }
+    });
+
+    test('shows "title" attribute', () => {
+        /**
+         * Given
+         * 1. The DOM contains the component
+         * 2. The component markup contains a title
+         */
+        const testTitle = 'A1B2';
+        const element = createElement('ui-modal-confirmable', {
+            is: ModalConfirmable
+        });
+        element.title = testTitle;
+        document.body.appendChild(element);
+
+        /**
+         * When
+         * -
+         */
+
+        /**
+         * Then
+         * The header section contains the given title
+         */
+
+        const headerContainers = element.shadowRoot.querySelectorAll(
+            'span[slot=header]'
+        );
+        expect(headerContainers.length).toBe(1);
+        // eslint-disable-next-line @lwc/lwc/no-inner-html
+        expect(headerContainers[0].innerHTML).toBe(testTitle);
+    });
+});
