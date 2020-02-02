@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { createElement } from 'lwc';
 // eslint-disable-next-line no-unused-vars
-import ModalThreeSections from 'ui/modalThreeSections';
+import ModalGeneric from 'ui/modalGeneric';
 
 describe('visibility controls', () => {
     afterEach(() => {
@@ -17,8 +17,8 @@ describe('visibility controls', () => {
          * Given
          * The component is added to Dom
          */
-        const element = createElement('ui-modal-three-sections', {
-            is: ModalThreeSections
+        const element = createElement('ui-modal-generic', {
+            is: ModalGeneric
         });
         document.body.appendChild(element);
 
@@ -41,8 +41,8 @@ describe('visibility controls', () => {
          * Given
          * The DOM contains the component
          */
-        const element = createElement('ui-modal-three-sections', {
-            is: ModalThreeSections
+        const element = createElement('ui-modal-generic', {
+            is: ModalGeneric
         });
         document.body.appendChild(element);
 
@@ -67,8 +67,8 @@ describe('visibility controls', () => {
          * 1. The DOM contains the component
          * 2. The Modal is visible
          */
-        const element = createElement('ui-modal-three-sections', {
-            is: ModalThreeSections
+        const element = createElement('ui-modal-generic', {
+            is: ModalGeneric
         });
         document.body.appendChild(element);
         element.show();
