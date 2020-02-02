@@ -41,6 +41,10 @@ export default class ModalConfirmable extends LightningElement {
         this.fireEventConfirm();
     }
 
+    handleButtonClickCancel() {
+        this.fireEventCancel();
+    }
+
     //----------------------------
     // Util
     //----------------------------
@@ -52,6 +56,12 @@ export default class ModalConfirmable extends LightningElement {
     fireEventConfirm() {
         var evt;
         evt = new CustomEvent('confirm');
+        this.dispatchEvent(evt);
+    }
+
+    fireEventCancel() {
+        var evt;
+        evt = new CustomEvent('cancel');
         this.dispatchEvent(evt);
     }
 }

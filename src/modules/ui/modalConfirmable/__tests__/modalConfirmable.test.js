@@ -378,4 +378,34 @@ describe('Events', () => {
             expect(handler).toHaveBeenCalled();
         });
     });
+
+    test('check cancel hide modal', () => {
+        const handler = jest.fn();
+        /**
+         * Given
+         * The DOM contains the component
+         */
+        const element = createElement('ui-modal-confirmable', {
+            is: ModalConfirmable
+        });
+        element.addEventListener('cancel', handler);
+        document.body.appendChild(element);
+
+        /**
+         * When
+         * The cancel-button is clicked
+         */
+        const confirmButton = element.shadowRoot.querySelector(
+            'div[slot=footer] > input.cancel'
+        );
+        confirmButton.dispatchEvent(new CustomEvent('click'));
+
+        return Promise.resolve().then(() => {
+            /**
+             * Then
+             * A cancel-event is fired
+             */
+            expect(handler).toHaveBeenCalled();
+        });
+    });
 });
