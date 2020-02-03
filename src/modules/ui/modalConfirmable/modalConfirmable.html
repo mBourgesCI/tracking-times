@@ -3,18 +3,18 @@
         <div slot="header"><span>{title}</span></div>
         <slot slot="body"></slot>
         <div slot="footer">
-            <input
-                type="button"
-                class="button confirm"
+            <ui-modal-button
+                class="confirm"
+                design={confirmDesign}
                 value={confirmLabel}
                 onclick={handleButtonClickConfirm}
-            />
-            <input
-                type="button"
-                class="button cancel"
+            ></ui-modal-button>
+            <ui-modal-button
+                class="cancel"
+                design={cancelDesign}
                 value={cancelLabel}
                 onclick={handleButtonClickCancel}
-            />
+            ></ui-modal-button>
         </div>
     </ui-modal-generic>
 </template>

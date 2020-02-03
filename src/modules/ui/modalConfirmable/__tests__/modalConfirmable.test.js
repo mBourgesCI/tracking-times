@@ -148,9 +148,7 @@ describe('check api attributes', () => {
          * The confirm-button has the given label
          */
 
-        const confirmButtons = element.shadowRoot.querySelectorAll(
-            'input.confirm'
-        );
+        const confirmButtons = element.shadowRoot.querySelectorAll('.confirm');
         expect(confirmButtons[0].value).toBe(testLabel);
     });
 
@@ -177,9 +175,7 @@ describe('check api attributes', () => {
          * The confirm-button has the given label
          */
 
-        const cancelButtons = element.shadowRoot.querySelectorAll(
-            'input.cancel'
-        );
+        const cancelButtons = element.shadowRoot.querySelectorAll('.cancel');
         expect(cancelButtons[0].value).toBe(testLabel);
     });
 });
@@ -309,7 +305,7 @@ describe('Slots', () => {
              * The footer contains a confirm button
              */
             const confirmButtons = element.shadowRoot.querySelectorAll(
-                'div[slot=footer] > input.confirm'
+                'div[slot=footer] > .confirm'
             );
             expect(confirmButtons.length).toBe(1);
         });
@@ -334,7 +330,7 @@ describe('Slots', () => {
              * The footer contains a cancel button
              */
             const cancelButtons = element.shadowRoot.querySelectorAll(
-                'div[slot=footer] > input.cancel'
+                'div[slot=footer] > .cancel'
             );
             expect(cancelButtons.length).toBe(1);
         });
@@ -366,7 +362,7 @@ describe('Events', () => {
          * The confirm-button is clicked
          */
         const confirmButton = element.shadowRoot.querySelector(
-            'div[slot=footer] > input.confirm'
+            'div[slot=footer] > .confirm'
         );
         confirmButton.dispatchEvent(new CustomEvent('click'));
 
@@ -396,7 +392,7 @@ describe('Events', () => {
          * The cancel-button is clicked
          */
         const confirmButton = element.shadowRoot.querySelector(
-            'div[slot=footer] > input.cancel'
+            'div[slot=footer] > .cancel'
         );
         confirmButton.dispatchEvent(new CustomEvent('click'));
 

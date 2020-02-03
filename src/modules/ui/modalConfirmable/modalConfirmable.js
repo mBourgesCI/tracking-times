@@ -31,7 +31,13 @@ export default class ModalConfirmable extends LightningElement {
     confirmLabel;
 
     @api
+    confirmDesign;
+
+    @api
     cancelLabel;
+
+    @api
+    cancelDesign;
 
     //----------------------------
     // Handlers
