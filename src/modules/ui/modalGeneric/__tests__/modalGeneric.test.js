@@ -1,6 +1,4 @@
-// eslint-disable-next-line no-unused-vars
 import { createElement } from 'lwc';
-// eslint-disable-next-line no-unused-vars
 import ModalGeneric from 'ui/modalGeneric';
 
 describe('visibility controls', () => {
