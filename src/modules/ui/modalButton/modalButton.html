@@ -1,0 +1,30 @@
+<template>
+    <template if:true={isDesignInfo}>
+        <input
+            type="button"
+            value={value}
+            class="button color-blue border-blue background-white"
+        />
+    </template>
+    <template if:true={isDesignDeny}>
+        <input
+            type="button"
+            value={value}
+            class="button color-white border-red background-red"
+        />
+    </template>
+    <template if:true={isDesignCancel}>
+        <input
+            type="button"
+            value={value}
+            class="button color-red border-red background-white"
+        />
+    </template>
+    <template if:true={isDesignConfirm}>
+        <input
+            type="button"
+            value={value}
+            class="button color-white border-green background-green"
+        />
+    </template>
+</template>

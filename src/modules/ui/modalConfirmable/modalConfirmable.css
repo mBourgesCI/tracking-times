@@ -1,0 +1,43 @@
+/**
+ * Header
+ */
+
+div[slot='header'] {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: medium;
+    color: rgb(160, 160, 160);
+
+    margin-bottom: 10px;
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+    border-bottom-width: 1px;
+    padding-bottom: 10px;
+}
+
+/**
+ * Footer
+ */
+
+div[slot='footer'] {
+    margin-top: 10px;
+    border-top-style: solid;
+    border-top-color: lightgray;
+    border-top-width: 1px;
+    padding-top: 10px;
+
+    text-align: right;
+}
+
+div[slot='footer'] > input[type='button'] {
+    width: fit-content;
+    border-radius: 5px;
+    border: 0;
+    padding: 8px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    user-select: none;
+    border-width: 1px;
+    border-style: solid;
+}
