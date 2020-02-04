@@ -27,6 +27,21 @@ div[slot='footer'] {
     padding-top: 10px;
 
     text-align: right;
+
+    display: grid;
+    grid-auto-columns: auto;
+    grid-template-areas:
+        'confirm'
+        'cancel';
+    grid-gap: 10px;
+}
+
+.confirm {
+    grid-area: confirm;
+}
+
+.cancel {
+    grid-area: cancel;
 }
 
 div[slot='footer'] > input[type='button'] {
@@ -40,4 +55,11 @@ div[slot='footer'] > input[type='button'] {
     user-select: none;
     border-width: 1px;
     border-style: solid;
+}
+
+@media (min-width: 550px) {
+    div[slot='footer'] {
+        grid-auto-columns: auto 16.66% 16.66%;
+        grid-template-areas: 'space confirm cancel';
+    }
 }
