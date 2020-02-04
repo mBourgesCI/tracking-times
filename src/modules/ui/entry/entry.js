@@ -56,7 +56,15 @@ export default class Entry extends LightningElement {
 
     label = {
         modal: {
-            title: 'Entry Details'
+            title: 'Entry Details',
+            delete: {
+                title: 'Delete',
+                body: 'Delete Entry?',
+                button: {
+                    confirm: 'Delete',
+                    cancel: 'Cancel'
+                }
+            }
         },
         button: {
             edit: 'Edit',
@@ -145,7 +153,16 @@ export default class Entry extends LightningElement {
     }
 
     handleButtonClickDelete() {
+        this.getDeleteModal().show();
+    }
+
+    handleButtonClickDeleteConfirm() {
+        this.getDeleteModal().hide();
         this.processDelete();
+    }
+
+    handleButtonClickDeleteCancel() {
+        this.getDeleteModal().hide();
     }
 
     handleChangeStartDate(internalEvent) {
@@ -410,6 +427,10 @@ export default class Entry extends LightningElement {
     //----------------------
     // Element selectors
     //----------------------
+
+    getDeleteModal() {
+        return this.template.querySelector('.modal-delete');
+    }
 
     getEditModal() {
         return this.template.querySelector('.modal-edit');
