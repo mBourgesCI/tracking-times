@@ -27,6 +27,12 @@ input[type='button'] {
     background-color: white;
 }
 
+.confirm {
+    color: white;
+    border-color: hsl(125, 94%, 47%);
+    background-color: hsl(125, 94%, 47%);
+}
+
 .color-white {
     color: white;
 }
