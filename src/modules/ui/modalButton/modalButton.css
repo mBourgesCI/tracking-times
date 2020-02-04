@@ -15,6 +15,12 @@ input[type='button'] {
     background-color: white;
 }
 
+.deny {
+    color: white;
+    border-color: hsl(7, 92%, 64%);
+    background-color: hsl(7, 92%, 64%);
+}
+
 .color-white {
     color: white;
 }

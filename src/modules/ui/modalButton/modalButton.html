@@ -3,11 +3,7 @@
         <input type="button" value={value} class="button info" />
     </template>
     <template if:true={isDesignDeny}>
-        <input
-            type="button"
-            value={value}
-            class="button color-white border-red background-red"
-        />
+        <input type="button" value={value} class="button deny" />
     </template>
     <template if:true={isDesignCancel}>
         <input
