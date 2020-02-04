@@ -6,11 +6,7 @@
         <input type="button" value={value} class="button deny" />
     </template>
     <template if:true={isDesignCancel}>
-        <input
-            type="button"
-            value={value}
-            class="button color-red border-red background-white"
-        />
+        <input type="button" value={value} class="button cancel" />
     </template>
     <template if:true={isDesignConfirm}>
         <input

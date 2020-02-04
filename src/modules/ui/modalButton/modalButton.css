@@ -21,6 +21,12 @@ input[type='button'] {
     background-color: hsl(7, 92%, 64%);
 }
 
+.cancel {
+    color: hsl(7, 92%, 64%);
+    border-color: hsl(7, 92%, 64%);
+    background-color: white;
+}
+
 .color-white {
     color: white;
 }
