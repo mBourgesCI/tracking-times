@@ -148,6 +148,14 @@ export default class Entry extends LightningElement {
         this.processDelete();
     }
 
+    handleButtonClickDeleteConfirm() {
+
+    }
+
+    handleButtonClickDeleteCancel() {
+        
+    }
+
     handleChangeStartDate(internalEvent) {
         this.processNewStartDate(internalEvent.target.value);
     }
