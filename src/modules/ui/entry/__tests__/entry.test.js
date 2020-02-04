@@ -564,13 +564,11 @@ describe('check single entry delete', () => {
         document.body.appendChild(element);
 
         // select delete button
-        const deleteButton = element.shadowRoot.querySelector(
-            'input.button-delete'
-        );
-        expect(deleteButton).toBeTruthy();
+        const deleteModal = element.shadowRoot.querySelector('.modal-delete');
+        expect(deleteModal).toBeTruthy();
 
         // click delete button
-        deleteButton.dispatchEvent(new CustomEvent('click'));
+        deleteModal.dispatchEvent(new CustomEvent('confirm'));
 
         // check for event of type 'delete'
         return Promise.resolve().then(() => {
