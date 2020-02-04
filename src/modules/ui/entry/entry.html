@@ -66,12 +66,14 @@
     </ui-modal-generic>
     <ui-modal-confirmable
         class="modal-delete"
-        confirm-label="Delete"
+        title={label.modal.delete.title}
+        confirm-label={label.modal.delete.button.confirm}
         confirm-design="deny"
         onconfirm={handleButtonClickDeleteConfirm}
         cancel-design="info"
-        cancel-label="cancel"
+        cancel-label={label.modal.delete.button.cancel}
         oncancel={handleButtonClickDeleteCancel}
     >
+        <div>{label.modal.delete.body}</div>
     </ui-modal-confirmable>
 </template>
