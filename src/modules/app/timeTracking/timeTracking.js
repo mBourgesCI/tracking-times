@@ -40,7 +40,12 @@ export default class TimeTracking extends LightningElement {
         this.showClearModal();
     }
 
+    handleClickClearCancel() {
+        this.hideClearModal();
+    }
+
     handleClickClearConfirm() {
+        this.hideClearModal();
         this.processClearData();
     }
 
@@ -256,6 +261,10 @@ export default class TimeTracking extends LightningElement {
 
     showClearModal() {
         this.getClearModal().show();
+    }
+
+    hideClearModal() {
+        this.getClearModal().hide();
     }
 
     //----------------------
