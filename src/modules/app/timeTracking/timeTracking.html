@@ -44,13 +44,18 @@
             </template>
         </div>
     </div>
-    <ui-modal
+    <ui-modal-confirmable
         class="modal-clear"
-        onconfirm={handleClickClearConfirm}
         title={state.label.modal.clear.title}
+        confirm-design="deny"
+        confirm-label="Clear"
+        onconfirm={handleClickClearConfirm}
+        cancel-design="info"
+        cancel-label="Cancel"
+        oncancel={handleClickClearCancel}
     >
         <div class="modal-clear-body">
             <span>{state.label.modal.clear.body}</span>
         </div>
-    </ui-modal>
+    </ui-modal-confirmable>
 </template>
