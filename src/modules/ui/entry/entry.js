@@ -419,6 +419,10 @@ export default class Entry extends LightningElement {
     // Element selectors
     //----------------------
 
+    getDeleteModal() {
+        return this.template.querySelector('.modal-delete');
+    }
+
     getEditModal() {
         return this.template.querySelector('.modal-edit');
     }
