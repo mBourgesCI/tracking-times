@@ -11,8 +11,8 @@ input[type='button'] {
 }
 
 .info {
-    color: rgb(54, 51, 255);
-    border-color: rgb(54, 51, 255);
+    color: hsl(241, 100%, 60%);
+    border-color: hsl(241, 100%, 60%);
     background-color: white;
 }
 
