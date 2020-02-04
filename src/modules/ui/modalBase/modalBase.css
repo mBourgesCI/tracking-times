@@ -24,9 +24,10 @@
     transform: translate(-50%, -50%);
 
     /* sizing */
-    max-width: 800pt;
     max-height: 80%;
+
     width: 70%;
+    max-width: 500px;
 
     /* white border */
     padding: 10px;
