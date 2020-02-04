@@ -7,6 +7,10 @@ export default class ModalButton extends LightningElement {
     @api
     value;
 
+    get isDesignAccept() {
+        return this.design === 'accept';
+    }
+
     get isDesignInfo() {
         return this.design === 'info';
     }

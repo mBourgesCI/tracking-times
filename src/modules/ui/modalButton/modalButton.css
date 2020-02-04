@@ -1,47 +1,41 @@
 input[type='button'] {
     border-radius: 5px;
-    border: 0;
     padding: 8px;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10pt;
     font-weight: bold;
     border-width: 1px;
     border-style: solid;
+    width: 100%;
+    height: 100%;
 }
 
-.color-white {
+.accept {
     color: white;
+    border-color: hsl(241, 100%, 60%);
+    background-color: hsl(241, 100%, 60%);
 }
-.background-white {
+
+.info {
+    color: hsl(241, 100%, 60%);
+    border-color: hsl(241, 100%, 60%);
     background-color: white;
 }
 
-.color-blue {
-    color: rgb(54, 51, 255);
-}
-.background-blue {
-    background-color: rgb(54, 51, 255);
-}
-.border-blue {
-    border-color: rgb(54, 51, 255);
-}
-
-.color-red {
-    color: hsl(7, 92%, 64%);
-}
-.background-red {
+.deny {
+    color: white;
+    border-color: hsl(7, 92%, 64%);
     background-color: hsl(7, 92%, 64%);
 }
-.border-red {
+
+.cancel {
+    color: hsl(7, 92%, 64%);
     border-color: hsl(7, 92%, 64%);
+    background-color: white;
 }
 
-.color-green {
-    color: hsl(125, 94%, 47%);
-}
-.background-green {
-    background-color: hsl(125, 94%, 47%);
-}
-.border-green {
-    border-color: hsl(125, 94%, 47%);
+.confirm {
+    color: white;
+    border-color: hsl(125, 60%, 53%);
+    background-color: hsl(125, 60%, 53%);
 }
