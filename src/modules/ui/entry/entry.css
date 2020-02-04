@@ -130,6 +130,10 @@ div.container-button-bar > input {
     margin-right: 10px;
 }
 
+ui-modal-confirmable > div {
+    text-align: center;
+}
+
 @media (min-width: 500px) {
     .modal-edit > div[slot='body'] {
         display: grid;
