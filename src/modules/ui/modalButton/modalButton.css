@@ -9,6 +9,12 @@ input[type='button'] {
     border-style: solid;
 }
 
+.info {
+    color: rgb(54, 51, 255);
+    border-color: rgb(54, 51, 255);
+    background-color: white;
+}
+
 .color-white {
     color: white;
 }
