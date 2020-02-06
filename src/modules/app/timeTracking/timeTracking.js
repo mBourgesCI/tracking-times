@@ -50,7 +50,8 @@ export default class TimeTracking extends LightningElement {
     }
 
     handleEventDelete(event) {
-        var itemSortNumber = event.target.getAttribute('data-index');
+        const itemSortNumber = event.target.getAttribute('data-index');
+
         this.processEntryDelete(itemSortNumber);
         this.saveData();
     }
@@ -76,7 +77,7 @@ export default class TimeTracking extends LightningElement {
     }
 
     saveData() {
-        var data = {
+        const data = {
             settings: {
                 version: 'v0.4'
             },
@@ -123,10 +124,10 @@ export default class TimeTracking extends LightningElement {
     }
 
     loadDataV03(loaded) {
-        var itemCounter;
-        itemCounter = 0;
+        let itemCounter = 0;
         this.state.version = loaded.settings.version;
         this.state.entries = loaded.entries;
+
         this.state.entries.forEach(loadedEntry => {
             loadedEntry.itemId = loadedEntry.start + itemCounter;
             itemCounter++;
@@ -146,7 +147,7 @@ export default class TimeTracking extends LightningElement {
 
     fireClearDataConfirmation() {
         // eslint-disable-next-line no-alert
-        var confirmationResult = confirm('Clear all entries?');
+        const confirmationResult = confirm('Clear all entries?');
         return confirmationResult;
     }
 
@@ -156,22 +157,20 @@ export default class TimeTracking extends LightningElement {
     }
 
     processClickAdd() {
-        var newEntry, entryConfig;
-        entryConfig = {
+        const entryConfig = {
             cuttingType: CUTTING_TYPE_ROUND,
             cuttingAccuracy: MILISECONDS_PER_FIFTEEN_MINUTE,
             defaultDuration: MILISECONDS_PER_HOUR
         };
-        newEntry = this.createListEntry(entryConfig);
+        const newEntry = this.createListEntry(entryConfig);
         this.state.entries.unshift(newEntry);
     }
 
     processEntryChange(index, newDetail) {
-        var entry, startValue, endValue, commentValue;
-
-        startValue = newDetail.start;
-        endValue = newDetail.end;
-        commentValue = newDetail.comment;
+        let entry;
+        const startValue = newDetail.start;
+        const endValue = newDetail.end;
+        const commentValue = newDetail.comment;
 
         if (index !== undefined) {
             let entryIndex = parseInt(index, 10);
@@ -195,13 +194,12 @@ export default class TimeTracking extends LightningElement {
     }
 
     createListEntry(entryConfig) {
-        var newEntry, currentTime, approximatedTime, newEntryId;
+        let newEntry = {};
+        let newEntryId = this.state.entries.length;
+        const currentTime = new Date().getTime();
+        const approximatedTime = this.createNewTimestamp(entryConfig);
 
-        newEntryId = this.state.entries.length;
         newEntryId = newEntryId === undefined ? 0 : newEntryId;
-        currentTime = new Date().getTime();
-        approximatedTime = this.createNewTimestamp(entryConfig);
-        newEntry = {};
         // tests add all entries in the very same millisecond which causes key-values to not unique
         // => to tackle the we add as many milliseconds as there are entries in the entry list
         newEntry.itemId = currentTime + this.state.entries.length;
@@ -214,11 +212,11 @@ export default class TimeTracking extends LightningElement {
     }
 
     createNewTimestamp(entryConfig) {
-        var currentTime, cuttingType, cuttingAccuracy, method;
+        let currentTime, method;
 
         //set default values for cutting typ and accuracy
-        cuttingType = CUTTING_TYPE_ROUND;
-        cuttingAccuracy = MILISECONDS_PER_FIFTEEN_MINUTE;
+        let cuttingType = CUTTING_TYPE_ROUND;
+        let cuttingAccuracy = MILISECONDS_PER_FIFTEEN_MINUTE;
 
         if (entryConfig !== undefined) {
             // set cutting type
