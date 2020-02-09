@@ -56,6 +56,14 @@ export default class TimeTracking extends LightningElement {
         this.saveData();
     }
 
+    handleClickExport() {
+        
+    }
+    
+    //----------------------------
+    // Actions
+    //----------------------------
+    
     processEntryDelete(itemSortNumber) {
         let index, entryIndex, newlength;
 
