@@ -1,4 +1,5 @@
 import { LightningElement, track } from 'lwc';
+import { startDownload } from 'data/fileDownload';
 import { save, load, clear } from 'data/localStorage';
 
 const MILISECONDS_PER_MINUTE = 1000 * 60;
@@ -57,13 +58,69 @@ export default class TimeTracking extends LightningElement {
     }
 
     handleClickExport() {
-        
+        this.doExport();
     }
-    
+
     //----------------------------
     // Actions
     //----------------------------
-    
+
+    doExport() {
+        const output = [];
+        const firstLine =
+            ' Startdate | Starttime |    Enddate | Endtime | Duration (h) | Comment\n';
+        output.push(firstLine);
+        const secondLine =
+            '===================================================================================\n';
+        output.push(secondLine);
+
+        const columnSeparator = ' | ';
+        this.state.entries.forEach(entry => {
+            let outputLine = '';
+
+            // add start date column
+            let startDateStr = extractDateStringFromTimeStamp(entry.start);
+            outputLine += startDateStr;
+            outputLine += columnSeparator;
+
+            //add start time column
+            let startTimeStr = extractTimeStringFromTimeStamp(entry.start);
+            outputLine += '    ';
+            outputLine += startTimeStr;
+            outputLine += columnSeparator;
+
+            // add end date column
+            let endDateStr = extractDateStringFromTimeStamp(entry.end);
+            outputLine += endDateStr;
+            outputLine += columnSeparator;
+
+            //add start time column
+            let endTimeStr = extractTimeStringFromTimeStamp(entry.end);
+            outputLine += '  ';
+            outputLine += endTimeStr;
+            outputLine += columnSeparator;
+
+            // add difference column
+            let differenceStr = '' + getdifference(entry.start, entry.end);
+            let columnWidth = 13;
+            //leading spaces
+            outputLine += ' '.repeat(columnWidth - differenceStr.length - 1);
+
+            outputLine += differenceStr;
+            outputLine += columnSeparator;
+
+            // add comment
+            let commentStr = entry.comment;
+            commentStr = commentStr ? commentStr : '';
+            outputLine += commentStr;
+
+            // add line break
+            outputLine += '\n';
+            output.push(outputLine);
+        });
+        startDownload('export.txt', output, 'test/plain');
+    }
+
     processEntryDelete(itemSortNumber) {
         let index, entryIndex, newlength;
 
@@ -280,4 +337,29 @@ export default class TimeTracking extends LightningElement {
     getClearModal() {
         return this.template.querySelector('.modal-clear');
     }
+}
+
+//----------------------------
+// Date/Time Utils (should be exported as being used in entrycmp too)
+//----------------------------
+
+function extractTimeStringFromTimeStamp(timestamp) {
+    let fullDate, timeString;
+
+    fullDate = new Date(timestamp);
+    timeString = fullDate.toLocaleTimeString().substr(0, 5);
+
+    return timeString;
+}
+
+function extractDateStringFromTimeStamp(timestamp) {
+    let fullDate, dateString;
+    fullDate = new Date(timestamp);
+    dateString = fullDate.toISOString().split('T')[0];
+    return dateString;
+}
+
+function getdifference(startTimeStamp, endTimeStamp) {
+    let difference = endTimeStamp - startTimeStamp;
+    return difference / (1000 * 60 * 60);
 }
