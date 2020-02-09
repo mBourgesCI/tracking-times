@@ -5,5 +5,13 @@ export default class FileDownload extends LightningElement {
     // handlers
     //----------------------------
 
-    onBtnClckDownload() {}
+    onBtnClckDownload() {
+        this.doDownload();
+    }
+
+    //----------------------------
+    // Actions
+    //----------------------------
+
+    doDownload() {}
 }
