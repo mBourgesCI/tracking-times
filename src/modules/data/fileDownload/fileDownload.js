@@ -24,7 +24,7 @@ export default class FileDownload extends LightningElement {
 
     doDownload() {
         //Create Blob
-        const blob = this.createBlob(this.content, { type: this.type });
+        const blob = new Blob(this.content, { type: this.type });
 
         // Create download URL for blob
         const url = window.URL.createObjectURL(blob);
@@ -35,5 +35,11 @@ export default class FileDownload extends LightningElement {
         anchor.download = this.filename;
 
         anchor.click();
+
+        // cleanup
+        anchor.remove();
+        document.addEventListener('focus', () => {
+            window.URL.revokeObjectURL(blob);
+        });
     }
 }
