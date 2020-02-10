@@ -5,6 +5,8 @@ body {
 }
 
 div.content {
+    max-width: 1000px;
+    margin: auto;
     display: grid;
     gap: 5px;
     grid-template-columns: auto;
@@ -56,6 +58,12 @@ a.button-github {
     margin: auto;
     color: white;
     text-decoration: none;
+}
+
+.container-list {
+    display: grid;
+    grid-auto-columns: 100%;
+    grid-row-gap: 5px;
 }
 
 @media (min-width: 500px) {
