@@ -319,7 +319,7 @@ export default class TimeTracking extends LightningElement {
         return currentTime;
     }
 
-    isEmpty() {
+    get isEmpty() {
         if (this.state.entries === undefined) return true;
         if (this.state.entries === null) return true;
         if (this.state.entries.length === 0) return true;
