@@ -58,6 +58,12 @@ a.button-github {
     text-decoration: none;
 }
 
+.container-list {
+    display: grid;
+    grid-auto-columns: 100%;
+    grid-row-gap: 5px;
+}
+
 @media (min-width: 500px) {
     div.button-bar {
         grid-template-columns: auto auto;
