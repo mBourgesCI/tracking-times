@@ -320,10 +320,11 @@ export default class TimeTracking extends LightningElement {
     }
 
     get isEmpty() {
-        if (this.state.entries === undefined) return true;
-        if (this.state.entries === null) return true;
-        if (this.state.entries.length === 0) return true;
-        return false;
+        return (
+            this.state.entries === undefined ||
+            this.state.entries === null ||
+            this.state.entries.length === 0
+        );
     }
 
     showClearModal() {
