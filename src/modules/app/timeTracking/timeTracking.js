@@ -193,14 +193,14 @@ export default class TimeTracking extends LightningElement {
     }
 
     loadDataV03(loaded) {
-        let itemCounter = 0;
-        this.state.version = loaded.settings.version;
-        this.state.entries = loaded.entries;
+        const { settings, entries } = loaded;
+        this.state.version = settings.version;
+        this.state.entries = entries
+          .map((entry, index) => {
+            entry.itemId = entry.start + index;
 
-        this.state.entries.forEach(loadedEntry => {
-            loadedEntry.itemId = loadedEntry.start + itemCounter;
-            itemCounter++;
-        });
+            return entry;
+          });
     }
 
     loadDataV04(loaded) {
